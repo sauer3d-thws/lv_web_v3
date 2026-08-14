@@ -1,0 +1,1108 @@
+---
+title: "Kapitel 2: HTML5 & Webseiten-Struktur"
+subtitle: "Interaktives Selbstlern-Quiz | THWS Webprogrammierung"
+date: last-modified
+lang: de
+
+author:
+  - name: Stefan Sauer
+    email: stefan.sauer@thws.de
+    role: Fachlehrer
+    affiliation: THWS Geovisualisierung & Vermessung
+
+semester: "WS 26/27"
+course: "Webprogrammierung"
+version: "2.0"
+
+include-after-body:
+  - _extensions/moodle/interactions.js
+
+format:
+  moodle-html: default
+---
+
+# 🎯 Umfassendes Selbstlern-Quiz & Wissens-Check
+
+Willkommen zum erweiterten interaktiven Selbsttest für **Kapitel 2: HTML5 & Webseiten-Struktur**. Überprüfen Sie Ihr didaktisches und klausurrelevantes Verständnis zu folgenden Hauptthemen:
+1. **Entstehung des Web & CERN (Tim Berners-Lee, Hypertext-Idee)**
+2. **HTML-Basiswissen & Spezifikation (W3C, Tags, Auszeichnungssprache)**
+3. **Webserver, Localhost & Testumgebungen (Apache, XAMPP, Mongoose, Loopback-IP)**
+4. **Das HTTP-Protokoll (Schichtenmodell, Client-Server, Zustandslosigkeit & Methoden)**
+5. **HTTPS, Ports & Digitale SSL/TLS-Zertifikate**
+6. **Webhosting, DENIC & Domain-Hierarchie (DNS, TLDs, RFC-Limits)**
+7. **Websitedarstellung im Browser (Rendering, Engines Blink/Gecko/WebKit, Usability-Regeln)**
+8. **Browser-Entwicklertools (DevTools F12, Konsole, Netzwerküberwachung, DOM-Inspektion)**
+9. **HTML-Syntax & Aufbau (Tags, Attribute, leere Elemente, Case-Insensitivity, Einrückung)**
+10. **Valides HTML5-Grundgerüst (`<!DOCTYPE>`, `<html>`, `<head>`, `<title>`, `<body>`, `charset="utf-8"`)**
+11. **Meta-Tags & SEO (`description`, `viewport`, `robots`, `keywords`, `author`, `language`)**
+12. **HTML-Semantik & Textstruktur (`<h1>-<h6>`, `<p>`, `<ul>`, `<ol>`, `<li>`, `<br>`, `<hr>`)**
+13. **Semantische Betonung & Code (`<strong>` vs. `<b>`, `<em>` vs. `<i>`, `<pre>`, `<code>`)**
+14. **CSS-Syntax & Anatomie einer CSS-Regel (Selektor, Deklaration, Eigenschaft, Wert)**
+15. **Die 3 Wege der CSS-Einbindung (Inline, Intern, Extern – Vor-/Nachteile & Codebeispiele)**
+16. **CSS-Kaskade, Spezifität & Vererbung (Inheritance vs. Box-Modell)**
+
+---
+
+## 1. Kernbegriffe (Flip-Cards)
+
+Klicken oder tippen Sie auf die Karten, um die Vorder- und Rückseite zu wenden:
+
+::: {.flip-card}
+#### Wer erfand HTML und das World Wide Web?
+**Tim Berners-Lee** erfand 1989/1990 am **CERN** in Genf das World Wide Web (HTML, HTTP, URLs und den ersten Webbrowser/Webserver), um Forschern den plattformunabhängigen Austausch und die Verlinkung wissenschaftlicher Dokumente über Hyperlinks zu ermöglichen.
+:::
+
+::: {.flip-card}
+#### Was bedeutet HTML und wie unterscheidet es sich vom Programmieren?
+**HTML** steht für *Hypertext Markup Language*. Es ist eine **Auszeichnungssprache**, keine Programmiersprache. HTML strukturiert Inhalte über Tags semantisch; Webseiten werden geschrieben/ausgezeichnet und vom Browser interpretiert.
+:::
+
+::: {.flip-card}
+#### Was ist die Hauptaufgabe eines Webservers?
+Ein **Webserver** (z. B. Apache, Nginx) empfängt HTTP-Anfragen (Requests) von Clients (Browsern) und liefert die angeforderten Ressourcen (HTML, CSS, JS, Bilder, Videos) als Antwort (Response) aus. Er kann zudem dynamische Skripte ausführen.
+:::
+
+::: {.flip-card}
+#### Was ist „localhost“ und welche IP-Adresse gehört dazu?
+**localhost** ist der Standard-Hostname für den eigenen, lokalen Rechner (*Loopback-Schnittstelle*). Er löst standardmäßig auf die IP-Adresse **`127.0.0.1`** (IPv4) bzw. **`::1`** (IPv6) auf. Anfragen an localhost verlassen den Rechner nicht.
+:::
+
+::: {.flip-card}
+#### Was bedeutet „Zustandslosigkeit“ (Stateless) bei HTTP?
+Das **HTTP-Protokoll** ist zustandslos: Der Server speichert standardmäßig keine Verbindungsinformationen zwischen zwei Anfragen. Jede Anfrage wird völlig isoliert verarbeitet. Für Logins und Warenkörbe sind Hilfsmittel wie Cookies oder Sessions nötig.
+:::
+
+::: {.flip-card}
+#### Was ist HTTPS und welcher Port wird standardmäßig genutzt?
+**HTTPS** (*Hypertext Transfer Protocol Secure*) verschlüsselt die HTTP-Kommunikation zwischen Browser und Webserver über **TLS/SSL**. Es nutzt standardmäßig den **Port 443** (im Gegensatz zu Port 80 bei unverschlüsseltem HTTP).
+:::
+
+::: {.flip-card}
+#### Welche Rolle spielt die DENIC eG?
+Die **DENIC eG** mit Sitz in Frankfurt am Main ist die zentrale Registrierungsstelle (Registry/NIC) für alle Top-Level-Domains mit der Endung **.de**. Sie verwaltet über 17 Millionen `.de`-Domains. Endkunden registrieren ihre Domain meist über ihren Webhoster.
+:::
+
+::: {.flip-card}
+#### Was ist ein FQDN und wie ist eine Domain hierarchisch aufgebaut?
+Ein **FQDN** (*Fully Qualified Domain Name*) beschreibt den vollständigen Domain-Pfad von der Subdomain über die Second-Level-Domain bis zur Top-Level-Domain und dem Root-Label (z. B. `elearning.thws.de.`). Gemäß RFC 1035 darf ein FQDN maximal 253 Zeichen lang sein (max. 63 Zeichen pro Label).
+:::
+
+::: {.flip-card}
+#### Was versteht man unter „Mixed Content“?
+**Mixed Content** tritt auf, wenn eine über HTTPS geladene Webseite unverschlüsselte Ressourcen (z. B. Bilder oder Skripte über `http://`) nachlädt. Browser blockieren solche Inhalte häufig oder stufen die Seite als unsicher ein.
+:::
+
+::: {.flip-card}
+#### Was ist Browser-Rendering und welche Engines gibt es?
+**Rendering** ist der Prozess, bei dem der Browser aus HTML, CSS und JS eine visuelle Webseite aufbaut. Die drei dominierenden Engines sind: **Blink** (Chrome, Edge, Opera), **WebKit** (Safari) und **Gecko** (Firefox).
+:::
+
+::: {.flip-card}
+#### Welche 4 goldenen Regeln der Usability gelten im Web?
+1. **Lesbarkeit:** Alle Texte müssen ungehindert lesbar sein.  
+2. **Navigation:** Bedienelemente müssen auffindbar sein & wie erwartet reagieren.  
+3. **Interaktivität:** Formulare lassen sich problemlos ausfüllen & absenden.  
+4. **Logik:** JavaScript-Funktionen laufen fehlerfrei und liefern korrekte Ergebnisse.
+:::
+
+::: {.flip-card}
+#### Wozu dienen die Browser-Entwicklertools (F12)?
+Die **DevTools** ermöglichen das Live-Inspizieren & Bearbeiten des DOM/CSS (Elemente), das Debuggen von JavaScript und Anzeigen von Fehlern (**Konsole**), das Analysieren aller Netzwerk-Requests & Ladezeiten (**Netzwerk**) sowie das Testen von responsiven Bildschirmgrößen.
+:::
+
+::: {.flip-card}
+#### Was sind die 5 Hauptelemente des HTML5-Grundgerüsts?
+1. `<!DOCTYPE html>` (Dokumenttyp-Deklaration)  
+2. `<html lang="de">` (Wurzelelement mit Sprachattribut)  
+3. `<head>` (unsichtbarer Kopfbereich für Metadaten)  
+4. `<title>` (Pflichtelement für den Seitentitel im Tab & SEO)  
+5. `<body>` (Körper für alle sichtbaren Inhalte)
+:::
+
+::: {.flip-card}
+#### Was unterscheidet reguläre Elemente von leeren Elementen (Void Elements)?
+**Reguläre Elemente** (wie `<p>...</p>` oder `<h1>...</h1>`) besitzen ein Start-Tag, Inhalt und ein End-Tag. **Leere Elemente** (wie `<img>`, `<br>`, `<hr>`) besitzen keinen Inhalt und haben daher **kein schließendes End-Tag**.
+:::
+
+::: {.flip-card}
+#### Warum ist das `<title>`-Tag so wichtig?
+Das `<title>`-Tag ist das einzige **zwingend vorgeschriebene Pflichtelement** im `<head>`. Es definiert den Titel im Browser-Tab, dient als Standardname beim Setzen von Lesezeichen und ist die Hauptüberschrift des Snippets in Google-Suchergebnissen (SEO).
+:::
+
+::: {.flip-card}
+#### Wozu dient `<meta charset="utf-8">`?
+Es deklariert die Zeichenkodierung **UTF-8 (Unicode)**, damit Umlaute (ä, ö, ü, ß), Sonderzeichen und Emojis auf allen Geräten korrekt dargestellt werden. Best Practice: Es muss als erstes Element im `<head>` innerhalb der ersten 512 Bytes stehen.
+:::
+
+::: {.flip-card}
+#### Warum darf es pro HTML-Seite nur genau eine `<h1>`-Überschrift geben?
+Die **`<h1>`** stellt die thematische **Hauptüberschrift** des gesamten Dokuments dar. Für Suchmaschinen (SEO), Gliederungsstrukturen und Screenreader für Barrierefreiheit darf es pro Einzelseite nur eine übergeordnete `<h1>` geben; Unterkapitel werden mit `<h2>` bis `<h6>` gegliedert.
+:::
+
+::: {.flip-card}
+#### Was unterscheidet ungeordnete Listen (`<ul>`) von geordneten Listen (`<ol>`)?
+**`<ul>`** (*unordered list*) dient für Sammlungen ohne feste Reihenfolge (Darstellung mit Aufzählungspunkten / Bullets). **`<ol>`** (*ordered list*) dient für nummerierte Schritt-für-Schritt-Anleitungen, Abläufe oder Rangfolgen (1., 2., 3...). Beide umschließen **`<li>`** (*list items*).
+:::
+
+::: {.flip-card}
+#### Wann ist der Einsatz von `<br>` sinnvoll und wann verboten?
+**`<br>`** (*line break*) erzeugt einen Zeilenumbruch und darf **nur genutzt werden, wenn der Umbruch inhaltlich zwingend ist** (z. B. Postanschriften, Gedichte, Liedtexte). Es ist **verboten**, `<br>` zur Erzeugung visueller Abstände zwischen Elementen zu missbrauchen – Abstände gehören in CSS (`margin`).
+:::
+
+::: {.flip-card}
+#### Was unterscheidet `<strong>` von `<b>` und `<em>` von `<i>`?
+- **`<strong>` vs. `<b>`:** `<strong>` drückt semantische Wichtigkeit/Dringlichkeit aus (wird von Screenreadern betont). `<b>` formatiert Text rein optisch fett ohne inhaltliche Bedeutung.
+- **`<em>` vs. `<i>`:** `<em>` verleiht einer Phrase eine sprachliche Betonung (Intonation). `<i>` stellt Text rein optisch kursiv dar.
+:::
+
+::: {.flip-card}
+#### Wie ist eine CSS-Regel (CSS Rule) syntaktisch aufgebaut?
+Eine CSS-Regel besteht aus einem **Selektor** (z. B. `p`) und einem **Deklarationsblock** `{ ... }`. Darin stehen Deklarationen bestehend aus **Eigenschaft** (*Property*, z. B. `color`), Doppelpunkt `:`, **Wert** (*Value*, z. B. `blue`) und abschließendem **Semikolon** `;`.
+:::
+
+::: {.flip-card}
+#### Welche 3 Wege der CSS-Einbindung gibt es und was ist Best Practice?
+1. **Inline-Styles:** Direkt im HTML-Tag via `style="..."` (nur für absolute Ausnahmefälle).  
+2. **Interne Stylesheets:** Im `<head>` via `<style>...</style>` (für einfache One-Pager).  
+3. **Externe Stylesheets:** In separater Datei via `<link rel="stylesheet" href="style.css">` im `<head>` (**Best Practice** für Skalierbarkeit, Caching und Wartung).
+:::
+
+::: {.flip-card}
+#### Welche CSS-Eigenschaften werden vererbt und welche nicht?
+- **Vererbt (Inherited):** Schrift- und Texteigenschaften wie `font-family`, `font-size`, `color`, `line-height`, `text-align`.
+- **Nicht vererbt (Not Inherited):** Box-Modell- und Layouteigenschaften wie `margin`, `padding`, `border`, `background-color`, `width`, `height`.
+:::
+
+::: {.flip-card}
+#### Wie entscheidet die CSS-Kaskade bei Konflikten (Spezifitäts-Rangfolge)?
+Treffen mehrere Regeln auf dasselbe Element zu, gilt die Spezifitäts-Rangfolge:  
+**Inline-Style** (`style="..."`) $>$ **ID-Selektor** (`#id`) $>$ **Klassen-Selektor** (`.klasse`) $>$ **Element-Selektor** (`p`, `h1`). Bei gleicher Spezifität gewinnt die im Quellcode **zuletzt definierte Regel**.
+:::
+
+---
+
+## 2. Deep Dives & Exkurse
+
+::: {.details}
+#### Deep Dive 1: Das 3-Schichten-Modell der Netzwerkkommunikation
+- **Anwendungsschicht (HTTP/HTTPS):** Definiert das **WAS** – das Format der Nutzdaten (z. B. HTML-Dateien, JSON, Bilder).
+- **Transportschicht (TCP):** Definiert das **WIE** – sorgt für eine zuverlässige, fehlerfreie Ende-zu-Ende-Übertragung und adressiert Programme über **Ports** (Port 80 für HTTP, Port 443 für HTTPS).
+- **Netzwerkschicht (IP):** Definiert das **WOHIN** – zuständig für die logische Adressierung über IP-Adressen (z. B. IPv4/IPv6) und das Routing über Router im globalen Internet.
+:::
+
+::: {.details}
+#### Deep Dive 2: Digitale Zertifikate & der Erneuerungsprozess (CA & Certbot)
+- **Digitales Zertifikat:** Ein kryptografischer Datensatz (nach ITU-T/IETF-Standards), der die Identität des Domaininhabers verifiziert und den öffentlichen Schlüssel zur Verschlüsselung bereitstellt.
+- **Keine echte Verlängerung:** Technisch wird ein Zertifikat nicht verlängert, sondern **durch ein neu ausgestelltes Zertifikat ersetzt**.
+- **Certification Authority (CA):** Beglaubigungsstellen wie *Let's Encrypt* stellen Zertifikate aus. Server-Administratoren automatisieren den Austausch mit ACME-Clients wie *Certbot* (meist im 60- bis 90-Tage-Rhythmus), während Webhoster dies oft im Hintergrund managen.
+:::
+
+::: {.details}
+#### Deep Dive 3: DNS-Hierarchie & Vergaberegeln für `.de`-Domains
+- **Root-Zone (`.`):** Die oberste Ebene des DNS-Baums.
+- **Top-Level-Domain (TLD):** Länderspezifisch (**ccTLD**, z. B. `.de`, `.at`, `.ai`) oder generisch (**gTLD**, z. B. `.com`, `.org`, `.edu`).
+- **Second-Level-Domain:** Der eigentliche Name der Organisation/Marke (z. B. `thws`).
+- **Third-Level-Domain / Subdomain:** Spezifischer Dienst oder Bereich (z. B. `elearning`).
+- **DENIC-Regeln für `.de`:** Erlaubt sind Zeichen `a-z`, `0-9`, Bindestriche (nicht an 1., letzter oder 3.+4. Stelle) sowie deutsche Umlaute (IDN). Es muss ein Ansprechpartner in Deutschland benannt werden können.
+:::
+
+::: {.details}
+#### Deep Dive 4: HTTP-Methoden & Statuscodes im Client-Server-Zyklus
+- **HTTP-Methoden:**
+  - `GET`: Ruft Daten ab (z. B. Laden einer HTML-Seite oder eines Bildes); Parameter stehen in der URL.
+  - `POST`: Sendet Daten an den Server (z. B. Formularübertragungen, Datei-Uploads); Parameter stehen im Request-Body.
+  - `PUT` / `DELETE`: Ressourcen komplett überschreiben bzw. löschen.
+- **Klassische Statuscodes:**
+  - `200 OK`: Erfolgreiche Anfrage.
+  - `301 / 302 Redirection`: Permanente bzw. temporäre Weiterleitung.
+  - `404 Not Found`: Angefragte Datei existiert auf dem Server nicht (Client-Fehler).
+  - `500 Internal Server Error`: Schwerwiegender Fehler bei der serverseitigen Verarbeitung.
+:::
+
+::: {.details}
+#### Deep Dive 5: Localhost, Loopback-Interface & der Apache Document Root
+- **Loopback-Schnittstelle:** Anfragen an `http://localhost/` oder `http://127.0.0.1/` werden vom Betriebssystem direkt an den eigenen lokalen Netzwerk-Stack zurückgeführt.
+- **Vorteil beim Web-Development:** Vollständige Unabhängigkeit vom Internet; sicheres Testen von Serverumgebungen und Skripten.
+- **Document Root in XAMPP (`htdocs`):** Verzeichnis `C:\xampp\htdocs\`. Eine Datei `htdocs\mein-projekt\index.html` wird im Browser unter `http://localhost/mein-projekt/index.html` aufgerufen.
+:::
+
+::: {.details}
+#### Deep Dive 6: Rendering-Engines & das fluide Web
+- **Die drei dominierenden Engines:**
+  - **Blink** (Chromium / Google Chrome, Edge, Opera): V8 JS-Engine, sehr schnell, hoher Speicherverbrauch.
+  - **WebKit** (Apple Safari): Tief in iOS/macOS integriert, stromsparend, Standard auf allen Apple-Mobilgeräten.
+  - **Gecko** (Mozilla Firefox): Unabhängig, Open-Source, herausragende DevTools für CSS-Grid & Flexbox.
+- **Webseiten sind kein PDF:** HTML/CSS ist von Natur aus flexibel (fluid). Darstellungsunterschiede zwischen Browsern und Displaygrößen sind normal und gewollt, solange die Usability gewährleistet ist.
+:::
+
+::: {.details}
+#### Deep Dive 7: Die Kernmodule der Browser-DevTools (Taste F12)
+- **Elemente (Elements):** Inspizieren und temporäres Live-Editieren des DOM-Baums und aller CSS-Regeln.
+- **Konsole (Console):** Ausgabe von `console.log()`, Nachverfolgen von JavaScript-Laufzeitfehlern und Ausführen von Test-Code.
+- **Netzwerk (Network):** Detaillierte Timeline aller geladenen Ressourcen, Prüfung von HTTP-Statuscodes (z. B. 404 für fehlende Bilder) und Ladezeitmessung.
+- **Quellen (Sources):** Quellcode-Explorer und Setzen von Breakpoints zum schrittweisen JS-Debugging.
+- **Responsive Mode:** Simulation von Mobilgeräten (Smartphones/Tablets) inklusive Touch-Events und Viewport-Skalierung.
+:::
+
+::: {.details}
+#### Deep Dive 8: Die 5 Grundgerüst-Elemente eines validen HTML5-Dokuments
+- **`<!DOCTYPE html>`:** Steht in Zeile 1, schaltet den Browser in den standardkonformen HTML5-Modus (*Standards Mode* statt Quirks Mode).
+- **`<html lang="de">`:** Das Wurzelelement umschließt das gesamte Dokument. Das `lang`-Attribut ist wichtig für Screenreader (Sprachausgabe) und Suchmaschinen.
+- **`<head>`:** Container für Metadaten, CSS-Verlinkungen (`<link rel="stylesheet">`) und Schriftarten. Inhalte im Head werden auf der Webseite selbst nicht visuell gerendert.
+- **`<title>`:** Zwingendes Pflichtelement im Head zur Benennung der Webseite.
+- **`<body>`:** Umschließt alle visuell sichtbaren Tags (`<h1>`, `<p>`, `<img>`, etc.).
+:::
+
+::: {.details}
+#### Deep Dive 9: Meta-Tags im `<head>` – SEO, Indexierung & Responsiveness
+- **`<meta charset="utf-8">`:** Zeichenkodierung; verhindert „Zeichensalat“ bei Umlauten.
+- **`<meta name="viewport" content="width=device-width, initial-scale=1.0">`:** Unabdingbar für Responsive Design – verhindert, dass Mobilgeräte Webseiten auf Desktop-Breite herunterskalieren.
+- **`<meta name="description" content="...">`:** Kurzbeschreibung der Seite; wird von Google als Snippet-Vorschautext in den SERPs genutzt.
+- **`<meta name="robots" content="index, follow">`:** Steuerungsanweisung für Suchmaschinen-Crawler (Indexieren und Links verfolgen).
+- **`<meta name="keywords" content="...">` / `<meta name="author" content="...">`:** Schlagworte bzw. Urheber der Seite.
+:::
+
+::: {.details}
+#### Deep Dive 10: HTML-Syntax – Tags, Attribute, Leere Elemente & Case-Insensitivity
+- **Tag-Struktur:** Besteht aus Start-Tag `<tag>`, Inhalt und End-Tag `</tag>`.
+- **Attribute:** Werden im Start-Tag notiert nach dem Schema `name="wert"` (z. B. `<img src="bild.jpg" alt="Beschreibung">`).
+- **Leere Elemente (Void Elements):** Tags ohne Inhalt wie `<img>`, `<br>`, `<hr>`, `<meta>`, `<link>` besitzen kein schließendes End-Tag.
+- **Groß- und Kleinschreibung:** HTML ist nicht case-sensitiv (`<P>` funktioniert wie `<p>`), jedoch ist die **konsequente Kleinschreibung** die weltweit anerkannte Best Practice und Standardkonvention.
+- **Code-Einrückung:** Für den Browser unerheblich (ignoriert Whitespace), für Entwickler unverzichtbar zur visuellen Erkennung von Eltern-Kind-Beziehungen (2–4 Leerzeichen pro Ebene).
+:::
+
+::: {.details}
+#### Deep Dive 11: CSS-Architektur – Kaskade, Vererbung & Selektoren
+- **Separation of Concerns:** Strikte Trennung von HTML (Semantik/Struktur) und CSS (Layout/Design).
+- **Die Kaskade:** Löst Konflikte zwischen CSS-Regeln auf. Spezifischere Selektoren (z. B. ID `#header`) überschreiben Klassen (`.header`) und diese überschreiben Element-Selektoren (`h1`).
+- **Vererbung:** Viele Typografie-Eigenschaften (wie `font-family`, `color`) werden vom Eltern-Element (z. B. `body`) automatisch an alle Kind-Elemente vererbt.
+- **Media Queries (`@media`):** Ermöglichen geräteabhängiges Styling (z. B. Layout-Anpassung ab Bildschirmbreiten unter 600px).
+:::
+
+::: {.details}
+#### Deep Dive 12: Semantische Textstrukturierung in HTML5
+- **Überschriften (`<h1>` - `<h6>`):**
+  - Stellen die logische Gliederung des Dokuments dar (wie ein Inhaltsverzeichnis).
+  - Regel: Genau **eine `<h1>`** als Haupttitel der Seite. Niemals Überschriften-Tags nur zur visuellen Schriftgrößen-Anpassung missbrauchen.
+- **Absätze (`<p>`):**
+  - Bilden zusammenhängende Textblöcke.
+  - Wichtig: Ein `<p>` darf **keine Block-Elemente** enthalten (z. B. keine `<h1>`, `<ul>`, `<table>` oder andere `<p>`). Findet der Browser ein Block-Element im `<p>`, schließt er den Absatz automatisch implizit.
+- **Listen (`<ul>`, `<ol>`, `<li>`):**
+  - `<ul>` = Unordered List für ungeordnete Sammlungen (Stichpunkte/Bullets).
+  - `<ol>` = Ordered List für strukturierte Abläufe, Rezepte und Anleitungen (automatisch nummeriert).
+  - Innerhalb von `<ul>` und `<ol>` dürfen als direkte Kinder **nur `<li>`-Elemente** stehen.
+:::
+
+::: {.details}
+#### Deep Dive 13: Semantische Auszeichnung vs. rein visuelle Formatierung
+- **`<strong>` vs. `<b>`:**
+  - `<strong>`: Bedeutet *hohe Relevanz / Wichtigkeit*. Screenreader heben dies stimmlich hervor.
+  - `<b>` (*bold*): Reine visuelle Fettstellung ohne semantischen Bedeutungsgehalt.
+- **`<em>` vs. `<i>`:**
+  - `<em>` (*emphasis*): Sprachliche Betonung im Satzfluss (verändert die Aussageabsicht).
+  - `<i>` (*italic*): Reine visuelle Kursivstellung (z. B. für Schiffsnamen oder Fachbegriffe).
+- **`<pre>` und `<code>`:**
+  - `<code>` zeichnet Inline-Code aus.
+  - `<pre>` erhält alle Leerzeichen und Zeilenumbrüche exakt bei (preformatted text). Häufige Kombination für Code-Blöcke: `<pre><code>...</code></pre>`.
+:::
+
+::: {.details}
+#### Deep Dive 14: Die Anatomie einer CSS-Regel & die 3 Einbindungswege
+- **Aufbau einer CSS-Regel:**
+  ```css
+  /* Selektor { Eigenschaft: Wert; } */
+  h1, h2 {
+    color: #FFFFFF;
+    background-color: #303030;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 1.4em;
+    margin: 0px;
+    padding: 2px;
+  }
+  ```
+- **Vergleich der 3 Einbindungsarten:**
+  1. **Inline-Style:** `<p style="color: red;">Text</p>`  
+     *Nachteil:* Verletzt Separation of Concerns, schwer wartbar, extrem hohe Spezifität. Nur für dynamische JS-Berechnungen oder E-Mail-Templates sinnvoll.
+  2. **Internes Stylesheet:** `<head><style> p { color: red; } </style></head>`  
+     *Einsatz:* Schnelle One-Pager oder Single-Page-Demos; keine Wiederverwendbarkeit auf Folgeseiten.
+  3. **Externes Stylesheet:** `<link rel="stylesheet" href="css/style.css">`  
+     *Vorteil:* **Industriestandard**. Eine einzige CSS-Datei formatiert hunderte Unterseiten; Browser cachen die Datei effizient.
+:::
+
+::: {.details}
+#### Deep Dive 15: Kaskade, Spezifitätsberechnung & Vererbung in CSS
+- **Spezifitäts-Gewichtung (Punkte-System):**
+  - **Inline-Style:** 1000 Punkte
+  - **ID-Selektor (`#nav`):** 100 Punkte
+  - **Klasse (`.btn`), Attribut (`[type="text"]`), Pseudoklasse (`:hover`):** 10 Punkte
+  - **Element (`p`, `h1`), Pseudoelement (`::before`):** 1 Punkt
+- **Vererbung in der Praxis:**
+  - Definiert man im `body` eine Schriftart (`body { font-family: Tahoma, Arial, sans-serif; }`), erben alle Überschriften, Absätze und Tabellenzellen automatisch diese Schriftfamilie.
+  - Box-Eigenschaften (`margin: 20px;`, `border: 1px solid black;`) werden **nicht** vererbt, damit Kind-Elemente nicht unerwünscht eingerahmt oder verschoben werden.
+:::
+
+---
+
+## 3. Fallstudien & Reflexionsaufgaben
+
+::: {.case-study}
+#### Fallbeispiel A: Domain-Auswahl und Webhosting für „Maiks Mobilen Caravan-Service“
+Maik möchte mit seinem mobilen Wohnmobil-Reparaturservice online gehen. Er überlegt, die Domain `www.service-reparatur-caravan-unterfranken-wuerzburg-notdienst-24h.de` zu registrieren und die Seite über einen kostenlosen Homepage-Baukasten mit Werbeeinblendungen zu betreiben.
+
+::: {.solution}
+**Didaktische Analyse & Empfehlung:**
+1. **Domain-Auswahl & Usability:**
+   - Der geplante Name ist viel zu lang, schwer zu merken und fehleranfällig beim Tippen.
+   - *Besser:* Ein kurzer, einprägsamer, sprechender Domain-Name wie `maiks-caravan-service.de` oder `caravan-wuerzburg.de`. Dies vereint persönliche Marke, Tätigkeit und Regionalität optimal.
+2. **Webhosting & Baukasten-Gefahr:**
+   - Kostenlose Homepage-Baukästen binden den Kunden (*Vendor Lock-in*), erschweren den späteren Export von HTML/CSS-Dateien und wirken durch Drittwerbung unprofessionell.
+   - *Empfehlung:* Ein Standard-Webhosting-Paket bei einem etablierten Hoster mit eigener `.de`-Domain, integriertem SSL/TLS-Zertifikat, PHP/MySQL-Option und DSGVO-konformem Serverstandort in Deutschland.
+:::
+:::
+
+::: {.case-study}
+#### Fallbeispiel B: Das Schloss-Symbol fehlt – Mixed Content nach HTTPS-Umstellung
+Eine Kanzlei hat ihre Website auf HTTPS umgestellt und ein Zertifikat installiert. Beim Aufruf über `https://kanzlei-beispiel.de` warnt der Browser jedoch vor unsicheren Inhalten, und das grüne bzw. geschlossene Schloss-Symbol erscheint nicht oder ist durchgestrichen.
+
+::: {.solution}
+**Ursachenanalyse & Behebung:**
+1. **Ursache (Mixed Content):**
+   - Obwohl das HTML-Hauptdokument über HTTPS geladen wird, sind im Quelltext noch externe Bilder, Stylesheets oder Skripte mit absolutem unverschlüsseltem Pfad (`http://...`) eingebunden.
+2. **Sicherheitsrisiko:**
+   - Unverschlüsselte Skripte oder Ressourcen könnten per Man-in-the-Middle-Angriff manipuliert werden. Der Browser stuft die Integrität der gesamten Verbindung herab.
+3. **Lösung:**
+   - Alle Datei- und Ressourcen-Pfade im HTML/CSS auf relative Pfade (z. B. `img/logo.png`) oder explizites `https://` umstellen.
+   - Eine automatische Weiterleitung (HTTP 301) von Port 80 (HTTP) auf Port 443 (HTTPS) am Webserver einrichten.
+:::
+:::
+
+::: {.case-study}
+#### Fallbeispiel C: Der neue CSS-Button wird im Browser nicht angezeigt
+Ein Entwickler ändert die Hintergrundfarbe eines Buttons in der Datei `style.css` und speichert ab. Beim Aktualisieren der Seite im Browser (`F5`) bleibt der Button jedoch unverändert in der alten Farbe.
+
+::: {.solution}
+**Fehlersuche mit DevTools & Browser-Cache:**
+1. **Ursache (Browser-Cache):**
+   - Der Browser hat die Datei `style.css` im lokalen Cache zwischengespeichert und fordert sie beim einfachen Neuladen nicht erneut vom Server an.
+2. **Lösung über DevTools:**
+   - Öffnen der DevTools (`F12`), Wechsel in den Reiter **Netzwerk (Network)** und Aktivieren von *„Disable Cache“* (Cache deaktivieren, solange DevTools offen sind).
+   - Alternativ: Hard-Reload über Tastenkombination `Strg + F5` (Windows) bzw. `Cmd + Shift + R` (macOS).
+   - Im Reiter **Elemente** prüfen, ob die CSS-Regel geladen wurde oder eventuell von einer spezifischeren Regel überschrieben wird (*Kaskade*).
+:::
+:::
+
+::: {.case-study}
+#### Fallbeispiel D: Zerstörte Umlaute (`Ã¼`, `Ã¶`) und fehlender Seitentitel
+Auf einer neuen Vereins-Webseite erscheinen Wörter wie „Über uns“ als „Ãœber uns“, und im Browser-Tab steht lediglich die Dateiadresse `file:///C:/projekte/index.html`.
+
+::: {.solution}
+**Analyse nach HTML5-Standard:**
+1. **Ursache 1 (Umlaute):**
+   - Im `<head>` fehlt die Zeichensatzdeklaration `<meta charset="utf-8">`, oder die Datei wurde im Texteditor nicht im UTF-8-Format abgespeichert.
+2. **Ursache 2 (Browser-Tab):**
+   - Das Pflichtelement `<title>` fehlt im `<head>`-Bereich. Fehlt das Tag, zeigt der Browser ersatzweise den Dateipfad an, und die Seite ist nach W3C-Standard nicht valide.
+3. **Korrektur:**
+   - Im `<head>` als erstes `<meta charset="utf-8">` und danach `<title>Verein Maintaucher e.V. - Über uns</title>` ergänzen und die Datei im Editor explizit als *UTF-8 (ohne BOM)* abspeichern.
+:::
+:::
+
+::: {.case-study}
+#### Fallbeispiel E: Die Gefahren von Inline-Styles beim Webseiten-Relaunch
+Ein Unternehmen betreibt eine Webpräsenz mit 80 Einzelseiten. Sämtliche Überschriften und Absätze wurden damals mit Inline-Styles formatiert (z. B. `<h2 style="color: #003366; font-family: Arial; font-size: 18px;">`). Das neue Corporate Design verlangt nun eine Umstellung aller Überschriften auf eine moderne Schriftart und Firmenfarbe.
+
+::: {.solution}
+**Analyse des Wartungsaufwands:**
+1. **Problem bei Inline-Styles:**
+   - Jede einzelne Überschrift auf allen 80 Seiten müsste manuell im HTML-Quelltext editiert werden (Hunderte fehleranfällige Ersetzungen).
+   - Inline-Styles haben eine Spezifität von 1000 Punkten und können durch ein externes Stylesheet nicht ohne Weiteres überschrieben werden.
+2. **Saubere Architektur (Separation of Concerns):**
+   - Entfernen aller `style="..."`-Attribute aus dem HTML.
+   - Einbinden eines zentralen externen Stylesheets `<link rel="stylesheet" href="css/style.css">`.
+   - Zukünftige Designänderungen erfordern nur noch eine einzige Zeilenänderung in der zentralen CSS-Datei (`h2 { color: #ff6600; font-family: 'Open Sans', sans-serif; }`).
+:::
+:::
+
+---
+
+## 4. Active Recall (Lückentexte / Drag & Drop)
+
+::: {.drag-exercise}
+Das World Wide Web wurde 1989 von *Tim Berners-Lee* am Forschungszentrum *CERN* in Genf entwickelt. HTML ist eine *Auszeichnungssprache*, mit der Dokumente über *Hyperlinks* verknüpft werden. Ressourcen wie Bilder werden im HTML-Code lediglich *verlinkt* und nicht in der HTML-Datei gespeichert.
+:::
+
+::: {.drag-exercise}
+In der Netzwerkkommunikation regelt *HTTP* das Datenformat auf der Anwendungsschicht, während *TCP* auf Port *80* für die Übertragung sorgt. Für verschlüsseltes *HTTPS* wird Port *443* genutzt. Die zentrale Vergabestelle für deutsche Domains ist die *DENIC*, wobei die Registrierung meist direkt über den *Webhoster* abgewickelt wird.
+:::
+
+::: {.drag-exercise}
+Zur lokalen Webentwicklung wird als Hostname *localhost* mit der Loopback-IP-Adresse *127.0.0.1* verwendet. Das visuelle Aufbauen einer Webseite im Browser nennt man *Rendering*. Die Chrome-Engine heißt *Blink*, während Firefox auf *Gecko* und Safari auf *WebKit* setzt. Über die Taste *F12* öffnet man die DevTools, in denen die *Konsole* JavaScript-Fehler anzeigt und der *Netzwerk*-Tab Datenübertragungen überwacht.
+:::
+
+::: {.drag-exercise}
+Ein valides HTML5-Dokument beginnt mit der Deklaration *<!DOCTYPE html>*. Das Wurzelelement heißt *html*, während im unsichtbaren *head* Metadaten wie der Zeichensatz *UTF-8* und das Pflichtelement *title* stehen. Alle sichtbaren Inhalte liegen im *body*. Leere Elemente wie *img* oder *br* besitzen kein schließendes End-Tag.
+:::
+
+::: {.drag-exercise}
+Zur Textstrukturierung gibt es die Überschriften *h1* bis *h6*, wobei die Hauptüberschrift genau *einmal* pro Seite vorkommen darf. Ungeordnete Listen beginnen mit *ul*, während nummerierte Abläufe mit *ol* ausgezeichnet werden. Für inhaltliche Zeilenumbrüche nutzt man *br*, für thematische Trennlinien *hr*.
+:::
+
+::: {.drag-exercise}
+Nach dem Prinzip *Separation of Concerns* trennt man Struktur (*HTML*) und Design (*CSS*). Externe Stylesheets werden über das Tag *link* im Kopfbereich eingebunden. In CSS überschreiben spezifischere Regeln allgemeinere durch das Prinzip der *Kaskade*, während Schriftarten an Kind-Elemente per *Vererbung* weitergegeben werden.
+:::
+
+---
+
+## 5. Quick-Check (Klausurrelevantes Quiz)
+
+### Bereich 1: Entstehung des Web & HTML-Grundlagen
+
+::: {.quick-check}
+Aus welchem Hauptgrund entwickelte Tim Berners-Lee ab 1989 am CERN das World Wide Web und HTML?
+
+- Um einen weltweiten Online-Shop für physikalische Messgeräte aufzubauen.
+- **Um Tausenden Forschern auf inkompatiblen Computersystemen den Austausch und die direkte Verlinkung von Dokumenten über Hyperlinks zu ermöglichen.**
+- Um das Betriebssystem Microsoft Windows durch einen Webbrowser zu ersetzen.
+
+> Am CERN arbeiteten Wissenschaftler mit unterschiedlichster Hard- und Software. HTML bot die erste plattformunabhängige Möglichkeit zum flexiblen Dokumentenaustausch über das Internet.
+:::
+
+::: {.quick-check}
+Warum ist die Aussage „Webseiten werden in HTML programmiert“ fachlich inkorrekt?
+
+- Weil HTML ausschließlich auf Linux-Servern kompiliert wird.
+- **Weil HTML eine Auszeichnungssprache (Markup Language) ist, die Texten semantische Bedeutung zuweist und vom Browser interpretiert wird.**
+- Weil HTML nur für mathematische Formeln gedacht ist.
+
+> HTML besitzt keine Programmlogik (Schleifen, Variablen, Bedingungen). Es beschreibt und strukturiert Dokumente für den Webbrowser.
+:::
+
+::: {.quick-check}
+Wie werden Bilder, Audio- und Videodateien in ein HTML-Dokument eingebunden?
+
+- Die Mediendateien werden direkt binär im HTML-Code abgespeichert.
+- **Die Dateien liegen separat auf dem Webspace und werden im HTML-Dokument lediglich über Pfade/URLs verlinkt.**
+- Der Browser wandelt alle Mediendateien beim Laden automatisch in Text um.
+
+> HTML-Dateien sind reine Textdokumente mit spezieller Auszeichnung. Externe Ressourcen werden per Referenz (z. B. via `src`-Attribut) nachgeladen.
+:::
+
+---
+
+### Bereich 2: Webserver, Localhost & Testumgebungen
+
+::: {.quick-check}
+Was ist die primäre Aufgabe eines Webservers (z. B. Apache oder Nginx)?
+
+- Das permanente Generieren von Backup-Dateien für das Betriebssystem.
+- **Das Entgegennehmen von Client-Anfragen (HTTP-Requests) und das Ausliefern von statischen Dateien oder Skript-Ergebnissen (HTTP-Responses).**
+- Das Zeichnen von CSS-Layouts auf dem Bildschirm des Anwenders.
+
+> Das Wort Server stammt von lat. *servire* („dienen“). Er stellt Webdokumente und Dienste über das Netzwerk für Clients (Browser) bereit.
+:::
+
+::: {.quick-check}
+Was zeichnet den Hostnamen `localhost` und die zugehörige IP-Adresse `127.0.0.1` aus?
+
+- `localhost` leitet Anfragen über die DNS-Root-Server in Frankfurt weiter.
+- **`localhost` ist die Loopback-Adresse des eigenen Computers; Anfragen verlassen den Rechner nicht und ermöglichen sicheres lokales Testen.**
+- `127.0.0.1` ist die weltweite Haupt-IP-Adresse von Google.
+
+> Die Loopback-Adresse schleift Anfragen direkt im internen Netzwerk-Stack des eigenen Betriebssystems zurück an lokale Serverdienste (z. B. Apache unter XAMPP).
+:::
+
+::: {.quick-check}
+Welcher Vorteil zeichnet den Mini-Webserver Mongoose gegenüber XAMPP aus?
+
+- Mongoose enthält ein vollständiges Oracle-Datenbankpaket.
+- **Mongoose benötigt keine Installation, besteht aus einer einzigen Datei (`mongoose.exe`) und eignet sich ideal zum schnellen Testen von statischem HTML, CSS und JS.**
+- Mongoose läuft ausschließlich auf Smartphones.
+
+> Mongoose ist extrem leichtgewichtig und startet direkt im Projektordner, ohne komplexe Serverdienste oder Root-Installationen zu erfordern.
+:::
+
+::: {.quick-check}
+Warum schlägt der Start des Apache-Webservers in XAMPP gelegentlich fehl?
+
+- Weil Windows HTML-Dateien standardmäßig blockiert.
+- **Weil Standard-Ports wie Port 80 oder 443 bereits von anderen Programmen (z. B. Skype, Teams, IIS) belegt sind.**
+- Weil XAMPP nur bei aktiver Internetverbindung gestartet werden darf.
+
+> Jeder Port kann auf einem Rechner nur von genau einem Prozess gebunden werden. Bei Portkonflikten muss der Port in der `httpd.conf` angepasst werden (z. B. auf 8080).
+:::
+
+---
+
+### Bereich 3: HTTP-Protokoll, Schichten & Zustandslosigkeit
+
+::: {.quick-check}
+Welche Rolle übernimmt das Transmission Control Protocol (TCP) im Schichtenmodell der Webkommunikation?
+
+- Es definiert das Aussehen von HTML-Elementen.
+- **Es regelt auf der Transportschicht die fehlerfreie Übertragung der Datenpakete und die Adressierung über Ports.**
+- Es vergibt weltweit eindeutige Domain-Namen.
+
+> Im 3-Schichten-Modell gilt: HTTP bestimmt *WAS* übertragen wird (Anwendung), TCP bestimmt *WIE* zuverlässig übertragen wird (Transport), und IP bestimmt *WOHIN* geroutet wird (Netzwerk).
+:::
+
+::: {.quick-check}
+Was bedeutet die Eigenschaft der „Zustandslosigkeit“ (Statelessness) des HTTP-Protokolls?
+
+- Der Server stürzt ab, sobald zwei Nutzer gleichzeitig zugreifen.
+- **Jede HTTP-Anfrage wird völlig unabhängig von vorherigen Anfragen verarbeitet; der Server speichert standardmäßig keinen Verbindungsstatus.**
+- HTTP-Seiten dürfen keine Stylesheets oder Bilder nachladen.
+
+> Da HTTP zustandslos ist, müssen Zustände wie Login-Status oder Warenkörbe über zusätzliche Mechanismen (Cookies, Sessions, Token) verwaltet werden.
+:::
+
+::: {.quick-check}
+Welche HTTP-Methode wird standardmäßig verwendet, wenn ein Benutzer ein Kontaktformular mit vertraulichen Daten an den Server übermittelt?
+
+- `GET`
+- **`POST`**
+- `DELETE`
+
+> `POST` überträgt Daten im Request-Body und nicht sichtbar in der Adresszeile der URL, weshalb es für Formulare, Logins und Datei-Uploads Standard ist.
+:::
+
+::: {.quick-check}
+Was signalisiert der HTTP-Statuscode `404` dem Webbrowser?
+
+- Der Server ist überlastet (Internal Server Error).
+- **Die angeforderte Ressource wurde auf dem Server nicht gefunden (Not Found - Client-Fehler).**
+- Die Anfrage war erfolgreich und die Seite wird ausgeliefert (OK).
+
+> Statuscodes im 4xx-Bereich stehen für Client-Fehler. 404 bedeutet, dass der angefragte Pfad auf dem Webserver nicht existiert.
+:::
+
+---
+
+### Bereich 4: HTTPS, SSL/TLS & Digitale Zertifikate
+
+::: {.quick-check}
+Welcher Standard-Port wird für verschlüsselte HTTPS-Verbindungen verwendet?
+
+- Port 21
+- Port 80
+- **Port 443**
+
+> Port 80 ist der Standard-Port für unverschlüsseltes HTTP; Port 443 wird für verschlüsseltes HTTPS verwendet.
+:::
+
+::: {.quick-check}
+Was ist der Hauptzweck eines digitalen SSL/TLS-Zertifikats?
+
+- Die Ladezeit von hochauflösenden Videodateien zu halbieren.
+- **Die Identität des Webservers zu bestätigen (Authentizität) und die Datenübertragung zwischen Browser und Server kryptografisch zu verschlüsseln (Vertraulichkeit & Integrität).**
+- Die IP-Adresse des Besuchers in den DENIC-Servern zu speichern.
+
+> Digitale Zertifikate werden von vertrauenswürdigen Zertifizierungsstellen (CA) ausgestellt und schützen vor Abhören und Manipulation.
+:::
+
+::: {.quick-check}
+Wie läuft die Erneuerung eines SSL/TLS-Zertifikats technisch korrekt ab?
+
+- Das alte Zertifikat wird durch Eingabe eines PINs verlängert, ohne dass neue Schlüssel nötig sind.
+- **Das abgelaufene Zertifikat wird durch ein vollständig neu generiertes und von einer CA ausgestelltes Zertifikat ersetzt.**
+- Zertifikate müssen nach Ablauf nie wieder erneuert werden.
+
+> Ein Zertifikat hat eine feste kryptografische Gültigkeitsdauer. Nach Ablauf muss ein neues Schlüsselpaar beglaubigt und installiert werden (oft automatisiert via Certbot/ACME).
+:::
+
+---
+
+### Bereich 5: Webhosting, DENIC & Domain-Hierarchie
+
+::: {.quick-check}
+Was ist die zentrale Funktion des Domain Name Systems (DNS)?
+
+- Das Komprimieren von HTML- und Bilddateien.
+- **Das Übersetzen von menschenlesbaren Domain-Namen (z. B. `www.thws.de`) in maschinenlesbare IP-Adressen (z. B. `193.175.120.40`).**
+- Das automatische Sperren von unverschlüsselten Webseiten.
+
+> Das DNS fungiert als weltweites „Telefonbuch“ des Internets und löst Domain-Namen in IP-Adressen auf.
+:::
+
+::: {.quick-check}
+Muss ein Webseitenbetreiber eine gewünschte `.de`-Domain zwingend persönlich bei der DENIC eG in Frankfurt vor Ort registrieren?
+
+- Ja, die Registrierung ist ausschließlich mit persönlichem Notartermin bei der DENIC möglich.
+- **Nein, die Registrierung und technische Anbindung übernimmt in der Praxis der jeweilige Webhoster als akkreditierter Registrar.**
+- Nein, `.de`-Domains müssen bei der US-Regierung angemeldet werden.
+
+> Webhoster (wie IONOS, Strato, All-Inkl) sind an die DENIC angebunden und wickeln die Registrierung für ihre Kunden vollautomatisch ab.
+:::
+
+::: {.quick-check}
+Welche Längenbeschränkung gilt gemäß RFC 1035 für einen Fully Qualified Domain Name (FQDN) in der Textdarstellung?
+
+- Maximal 63 Zeichen für die gesamte Domain.
+- **Maximal 253 Zeichen für den gesamten FQDN (und maximal 63 Zeichen pro Label zwischen zwei Punkten).**
+- Unbegrenzt viele Zeichen.
+
+> Gemäß RFC 1035 ist jedes einzelne Label auf 63 Zeichen limitiert, und der gesamte FQDN darf maximal 253 Zeichen (bzw. 255 Byte im DNS-Format) umfassen.
+:::
+
+::: {.quick-check}
+Was versteht man im Webdesign und Online-Marketing unter einem „sprechenden Domain-Namen“?
+
+- Eine Domain, die von einem Screenreader automatisch vorgelesen wird.
+- **Ein Domain-Name, der beim Lesen sofort Rückschlüsse auf Inhalt, Marke, Region oder Zweck des Webangebots zulässt.**
+- Eine Domain, die ausschließlich aus Zahlen und Sonderzeichen besteht.
+
+> Sprechende Domains (z. B. `autoinstandsetzung-wuerzburg.de`) schaffen sofortiges Vertrauen bei Nutzern und bieten signifikante SEO-Vorteile bei Suchmaschinen.
+:::
+
+---
+
+### Bereich 6: Websitedarstellung, Browser-Engines & Usability
+
+::: {.quick-check}
+Was beschreibt der Begriff „Browser-Rendering“?
+
+- Das Versenden von E-Mails über den Webserver.
+- **Der Prozess, bei dem der Browser aus HTML-Struktur, CSS-Regeln und JavaScript eine interaktive, sichtbare Webseite aufbaut.**
+- Das Speichern von Passwörtern im Browser-Cache.
+
+> Die Rendering Engine ist das Kernstück des Browsers zur visuellen Aufbereitung von Web-Dokumenten.
+:::
+
+::: {.quick-check}
+Welche Rendering-Engine kommt in Google Chrome, Microsoft Edge und Opera zum Einsatz?
+
+- Gecko
+- WebKit
+- **Blink**
+
+> Blink ist die quelloffene Rendering-Engine des Chromium-Projekts. Mozilla Firefox nutzt Gecko, Apple Safari nutzt WebKit.
+:::
+
+::: {.quick-check}
+Warum ist der Versuch, eine Website auf allen Endgeräten absolut „pixelgenau identisch“ wie ein gedrucktes Dokument oder PDF darzustellen, im modernen Webdesign überholt?
+
+- Weil moderne Monitore keine Schriftarten mehr darstellen können.
+- **Weil HTML/CSS ein fluides Medium ist und sich Webseiten responsiv an unterschiedlichste Displaygrößen, Auflösungen und Systeme anpassen müssen.**
+- Weil Webbrowser das Drucken von Webseiten verbieten.
+
+> Webseiten sind kein starres PDF: Gutes Webdesign setzt auf Responsive Design, bei dem Funktionalität und Lesbarkeit im Vordergrund stehen.
+:::
+
+::: {.quick-check}
+Welche Aussage gehört zu den „4 goldenen Regeln der Usability“ bei der Browser-Darstellung?
+
+- Alle Hintergründe müssen zwingend animiert sein.
+- **Bedienelemente müssen leicht auffindbar sein und wie erwartet reagieren (Navigation).**
+- Webseiten dürfen maximal zwei Farben verwenden.
+
+> Die 4 goldenen Usability-Regeln lauten: 1. Lesbarkeit (Typografie), 2. Navigation (Auffindbarkeit & Erwartungskonformität), 3. Interaktivität (Formulare), 4. Logik (Fehlerfreies JavaScript).
+:::
+
+---
+
+### Bereich 7: Browser-Entwicklertools (DevTools, Konsole & Netzwerk)
+
+::: {.quick-check}
+Über welche Taste bzw. Tastenkombination werden die Browser-Entwicklertools in den meisten Browsern standardmäßig geöffnet?
+
+- `F1`
+- **`F12` (oder `Strg + Umschalt + I` unter Windows)**
+- `Alt + F4`
+
+> Mit der Taste `F12` werden die integrierten Developer Tools in Chrome, Firefox, Edge und Safari geöffnet.
+:::
+
+::: {.quick-check}
+Was passiert, wenn ein Entwickler im Reiter „Elemente“ (Elements) der DevTools den Text einer Überschrift ändert?
+
+- Die Datei auf dem Webserver wird sofort dauerhaft überschrieben.
+- **Die Änderung wird temporär live im lokalen DOM-Speicher des Browsers gerendert; nach einem Neuladen der Seite ist der Originalzustand wieder da.**
+- Der Browser stürzt sofort ab.
+
+> Das DOM-Inspecting in den DevTools ist eine temporäre Sandbox für Entwickler, um Styles und HTML live im Browser auszuprobieren.
+:::
+
+::: {.quick-check}
+Welche Hauptfunktion erfüllt die „Konsole“ (Console) in den Entwicklertools?
+
+- Sie dient zum Erstellen von Backups der MySQL-Datenbank.
+- **Sie protokolliert JavaScript-Fehler, Ausgaben von `console.log()` und erlaubt das direkte Ausführen von JS-Befehlen im Seitenkontext.**
+- Sie misst ausschließlich die Druckqualität der Website.
+
+> Die Konsole ist das zentrale Diagnosewerkzeug für Frontend-Entwickler zum Auffinden von Skript- und Laufzeitfehlern.
+:::
+
+::: {.quick-check}
+Wozu wird der Reiter „Netzwerk“ (Network) in den DevTools primär genutzt?
+
+- Zum Ändern des WLAN-Passworts des Routers.
+- **Zum Überwachen aller HTTP-Anfragen (Ladezeiten, Statuscodes wie 404, Dateigrößen und geladene Assets wie Bilder/CSS/JS).**
+- Zum Zeichnen von Vektorgrafiken.
+
+> Im Netzwerk-Tab lässt sich exakt nachvollziehen, welche Ressourcen geladen wurden, wie lange der Transfer dauerte und wo Ladefehler (z. B. falsche Bildpfade) auftreten.
+:::
+
+---
+
+### Bereich 8: HTML-Syntax, Tags, Attribute & Code-Konventionen
+
+::: {.quick-check}
+Wie ist ein reguläres HTML-Element (z. B. ein Absatz) syntaktisch korrekt aufgebaut?
+
+- (p)Dies ist ein Textabsatz(/p)
+- **<p>Dies ist ein Textabsatz</p> (Start-Tag, Inhalt, schließendes End-Tag mit Schrägstrich)**
+- <p: Dies ist ein Textabsatz>
+
+> Nahezu alle regulären HTML-Elemente bestehen aus einem Start-Tag `<tag>`, dem eigentlichen Nutzinhalt und einem abschließenden End-Tag `</tag>`.
+:::
+
+::: {.quick-check}
+Was zeichnet sogenannte „leere Elemente“ (Void Elements wie `<img>`, `<br>` oder `<hr>`) in HTML aus?
+
+- Sie dürfen weder Text noch HTML-Attribute enthalten.
+- **Sie besitzen keinen Inhalt und benötigen daher kein schließendes End-Tag (z. B. kein `</img>` oder `</br>`).**
+- Sie werden vom Webserver bei der Auslieferung gelöscht.
+
+> Leere Elemente (wie `<img>`, `<br>`, `<hr>`, `<meta>`, `<link>`) umschließen keinen Inhalt und besitzen daher im HTML5-Standard kein separates End-Tag.
+:::
+
+::: {.quick-check}
+Wo und wie werden HTML-Attribute in einem Element standardkonform deklariert?
+
+- Im schließenden End-Tag nach einem Doppelpunkt (z. B. `</img src="bild.jpg">`).
+- **Im einleitenden Start-Tag als Name-Wert-Paar mit Gleichheitszeichen und Anführungszeichen (z. B. `<img src="bild.jpg" alt="Logo">`).**
+- In einer externen Textdatei im selben Serververzeichnis.
+
+> Attribute werden ausnahmslos im Start-Tag notiert und übergeben zusätzliche Eigenschaften (wie Pfade oder Alternativtexte) an das Element.
+:::
+
+::: {.quick-check}
+Wie verhält sich der HTML5-Standard bezüglich der Groß- und Kleinschreibung von Tag- und Attributnamen?
+
+- Die Verwendung von Großbuchstaben führt sofort zu einem fatalen Parsing-Fehler im Browser.
+- **HTML ist nicht case-sensitiv (Groß-/Kleinschreibung ist technisch erlaubt), jedoch ist die ausschließliche Kleinschreibung verbindlicher weltweiter Standard.**
+- Nur Vokale müssen zwingend großgeschrieben werden.
+
+> Obwohl Browser `<BODY>` und `<body>` gleichermaßen verarbeiten, ist die durchgängige Kleinschreibung die anerkannte Best Practice im modernen Web.
+:::
+
+::: {.quick-check}
+Warum ist eine konsistente Code-Einrückung (Indentation) in HTML-Dateien für Entwickler unverzichtbar?
+
+- Weil der Browser uneingerückten HTML-Code langsamer parst und anzeigt.
+- **Weil Einrückungen die hierarchische Eltern-Kind-Struktur (Verschachtelung) der Tags visuell sofort erfassbar und wartbar machen.**
+- Weil der W3C-Validator Seiten ohne Tabstopps als ungültig abweist.
+
+> Der Browser ignoriert Leerräume und Zeilenumbrüche (Whitespace). Für Entwickler ist die hierarchische Einrückung jedoch der Schlüssel zur Fehlervermeidung.
+:::
+
+---
+
+### Bereich 9: Das HTML5-Grundgerüst & die 5 Hauptelemente
+
+::: {.quick-check}
+Welche Aufgabe hat die Angabe `<!DOCTYPE html>` in der allerersten Zeile eines Dokuments?
+
+- Sie lädt automatisch externe JavaScript-Bibliotheken vom Server nach.
+- **Sie weist den Webbrowser an, das Dokument nach dem modernen HTML5-Standard im „Standards Mode“ zu rendern.**
+- Sie verschlüsselt den Quelltext der Webseite mit einem Passwort.
+
+> Ohne die Doctype-Deklaration schalten Browser in den historischen Rückwärtskompatibilitätsmodus (*Quirks Mode*), was zu Layoutfehlern führen kann.
+:::
+
+::: {.quick-check}
+Wozu dient das Attribut `lang="de"` im Wurzelelement `<html lang="de">`?
+
+- Es zwingt den Benutzer, Deutsch als Browsersprache zu konfigurieren.
+- **Es deklariert die Hauptsprache des Dokuments für Screenreader (korrekte Sprachausgabe) und Suchmaschinen.**
+- Es übersetzt englische HTML-Tags automatisch in deutsche Begriffe.
+
+> Das `lang`-Attribut ist essentiell für Barrierefreiheit (Screenreader für sehbehinderte Menschen) und für die internationale Indexierung durch Suchmaschinen.
+:::
+
+::: {.quick-check}
+Welche Aussage zum `title`-Element (`<title>`) im Head-Bereich trifft exakt zu?
+
+- Das title-Element ist optional und wird nur für Druckversionen benötigt.
+- **Das title-Element ist ein zwingendes Pflichtelement für valides HTML; es definiert den Namen im Browser-Tab sowie den Hauptlink in Google-Suchergebnissen.**
+- Das title-Element erzeugt eine zentrierte Überschrift mitten im sichtbaren Body-Bereich der Webseite.
+
+> Ohne ein `<title>`-Tag ist ein HTML-Dokument nach W3C-Standard nicht valide. Es ist zudem das wichtigste On-Page-Signal für Suchmaschinen.
+:::
+
+::: {.quick-check}
+Was unterscheidet den `<head>`-Bereich vom `<body>`-Bereich eines HTML-Dokuments?
+
+- Der head-Bereich ist für mobile Smartphones gedacht, der body-Bereich für Desktop-PCs.
+- **Der head-Bereich enthält unsichtbare Metadaten, Titel und Stylesheet-Links, während der body-Bereich alle visuell sichtbaren Inhalte umschließt.**
+- Der head-Bereich darf nur von Administratoren eingesehen werden.
+
+> Alle für den Webseiten-Besucher sichtbaren Elemente (Überschriften, Fließtexte, Bilder, Buttons) müssen zwingend innerhalb des `<body>` platziert werden.
+:::
+
+---
+
+### Bereich 10: Zeichensatz UTF-8 & Meta-Tags im `<head>`
+
+::: {.quick-check}
+Warum sollte `<meta charset="utf-8">` als erstes Tag im `<head>` platziert werden?
+
+- Weil UTF-8 die CSS-Dateien automatisch komprimiert und minifiziert.
+- **Damit der Browser die Zeichenkodierung (Unicode) kennt, bevor er Texte, Titel und Umlaute einliest und fehlerfrei darstellt.**
+- Weil nach 500 Zeichen im Dokument keine Meta-Tags mehr verarbeitet werden.
+
+> Die UTF-8-Deklaration muss innerhalb der ersten 512 Bytes des Dokuments stehen, um fehlerhafte Zeichendarstellungen („Zeichensalat“ bei Umlauten) zuverlässig zu verhindern.
+:::
+
+::: {.quick-check}
+Welche Auswirkung hat das Viewport-Meta-Tag `<meta name="viewport" content="width=device-width, initial-scale=1.0">` auf Smartphones?
+
+- Es sperrt die Website für alle Mobilgeräte.
+- **Es passt die virtuelle Seitenbreite exakt an die Bildschirmbreite des Geräts an und verhindert eine unlesbare Miniaturansicht.**
+- Es aktiviert automatisch den energiesparenden Dark Mode des Betriebssystems.
+
+> Ohne das Viewport-Tag rendern Mobilbrowser Seiten in einer virtuellen Desktop-Breite (z. B. 980px) und verkleinern die Ansicht, sodass Texte mikroskopisch klein wirken.
+:::
+
+::: {.quick-check}
+Welcher konkrete Nutzen entsteht durch das Meta-Tag `<meta name="description" content="...">`?
+
+- Es legt das administrative Passwort für das Content-Management-System fest.
+- **Suchmaschinen wie Google nutzen diese Kurzbeschreibung häufig als Snippet-Vorschautext in den Suchergebnissen.**
+- Es verdoppelt die Netzwerkübertragungsrate für Bilder.
+
+> Eine ansprechende Meta-Description verbessert die Klickrate (Click-Through-Rate / CTR) potenzieller Webseiten-Besucher in den Google-Suchtreffern.
+:::
+
+::: {.quick-check}
+Was signalisiert das Meta-Tag `<meta name="robots" content="index, follow">` einem Suchmaschinen-Crawler (z. B. Googlebot)?
+
+- Die Website sofort aus dem Google-Suchindex zu entfernen.
+- **Die aktuelle Webseite in den Index aufzunehmen (index) und allen darauf platzierten Hyperlinks zu folgen (follow).**
+- Alle Bilddateien der Webseite automatisch auf den Server zu kopieren.
+
+> `index, follow` erteilt Suchmaschinen-Crawlern die ausdrückliche Erlaubnis, den Inhalt aufzunehmen und weiterführenden Links zu folgen.
+:::
+
+---
+
+### Bereich 11: CSS-Grundlagen, Kaskade & Separation of Concerns
+
+::: {.quick-check}
+Was bedeutet das Architekturprinzip „Separation of Concerns“ im Zusammenspiel von HTML und CSS?
+
+- HTML und CSS müssen zwingend in derselben Datei in Zeile 1 stehen.
+- **Strikte Aufgabentrennung: HTML ist rein für Struktur & Semantik zuständig, während CSS das komplette visuelle Design steuert.**
+- CSS darf nur von Webdesignern und HTML nur von Software-Entwicklern geschrieben werden.
+
+> Durch die saubere Trennung von Struktur und Design bleibt der Quellcode wartbar, barrierefrei und das Re-Styling einer Seite gelingt ohne Eingriff in das HTML.
+:::
+
+::: {.quick-check}
+Was versteht man unter dem Prinzip der „Kaskade“ (Cascading) in CSS?
+
+- Das gleichzeitige Herunterladen von Bilddateien über parallele Datenverbindungen.
+- **Das Regelsystem, das Konflikte auflöst, wenn mehrere Stylesheets oder Selektoren auf dasselbe Element zutreffen (Spezifität & Quellcode-Reihenfolge).**
+- Das zyklische Wechseln von Hintergrundfarben über eine CSS-Animation.
+
+> Treffen mehrere Deklarationen auf dasselbe Element zu, entscheidet die Kaskade anhand von Spezifität und Reihenfolge, welcher Style gewinnt.
+:::
+
+::: {.quick-check}
+Was beschreibt das Prinzip der „Vererbung“ (Inheritance) in Cascading Style Sheets?
+
+- Dass CSS-Stylesheets nach Projektabschluss an Kunden übergeben werden.
+- **Dass Eigenschaften (wie Schriftart oder Textfarbe), die für ein Eltern-Element festgelegt wurden, automatisch an die Kind-Elemente weitergegeben werden.**
+- Dass gelöschter CSS-Code nach 30 Tagen automatisch wiederhergestellt wird.
+
+> Definiert man z. B. `body { font-family: sans-serif; }`, erben alle untergeordneten Absätze, Überschriften und Listen diese Schriftfamilie automatisch.
+:::
+
+::: {.quick-check}
+Wozu dienen CSS Media Queries (z. B. `@media (max-width: 600px)`)?
+
+- Zum Abspielen von Multimedia-Dateien im Browser.
+- **Zur Definition von responsiven Gestaltungsregeln, die nur dann greifen, wenn bestimmte Display-Eigenschaften (z. B. Maximalbreite) vorliegen.**
+- Zum Blockieren unerwünschter Werbeeinblendungen.
+
+> Media Queries bilden das technische Fundament für Responsive Webdesign: Sie passen Layouts flexibel an Smartphone-, Tablet- und Desktop-Bildschirme an.
+:::
+
+---
+
+### Bereich 12: HTML-Semantik – Überschriften, Absätze & Listen
+
+::: {.quick-check}
+Warum ist die Einhaltung der Regel „Nur genau ein h1-Element pro HTML-Seite“ für SEO und Barrierefreiheit so bedeutsam?
+
+- Weil der Webbrowser beim Auffinden eines zweiten h1-Tags eine Fehlermeldung anzeigt.
+- **Weil h1 das übergeordnete Hauptthema der Einzelseite deklariert; Screenreader und Suchmaschinen nutzen dies als obersten Gliederungspunkt.**
+- Weil für mehr als eine h1-Überschrift zusätzliche Lizenzgebühren fällig werden.
+
+> Die `<h1>` ist der Titel des Dokuments. Eine saubere Überschriften-Hierarchie (`h1` vor `h2` vor `h3`) ermöglicht Screenreader-Nutzern das gezielte Anspringen von Abschnitten.
+:::
+
+::: {.quick-check}
+Welches HTML-Element eignet sich semantisch am besten für eine nummerierte Schritt-für-Schritt-Anleitung (z. B. ein Rezept oder ein Montageablauf)?
+
+- Das ul-Element (Unordered List mit Aufzählungspunkten / Bullets)
+- **Das ol-Element (Ordered List mit durchnummerierten Listenelementen li)**
+- Ein p-Fließtextabsatz mit manuellen br-Zeilenumbrüchen
+
+> Geordnete Listen (`<ol>`) nummerieren Einträge automatisch durch und signalisieren eine zwingende chronologische Reihenfolge der Einzelschritte.
+:::
+
+::: {.quick-check}
+Darf ein Fließtextabsatz (`<p>`) andere Block-Elemente wie Überschriften (`<h2>`) oder Listen (`<ul>`) umschließen?
+
+- Ja, beliebig viele Block-Elemente dürfen innerhalb eines p-Tags geschachtelt werden.
+- **Nein, ein p-Tag darf nur Text und Inline-Elemente enthalten; bei einem Block-Element schließt der Browser den Absatz automatisch vorzeitig.**
+- Nur wenn man im head-Bereich ein spezielles JavaScript-Polyfill einbindet.
+
+> Laut HTML5-Spezifikation ist das Verschachteln von Block-Elementen in `<p>` unzulässig. Der Browser schließt das `<p>` implizit vor dem Block-Tag.
+:::
+
+::: {.quick-check}
+Welche Elemente dürfen als direkte Kind-Elemente innerhalb eines `<ul>`- oder `<ol>`-Listencontainers platziert werden?
+
+- Beliebige p-Absätze und Überschriften (h1 bis h6).
+- **Ausschließlich Listenelemente (li / List Items).**
+- Ausschließlich neutrale div-Container.
+
+> Die Listen-Container `<ul>` und `<ol>` dürfen direkt ausschließlich `<li>`-Tags enthalten. Text, Links oder Formatierungen werden innerhalb des jeweiligen `<li>` platziert.
+:::
+
+---
+
+### Bereich 13: Auszeichnung, Betonung, Trenner & Code
+
+::: {.quick-check}
+Wann ist die Verwendung des Zeilenumbruch-Tags `<br>` fachlich korrekt und best-practice-konform?
+
+- Um optische Leerräume oder größere Abstände zwischen zwei Absätzen zu erzeugen.
+- **Ausschließlich dann, wenn der Zeilenumbruch inhaltlich zwingend zum Text gehört (z. B. bei Postanschriften oder Gedichten).**
+- Um ein Bild horizontal mittig auszurichten.
+
+> Fließtext bricht der Browser responsiv um. Abstände werden mit CSS (`margin`) erzeugt. `<br>` darf nur für inhaltlich zwingende Zeilenumbrüche genutzt werden.
+:::
+
+::: {.quick-check}
+Welche semantische Bedeutung besitzt das Trenn-Element `<hr>` in modernem HTML5?
+
+- Es lädt eine hochauflösende Vektorgrafik (High Resolution).
+- **Es repräsentiert einen thematischen Bruch bzw. inhaltlichen Themenwechsel auf Absatzebene (visuell als Trennlinie dargestellt).**
+- Es setzt die Schriftgröße aller nachfolgenden Absätze auf den Standardwert zurück.
+
+> In HTML5 ist `<hr>` (*Horizontal Rule*) nicht mehr bloß eine dekorative Trennlinie, sondern kennzeichnet einen inhaltlichen Themenwechsel.
+:::
+
+::: {.quick-check}
+Was unterscheidet das semantische Tag `<strong>` vom rein visuellen Tag `<b>`?
+
+- Das strong-Tag färbt den Text blau, das b-Tag färbt ihn grün.
+- **Das strong-Tag weist dem Inhalt eine hohe Bedeutung/Dringlichkeit zu (Screenreader betonen dies), während b den Text rein optisch fett darstellt.**
+- Es gibt zwischen den beiden Tags keinerlei Unterschied.
+
+> In modernem HTML wird `<strong>` für inhaltliche Wichtigkeit verwendet. `<b>` dient lediglich der visuellen Hervorhebung ohne semantischen Bedeutungsgehalt.
+:::
+
+::: {.quick-check}
+Welche Tag-Kombination eignet sich ideal, um einen mehrzeiligen Quellcode-Block mit exakten Einrückungen und Leerzeichen auf einer Webseite anzuzeigen?
+
+- Das p-Element kombiniert mit mehreren br-Umbruch-Tags
+- **Die Kombination aus pre- und code-Element (`<pre><code>...</code></pre>`)**
+- Eine h1-Hauptüberschrift kombiniert mit dem em-Tag
+
+> Das `<pre>`-Element (preformatted) erhält alle Leerzeichen und Zeilenumbrüche originalgetreu bei, während `<code>` den umschlossenen Inhalt semantisch als Programmiercode kennzeichnet.
+:::
+
+---
+
+### Bereich 14: CSS-Syntax & die 3 Einbindungsarten
+
+::: {.quick-check}
+Wie ist eine einzelne CSS-Deklaration innerhalb der geschweiften Klammern aufgebaut?
+
+- wert = eigenschaft;
+- **eigenschaft: wert; (z. B. color: #ffffff;)**
+- (eigenschaft -> wert)
+
+> Eine CSS-Deklaration besteht immer aus der Eigenschaft (*Property*), einem trennenden Doppelpunkt, dem eigentlichen Wert (*Value*) und einem abschließenden Semikolon.
+:::
+
+::: {.quick-check}
+Wie wird ein externes Stylesheet (`style.css`) standardkonform im HTML-Dokument verknüpft?
+
+- Im body-Bereich über ein script-Tag: `<script src="style.css"></script>`
+- **Im head-Bereich über ein link-Tag: `<link rel="stylesheet" href="style.css">`**
+- Im footer-Bereich über ein style-Tag: `<style href="style.css"></style>`
+
+> Externe Stylesheets werden standardmäßig im `<head>` über das leere Element `<link>` mit dem Attribut `rel="stylesheet"` eingebunden.
+:::
+
+::: {.quick-check}
+Warum gelten Inline-Styles (z. B. `<p style="font-size: 14px;">`) bei größeren Webprojekten als schlechter Programmierstil („Tabu“)?
+
+- Weil moderne Webbrowser Inline-Styles grundsätzlich ignorieren und nicht ausführen.
+- **Weil sie gegen die Trennung von Inhalt und Design verstoßen, den HTML-Code aufblähen und bei Designänderungen extrem aufwendig zu pflegen sind.**
+- Weil Inline-Styles die Internetverbindung des Nutzers verlangsamen.
+
+> Inline-Styles erfordern bei einer Designanpassung das manuelle Editieren jeder einzelnen HTML-Stelle anstatt einer einzigen zentralen CSS-Zeile.
+:::
+
+::: {.quick-check}
+Wann ist der Einsatz eines internen Stylesheets (`<style>...</style>` im `<head>`) sinnvoll?
+
+- Bei großen Webportalen mit mehreren hundert Unterseiten.
+- **Bei kompakten One-Pagern, HTML-E-Mail-Vorlagen oder eigenständigen Demodateien, um alle Regeln in einer einzigen Datei zu bündeln.**
+- Ausschließlich für Datenbankabfragen und Serververbindungen.
+
+> Interne Stylesheets vereinfachen die Weitergabe einzelner HTML-Dateien, bieten jedoch keine seitenübergreifende Wiederverwendbarkeit wie externe CSS-Dateien.
+:::
+
+---
+
+### Bereich 15: CSS-Kaskade, Spezifität & Vererbung
+
+::: {.quick-check}
+Welche CSS-Regel setzt sich durch, wenn für denselben Textabsatz `<p id="intro" class="highlight">` folgende Styles definiert sind: `#intro { color: green; }`, `.highlight { color: red; }`, `p { color: blue; }`?
+
+- p { color: blue; }
+- .highlight { color: red; }
+- **#intro { color: green; }**
+
+> Ein ID-Selektor (`#intro`, Spezifitätswert 100) besitzt Vorrang vor einem Klassen-Selektor (`.highlight`, Wert 10) und einem Element-Selektor (`p`, Wert 1).
+:::
+
+::: {.quick-check}
+Was geschieht, wenn im CSS `body { font-family: Tahoma, Arial, sans-serif; color: #333; }` deklariert wird?
+
+- Nur der Hintergrund des Body-Containers wird gefärbt; Schriftarten bleiben unberührt.
+- **Alle untergeordneten Kind-Elemente (Überschriften, Absätze, Listen) erben automatisch diese Schriftart und Textfarbe, sofern sie nicht lokal überschrieben werden.**
+- Alle Grafiken auf der Webseite werden automatisch ausgeblendet.
+
+> Schrifteigenschaften werden in CSS kaskadierend vom `body` an alle Nachkommen vererbt. Dies etabliert die globale Standardschriftart der gesamten Webseite.
+:::
+
+::: {.quick-check}
+Welche der folgenden CSS-Eigenschaften wird **nicht** automatisch an untergeordnete Kind-Elemente vererbt?
+
+- font-family (Schriftfamilie)
+- color (Textfarbe)
+- **margin (Außenabstand)**
+
+> Box-Modell- und Layouteigenschaften (`margin`, `padding`, `border`, `background-color`, `width`, `height`) werden nicht vererbt, um Kind-Elemente nicht unerwünscht zu verzerren.
+:::
+
+::: {.quick-check}
+Gegeben ist der folgende CSS-Code mit Selektorgruppierung:
+
+`h1, h2 { color: #ffffff; background-color: #303030; font-size: 1.4em; padding: 2px; }`
+
+Welche Auswirkung hat die durch ein Komma getrennte Selektor-Angabe `h1, h2`?
+
+- Die Formatierung gilt nur für Überschriften, die gleichzeitig die Tags h1 und h2 besitzen.
+- **Die im Deklarationsblock definierten Styles gelten gleichermaßen für alle h1- und für alle h2-Überschriften (Selektorgruppierung).**
+- Der Browser wählt per Zufallsprinzip aus, ob h1 oder h2 formatiert wird.
+
+> Durch Kommas getrennte Selektoren fassen mehrere HTML-Elemente zusammen, um identische Stilregeln kompakt und ohne Code-Duplizierung zu deklarieren.
+:::
+

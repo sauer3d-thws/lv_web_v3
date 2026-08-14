@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS-Objekte & JSON Praxis-Demo</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            max-width: 680px;
+            margin: 40px auto;
+            padding: 24px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 { color: #005a9c; font-size: 1.4rem; margin-bottom: 8px; }
+        p.description { color: #666; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; }
+        .button-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        button { background: #005a9c; color: white; border: none; padding: 10px 12px; font-size: 0.9rem; border-radius: 4px; cursor: pointer; text-align: center; font-weight: 500; transition: background 0.2s; }
+        button:hover { background: #004070; }
+        .console-output { background: #1e1e1e; color: #4ec9b0; font-family: 'Consolas', 'Courier New', monospace; padding: 16px; border-radius: 6px; min-height: 160px; font-size: 0.9rem; white-space: pre-wrap; line-height: 1.4; }
+        .info-box { background: #eef6fc; border-left: 4px solid #005a9c; padding: 14px 16px; font-size: 0.88rem; color: #1a385c; border-radius: 0 4px 4px 0; margin-top: 24px; }
+        .info-box ul { margin: 8px 0 0 18px; padding: 0; }
+        .info-box li { margin-bottom: 6px; }
+    </style>
+</head>
+<body>
+
+    <h1>JavaScript Objekte & JSON-Notation Praxis-Test</h1>
+    <p class="description">
+        Dieses interaktive Beispiel demonstriert die Erstellung von JavaScript-Objekten,
+        Eigenschaftszugriffe sowie die Konvertierung zwischen JS-Objekten und JSON-Strings.
+    </p>
+
+    <div class="button-grid">
+        <button id="btnObject">1. Objekt & Zugriffe</button>
+        <button id="btnStringify">2. JSON.stringify()</button>
+        <button id="btnParse">3. JSON.parse()</button>
+        <button id="btnMethods">4. Objekt-Methoden & this</button>
+    </div>
+
+    <div id="output" class="console-output">// Klicke einen Button oben, um die Ausführung zu starten...</div>
+
+    <div class="info-box">
+        <strong>💡 Zeilenweise Aufschlüsselung im Skript:</strong>
+        <ul>
+            <li><strong>1. Objekt-Literale `{}`:</strong> Speichern Daten in Schlüssel-Wert-Paaren (Keys & Values).</li>
+            <li><strong>2. `JSON.stringify()`:</strong> Serialisiert ein JS-Objekt in einen JSON-Text-String.</li>
+            <li><strong>3. `JSON.parse()`:</strong> Deserialisiert einen empfangenen JSON-String zurück in ein JS-Objekt.</li>
+            <li><strong>4. Objekt-Methoden & `this`:</strong> Funktionen im Objekt greifen per `this` auf eigene Eigenschaften zu.</li>
+        </ul>
+    </div>
+
+    <script>
+        // Referenz auf das Terminal-Ausgabefeld im HTML holen
+        const output = document.getElementById('output');
+
+        // Hilfsfunktion: Fügt eine Nachricht mit Zeilenumbruch im Konsolen-Feld an
+        function log(text) { output.innerText += text + "\n"; }
+
+        // Hilfsfunktion: Leert das Konsolen-Feld vor jedem neuen Test
+        function clearLog() { output.innerText = ""; }
+
+
+        /* ==========================================================================
+           ABSCHNITT 1: OBJEKT-ERSTELLUNG (LITERAL {}) UND EIGENSCHAFTSZUGRIFFE
+           ========================================================================== */
+
+        // Zeile 1: Erstellung eines JS-Objekts 'student' mittels Objekt-Literal-Syntax {}.
+        const student = {
+            // Zeile 2: Eigenschaft 'id' mit einem numerischen Wert (Number).
+            id: 632217,
+            
+            // Zeile 3: Eigenschaft 'name' mit einem Textwert (String).
+            name: "Anna Schmidt",
+            
+            // Zeile 4: Eigenschaft 'studiengang' (String).
+            studiengang: "Geovisualisierung",
+            
+            // Zeile 5: Eigenschaft 'semester' (Number).
+            semester: 3,
+            
+            // Zeile 6: Verschachteltes Objekt (Nested Object) unter dem Schlüssel 'adresse'.
+            adresse: {
+                stadt: "Würzburg",
+                plz: "97070"
+            },
+            
+            // Zeile 7: Eigenschaft 'kurse' speichert ein Array von Strings.
+            kurse: ["Webprogrammierung", "GIS", "Kartographie"]
+        };
+
+        // Event-Listener für Button 1: Eigenschaftszugriffe testen
+        document.getElementById('btnObject').addEventListener('click', () => {
+            clearLog();
+            log("=== 1. JS-Objekt & Eigenschaftszugriff ===");
+            
+            // Zugriff über Punkt-Notation (standardmäßig verwendet, z. B. student.name)
+            log(`Punkt-Notation (student.name):       ${student.name}`);
+            
+            // Zugriff über Klammer-Notation (nützlich bei dynamischen Key-Namen als String, z. B. student['id'])
+            log(`Klammer-Notation (student['id']):    ${student['id']}`);
+            
+            // Zugriff auf Eigenschaften verschachtelter Objekte (student.adresse.stadt)
+            log(`Verschachtelter Zugriff (adresse):   ${student.adresse.stadt} (${student.adresse.plz})`);
+            
+            // Zugriff auf ein bestimmtes Element im enthaltenen Array (student.kurse[0])
+            log(`Erster Kurs (student.kurse[0]):       ${student.kurse[0]}`);
+        });
+
+
+        /* ==========================================================================
+           ABSCHNITT 2: SERIALISIERUNG (JS-OBJEKT ➔ JSON-STRING MIT JSON.stringify)
+           ========================================================================== */
+
+        // Event-Listener für Button 2: JSON.stringify() testen
+        document.getElementById('btnStringify').addEventListener('click', () => {
+            clearLog();
+            log("=== 2. JSON.stringify(student, null, 2) ===");
+            log("// Das JS-Objekt wird für den Datentransfer in einen JSON-String umgewandelt:\n");
+            
+            // JSON.stringify() wandelt das JS-Objekt in einen reinen Text-String um.
+            // Parameter 1: Das umzuwandelnde Objekt ('student').
+            // Parameter 2: Replacer-Funktion (hier null = alle Eigenschaften einbinden).
+            // Parameter 3: Formatierung (hier 2 Leerzeichen Einrückung für lesbare Darstellung).
+            const jsonText = JSON.stringify(student, null, 2);
+            
+            // Ausgabe des erzeugten JSON-Strings
+            log(jsonText);
+            
+            // Überprüfung des Datentyps: `typeof jsonText` ergibt "string"!
+            log(`\nTyp der Variable jsonText: ${typeof jsonText} (Reiner Text-String!)`);
+        });
+
+
+        /* ==========================================================================
+           ABSCHNITT 3: DESERIALISIERUNG (JSON-STRING ➔ JS-OBJEKT MIT JSON.parse)
+           ========================================================================== */
+
+        // Rohdaten, wie sie z. B. von einer Web-API / einem Webserver als String empfangen werden.
+        // WICHTIG in JSON: Alle Keys ("produktId", "titel") MÜSSEN in doppelten Anführungszeichen stehen!
+        const empfangeneJsonDaten = '{"produktId": 402, "titel": "GPS-Empfänger", "preis": 249.99, "verfuegbar": true}';
+
+        // Event-Listener für Button 3: JSON.parse() testen
+        document.getElementById('btnParse').addEventListener('click', () => {
+            clearLog();
+            log("=== 3. JSON.parse(empfangeneJsonDaten) ===");
+            log("1. Rohdaten vom Server (String):\n" + empfangeneJsonDaten);
+            
+            // JSON.parse() liest den JSON-Text und baut im Speicher ein voll funktionsfähiges JS-Objekt auf.
+            const produktObjekt = JSON.parse(empfangeneJsonDaten);
+            
+            // Der Typ nach dem Parsen ist "object"
+            log(`\n2. Typ nach JSON.parse(): ${typeof produktObjekt} (Echtes JS-Objekt!)`);
+            
+            // Nun kann auf Eigenschaften wie bei jedem normalen JS-Objekt zugegriffen werden:
+            log(`3. Zugriff auf produktObjekt.titel: ${produktObjekt.titel}`);
+            
+            // Auch mathematische Berechnungen mit Werten (wie 'preis') sind nun direkt möglich:
+            const bruttoPreis = produktObjekt.preis * 1.19;
+            log(`4. Berechneter Bruttopreis (preis * 1.19): ${bruttoPreis.toFixed(2)} €`);
+        });
+
+
+        /* ==========================================================================
+           ABSCHNITT 4: OBJEKT-METHODEN UND DAS 'this'-KEYWORD
+           ========================================================================== */
+
+        // Erstellung eines Objekts 'benutzer' mit Daten und einer Funktion (Methode)
+        const benutzer = {
+            vorname: "Stefan",
+            nachname: "Sauer",
+            rolle: "Dozent",
+            
+            // Zeile: Methode 'getVollstaendigerName' innerhalb des Objekts.
+            getVollstaendigerName() {
+                // Das Schlüsselwort 'this' verweist innerhalb der Methode auf das eigene Objekt ('benutzer').
+                // Dadurch kann auf 'this.vorname', 'this.nachname' etc. zugegriffen werden.
+                return `${this.vorname} ${this.nachname} (${this.rolle})`;
+            }
+        };
+
+        // Event-Listener für Button 4: Objekt-Methoden testen
+        document.getElementById('btnMethods').addEventListener('click', () => {
+            clearLog();
+            log("=== 4. Objekt-Methoden & 'this'-Keyword ===");
+            log("Aufruf benutzer.getVollstaendigerName():");
+            
+            // Aufrufen der Methode über die Punkt-Notation inklusive runder Klammern ()
+            log("➔ " + benutzer.getVollstaendigerName());
+        });
+    </script>
+
+</body>
+</html>

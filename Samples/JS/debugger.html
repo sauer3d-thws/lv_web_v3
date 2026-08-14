@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Debugging Demo - DevTools</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background: #ffffff;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: #005a9c;
+            margin-bottom: 8px;
+        }
+
+        p.description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .demo-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px 12px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #005a9c;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #004070;
+        }
+
+        .result-output {
+            margin-top: 16px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #2b2b2b;
+        }
+
+        .instructions {
+            background: #eef6fc;
+            border-left: 4px solid #005a9c;
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            color: #1a385c;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .instructions ol {
+            margin: 8px 0 0 20px;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>JavaScript Debugging Praxis-Test</h1>
+    <p class="description">
+        Dieses Beispiel demonstriert Breakpoint-Debugging im Browser.
+        Drücke <code>F12</code>, um die Entwicklertools zu öffnen, bevor du auf den Button klickst!
+    </p>
+
+    <div class="demo-box">
+        <label for="eingabeA">Wert A (Zahl eingeben):</label>
+        <input type="text" id="eingabeA" value="5">
+
+        <button id="calcBtn">Summe berechnen</button>
+
+        <div id="result" class="result-output">Ergebnis: -</div>
+    </div>
+
+    <div class="instructions">
+        <strong>Anleitung zum Debuggen:</strong>
+        <ol>
+            <li>Entwicklertools mit <code>F12</code> öffnen.</li>
+            <li>Auf <strong>"Summe berechnen"</strong> klicken.</li>
+            <li>Der Browser stoppt automatisch bei der Zeile <code>debugger;</code>.</li>
+            <li>Im <strong>Sources / Scope Panel</strong> den Datentyp von <code>a</code> (String) und <code>b</code>
+                (Number) prüfen.</li>
+        </ol>
+    </div>
+
+    <script>
+        function berechneSumme(a, b) {
+            debugger; // Stoppt die Ausführung automatisch bei geöffneten DevTools!
+
+            // Bug im Original: a ist ein String ("5"), b ist eine Zahl (10) -> "510"
+            let ergebnis = a + b;
+
+            // Korrektur-Möglichkeit:
+            // let ergebnis = Number(a) + b;
+
+            return ergebnis;
+        }
+
+        document.getElementById("calcBtn").addEventListener("click", () => {
+            let eingabeA = document.getElementById("eingabeA").value; // Liefert stets einen String zurück!
+            let eingabeB = 10;
+
+            let summe = berechneSumme(eingabeA, eingabeB);
+
+            document.getElementById("result").innerText = "Ergebnis: " + summe;
+        });
+    </script>
+
+</body>
+
+</html>

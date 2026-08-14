@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Responsive Fluid Layout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            width: 90%; /* Fluid width */
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 2px solid #333;
+        }
+        header {
+            background-color: #e74c3c;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+            background-color: #ecf0f1;
+        }
+        .box {
+            width: 100%; /* Fluid width */
+            height: 100px;
+            background-color: #f1c40f;
+            margin-bottom: 10px;
+            color: #333;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Responsive Fluid Layout</h1>
+            <!-- BESONDERHEIT:
+                 Dieses Layout nutzt prozentuale Werte (%) für Breiten.
+                 Dadurch fließt (fluid) das Layout und füllt den Viewport immer prozentual aus.
+                 Zusätzlich verhindert max-width (z.B. 1200px), dass das Layout auf sehr großen
+                 Bildschirmen zu breit und unleserlich wird. -->
+        </header>
+        <main>
+            <div class="box">Container 1 (Breite: 100%)</div>
+            <div class="box">Container 2 (Breite: 100%)</div>
+        </main>
+    </div>
+</body>
+</html>

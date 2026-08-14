@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modernes Event Handling Demo</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            max-width: 750px;
+            margin: 40px auto;
+            padding: 24px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 { color: #005a9c; font-size: 1.4rem; margin-bottom: 8px; }
+        p.description { color: #666; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; }
+        
+        .demo-section {
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+            background: #fafafa;
+        }
+        .demo-section h2 { font-size: 1.05rem; color: #005a9c; margin-top: 0; margin-bottom: 12px; }
+
+        .button-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+        button {
+            background: #005a9c;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            font-size: 0.88rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover { background: #004070; }
+        button.secondary { background: #6c757d; }
+        button.secondary:hover { background: #5a6268; }
+        button.danger { background: #dc3545; }
+        button.danger:hover { background: #bd2130; }
+
+        /* Event Delegation Liste */
+        ul.item-list { list-style: none; padding: 0; margin: 0; }
+        ul.item-list li {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        form.demo-form { display: flex; gap: 10px; align-items: center; }
+        form.demo-form input { padding: 8px; border: 1px solid #ccc; border-radius: 4px; flex-grow: 1; }
+
+        .console-output {
+            background: #1e1e1e;
+            color: #4ec9b0;
+            font-family: 'Consolas', 'Courier New', monospace;
+            padding: 16px;
+            border-radius: 6px;
+            min-height: 140px;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+        .info-box {
+            background: #eef6fc;
+            border-left: 4px solid #005a9c;
+            padding: 14px 16px;
+            font-size: 0.88rem;
+            color: #1a385c;
+            border-radius: 0 4px 4px 0;
+            margin-top: 24px;
+        }
+        .info-box ul { margin: 8px 0 0 18px; padding: 0; }
+        .info-box li { margin-bottom: 6px; }
+    </style>
+</head>
+<body>
+
+    <h1>Modernes Event Handling Praxis-Test</h1>
+    <p class="description">
+        Klicke auf die interaktiven Steuerelemente, um Event-Listener, <code>event.preventDefault()</code>, 
+        Event Bubbling und <strong>Event Delegation</strong> live in Aktion zu beobachten.
+    </p>
+
+    <!-- Testbereich 1: Event Listener Registrieren / Entfernen -->
+    <div class="demo-section">
+        <h2>1. Event-Listener registrieren & entfernen</h2>
+        <div class="button-group">
+            <button id="btnAttach">1. Listener aktivieren</button>
+            <button id="btnTest" class="secondary">2. Test-Button klicken</button>
+            <button id="btnDetach" class="danger">3. Listener entfernen</button>
+        </div>
+    </div>
+
+    <!-- Testbereich 2: Formular Submit & preventDefault -->
+    <div class="demo-section">
+        <h2>2. Standardverhalten verhindern (<code>event.preventDefault()</code>)</h2>
+        <form id="sampleForm" class="demo-form">
+            <input type="text" id="username" placeholder="Name eingeben..." required>
+            <button type="submit">Formular absenden</button>
+        </form>
+    </div>
+
+    <!-- Testbereich 3: Event Delegation -->
+    <div class="demo-section">
+        <h2>3. Event Delegation an Liste (<code><ul></code> mit einem einzigen Listener)</h2>
+        <ul id="dynamicList" class="item-list">
+            <li><span>Projekt A</span> <button class="delete-btn danger" data-id="101">Löschen</button></li>
+            <li><span>Projekt B</span> <button class="delete-btn danger" data-id="102">Löschen</button></li>
+            <li><span>Projekt C</span> <button class="delete-btn danger" data-id="103">Löschen</button></li>
+        </ul>
+        <button id="btnAddItem" class="secondary" style="margin-top: 10px;">+ Neues Element hinzufügen</button>
+    </div>
+
+    <!-- Live Console Output -->
+    <h2>Live JavaScript Konsole:</h2>
+    <div id="consoleLog" class="console-output">> Konsole bereit. Klicke auf die Elemente oben...</div>
+
+    <div class="info-box">
+        <strong>💡 Gezeigte Kernkonzepte im Code:</strong>
+        <ul>
+            <li><code>addEventListener() / removeEventListener()</code> mit benannter Funktion.</li>
+            <li><code>event.preventDefault()</code> zum Unterdrücken des automatischen Formular-Reloads.</li>
+            <li><code>Event Delegation:</code> Nur 1 Listener am übergeordneten <code>&lt;ul&gt;</code>-Element fängt Klicks auf allen (auch neu hinzugefügten) Buttons ab.</li>
+        </ul>
+    </div>
+
+    <script>
+        // ==========================================================================
+        // HILFSFUNKTIONEN FÜR DIE INTERAKTIVE AUSGABE
+        // ==========================================================================
+        
+        // Referenz auf das HTML-Element zur Konsolenausgabe im DOM holen
+        const consoleLog = document.getElementById('consoleLog');
+
+        // Funktion zum Schreiben einer Nachricht in das Konsolenfenster
+        function log(message) {
+            consoleLog.textContent += '\n> ' + message;
+            consoleLog.scrollTop = consoleLog.scrollHeight; // Automatisch nach unten scrollen
+        }
+
+        // Funktion zum Zurücksetzen des Konsoleninhalts
+        function clearLog() {
+            consoleLog.textContent = '> Konsole geleert.';
+        }
+
+
+        /* ==========================================================================
+           ABSCHNITT 1: EVENT LISTENER REGISTRIEREN UND ENTFERNEN (addEventListener / removeEventListener)
+           ========================================================================== */
+
+        // 1. DOM-Selektion der drei Steuerungsschaltflächen für den Testbereich
+        const btnAttach = document.getElementById('btnAttach'); // Button zum Aktivieren
+        const btnTest   = document.getElementById('btnTest');   // Ziel-Button, der das Event empfängt
+        const btnDetach = document.getElementById('btnDetach'); // Button zum Deaktivieren
+
+        /**
+         * BENANNTE HANDLER-FUNKTION:
+         * WICHTIG: Damit removeEventListener() eine Funktion wieder entfernen kann, MUSS
+         * sie als benannte Funktion (oder als Funktions-Variable) im Speicher abgelegt sein!
+         * Eine anonyme Funktion () => {} könnte später NICHT mehr gezielt entfernt werden, 
+         * da der Browser beim Entfernen die exakte Speicheradresse der Funktion benötigt.
+         * 
+         * @param {Event} event - Das automatisch vom Browser übergebene Event-Objekt
+         */
+        function customClickHandler(event) {
+            // event.type liefert den Namen des aufgetretenen Ereignisses (hier: "click")
+            // event.target ist das konkrete Element, das geklickt wurde (hier der btnTest)
+            log(`[EVENT HANDLER EXECUTED] Event '${event.type}' auf Element <${event.target.tagName.toLowerCase()} id="${event.target.id}"> ausgelöst!`);
+        }
+
+        /**
+         * SCHRITT 1A: EVENT-LISTENER REGISTRIEREN (btnAttach)
+         * - Wir hängen an btnAttach einen anonymen Arrow-Function-Listener für das Klick-Ereignis.
+         * - Beim Klick auf btnAttach wird die Funktion customClickHandler an btnTest registriert.
+         */
+        btnAttach.addEventListener('click', () => {
+            clearLog();
+            
+            // element.addEventListener(eventType, handlerFunction)
+            // Registriert den Event-Listener im Browser-Event-System.
+            // Sobald der Benutzer nun auf btnTest klickt, wird customClickHandler aufgerufen.
+            btnTest.addEventListener('click', customClickHandler);
+            
+            log("Event-Listener 'customClickHandler' wurde für den Event-Typ 'click' an btnTest REGISTRIERT.");
+            log("-> Klicke jetzt auf '2. Test-Button klicken', um das Event auszulösen!");
+        });
+
+        /**
+         * SCHRITT 1B: EVENT-LISTENER ENTFERNEN (btnDetach)
+         * - Beim Klick auf btnDetach wird die zuvor registrierte Funktion customClickHandler wieder abgemeldet.
+         */
+        btnDetach.addEventListener('click', () => {
+            clearLog();
+            
+            // element.removeEventListener(eventType, handlerFunction)
+            // Entfernt den Event-Listener wieder aus dem Event-Register des Browsers.
+            // VORAUSSETZUNG: Exakt dieselbe Funktionsreferenz (customClickHandler) wird übergeben!
+            btnTest.removeEventListener('click', customClickHandler);
+            
+            log("Event-Listener 'customClickHandler' wurde erfolgreich von btnTest ENTFERNT.");
+            log("-> Klicks auf '2. Test-Button klicken' führen jetzt zu keiner Reaktion mehr.");
+        });
+
+
+        /* ==========================================================================
+           ABSCHNITT 2: STANDARDVERHALTEN VERHINDERN (event.preventDefault())
+           ========================================================================== */
+
+        // Selektion des Formular-Elements im DOM
+        const sampleForm = document.getElementById('sampleForm');
+        
+        /**
+         * FORMULAR-SUBMIT MIT PREVENTDEFAULT:
+         * Standardmäßig führt das Absenden eines HTML-Formulars (z. B. per Button oder Enter-Taste)
+         * zu einem HTTP-Request an die Server-URL und damit zum NEULADEN der kompletten Webseite.
+         * 
+         * In modernen Webanwendungen (Single Page Applications / AJAX / Fetch) soll die Seite 
+         * jedoch NICHT neu geladen werden, sondern JavaScript übernimmt die Datenverarbeitung.
+         */
+        sampleForm.addEventListener('submit', (event) => {
+            // event.preventDefault() stoppt die standardmäßige Browser-Aktion (hier: Seiten-Reload / Form-Submit).
+            // Dies ist einer der wichtigsten Methodenaufrufe im modernem Event Handling!
+            event.preventDefault();
+            
+            clearLog();
+            
+            // Nach dem Stoppen des Reloads können wir die Eingabewerte sauber mit JS verarbeiten:
+            const nameInput = document.getElementById('username');
+            const nameValue = nameInput.value;
+            
+            log(`[SUBMIT EVENT ABGEFANGEN] event.preventDefault() wurde ausgeführt.`);
+            log(`-> Der automatische Browser-Seiten-Reload wurde unterdrückt.`);
+            log(`-> Eingegebener Formularwert: "${nameValue}"`);
+            log(`-> Die Daten können nun per JavaScript (z. B. fetch()) asynchron gesendet werden.`);
+        });
+
+
+        /* ==========================================================================
+           ABSCHNITT 3: EVENT DELEGATION (Effiziente Event-Steuerung an Eltern-Elementen)
+           ========================================================================== */
+
+        // Selektion des übergeordneten <ul>-Containers und des Hinzufügen-Buttons
+        const dynamicList = document.getElementById('dynamicList'); // Das <ul> Elternelement
+        const btnAddItem   = document.getElementById('btnAddItem');   // Button zum Ergänzen neuer <li>s
+        let itemCounter = 104; // ID-Zähler für neu erzeugte Elemente
+
+        /**
+         * WAS IST EVENT DELEGATION?
+         * Anstatt jedem einzelnen Löschen-Button (<button class="delete-btn">) einen eigenen Listener zu verpassen
+         * (was bei 1000 Listeneinträgen 1000 Listener bedeuten würde!), registrieren wir NUR EINEN EINZIGEN Listener
+         * an der übergeordneten Liste (<ul> ID: dynamicList).
+         * 
+         * WARUM FUNKTIONIERT DAS?
+         * Wegen des Event Bubblings! Ein Klick auf ein beliebiges Kind-Element (z. B. ein Button in einem <li>)
+         * steigt im DOM-Baum nach oben zum <ul>-Element auf. Dort wird das Event von unserem Listener abgefangen.
+         */
+        dynamicList.addEventListener('click', (event) => {
+            // 1. event.target ist das KONKRETE Element, auf das der Benutzer geklickt hat.
+            // 2. element.closest('.delete-btn') sucht vom Klick-Ziel ausgehend nach OBEN im DOM-Baum 
+            //    nach dem nächsten Element, das zur CSS-Klasse '.delete-btn' passt.
+            const deleteBtn = event.target.closest('.delete-btn');
+
+            // GUARD CLAUSE (Schutzbedingung):
+            // Falls der Klick innerhalb des <ul> irgendwo anders war (z.B. auf den weißen Hintergrund oder den Text),
+            // liefert closest('.delete-btn') den Wert null zurück. In diesem Fall brechen wir sofort ab!
+            if (!deleteBtn) {
+                return;
+            }
+
+            clearLog();
+
+            // Auslesen des HTML data-Attribute 'data-id' über die dataset-Eigenschaft des Buttons:
+            const itemId = deleteBtn.dataset.id;
+
+            // Vom geklickten Button aus das zugehörige <li>-Elternelement im DOM finden:
+            const listItem = deleteBtn.closest('li');
+            
+            log(`[EVENT DELEGATION] Klick auf Unterelement registriert!`);
+            log(`-> event.target war: <${event.target.tagName.toLowerCase()}>`);
+            log(`-> event.currentTarget (Listener-Ort) war: <${event.currentTarget.tagName.toLowerCase()} id="${event.currentTarget.id}">`);
+            log(`-> Lösche Listenelement mit data-id="${itemId}" per listItem.remove()...`);
+
+            // Das Listenelement komplett aus dem DOM-Baum entfernen:
+            listItem.remove();
+        });
+
+        /**
+         * NEUES ELEMENT DYNAMISCH HINZUFÜGEN:
+         * Hier wird der riesige Vorteil von Event Delegation sichtbar:
+         * Für neu hinzugefügte HTML-Elemente muss KEIN neuer Event-Listener registriert werden!
+         * Das übergeordnete <ul> fängt Klicks auf neu hinzugefügte Buttons automatisch mit ab.
+         */
+        btnAddItem.addEventListener('click', () => {
+            clearLog();
+            
+            // Erzeugen eines neuen HTML-Template-Strings mit Löschen-Button
+            const newItemHtml = `<li><span>Neues Projekt #${itemCounter}</span> <button class="delete-btn danger" data-id="${itemCounter}">Löschen</button></li>`;
+            
+            // insertAdjacentHTML('beforeend', html) fügt den String direkt am Ende des <ul>-Containers ein
+            dynamicList.insertAdjacentHTML('beforeend', newItemHtml);
+            
+            log(`Neues <li>-Element mit ID ${itemCounter} dynamisch im DOM erzeugt.`);
+            log(`WICHTIG: Es wurde KEIN neuer Event-Listener für den neuen Button angelegt!`);
+            log(`Dank Event Delegation am <ul> funktioniert der Löschen-Button sofort automatisch.`);
+            
+            itemCounter++; // Zähler für das nächste Element erhöhen
+        });
+    </script>
+</body>
+</html>

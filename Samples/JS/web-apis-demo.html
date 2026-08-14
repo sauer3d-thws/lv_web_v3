@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moderne Web APIs (Geolocation API) Demo</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            max-width: 750px;
+            margin: 40px auto;
+            padding: 24px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 { color: #005a9c; font-size: 1.4rem; margin-bottom: 8px; }
+        p.description { color: #666; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; }
+        
+        .demo-section {
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+            background: #fafafa;
+        }
+        .demo-section h2 { font-size: 1.05rem; color: #005a9c; margin-top: 0; margin-bottom: 12px; }
+
+        .button-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; }
+        button {
+            background: #005a9c;
+            color: white;
+            border: none;
+            padding: 9px 15px;
+            font-size: 0.88rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-weight: 500;
+        }
+        button:hover { background: #004070; }
+        button.secondary { background: #6c757d; }
+        button.secondary:hover { background: #5a6268; }
+
+        .location-card {
+            background: white;
+            border: 1px solid #cce0f0;
+            padding: 14px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+        .location-card p { margin: 4px 0; font-size: 0.9rem; }
+        .location-card .coords-val { font-family: monospace; font-weight: bold; color: #005a9c; }
+
+        .console-output {
+            background: #1e1e1e;
+            color: #4ec9b0;
+            font-family: 'Consolas', 'Courier New', monospace;
+            padding: 16px;
+            border-radius: 6px;
+            min-height: 140px;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+        .info-box {
+            background: #eef6fc;
+            border-left: 4px solid #005a9c;
+            padding: 14px 16px;
+            font-size: 0.88rem;
+            color: #1a385c;
+            border-radius: 0 4px 4px 0;
+            margin-top: 24px;
+        }
+        .info-box ul { margin: 8px 0 0 18px; padding: 0; }
+        .info-box li { margin-bottom: 6px; }
+    </style>
+</head>
+<body>
+
+    <h1>Moderne Web APIs Praxis-Test: Geolocation API</h1>
+    <p class="description">
+        Moderne Web-Browser stellen leistungsfähige <strong>Web APIs</strong> direkt zur Verfügung. 
+        In der Geovisualisierung ist die <strong>Geolocation API</strong> (<code>navigator.geolocation</code>) 
+        besonders wichtig, um den aktuellen Standort des Benutzers (GPS / IP / WLAN) mit seiner Erlaubnis abzufragen.
+    </p>
+
+    <!-- Testbereich: Geolocation -->
+    <div class="demo-section">
+        <h2>Benutzer-Standort ermitteln (<code>navigator.geolocation</code>)</h2>
+        <div class="button-group">
+            <button id="btnGetLocation">📍 Aktuelle GPS-Position ermitteln</button>
+            <button id="btnClear" class="secondary">Zurücksetzen</button>
+        </div>
+
+        <div id="locationCard" class="location-card" style="display: none;">
+            <p><strong>Latitude (Breitengrad):</strong> <span id="valLat" class="coords-val">-</span></p>
+            <p><strong>Longitude (Längengrad):</strong> <span id="valLng" class="coords-val">-</span></p>
+            <p><strong>Genauigkeit (Accuracy):</strong> <span id="valAcc" class="coords-val">-</span> Meter</p>
+            <p><strong>Zeitstempel:</strong> <span id="valTime">-</span></p>
+        </div>
+    </div>
+
+    <!-- Live Console Output -->
+    <h2>Live JavaScript Konsole:</h2>
+    <div id="consoleLog" class="console-output">> Konsole bereit. Klicke auf 'Aktuelle GPS-Position ermitteln'...</div>
+
+    <div class="info-box">
+        <strong>💡 Gezeigte Kernkonzepte im Code:</strong>
+        <ul>
+            <li><code>'geolocation' in navigator</code>: Prüfung, ob der Browser das Web-API unterstützt.</li>
+            <li><code>navigator.geolocation.getCurrentPosition(success, error)</code>: Asynchroner Aufruf zum Abfragen der Position.</li>
+            <li><strong>Berechtigungen &amp; Datenschutz:</strong> Der Browser verlangt vom Nutzer explizit die Erlaubnis zur Standortfreigabe.</li>
+            <li><strong>Fehlerbehandlung:</strong> Abfangen von Ablehnungen (`PERMISSION_DENIED`) oder Positionsfehlern.</li>
+        </ul>
+    </div>
+
+    <script>
+        // ==========================================================================
+        // HILFSFUNKTIONEN FÜR KONSOLE UND ANZEIGE
+        // ==========================================================================
+        const consoleLog = document.getElementById('consoleLog');
+        const locationCard = document.getElementById('locationCard');
+
+        function log(message) {
+            consoleLog.textContent += '\n> ' + message;
+            consoleLog.scrollTop = consoleLog.scrollHeight;
+        }
+
+        function clearLog() {
+            consoleLog.textContent = '> Konsole geleert.';
+        }
+
+
+        /* ==========================================================================
+           GEOLOCATION API (navigator.geolocation)
+           ========================================================================== */
+
+        const btnGetLocation = document.getElementById('btnGetLocation');
+        const btnClear = document.getElementById('btnClear');
+
+        /**
+         * Hauptfunktion zur Standortabfrage über die Browser Web API
+         */
+        btnGetLocation.addEventListener('click', () => {
+            clearLog();
+            locationCard.style.display = 'none';
+
+            // SCHRITT 1: Prüfen, ob die Geolocation API im aktuellen Browser verfügbar ist
+            if (!('geolocation' in navigator)) {
+                log('[ERROR] Geolocation API wird von diesem Browser leider NICHT unterstützt.');
+                return;
+            }
+
+            log('[START] Frage Standort über navigator.geolocation.getCurrentPosition() an...');
+            log('-> Der Browser zeigt nun ein Zustimmungs-Fenster an (Berechtigung abfragen)...');
+
+            /**
+             * SCHRITT 2: Position asynchron anfordern
+             * Erwartet 2 Callback-Funktionen: 
+             * 1. Success Callback (wenn die Position ermittelt wurde)
+             * 2. Error Callback (falls der Nutzer ablehnt oder kein GPS vorhanden ist)
+             */
+            navigator.geolocation.getCurrentPosition(
+                // 1. Success-Callback: Empfängt ein GeolocationPosition-Objekt
+                (position) => {
+                    const coords = position.coords;
+                    const lat = coords.latitude;
+                    const lng = coords.longitude;
+                    const accuracy = coords.accuracy; // Genauigkeit in Metern
+                    const timeStr = new Date(position.timestamp).toLocaleTimeString('de-DE');
+
+                    log(`[SUCCESS] Standort erfolgreich ermittelt!`);
+                    log(`-> Latitude: ${lat}`);
+                    log(`-> Longitude: ${lng}`);
+                    log(`-> Genauigkeit: ±${accuracy} Meter`);
+
+                    // Werte im HTML anzeigen
+                    document.getElementById('valLat').textContent = lat.toFixed(6);
+                    document.getElementById('valLng').textContent = lng.toFixed(6);
+                    document.getElementById('valAcc').textContent = Math.round(accuracy);
+                    document.getElementById('valTime').textContent = timeStr;
+                    
+                    locationCard.style.display = 'block';
+                },
+
+                // 2. Error-Callback: Empfängt ein GeolocationPositionError-Objekt
+                (error) => {
+                    log(`[FEHLER ABGEFANGEN] Geolocation-Fehler Code ${error.code}:`);
+                    
+                    switch (error.code) {
+                        case error.PERMISSION_DENIED:
+                            log('-> Zugriff verweigert: Der Nutzer hat die Standortfreigabe abgelehnt.');
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            log('-> Position nicht verfügbar: GPS/WLAN-Signal konnte nicht ermittelt werden.');
+                            break;
+                        case error.TIMEOUT:
+                            log('-> Zeitüberschreitung (Timeout) bei der Standortabfrage.');
+                            break;
+                        default:
+                            log(`-> Unbekannter Fehler: ${error.message}`);
+                    }
+                },
+
+                // 3. Optionale Einstellungen
+                {
+                    enableHighAccuracy: true, // Höchstmögliche Genauigkeit (z. B. echtes GPS) anfordern
+                    timeout: 10000,           // Maximal 10 Sekunden auf Antwort warten
+                    maximumAge: 0             // Keine veralteten gecachten Positionen akzeptieren
+                }
+            );
+        });
+
+        // Button: Zurücksetzen
+        btnClear.addEventListener('click', () => {
+            clearLog();
+            locationCard.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

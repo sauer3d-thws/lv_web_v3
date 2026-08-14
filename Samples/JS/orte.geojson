@@ -1,0 +1,41 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Festung Marienberg",
+        "kategorie": "Sehenswürdigkeit",
+        "stadt": "Würzburg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.919, 49.790]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Residenz Würzburg",
+        "kategorie": "UNESCO Weltkulturerbe",
+        "stadt": "Würzburg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.936, 49.792]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "THWS Campus SHL",
+        "kategorie": "Hochschule",
+        "stadt": "Würzburg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.932, 49.778]
+      }
+    }
+  ]
+}

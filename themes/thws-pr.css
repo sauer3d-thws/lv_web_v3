@@ -1,0 +1,17 @@
+/* @theme thws-pr */
+@import "thws";
+
+/* 🔁 Breitenanpassung global für alle Inhalte */
+section h1, section h2, section p, section h3, section ul, section ol, section table, section pre {
+  width: 100%;
+}
+
+/* 🎨 Titel-Farbanpassung */
+:root {
+  --background-teal: #003366;
+}
+
+/* 👇 Optional: Nur wenn Breite auf Titelfolie durch theme nochmal begrenzt wurde */
+section.titlepage h1, section.titlepage h2 {
+  width: 100%;
+}

@@ -1,0 +1,578 @@
+---
+title: "Kapitel 4: KI-Workflows, Spec-Driven Development (SDD) & KI-native Entwicklungsumgebungen"
+subtitle: "Interaktives Selbstlern-Quiz | THWS Webprogrammierung"
+date: last-modified
+lang: de
+
+author:
+  - name: Stefan Sauer
+    email: stefan.sauer@thws.de
+    role: Fachlehrer
+    affiliation: THWS Geovisualisierung & Vermessung
+
+semester: "WS 26/27"
+course: "Webprogrammierung"
+version: "1.0"
+
+include-after-body:
+  - _extensions/moodle/interactions.js
+
+format:
+  moodle-html: default
+---
+
+# 🎯 Umfassendes Selbstlern-Quiz & Wissens-Check
+
+Willkommen zum interaktiven Selbstlern-Quiz für **Kapitel 4: KI-Workflows, Spec-Driven Development (SDD) & KI-native Entwicklungsumgebungen**. Dieses Modul vertieft das transformative Paradigma moderner Softwareentwicklung und bereitet Sie optimal auf Klausur und Praxis vor:
+
+1. **Paradigmenwechsel der Webentwicklung** (Handwerkliches Kodieren vs. KI-gestützte Orchestrierung, Dirigentenrolle, Bill-Gates-Perspektive)
+2. **Spec-Driven Development (SDD)** (Der 4-Stufen-Zyklus `Specify` $\rightarrow$ `Plan` $\rightarrow$ `Tasks` $\rightarrow$ `Implement`, Scaffolding, Verschiebung der Wertschöpfung)
+3. **Die Rolle des „Digital Shepherd“** (Menschliche Verantwortung, Qualitätssicherung, Validierung, Semantik, Clean Code & Barrierefreiheit)
+4. **KI-native Entwicklungsumgebungen** (Evolution vom Texteditor zur intelligenten IDE, Google Antigravity IDE, Cursor, GitHub Copilot, ganzheitliches Projekt-Kontextbewusstsein)
+5. **Kontext-Management & Agentic Rules** (System-Prompts, `.cursorrules`, `GEMINI.md`, `AGENTS.md`, Skills & Permissions)
+6. **Echtzeit-Refactoring & Code Smells** (Automatische Fehlererkennung, Modernisierung veralteter Code-Muster)
+7. **Praktische KI-Generierung von Unterseiten** (Case Study „HomeSweetHome“, Asset-Strukturierung, Prompt Engineering für Webkomponenten)
+8. **Sub-Navigation & Scroll-Anker per Prompt** (Anker-Verlinkung `#anchor` auf `<h2>`-Überschriften, „Nach oben“-Links, gezieltes CSS-Styling via KI)
+9. **Qualitätssicherung & Best Practices** (Broken Link Tests, W3C-Konformität, Responsive Checks, Vermeidung blinden Vertrauens)
+
+---
+
+## 1. Kernbegriffe (Flip-Cards)
+
+Klicken oder tippen Sie auf die Karten, um die Vorder- und Rückseite zu wenden:
+
+::: {.flip-card}
+#### Was unterscheidet handwerkliches Kodieren von KI-Orchestrierung?
+**Handwerkliches Kodieren** fokussiert sich auf das zeilenweise Schreiben von Syntax und das manuelle Beheben von Tippfehlern. Bei der **KI-Orchestrierung** agiert der Entwickler als Dirigent, der Systemanforderungen formuliert, KI-Modelle instruiert und deren generierten Output validiert.
+:::
+
+::: {.flip-card}
+#### Was ist die neue Kernkompetenz von Webentwicklern im KI-Zeitalter?
+Nicht mehr das reine Auswendiglernen von Sprach-Syntax und API-Befehlen, sondern die **präzise Problemformulierung (Intent & Prompt Engineering)**, das architektonische Verständnis von Gesamtsystemen und die kritische Validierung der Ergebnisse.
+:::
+
+::: {.flip-card}
+#### Was bedeutet „Spec-Driven Development (SDD)“?
+SDD ist ein strukturierter Entwicklungsworkflow, bei dem die **detaillierte funktionale und architektonische Spezifikation** vor der eigentlichen Codegenerierung steht. Der iterative Zyklus lautet: **Specify $\rightarrow$ Plan $\rightarrow$ Tasks $\rightarrow$ Implement**.
+:::
+
+::: {.flip-card}
+#### Warum ist die Spezifikationsphase im SDD so kritisch?
+Weil KI-Modelle nach dem Prinzip **„Garbage In, Garbage Out“** arbeiten. Eine unpräzise oder lückenhafte Spezifikation führt zu halluziniertem, unvollständigem oder semantisch falschem Code. Eine exakte Spezifikation liefert sofort einsatzbereiten Produktionscode.
+:::
+
+::: {.flip-card}
+#### Was versteht man unter dem Begriff „Digital Shepherd“?
+Der Entwickler fungiert als **„Hirte“ (Shepherd)**, der den generierten KI-Code behütet und steuert. Er trägt die finale menschliche Verantwortung für Codequalität, W3C-Semantik, IT-Sicherheit, Barrierefreiheit und Performance.
+:::
+
+::: {.flip-card}
+#### Was zeichnet eine „KI-native Entwicklungsumgebung“ aus?
+Klassische Editoren (z. B. Notepad++) betrachten Dateien isoliert. **KI-native IDEs** (z. B. Google Antigravity, Cursor) besitzen ein **ganzheitliches Kontextbewusstsein** über das gesamte Projekt-Repository, kennen Dateibäume, Stylesheets und Abhängigkeiten.
+:::
+
+::: {.flip-card}
+#### Welche Hauptkomponenten besitzt die Google Antigravity IDE?
+1. **Explorer:** Dateibaum- und Projektverwaltung.
+2. **Inhaltsfenster / Editor:** Quelltext- und Dokumentanzeige mit Diffs.
+3. **Agentenfenster:** Interaktive Chat- und Steuerungskonsole für Prompts, Werkzeuge und Workflow-Genehmigungen.
+:::
+
+::: {.flip-card}
+#### Wozu dienen Agentic Rules (z. B. `.cursorrules`, `GEMINI.md`)?
+Sie definieren **dauerhafte Richtlinien und Kontextregeln** für den KI-Agenten im Projekt. Darin werden Codierstandards, Framework-Vorgaben, CSS-Klassenkonventionen oder No-Gos (z. B. „Keine inline-Styles verwenden“) verbindlich hinterlegt.
+:::
+
+::: {.flip-card}
+#### Was versteht man unter automatisiertem „Scaffolding“?
+Das blitzschnelle, automatisierte Erstellen von **Grundgerüsten und Boilerplate-Code** (z. B. HTML5-Struktur mit `<header>`, `<main>`, `<article>`, verknüpfter `style.css` und responsiven Container-Elementen) auf Basis eines einzigen Prompts.
+:::
+
+::: {.flip-card}
+#### Wie funktioniert die Anker-Navigation für Subnavigationen per Prompt?
+Jedem Ziel-Element (z. B. `<article>` oder `<h2>`) wird ein eindeutiges `id`-Attribut zugewiesen (z. B. `id="werkstatt"`). In der Subnavigation verweist der Hyperlink per Hash auf dieses Ziel (`<a href="#werkstatt">Werkstatt</a>`).
+:::
+
+::: {.flip-card}
+#### Was sind „Code Smells“ und wie hilft KI beim Refactoring?
+Code Smells sind strukturelle Schwachstellen im Code (z. B. veraltete Float-Hacks, redundanter CSS-Code, fehlende HTML5-Semantik). KI-Modelle erkennen diese Muster sofort und schlagen moderne Alternativen (z. B. CSS Grid, Flexbox, semantische Tags) vor.
+:::
+
+::: {.flip-card}
+#### Welche Rolle spielt das Sicherheits- und Permission-Modell bei KI-Agenten?
+Autonome Agenten fordern vor kritischen Aktionen (z. B. Lesen sensibler Pfade, Ausführen von Shell-Befehlen, Überschreiben von Dateien) **explizite Genehmigungen („Allow access?“, „Accept all“)** vom Nutzer ein, um versehentliche Schäden zu verhindern.
+:::
+
+::: {.flip-card}
+#### Wie verändert KI laut Bill Gates den Arbeitsmarkt?
+*„Computer machen uns nicht arbeitslos, aber sie verändern unseren Arbeitsalltag stark. Neue Technik nimmt uns viele schwere oder langweilige Aufgaben ab.“* Die Wertschöpfung verlagert sich von repetitiver Routinearbeit zu kreativer Konzeption und Steuerung.
+:::
+
+::: {.flip-card}
+#### Warum darf KI-generierter Webcode niemals ungeprüft veröffentlicht werden?
+KI garantiert keine Fehlerfreiheit. Der Entwickler muss generierten Code auf **Broken Links (404), fehlende responsive Breakpoints, barrierefreie `alt`-Attribute und saubere CSS-Kaskaden** manuell und automatisiert verifizieren.
+:::
+
+---
+
+## 2. Lückentext-Übungen (Active Recall)
+
+Klicken Sie auf ein Wort im Pool und setzen Sie es in die passende Lücke ein:
+
+### Übung 1: Das Paradigma der KI-gestützten Entwicklung
+
+::: {.drag-exercise}
+Die moderne Softwareentwicklung wandelt sich vom manuellen Schreiben von Quellcode zu einer *orchestrierten* Systemintegration. Entwickler agieren zunehmend als *Dirigenten*, die Anforderungen strukturieren und KI-Agenten anleiten. Anstelle des reinen Auswendiglernens von Syntax rückt die Fähigkeit zur präzisen *Problemformulierung* in den Mittelpunkt.
+:::
+
+### Übung 2: Spec-Driven Development (SDD)
+
+::: {.drag-exercise}
+Der iterative Entwicklungszyklus im Spec-Driven Development folgt den vier Phasen: *Specify*, Plan, Tasks und *Implement*. Da die KI auf Basis exakter Leitplanken arbeitet, beginnt der Prozess stets bei der *Spezifikation* und nicht direkt beim Code. Das automatisierte *Scaffolding* spart Entwicklern repetitive Routinearbeit bei Grundgerüsten ein.
+:::
+
+### Übung 3: Die Rolle des Digital Shepherd
+
+::: {.drag-exercise}
+Als *Digital Shepherd* trägt der Mensch die Gesamtverantwortung für das Endprodukt. Er überwacht die generierte *Semantik* der HTML5-Elemente, prüft die Einhaltung von *Barrierefreiheit* und kontrolliert, ob keine Sicherheitslücken oder *Halluzinationen* im Code vorliegen.
+:::
+
+### Übung 4: KI-native Entwicklungsumgebungen
+
+::: {.drag-exercise}
+Im Gegensatz zu einfachen Texteditoren besitzen moderne KI-native Entwicklungsumgebungen wie Google *Antigravity* oder Cursor ein umfassendes *Kontextbewusstsein* über das gesamte Repository. Über Konfigurationsdateien wie *GEMINI.md* werden projektspezifische Architekturregeln hinterlegt, während integrierte Agenten *Refactorings* in Echtzeit durchführen.
+:::
+
+### Übung 5: Subnavigationen & Prompt-Engineering
+
+::: {.drag-exercise}
+Beim Generieren einer Unterseite formuliert der Entwickler im *Prompt* präzise Anforderungen an Layout und Styling. Für eine interne Subnavigation erzeugt die KI Sprungmarken mittels *Anchor*-IDs an den Überschriften. Jeder Inhaltsabschnitt erhält zusätzlich einen Rücksprung-Link *nach oben* zur Menüleiste.
+:::
+
+### Übung 6: Qualitätssicherung & Verifikation
+
+::: {.drag-exercise}
+Nach der automatischen Codegenerierung ist eine gewissenhafte *Validierung* unerlässlich. Der Entwickler testet interne *Verlinkungen* auf 404-Fehler, prüft das Verhalten auf mobilen Viewports und stellt sicher, dass alle Assets im *img*-Verzeichnis korrekt referenziert wurden.
+:::
+
+---
+
+## 3. Fallstudien & Praxis-Szenarien
+
+::: {.case-study}
+#### Fallstudie A: Transformation vom Coder zum System-Orchestrator
+**Szenario:** Ein Webentwickler verbringt bisher 80 % seiner Arbeitszeit damit, HTML-Tags manuell abzutippen, CSS-Klassen für 10 Unterseiten per Hand zu duplizieren und Syntaxfehler im JavaScript mit der Konsole zu suchen. Nach Einführung einer KI-nativen IDE (Google Antigravity) ändert sich sein Aufgabenprofil radikal.
+
+**Aufgabenstellung:**
+1. Vergleichen Sie das traditionelle Aufgabenprofil („Handwerkliche Kodierung“) mit dem modernen Rollenbild („KI-gestützte Orchestrierung“).
+2. Erläutern Sie, warum fundierte Web-Grundlagen (HTML5-Semantik, CSS-Boxmodell, Pfade) für den Entwickler auch bei vollständiger KI-Generierung unverzichtbar bleiben.
+
+::: {.solution}
+**Musterlösung:**
+1. **Vergleich der Rollenprofile:**
+   - **Handwerklicher Coder:** Zeilenweises Schreiben von Standard-Syntax (Boilerplate), manuelle Tipparbeit, Fehlersuche auf Syntax-Ebene. Zeitfresser bei repetitiven Aufgaben.
+   - **System-Orchestrator:** Definition von Architekturspezifikationen (SDD), Formulierung präziser Prompts, Orchestrierung von Multi-File-Agenten, strategische Integration von Modulen und finale Qualitätsabnahme (Digital Shepherd).
+2. **Notwendigkeit fundierter Web-Grundlagen:**
+   - Ein Dirigent muss die Partitur lesen und Fehler im Orchester sofort hören können. Ohne Verständnis von HTML5-Semantik, Kaskade und CSS-Spezifität kann der Entwickler fehlerhaften oder unsauberen KI-Code (z. B. Divitis, Broken Links, fehlerhafte relative Pfade `../../`) weder erkennen noch korrigieren.
+:::
+:::
+
+::: {.case-study}
+#### Fallstudie B: Konzeptionelle Unterseitenerstellung „HomeSweetHome“ per Prompt
+**Szenario:** Für das Webprojekt „Maik's mobiler Service“ soll auf Basis der bestehenden `index.html` und eines neuen Bildordners `/img/1600/` eine Unterseite namens `homesweethome.html` generiert werden. Die Seite soll 8 verschiedene Fahrzeugbereiche (Büro, Führerhaus, Garage, Werkstatt, Küche etc.) in separaten `<article>`-Abschnitten vorstellen.
+
+**Aufgabenstellung:**
+1. Verfassen Sie einen professionellen, strukturierten Prompt für die Antigravity IDE, der alle Anforderungen an HTML5-Semantik, Bildreferenzen und responsive Stylesheets abdeckt.
+2. Erstellen Sie den Folge-Prompt zur automatischen Generierung einer interaktiven Subnavigation mit Sprungmarken und „Nach oben“-Links.
+
+::: {.solution}
+**Musterlösung:**
+1. **Initialer Erstellungs-Prompt:**
+   > *„Erstelle auf Basis der vorhandenen index.html eine neue, responsive Unterseite namens 'homesweethome.html'. Binde die vorhandene style.css ein. Erstelle im main-Bereich 8 strukturierte article-Elemente für die Bereiche: Büro, Führerhaus, Garage, Sanitäranlagen, Werkstatt, LKW-Außenansicht, Küche und Wohn-/Schlafbereich. Verwende jeweils die passenden Bilder aus dem Ordner 'img/' bzw. 'img/1600/' mit barrierefreien alt-Attributen. Verwende für alle Abschnitte semantische HTML5-Tags (header, nav, main, article, footer).“*
+
+2. **Folge-Prompt für die Subnavigation:**
+   > *„Erstelle am Anfang des main-Bereichs eine Subnavigation als ungeordnete Liste mit der CSS-Klasse 'subnavi'. Jeder Listenpunkt soll die h2-Überschrift eines der 8 Article enthalten und per Anchor-Link (#id) direkt zum entsprechenden Article springen. Ergänze unter jedem Article einen Link 'nach oben' (#subnavi). Style die Klasse 'subnavi' in der style.css so, dass keine Standard-Listenpunkte angezeigt werden, sondern die Einträge durch horizontale, schwarz-gepunktete Linien abgegrenzt sind.“*
+:::
+:::
+
+::: {.case-study}
+#### Fallstudie C: SDD-Zyklus für ein interaktives Kontaktformular
+**Szenario:** Ein Kunde benötigt ein mehrstufiges Buchungsformular für eine Werkstatt. Das Team entscheidet sich für den Spec-Driven Development (SDD) Workflow.
+
+**Aufgabenstellung:**
+1. Skizzieren Sie die 4 Phasen des SDD-Zyklus (`Specify`, `Plan`, `Tasks`, `Implement`) anhand dieses Beispiels.
+2. Nennen Sie zwei typische Risiken, wenn Entwickler die Phase `Specify` überspringen und direkt zur Implementierung übergehen.
+
+::: {.solution}
+**Musterlösung:**
+1. **Die 4 Phasen des SDD-Zyklus:**
+   - **1. Specify (Spezifikation):** Festlegen aller funktionalen Anforderungen (Eingabefelder: Name, E-Mail, Fahrzeugtyp, Datum, Fehlereingabe; Pflichtfeld-Validierung; DSGVO-Checkbox).
+   - **2. Plan (Architekturplan):** Festlegen der UI-Struktur (HTML5 `<form>`, `<fieldset>`, Labels), Validierungslogik und responsive CSS-Grid-Aufteilung.
+   - **3. Tasks (Aufgabenliste):** Aufteilung in konkrete Arbeitsschritte (z. B. Task 1: HTML-Grundgerüst mit Semantik; Task 2: CSS-Styling für Inputs & Buttons; Task 3: Clientseitige JS-Validierung).
+   - **4. Implement (Umsetzung):** Automatisierte Generierung der Tasks durch den KI-Agenten, gefolgt von manueller Verifikation.
+2. **Risiken beim Überspringen der Spezifikation:**
+   - **Scope Creep & Fehlfunktionen:** Die KI errät Anforderungen unvollständig, vergisst Pflichtfelder oder baut unpassende Validierungsregeln ein.
+   - **Hoher Refactoring-Aufwand:** Das Beheben struktureller Fehlannahmen im fertigen Code kostet mehr Zeit als die initiale, saubere Spezifikation.
+:::
+:::
+
+::: {.case-study}
+#### Fallstudie D: Code-Smell-Erkennung und KI-Refactoring
+**Szenario:** Ein KI-Agent analysiert ein 10 Jahre altes Legacy-Stylesheet und stößt auf folgende Codezeilen:
+```css
+#menu { width: 960px; margin: 0 auto; }
+.nav-item { float: left; width: 160px; font-size: 14px; }
+.clear { clear: both; }
+```
+
+**Aufgabenstellung:**
+1. Identifizieren Sie die drei gravierenden „Code Smells“ in diesem Auszug.
+2. Geben Sie den modernen, mobiltauglichen CSS-Refactoring-Vorschlag an, den eine KI-native IDE generieren sollte.
+
+::: {.solution}
+**Musterlösung:**
+1. **Identifizierte Code Smells:**
+   - **Starre Breiten (`960px`, `160px`):** Veraltetes Fixed Layout, führt auf Mobilgeräten zu horizontalem Scrollen.
+   - **Float-Hack (`float: left` & `.clear`):** Veraltetes Layout-Verfahren für Menüleisten mit überflüssigen Clearfix-Elementen im DOM.
+   - **Absolute Schriftgröße in Pixeln (`14px`):** Schlechtere Barrierefreiheit; skaliert nicht mit den Browser-Grundeinstellungen.
+2. **Modernes KI-Refactoring (Flexbox & Mobile First):**
+```css
+/* Modernes, elastisches Flexbox-Menü */
+#menu {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column; /* Mobile First: Untereinander */
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 768px) {
+  .nav-list {
+    flex-direction: row; /* Tablet/Desktop: Nebeneinander */
+    justify-content: space-around;
+  }
+}
+
+.nav-item a {
+  font-size: 1rem; /* 16px relative Basisgröße */
+  text-decoration: none;
+}
+```
+:::
+:::
+
+---
+
+## 4. Detaillierte Fachvertiefungen (Deep Dives)
+
+### Deep Dive 1: Der Paradigmenwechsel – Vom Handwerk zur Orchestrierung
+
+Die Einführung generativer KI in die Softwareentwicklung markiert den größten Produktivitätssprung seit der Erfindung von Hochsprachen-Compilern:
+
+```
+TRADITIONELL: HANDWERKLICHES KODIEREN
+[Entwickler] ---> schreibt Zeile für Zeile Syntax ---> [Editor] ---> [Browser]
+(Fokus: Semikolons, Klammern, CSS-Properties auswendig lernen)
+
+MODERN: KI-GESTÜTZTE ORCHESTRIERUNG (SDD)
+[Entwickler: Dirigent] 
+       |
+       |  1. Präzise Spezifikation & Prompts
+       v
+[KI-Agent: Multi-File IDE] ---> 2. Automatisiertes Scaffolding & Code-Generierung
+       |
+       v  3. Kritische Validierung & Quality Gates
+[Entwickler: Digital Shepherd] ---> 4. Freigabe & Deployment
+```
+
+| Dimension | Handwerkliche Kodierung | KI-gestützte Orchestrierung |
+| :--- | :--- | :--- |
+| **Hauptaufgabe** | Syntax tippen & Tippfehler debuggen | Architektur entwerfen, Prompts steuern, Code validieren |
+| **Geschwindigkeit** | Stunden bis Tage für Standardseiten | Minuten für vollständige Prototypen & Scaffolding |
+| **Fehlerfokus** | Syntax- & Tippfehler | Logik-, Sicherheits-, Semantik- & Kontextfehler |
+| **Rolle des Menschen** | Ausführender Handwerker | Leitender Architekt & Qualitätswächter (*Digital Shepherd*) |
+
+---
+
+### Deep Dive 2: Der Spec-Driven Development (SDD) Workflow
+
+SDD verhindert chaotisches Ausprobieren („Vibe Coding“) und stellt sicher, dass KI-Agenten deterministisch hochwertige Ergebnisse liefern:
+
+```
++-------------------------------------------------------------------+
+| 1. SPECIFY (Spezifizieren)                                        |
+|    - Funktionale & nicht-funktionale Anforderungen definieren     |
+|    - HTML5-Semantik, responsive Breakpoints, Farben vorgeben      |
++-------------------------------------------------------------------+
+                                  |
+                                  v
++-------------------------------------------------------------------+
+| 2. PLAN (Planen)                                                  |
+|    - Architektur & Dateistruktur festlegen (HTML, CSS, Assets)     |
+|    - Schnittstellen & Modulabhängigkeiten planen                  |
++-------------------------------------------------------------------+
+                                  |
+                                  v
++-------------------------------------------------------------------+
+| 3. TASKS (Aufgaben strukturieren)                                 |
+|    - Zerlegung in atomare, überprüfbare Einzelschritte            |
+|    - Klare Reihenfolge (z. B. Basis-HTML vor CSS vor JS)          |
++-------------------------------------------------------------------+
+                                  |
+                                  v
++-------------------------------------------------------------------+
+| 4. IMPLEMENT & VERIFY (Umsetzen & Validieren)                     |
+|    - KI generiert Code taskweise; Entwickler genehmigt Werkzeuge  |
+|    - W3C-Validierung, Responsivität & Verlinkungstests            |
++-------------------------------------------------------------------+
+```
+
+---
+
+### Deep Dive 3: KI-native Entwicklungsumgebungen im Vergleich
+
+Moderne IDEs unterscheiden sich grundlegend in ihrem Integrationsgrad von KI:
+
+```
+Texteditor (Notepad++)  -->  Erweiterte IDE (VS Code)  -->  KI-native IDE (Antigravity/Cursor)
+[Reiner Textspeicher]        [Plugins mit Autocomplete]     [Agent mit Repository-Kontext & Tools]
+```
+
+- **Google Antigravity IDE:**
+  - Tiefe Integration agentischer Workflows mit autonomer Werkzeugnutzung (Dateien lesen/schreiben, Befehle ausführen, Browser-Testing).
+  - Dreigeteilter Arbeitsbereich: **Explorer** (Projektdateien), **Editor** (Quellcode & Diff-Ansichten), **Agent-Fenster** (Dialog, Planungs- und Ausführungssteuerung).
+  - Sicherheitsarchitektur mit differenzierter Rechtevergabe (*Allow read access*, *Allow running commands*, *Accept all*).
+- **Kontext-Management via Agentic Rules:**
+  - Dateien wie `.cursorrules`, `GEMINI.md` oder `AGENTS.md` definieren das Projektgedächtnis der KI.
+  - Beispiel: *"Verwende immer HTML5-Semantik (<header>, <main>, <footer>). Verwende für Farben stets CSS-Custom-Properties aus style.css. Erzeuge keine Inline-Styles."*
+
+---
+
+### Deep Dive 4: Anatomie eines perfekten Web-Prompts
+
+Ein professioneller Prompt für Webkomponenten enthält fünf essenzielle Bausteine:
+
+```
++-----------------------------------------------------------------------+
+| 1. ROLLE & KONTEXT:   "Du bist ein erfahrener Frontend-Entwickler..." |
+| 2. AUFGABE:           "Erstelle eine Unterseite homesweethome.html..." |
+| 3. DATEN & ASSETS:    "Verwende Bilder aus /img/ und Klassen aus..."  |
+| 4. CONSTRAINTS:       "Nutze striktes HTML5, keine <div>-Suppe..."    |
+| 5. OUTPUT-FORMAT:     "Schreibe direkt in die Datei und erstelle..."  |
++-----------------------------------------------------------------------+
+```
+
+**Praxisbeispiel: Subnavigation mit Anker-Links:**
+```text
+Erstelle im <main>-Bereich von homesweethome.html direkt unter dem Titel:
+1. Eine Subnavigation (<nav class="subnavi">) als ungeordnete Liste (<ul>).
+2. Jeder Menüeintrag verlinkt per Hash (#id) auf das h2-Element des jeweiligen Artikels.
+3. Füge jedem <article> am Ende einen Rücksprung-Link ein: <a href="#subnavi">Nach oben</a>.
+4. Ergänze in der style.css die Klasse .subnavi:
+   - Hintergrund weiß, Textfarbe schwarz
+   - Keine Listenpunkte (list-style: none)
+   - Horizontale Abgrenzung der Einträge durch: border-bottom: 1px dotted #000;
+```
+
+---
+
+### Deep Dive 5: Das Prüfprotokoll für KI-generierten Webcode
+
+Bevor KI-generierter Code in Betrieb geht, muss er folgendes Qualitäts-Gate durchlaufen:
+
+```
+[KI-Output generiert]
+        |
+        +---> 1. W3C HTML-Semantik: Wurden <article>, <section>, <nav> korrekt gewählt?
+        |
+        +---> 2. Broken Links (404): Stimmen alle relativen Pfade (../) und Bild-Dateinamen?
+        |
+        +---> 3. Barrierefreiheit (a11y): Besitzen alle <img>-Tags sinnvolle alt-Attribute?
+        |
+        +---> 4. Mobile Viewport: Ist <meta name="viewport"...> vorhanden?
+        |
+        +---> 5. CSS-Kaskade: Keine doppelten Regeln oder !important-Verschmutzung?
+        |
+        v
+[Freigabe durch Digital Shepherd]
+```
+
+---
+
+## 5. Klausurrelevantes Quick-Check Quiz
+
+Testen Sie Ihr Wissen mit den folgenden Prüfungsfragen:
+
+### Bereich 1: KI-Workflows & Paradigmenwechsel
+
+::: {.quick-check}
+Wie verändert sich die primäre Rolle des Webentwicklers durch den Einsatz moderner KI-Agenten?
+
+- Der Entwickler muss nur noch binären Maschinencode schreiben.
+- **Der Entwickler agiert als System-Orchestrator und Dirigent, der Anforderungen spezifiziert und generierten Code validiert, statt reine Syntax manuell abzutippen.**
+- Die Rolle des Entwicklers wird vollständig obsolet, da KI fehlerfrei ohne Menschen arbeitet.
+
+> KI automatisiert zeilenweises Schreiben von Syntax. Die Wertschöpfung verlagert sich auf Architektur, Prompt-Präzision und Qualitätssicherung.
+:::
+
+::: {.quick-check}
+Welche Aussage zur künftigen Arbeitsmarktsituation durch KI entspricht dem Zitat von Bill Gates?
+
+- **„Computer machen uns nicht arbeitslos, aber sie verändern unseren Arbeitsalltag stark, indem sie schwere und langweilige Aufgaben abnehmen.“**
+- Computer werden in den nächsten zwei Jahren jeden Programmierer überflüssig machen.
+- Durch KI wird Softwareentwicklung wieder ausschließlich auf Papier stattfinden.
+
+> Neue Technologien verändern das Berufsbild: Routineaufgaben entfallen, höherwertige Steuerungs- und Kontrollaufgaben gewinnen an Bedeutung.
+:::
+
+::: {.quick-check}
+Welche Kernkompetenz gewinnt in der KI-gestützten Webentwicklung die höchste Priorität?
+
+- Das Auswendiglernen sämtlicher 141 CSS-Farbnamen.
+- **Die Fähigkeit zur präzisen Problemformulierung (Spezifikation), Systemintegration und kritischen Code-Validierung.**
+- Das manuelle Tippen von HTML-Tags mit mehr als 400 Anschlägen pro Minute.
+
+> Wer der KI präzise Leitplanken vorgibt und die Ergebnisse semantisch und sicherheitskritisch beurteilen kann, erzielt die besten Ergebnisse.
+:::
+
+---
+
+### Bereich 2: Spec-Driven Development (SDD) & Scaffolding
+
+::: {.quick-check}
+In welcher exakten Reihenfolge läuft der Entwicklungszyklus im Spec-Driven Development (SDD) ab?
+
+- **Specify $\rightarrow$ Plan $\rightarrow$ Tasks $\rightarrow$ Implement**
+- Implement $\rightarrow$ Tasks $\rightarrow$ Plan $\rightarrow$ Specify
+- Code $\rightarrow$ Debug $\rightarrow$ Deploy $\rightarrow$ Test
+
+> SDD stellt die Spezifikation und Planung vor die Codegenerierung, um Fehlentwicklungen von vornherein zu unterbinden.
+:::
+
+::: {.quick-check}
+Was versteht man unter dem Begriff „Scaffolding“ in der modernen Webentwicklung?
+
+- Das manuelle Zeichnen von Wireframes auf Papier.
+- **Das automatische Generieren von stabilen Grundgerüsten und Standard-Dateistrukturen (HTML-Struktur, CSS-Dateien, Ordner).**
+- Das endgültige Löschen veralteter Datenbank-Tabellen.
+
+> Scaffolding spart enorm viel Zeit, indem Boilerplate-Code für neue Seiten blitzschnell auf Knopfdruck erzeugt wird.
+:::
+
+::: {.quick-check}
+Welche Konsequenz droht, wenn bei der KI-Entwicklung die Spezifikationsphase („Specify“) übersprungen wird?
+
+- Die KI verweigert grundsätzlich die Antwort.
+- **Es entsteht fehlerhafter, unvollständiger oder semantisch unpassender Code nach dem Prinzip „Garbage In, Garbage Out“.**
+- Das Betriebssystem stürzt sofort ab.
+
+> Ohne klare funktionale und architektonische Spezifikation muss die KI raten, was zu schwer auffindbaren Fehlern führt.
+:::
+
+---
+
+### Bereich 3: KI-native Entwicklungsumgebungen & Google Antigravity
+
+::: {.quick-check}
+Was unterscheidet eine KI-native IDE (wie Google Antigravity oder Cursor) von klassischen Texteditoren?
+
+- Eine KI-native IDE benötigt keinen Stromanschluss.
+- **Sie besitzt ein ganzheitliches Kontextbewusstsein über das gesamte Projekt-Repository und kann Multi-File-Aktionen sowie Refactorings durchführen.**
+- Sie unterstützt ausschließlich die Programmiersprache PHP.
+
+> KI-native IDEs analysieren das gesamte Projektumfeld, bestehende CSS-Klassen und Dateipfade für konsistente Generierungen.
+:::
+
+::: {.quick-check}
+Welche drei Kernbereiche bilden die Arbeitsoberfläche der Google Antigravity IDE?
+
+- Excel-Tabelle, Word-Dokument und Paint-Fenster
+- **Explorer (Projektdateien), Editor/Inhaltsfenster (Quellcode & Diffs) und Agentenfenster (Chat & Werkzeugsteuerung)**
+- Terminal, BIOS und Task-Manager
+
+> Diese drei Komponenten ermöglichen die nahtlose Interaktion zwischen Entwickler, Projektdateien und autonomem Agenten.
+:::
+
+::: {.quick-check}
+Warum fragen agentische KI-Tools vor bestimmten Aktionen nach Genehmigungen wie „Allow access“ oder „Allow running command“?
+
+- Um die Internetverbindung des Webservers zu drosseln.
+- **Aus Sicherheitsgründen, damit der Entwickler die volle Kontrolle über Dateizugriffe, Überschreibungen und Befehlsausführungen behält.**
+- Weil die KI pro Klick bezahlt werden muss.
+
+> Das Sicherheitsmodell garantiert, dass keine sensiblen Dateien unbemerkt gelesen oder fehlerhafte Skripte ungeprüft ausgeführt werden.
+:::
+
+---
+
+### Bereich 4: Die Rolle des „Digital Shepherd“ & Qualitätssicherung
+
+::: {.quick-check}
+Was beschreibt die Metapher des „Digital Shepherd“ (digitaler Hirte) in der Softwareentwicklung?
+
+- Ein Entwickler, der Schafe über eine GPS-App auf der Weide ortet.
+- Ein automatisches Skript zum Herunterladen von Bilddateien.
+- **Der Entwickler, der den KI-generierten Code beaufsichtigt, schützt und die finale Verantwortung für Semantik, Barrierefreiheit und Sicherheit trägt.**
+
+> Der Mensch bleibt die letzte Kontrollinstanz für ethische, fachliche, semantische und sicherheitstechnische Standards.
+:::
+
+::: {.quick-check}
+Welcher Testschritt ist nach der KI-Generierung einer neuen HTML-Unterseite zwingend erforderlich?
+
+- Das manuelle Löschen aller CSS-Stylesheets.
+- **Die Prüfung aller internen Verlinkungen, Bildpfade (404-Checks), HTML5-Semantik und des responsiven Verhaltens auf Mobilgeräten.**
+- Das Ändern aller Dateinamen in Großbuchstaben.
+
+> KI-Modelle können fehlerhafte relative Pfade oder fehlende Alt-Attribute generieren; eine manuelle Verifikation ist Pflicht.
+:::
+
+::: {.quick-check}
+Was versteht man unter „Code Smells“, die moderne KI-Systeme beim Refactoring aufspüren?
+
+- Schlechten Geruch von überhitzten Computer-Lüftern.
+- **Strukturelle Mängel und veraltete Entwurfsmuster im Quellcode (z. B. unsaubere Float-Hacks oder Divitis), die Wartung und Lesbarkeit verschlechtern.**
+- Dateien, die größer als 10 Gigabyte sind.
+
+> KI hilft dabei, veraltete Muster schnell auf moderne Standards (wie Flexbox, CSS Grid, semantische Tags) umzustellen.
+:::
+
+---
+
+### Bereich 5: Prompting für Subnavigationen & HTML5-Komponenten
+
+::: {.quick-check}
+Wie verknüpft man in einer per KI erstellten Subnavigation Menüpunkte mit den Zielabschnitten auf derselben Seite?
+
+- Über absolute Links mit `https://google.de`.
+- **Über interne Anker-Hyperlinks (`<a href="#abschnitt-id">`), die auf Elemente mit der passenden ID (`id="abschnitt-id"`) verweisen.**
+- Durch das Versenden einer E-Mail bei jedem Klick.
+
+> Sprungmarken ermöglichen schnelle Navigation innerhalb langer Seiten ohne Neuladen.
+:::
+
+::: {.quick-check}
+Welche CSS-Deklaration erzeugt die geforderte horizontale schwarz-gepunktete Abgrenzung unter Listeneinträgen einer Subnavigation?
+
+- `text-decoration: underline dotted red;`
+- `background-color: dots;`
+- **`border-bottom: 1px dotted #000000;`**
+
+> `border-bottom` mit dem Rahmentyp `dotted` erzeugt eine saubere gepunktete Trennlinie unter jedem Element.
+:::
+
+::: {.quick-check}
+Wozu dient ein „Nach oben“-Link (`<a href="#subnavi">Nach oben</a>`) unter jedem Inhaltsartikel auf einer langen Unterseite?
+
+- Er schließt den Browser-Tab automatisch.
+- **Er verbessert die Benutzerfreundlichkeit (Usability) auf Mobil- und Desktop-Geräten, indem der Nutzer mit einem Klick zurück zur Subnavigation springen kann.**
+- Er lädt die Webseite im Hintergrund neu.
+
+> Auf langen Inhaltsseiten ersparen Sprungmarken zurück zum Seitenanfang mühsames manuelles Zurückscrollen.
+:::

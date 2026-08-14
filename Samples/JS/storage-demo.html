@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientseitige Speicherung (Web Storage API) Demo</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            max-width: 750px;
+            margin: 40px auto;
+            padding: 24px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 { color: #005a9c; font-size: 1.4rem; margin-bottom: 8px; }
+        p.description { color: #666; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; }
+        
+        .demo-section {
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+            background: #fafafa;
+        }
+        .demo-section h2 { font-size: 1.05rem; color: #005a9c; margin-top: 0; margin-bottom: 12px; }
+
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 0.88rem; margin-bottom: 4px; font-weight: bold; }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .button-group { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
+        button {
+            background: #005a9c;
+            color: white;
+            border: none;
+            padding: 9px 15px;
+            font-size: 0.88rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-weight: 500;
+        }
+        button:hover { background: #004070; }
+        button.secondary { background: #6c757d; }
+        button.secondary:hover { background: #5a6268; }
+        button.danger { background: #dc3545; }
+        button.danger:hover { background: #bd2130; }
+
+        .storage-display {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .storage-box {
+            background: white;
+            border: 1px solid #ccd0d5;
+            border-radius: 6px;
+            padding: 12px;
+        }
+        .storage-box h3 { margin-top: 0; font-size: 0.95rem; color: #005a9c; border-bottom: 1px solid #eee; padding-bottom: 6px; }
+        
+        .console-output {
+            background: #1e1e1e;
+            color: #4ec9b0;
+            font-family: 'Consolas', 'Courier New', monospace;
+            padding: 16px;
+            border-radius: 6px;
+            min-height: 140px;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+        .info-box {
+            background: #eef6fc;
+            border-left: 4px solid #005a9c;
+            padding: 14px 16px;
+            font-size: 0.88rem;
+            color: #1a385c;
+            border-radius: 0 4px 4px 0;
+            margin-top: 24px;
+        }
+        .info-box ul { margin: 8px 0 0 18px; padding: 0; }
+        .info-box li { margin-bottom: 6px; }
+    </style>
+</head>
+<body>
+
+    <h1>Clientseitige Speicherung (Web Storage API) Praxis-Test</h1>
+    <p class="description">
+        JavaScript läuft aus Sicherheitsgründen in einer isolierten <strong>Sandbox</strong> im Browser. 
+        Mit der Web Storage API (<code>localStorage</code> &amp; <code>sessionStorage</code>) kannst du Daten 
+        schlüssel-basiert auf dem Client speichern.
+    </p>
+
+    <!-- Formular für Benutzereinstellungen -->
+    <div class="demo-section">
+        <h2>GIS-Karten-Einstellungen speichern</h2>
+        <div class="form-group">
+            <label for="userName">Benutzername / Bearbeiter:</label>
+            <input type="text" id="userName" placeholder="z. B. Alex Muster">
+        </div>
+        <div class="form-group">
+            <label for="mapLayer">Standard-Kartenlayer:</label>
+            <select id="mapLayer">
+                <option value="OpenStreetMap">OpenStreetMap Standard</option>
+                <option value="Satellite">Satellitenbild (Orthofoto)</option>
+                <option value="Topographic">Topographische Karte</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="zoomLevel">Standard-Zoomstufe (1 - 18):</label>
+            <input type="number" id="zoomLevel" value="12" min="1" max="18">
+        </div>
+
+        <div class="button-group">
+            <button id="btnSaveLocal">1. In localStorage speichern (Permanent)</button>
+            <button id="btnSaveSession" class="secondary">2. In sessionStorage speichern (nur Sitzung)</button>
+            <button id="btnLoad" class="secondary">3. Speicher auslesen</button>
+            <button id="btnClear" class="danger">4. Speicher leeren</button>
+        </div>
+    </div>
+
+    <!-- Anzeige des aktuellen Speicherzustands -->
+    <div class="storage-display">
+        <div class="storage-box">
+            <h3>💾 localStorage (Dauerhaft)</h3>
+            <pre id="localDisplay" style="font-size: 0.82rem; color: #444;">Keine Daten geladen.</pre>
+        </div>
+        <div class="storage-box">
+            <h3>⏱️ sessionStorage (Tab-Sitzung)</h3>
+            <pre id="sessionDisplay" style="font-size: 0.82rem; color: #444;">Keine Daten geladen.</pre>
+        </div>
+    </div>
+
+    <!-- Live Console Output -->
+    <h2 style="margin-top: 20px;">Live JavaScript Konsole:</h2>
+    <div id="consoleLog" class="console-output">> Konsole bereit. Speicher-Aktionen oben testen...</div>
+
+    <div class="info-box">
+        <strong>💡 Gezeigte Kernkonzepte im Code:</strong>
+        <ul>
+            <li><strong>JS-Sandbox &amp; Same-Origin Policy:</strong> Der Speicher ist streng isoliert pro Domäne/Protokoll. Kein Zugriff auf das lokale Dateisystem der Benutzer.</li>
+            <li><code>localStorage.setItem(key, value)</code>: Speichert Daten dauerhaft im Browser (übersteht Browser-Neustarts).</li>
+            <li><code>sessionStorage.setItem(key, value)</code>: Speichert Daten nur für die Dauer des aktuellen Browser-Tabs.</li>
+            <li><code>JSON.stringify() &amp; JSON.parse()</code>: Da Web Storage nur Strings akzeptiert, müssen Objekte vorher serialisiert werden.</li>
+        </ul>
+    </div>
+
+    <script>
+        // ==========================================================================
+        // HILFSFUNKTIONEN FÜR KONSOLE UND ANZEIGE
+        // ==========================================================================
+        const consoleLog = document.getElementById('consoleLog');
+        const localDisplay = document.getElementById('localDisplay');
+        const sessionDisplay = document.getElementById('sessionDisplay');
+
+        function log(message) {
+            consoleLog.textContent += '\n> ' + message;
+            consoleLog.scrollTop = consoleLog.scrollHeight;
+        }
+
+        function clearLog() {
+            consoleLog.textContent = '> Konsole geleert.';
+        }
+
+        // Liest die aktuellen Formularwerte aus und baut ein JS-Objekt
+        function getFormConfigObject() {
+            return {
+                user: document.getElementById('userName').value || 'Anonym',
+                layer: document.getElementById('mapLayer').value,
+                zoom: parseInt(document.getElementById('zoomLevel').value, 10),
+                savedAt: new Date().toLocaleTimeString('de-DE')
+            };
+        }
+
+
+        /* ==========================================================================
+           ABSCHNITT 1: LOCALSTORAGE (Dauerhafte Speicherung im Browser-Profil)
+           ========================================================================== */
+        
+        /**
+         * SPEICHERN IN LOCALSTORAGE:
+         * localStorage speichert Key-Value-Paare dauerhaft im Browser-Profil des Benutzers.
+         * Die Daten bleiben auch nach dem Schließen des Browsers oder dem Neustart des PCs erhalten.
+         * 
+         * WICHTIG: Web Storage kann ausschließlich Strings speichern!
+         * Objekte müssen mit JSON.stringify() in einen String umgewandelt (serialisiert) werden.
+         */
+        document.getElementById('btnSaveLocal').addEventListener('click', () => {
+            clearLog();
+            const configObj = getFormConfigObject();
+
+            // 1. Objekt in JSON-String konvertieren (Serialisierung)
+            const jsonString = JSON.stringify(configObj);
+            
+            // 2. Im localStorage unter dem Schlüssel 'gis_user_config' ablegen
+            localStorage.setItem('gis_user_config', jsonString);
+            
+            log(`[LOCALSTORAGE SAVED] Objekt per JSON.stringify() serialisiert und gespeichert:`);
+            log(`Key: 'gis_user_config' | Value: ${jsonString}`);
+            
+            updateDisplays();
+        });
+
+
+        /* ==========================================================================
+           ABSCHNITT 2: SESSIONSTORAGE (Temporäre Speicherung für den aktuellen Tab)
+           ========================================================================== */
+
+        /**
+         * SPEICHERN IN SESSIONSTORAGE:
+         * sessionStorage hat exakt dieselbe Methoden-Syntax wie localStorage, 
+         * wird aber automatisch gelöscht, sobald der Benutzer den aktuellen Browser-Tab schließt.
+         */
+        document.getElementById('btnSaveSession').addEventListener('click', () => {
+            clearLog();
+            const configObj = getFormConfigObject();
+
+            // Serialisierung und Speichern im Session-Speicher
+            const jsonString = JSON.stringify(configObj);
+            sessionStorage.setItem('gis_session_config', jsonString);
+            
+            log(`[SESSIONSTORAGE SAVED] Objekt in sessionStorage gespeichert (gilt nur bis Tab-Schließen):`);
+            log(`Key: 'gis_session_config' | Value: ${jsonString}`);
+            
+            updateDisplays();
+        });
+
+
+        /* ==========================================================================
+           ABSCHNITT 3: SPEICHER AUSLESEN (JSON.parse()) & LEEREN
+           ========================================================================== */
+
+        /**
+         * DESERIALISIERUNG MIT JSON.PARSE():
+         * Beim Auslesen aus localStorage/sessionStorage erhalten wir einen String.
+         * Mit JSON.parse() verwandeln wir diesen String zurück in ein echtes JS-Objekt!
+         */
+        function updateDisplays() {
+            // A) localStorage auslesen
+            const localRaw = localStorage.getItem('gis_user_config');
+            if (localRaw) {
+                // String zurück in JS-Objekt umwandeln
+                const parsedLocal = JSON.parse(localRaw);
+                localDisplay.textContent = JSON.stringify(parsedLocal, null, 2);
+                
+                // Formularfelder mit den geladenen Werten befüllen
+                document.getElementById('userName').value = parsedLocal.user;
+                document.getElementById('mapLayer').value = parsedLocal.layer;
+                document.getElementById('zoomLevel').value = parsedLocal.zoom;
+            } else {
+                localDisplay.textContent = '(Kein localStorage Eintrag vorhanden)';
+            }
+
+            // B) sessionStorage auslesen
+            const sessionRaw = sessionStorage.getItem('gis_session_config');
+            if (sessionRaw) {
+                const parsedSession = JSON.parse(sessionRaw);
+                sessionDisplay.textContent = JSON.stringify(parsedSession, null, 2);
+            } else {
+                sessionDisplay.textContent = '(Kein sessionStorage Eintrag vorhanden)';
+            }
+        }
+
+        // Button: Speichern auslesen
+        document.getElementById('btnLoad').addEventListener('click', () => {
+            clearLog();
+            log(`[LOAD DATA] Auslesen von localStorage und sessionStorage...`);
+            updateDisplays();
+            log(`Daten erfolgreich aus dem Web Storage geladen und in das Formular eingetragen.`);
+        });
+
+        // Button: Speicher komplett leeren
+        document.getElementById('btnClear').addEventListener('click', () => {
+            clearLog();
+            localStorage.removeItem('gis_user_config'); // Bestimmten Key löschen
+            sessionStorage.clear();                     // Gesamten Session-Speicher leeren
+            
+            log(`[CLEAR STORAGE] localStorage.removeItem('gis_user_config') & sessionStorage.clear() ausgeführt.`);
+            updateDisplays();
+        });
+
+        // Beim ersten Aufruf der Seite automatisch bestehende Daten laden:
+        updateDisplays();
+    </script>
+</body>
+</html>

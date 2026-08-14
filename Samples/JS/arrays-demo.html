@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays & Moderne Array-Methoden Demo</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            max-width: 680px;
+            margin: 40px auto;
+            padding: 24px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 { color: #005a9c; font-size: 1.4rem; margin-bottom: 8px; }
+        p.description { color: #666; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; }
+        .button-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        button { background: #005a9c; color: white; border: none; padding: 10px 12px; font-size: 0.9rem; border-radius: 4px; cursor: pointer; text-align: center; font-weight: 500; transition: background 0.2s; }
+        button:hover { background: #004070; }
+        .console-output { background: #1e1e1e; color: #4ec9b0; font-family: 'Consolas', 'Courier New', monospace; padding: 16px; border-radius: 6px; min-height: 160px; font-size: 0.9rem; white-space: pre-wrap; line-height: 1.4; }
+        .info-box { background: #eef6fc; border-left: 4px solid #005a9c; padding: 14px 16px; font-size: 0.88rem; color: #1a385c; border-radius: 0 4px 4px 0; margin-top: 24px; }
+        .info-box ul { margin: 8px 0 0 18px; padding: 0; }
+        .info-box li { margin-bottom: 6px; }
+    </style>
+</head>
+<body>
+
+    <h1>Arrays & Moderne Array-Methoden Praxis-Test</h1>
+    <p class="description">
+        Diese Demodatei zeigt die Erstellung von Arrays sowie die modernen funktionalen Datenverarbeitungsmethoden:
+        <code>map()</code>, <code>filter()</code>, <code>reduce()</code> und <code>find()</code>.
+    </p>
+
+    <div class="button-grid">
+        <button id="btnBasics">1. Grundlagen (Literale & Index)</button>
+        <button id="btnMap">2. map() (Transformieren)</button>
+        <button id="btnFilter">3. filter() (Filtern)</button>
+        <button id="btnReduce">4. reduce() (Aggregieren)</button>
+    </div>
+
+    <div id="output" class="console-output">// Klicke einen Button oben, um die Ausführung zu starten...</div>
+
+    <div class="info-box">
+        <strong>💡 Zeilenweise Erläuterung im Skript:</strong>
+        <ul>
+            <li><strong>1. Array-Literale <code>[]</code>:</strong> Geordnete Listen mit 0-basiertem Index.</li>
+            <li><strong>2. <code>map()</code>:</strong> Erzeugt ein neues Array durch Transformation jedes Elements.</li>
+            <li><strong>3. <code>filter()</code>:</strong> Extrahiert Untermenge aller Elemente, die eine Bedingung (<code>true</code>) erfüllen.</li>
+            <li><strong>4. <code>reduce()</code>:</strong> Summiert/berechnet ein gesamtes Array auf einen einzigen Endwert herunter.</li>
+        </ul>
+    </div>
+
+    <script>
+        // Referenz auf das Ausgabefeld im DOM holen
+        const output = document.getElementById('output');
+
+        // Hilfsfunktion: Hängt Text mit Zeilenumbruch an das Terminal-Feld an
+        function log(text) { output.innerText += text + "\n"; }
+
+        // Hilfsfunktion: Leert das Terminal-Feld vor jedem neuen Test
+        function clearLog() { output.innerText = ""; }
+
+
+        /* ==========================================================================
+           ABSCHNITT 1: ARRAY-ERSTELLUNG (LITERAL []) UND INDEX-ZUGRIFF
+           ========================================================================== */
+
+        // Zeile 1: Erstellung eines Arrays 'staedte' mittels Best-Practice-Array-Literal []
+        const staedte = ["Würzburg", "Nürnberg", "München", "Bamberg"];
+
+        document.getElementById('btnBasics').addEventListener('click', () => {
+            clearLog();
+            log("=== 1. Array-Grundlagen & Index-Zugriff ===");
+            
+            // Zeile: 0-basierter Index (Erstes Element ist staedte[0])
+            log(`Erstes Element (staedte[0]):       ${staedte[0]}`);
+            log(`Zweites Element (staedte[1]):      ${staedte[1]}`);
+            
+            // Zeile: .length Eigenschaft liefert die Gesamtzahl der Elemente
+            log(`Anzahl Elemente (staedte.length):   ${staedte.length}`);
+            
+            // Zeile: Letztes Element dynamisch mit staedte[staedte.length - 1] ermitteln
+            log(`Letztes Element:                   ${staedte[staedte.length - 1]}`);
+        });
+
+
+        /* ==========================================================================
+           ABSCHNITT 2: MODERNE METHODE .map() (TRANSFORMIEREN)
+           ========================================================================== */
+
+        // Ausgangsdaten: Array von Produkte-Objekten
+        const produkte = [
+            { id: 1, name: "GPS-Gerät", nettoPreis: 100 },
+            { id: 2, name: "Kartierblock", nettoPreis: 15 },
+            { id: 3, name: "Kompastasche", nettoPreis: 25 },
+            { id: 4, name: "Drohne", nettoPreis: 500 }
+        ];
+
+        document.getElementById('btnMap').addEventListener('click', () => {
+            clearLog();
+            log("=== 2. Array.map() (Transformieren) ===");
+            log("// .map() erzeugt ein neues Array durch Anwenden einer Funktion auf jedes Element:\n");
+
+            // Zeile: .map() durchläuft jedes Produkt und berechnet den Brutto-Preis (inkl. 19% MwSt.)
+            const bruttoPreise = produkte.map(item => `${item.name}: ${(item.nettoPreis * 1.19).toFixed(2)} €`);
+
+            // Ausgabe des neuen transformierten Arrays
+            bruttoPreise.forEach(eintrag => log("➔ " + eintrag));
+        });
+
+
+        /* ==========================================================================
+           ABSCHNITT 3: MODERNE METHODE .filter() (FILTERN)
+           ========================================================================== */
+
+        document.getElementById('btnFilter').addEventListener('click', () => {
+            clearLog();
+            log("=== 3. Array.filter() (Gezieltes Filtern) ===");
+            log("// .filter() behält nur Elemente, bei denen die Prüffunktion 'true' zurückgibt:\n");
+
+            // Zeile: Filtere alle Produkte mit einem Netto-Preis unter 50 €
+            const guenstigeProdukte = produkte.filter(p => p.nettoPreis < 50);
+
+            // Ausgabe der gefilterten Objekte
+            guenstigeProdukte.forEach(p => log(`➔ ${p.name} (${p.nettoPreis} €)`));
+            log(`\nAnzahl gefilterte Treffer: ${guenstigeProdukte.length}`);
+        });
+
+
+        /* ==========================================================================
+           ABSCHNITT 4: MODERNE METHODE .reduce() (AGGREGIEREN)
+           ========================================================================== */
+
+        document.getElementById('btnReduce').addEventListener('click', () => {
+            clearLog();
+            log("=== 4. Array.reduce() (Gesamtsumme berechnen) ===");
+            log("// .reduce() addiert das gesamte Array Schritt für Schritt auf 1 Gesamtwert herunter:\n");
+
+            // Zeile: .reduce(akkumulator, aktuellesElement) mit Startwert 0
+            // In jedem Schritt wird p.nettoPreis zur laufenden 'summe' hinzuaddiert.
+            const gesamtSummeNetto = produkte.reduce((summe, p) => summe + p.nettoPreis, 0);
+
+            log(`Gesamtpreis aller ${produkte.length} Produkte (Netto): ${gesamtSummeNetto.toFixed(2)} €`);
+            log(`Gesamtpreis aller Produkte (Brutto 19%):   ${(gesamtSummeNetto * 1.19).toFixed(2)} €`);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KI-Integration & Spec-Driven Development Demo</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            max-width: 780px;
+            margin: 40px auto;
+            padding: 24px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 { color: #005a9c; font-size: 1.4rem; margin-bottom: 8px; }
+        p.description { color: #666; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; }
+        
+        .demo-section {
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+            background: #fafafa;
+        }
+        .demo-section h2 { font-size: 1.05rem; color: #005a9c; margin-top: 0; margin-bottom: 12px; }
+
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 0.88rem; margin-bottom: 4px; font-weight: bold; }
+        .form-group textarea, .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        .button-group { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
+        button {
+            background: #005a9c;
+            color: white;
+            border: none;
+            padding: 9px 15px;
+            font-size: 0.88rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-weight: 500;
+        }
+        button:hover { background: #004070; }
+        button.secondary { background: #6c757d; }
+        button.secondary:hover { background: #5a6268; }
+
+        .ai-card {
+            background: white;
+            border: 1px solid #d0e2f3;
+            border-left: 4px solid #005a9c;
+            padding: 14px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+
+        .console-output {
+            background: #1e1e1e;
+            color: #4ec9b0;
+            font-family: 'Consolas', 'Courier New', monospace;
+            padding: 16px;
+            border-radius: 6px;
+            min-height: 160px;
+            font-size: 0.88rem;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+        .info-box {
+            background: #eef6fc;
+            border-left: 4px solid #005a9c;
+            padding: 14px 16px;
+            font-size: 0.88rem;
+            color: #1a385c;
+            border-radius: 0 4px 4px 0;
+            margin-top: 24px;
+        }
+        .info-box ul { margin: 8px 0 0 18px; padding: 0; }
+        .info-box li { margin-bottom: 6px; }
+
+        .http-preview {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.82rem;
+            margin-top: 10px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>KI-Integration &amp; Spec-Driven Workflows Praxis-Test</h1>
+    <p class="description">
+        Dieses Beispiel zeigt die <strong>echte technische Architektur</strong> einer KI-Integration in JavaScript.
+        Du lernst, wie eine Web-Applikation per <code>fetch()</code> einen HTTP-POST-Request mit JSON-Payload an eine 
+        KI-API (z. B. OpenAI, Gemini oder lokale LLMs wie Ollama) sendet.
+    </p>
+
+    <!-- Testbereich: KI-Spezifikation eingeben -->
+    <div class="demo-section">
+        <h2>1. KI-Schnittstelle konfigurieren &amp; Prompt senden</h2>
+        
+        <div class="form-group">
+            <label for="aiApiKey">API-Schlüssel (Optional für echten Live-Call):</label>
+            <input type="password" id="aiApiKey" placeholder="sk-... (Leer lassen für interaktive Protokoll-Inspektion)">
+            <small style="color: #666;">Ohne Key zeigt die Konsole den exakten HTTP-Request an, den der Browser an das LLM senden würde.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="aiPrompt">Natürlichsprachige Geodaten-Spezifikation (Prompt):</label>
+            <textarea id="aiPrompt" rows="3">Generiere ein GeoJSON Feature für den Hauptbahnhof Würzburg mit Koordinaten und Kategorie.</textarea>
+        </div>
+
+        <div class="button-group">
+            <button id="btnRunAi">🤖 KI-API-Request per fetch() senden</button>
+            <button id="btnClear" class="secondary">Zurücksetzen</button>
+        </div>
+
+        <div id="aiResult" class="ai-card" style="display: none;">
+            <!-- KI-Ergebnis wird hier eingefügt -->
+        </div>
+    </div>
+
+    <!-- Live Console Output -->
+    <h2>Live JavaScript Konsole (HTTP Protocol Inspector):</h2>
+    <div id="consoleLog" class="console-output">> Konsole bereit. Klicke auf 'KI-API-Request per fetch() senden'...</div>
+
+    <div class="info-box">
+        <strong>💡 Der eigentliche Lerninhalt dieser Lektion:</strong>
+        <ul>
+            <li><strong>HTTP POST mit JSON-Payload:</strong> KI-APIs werden per <code>fetch()</code> mit der Methode <code>POST</code> aufgerufen.</li>
+            <li><strong>Request-Header:</strong> Übertragungen verlangen <code>Content-Type: application/json</code> und Authentifizierung (<code>Bearer API_KEY</code>).</li>
+            <li><strong>Structured Output / Prompt Engineering:</strong> Durch System-Prompts ("Antworte ausschließlich in GeoJSON") zwingt man die KI zur Erzeugung valider Datenstrukturen.</li>
+            <li><strong>Spec-Driven Development (SDD):</strong> Der Entwickler schreibt Spezifikationen (Prompts/Specs), die KI übernimmt die Transformation in Code/GeoJSON.</li>
+        </ul>
+    </div>
+
+    <script>
+        // ==========================================================================
+        // HILFSFUNKTIONEN FÜR KONSOLE UND ANZEIGE
+        // ==========================================================================
+        const consoleLog = document.getElementById('consoleLog');
+        const aiResult = document.getElementById('aiResult');
+
+        function log(message) {
+            consoleLog.textContent += '\n> ' + message;
+            consoleLog.scrollTop = consoleLog.scrollHeight;
+        }
+
+        function clearLog() {
+            consoleLog.textContent = '> Konsole geleert.';
+        }
+
+
+        /* ==========================================================================
+           ECHTE ARCHITEKTUR EINES KI-API-CALLS IN JAVASCRIPT (fetch + POST)
+           ========================================================================== */
+
+        const btnRunAi = document.getElementById('btnRunAi');
+        const btnClear = document.getElementById('btnClear');
+
+        /**
+         * Hauptfunktion: Zeigt das echte Konzept der KI-API-Anbindung in JS
+         * 
+         * @param {string} userPrompt - Die natürlichsprachige Anfrage an die KI
+         * @param {string} apiKey - Der API-Schlüssel (falls vorhanden)
+         */
+        async function rufeKiApiAuf(userPrompt, apiKey) {
+            clearLog();
+            aiResult.style.display = 'none';
+
+            log(`[1. INITIALISIERUNG] Starte KI-Anfrage für Prompt: "${userPrompt}"`);
+
+            // SCHRITT 1: API-Endpoint definieren (z. B. OpenAI / Gemini / Lokales LLM)
+            const apiEndpoint = "https://api.openai.com/v1/chat/completions";
+
+            // SCHRITT 2: Request-Payload (JSON-Struktur für das LLM) aufbauen
+            // System-Instruction zwingt die KI dazu, im GeoJSON-Format zu antworten!
+            const requestPayload = {
+                model: "gpt-4o-mini",
+                messages: [
+                    {
+                        role: "system",
+                        content: "Du bist ein GIS-Assistent. Antworte AUSSCHLIESSLICH mit einem validen GeoJSON-Feature (JSON)."
+                    },
+                    {
+                        role: "user",
+                        content: userPrompt
+                    }
+                ],
+                temperature: 0.2
+            };
+
+            log(`[2. HTTP POST PAYLOAD ERSTELLT] Serialisiere Daten mit JSON.stringify():`);
+            log(JSON.stringify(requestPayload, null, 2));
+
+            // SCHRITT 3: Prüfen, ob ein echter Live-Key vorliegt oder der Protokoll-Inspector läuft
+            if (apiKey && apiKey.startsWith("sk-")) {
+                log(`[3. NETWORK REQUEST] Sende echtes fetch() an '${apiEndpoint}'...`);
+                try {
+                    // Echter fetch() Aufruf an die KI-Schnittstelle
+                    const response = await fetch(apiEndpoint, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${apiKey}`
+                        },
+                        body: JSON.stringify(requestPayload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`KI-API Fehler! Status: ${response.status}`);
+                    }
+
+                    const resultData = await response.json();
+                    const aiText = resultData.choices[0].message.content;
+                    const parsedGeoJson = JSON.parse(aiText);
+                    
+                    log(`[4. LIVE RESPONSE EMPFANGEN] Echte KI-Antwort erfolgreich geparst!`);
+                    zeigeErgebnisAn(parsedGeoJson);
+
+                } catch (err) {
+                    log(`[FEHLER] API-Aufruf fehlgeschlagen: ${err.message}`);
+                }
+            } else {
+                // Lernmodus / Inspektionsmodus (ohne Kosten / Key)
+                log(`[3. INSPEKTIONS-MODUS] Kein API-Key eingegeben.`);
+                log(`-> Der Browser hätte folgenden HTTP-Header gesendet:`);
+                log(`   Headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer <YOUR_API_KEY>' }`);
+                log(`-> Simuliere eintreffende GeoJSON-Antwort des LLM nach der Verarbeitung...`);
+
+                await new Promise(resolve => setTimeout(resolve, 800));
+
+                // Erzeugtes GeoJSON-Ergebnis zur Veranschaulichung im DOM
+                const simulatedGeoJson = {
+                    type: "Feature",
+                    properties: {
+                        name: "Würzburg Hauptbahnhof",
+                        kategorie: "Verkehrsknotenpunkt / Bahnhof",
+                        stadt: "Würzburg",
+                        prompt: userPrompt
+                    },
+                    geometry: {
+                        type: "Point",
+                        coordinates: [9.935, 49.801]
+                    }
+                };
+
+                log(`[4. LLM PARSING] GeoJSON-String der KI per JSON.parse() in JS-Objekt konvertiert.`);
+                zeigeErgebnisAn(simulatedGeoJson);
+            }
+        }
+
+        /**
+         * Hilfsfunktion zum Rendern des GeoJSON-Objekts im HTML-DOM
+         */
+        function zeigeErgebnisAn(geoJsonObj) {
+            aiResult.innerHTML = `
+                <h3 style="margin-top: 0; color: #005a9c;">✨ KI-generiertes GeoJSON-Ergebnis</h3>
+                <p><strong>Name:</strong> ${geoJsonObj.properties.name}</p>
+                <p><strong>Kategorie:</strong> ${geoJsonObj.properties.kategorie}</p>
+                <p><strong>Koordinaten:</strong> <code>[${geoJsonObj.geometry.coordinates[0]}, ${geoJsonObj.geometry.coordinates[1]}]</code></p>
+                <details style="margin-top: 10px;">
+                    <summary style="cursor: pointer; font-size: 0.85rem; color: #005a9c;">Quellcode der KI-Antwort anzeigen</summary>
+                    <pre style="background: #2d3748; color: #e2e8f0; padding: 10px; border-radius: 4px; font-size: 0.8rem; margin-top: 6px;">${JSON.stringify(geoJsonObj, null, 2)}</pre>
+                </details>
+            `;
+            aiResult.style.display = 'block';
+        }
+
+        // Event-Listener: KI-Button
+        btnRunAi.addEventListener('click', () => {
+            const prompt = document.getElementById('aiPrompt').value.trim();
+            const key = document.getElementById('aiApiKey').value.trim();
+            if (prompt) {
+                rufeKiApiAuf(prompt, key);
+            } else {
+                alert('Bitte einen Prompt eingeben!');
+            }
+        });
+
+        // Event-Listener: Zurücksetzen
+        btnClear.addEventListener('click', () => {
+            clearLog();
+            aiResult.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

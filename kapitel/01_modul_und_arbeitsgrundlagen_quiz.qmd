@@ -1,0 +1,286 @@
+---
+title: "Kapitel 1: Modul- & Arbeitsgrundlagen"
+subtitle: "Interaktives Selbstlern-Quiz | THWS Webprogrammierung"
+date: last-modified
+lang: de
+
+author:
+  - name: Stefan Sauer
+    email: stefan.sauer@thws.de
+    role: Fachlehrer
+    affiliation: THWS Geovisualisierung & Vermessung
+
+semester: "WS 26/27"
+course: "Webprogrammierung"
+version: "2.0"
+
+include-after-body:
+  - _extensions/moodle/interactions.js
+
+format:
+  moodle-html: default
+---
+
+# 🎯 Umfassendes Selbstlern-Quiz & Wissens-Check
+
+Willkommen zum erweiterten Selbsttest für **Kapitel 1: Modul- & Arbeitsgrundlagen**. Testen Sie Ihr didaktisches und klausurrelevantes Verständnis zu folgenden Hauptbereichen:
+1. **Lernressourcen & Weiterbildungs-Websites**
+2. **Entwicklungs-Tools & Software-Stack**
+3. **Versionskontrolle (Git & GitHub)**
+4. **Lokale Webserver (XAMPP & Apache)**
+5. **Gutes Webdesign (Zielgruppe, Form follows Function, Responsive, SEO & Ladezeit)**
+6. **Rechtliche Grundlagen (Urheberrecht, Impressum, DSGVO & Cookie-Consent)**
+
+---
+
+## 1. Kernbegriffe (Flip-Cards)
+
+Klicken oder tippen Sie auf die Karten, um die Vorder- und Rückseite zu wenden:
+
+::: {.flip-card}
+#### Was ist das MDN (Mozilla Developer Network)?
+Das **MDN** ist die verlässlichste und aktuellste Dokumentation für HTML, CSS und JavaScript. Es dient Entwicklern als universeller Goldstandard zur Verifizierung von Web-APIs und zum Aufdecken von KI-Halluzinationen.
+:::
+
+::: {.flip-card}
+#### Was leistet "Can I Use"?
+**Can I Use** liefert präzise Informationen zur Browserunterstützung moderner Webtechnologien in verschiedenen Browserversionen (Chrome, Safari, Firefox, Edge).
+:::
+
+::: {.flip-card}
+#### Was ist der "Digital Shepherd"?
+Der **Digital Shepherd** leitet KI-Tools (wie Antigravity oder Cursor) gezielt an, verlässt sich aber nie blind auf deren Code. Er auditiert generierten Code kritisch bezüglich Semantik, Barrierefreiheit, Performance und Sicherheit (*Algorithmischer Skeptizismus*).
+:::
+
+::: {.flip-card}
+#### Wozu dient Git & GitHub?
+**Git** ist ein verteiltes Versionskontrollsystem, das Codeänderungen lückenlos nachvollzieht und Branches erlaubt. **GitHub** ist die Cloud-Plattform zum Hosten von Repositories und zur Zusammenarbeit.
+:::
+
+::: {.flip-card}
+#### Was ist die Impressumspflicht (§ 5 DDG)?
+Das **Impressum** ist eine gesetzlich vorgeschriebene Anbieterkennzeichnung für geschäftsmäßige Telemedien mit ladungsfähiger physischer Adresse und schnellen Kontaktmöglichkeiten (E-Mail/Telefon).
+:::
+
+::: {.flip-card}
+#### Was regelt § 25 TDDDG bei Cookies?
+Rechtlich erforderlich ist ein Cookie-Consent-Banner (Opt-In), sobald **technisch nicht notwendige Cookies** (z. B. Tracking/Marketing) gesetzt werden. Ablehnen und Akzeptieren müssen visuell gleichwertig sein!
+:::
+
+---
+
+## 2. Deep Dives & Exkurse
+
+::: {.details}
+#### Deep Dive 1: Git-Basics – Repository, Commit & Branching
+- **Repository (.git):** Die lokale oder remote Datenbank, in der der gesamte Projektverlauf gespeichert wird.
+- **Commit:** Ein Schnappschuss (Snapshot) des Quellcodes zu einem bestimmten Zeitpunkt mit Autorenangabe und Commit-Message.
+- **Branch:** Ein unabhängiger Entwicklungszweig. Der Standardzweig heißt `main` (früher `master`). Feature-Branches erlauben gefahrloses Experimentieren ohne den Hauptzweig zu beschädigen.
+:::
+
+::: {.details}
+#### Deep Dive 2: Lokale Serverumgebung mit XAMPP & Apache
+- **Apache Webserver:** Nimmt HTTP-Anfragen vom Browser entgegen und liefert Dateien aus.
+- **Document Root (`htdocs`):** Das Hauptverzeichnis in XAMPP, in dem Webprojekte abgelegt werden müssen, damit sie unter `http://localhost/` aufrufbar sind.
+- **Unterschied statisch vs. dynamisch:** Statische HTML/CSS-Dateien werden direkt vom Webserver ausgeliefert; dynamische Skripte (z. B. PHP) werden vor Auslieferung auf dem Server interpretiert.
+:::
+
+::: {.details}
+#### Deep Dive 3: SEO, Responsive Design & Ladezeiten
+- **64 % mobiler Traffic:** Da mehr als die Hälfte aller Zugriffe über Smartphones erfolgt, nutzt Google **Mobile-First-Indexing**.
+- **3-Sekunden-Regel:** Springen Nutzer nach ca. 3 Sekunden Wartezeit ab, verschlechtert dies die *Bounce Rate* und das Suchmaschinen-Ranking.
+- **Core Web Vitals:** Google misst messbare Performance-Metriken (Ladezeit, Interaktivität, visuelle Stabilität) als direkte Rankingfaktoren.
+:::
+
+::: {.details}
+#### Deep Dive 4: DSGVO & IP-Adressen in Server-Logfiles
+- **IP-Adresse als personenbezogenes Datum:** Selbst beim einfachen Aufruf einer statischen Website verarbeitet der Webserver die IP-Adresse des Besuchers in den Access-Logs.
+- **Informationspflicht (Art. 13 DSGVO):** Daher benötigt praktisch jede öffentliche Website eine Datenschutzerklärung – selbst wenn keine Formulare oder Tracking-Tools eingebaut sind.
+:::
+
+---
+
+## 3. Fallstudien & Reflexionsaufgaben
+
+::: {.case-study}
+#### Fallbeispiel A: Webdesign & Usability für Maiks Caravan-Werkstatt
+Maik möchte für seinen mobilen KFZ- & Caravan-Service eine Website gestalten. Ein Designer schlägt eine dunkle, aufwendige Website mit großen unkomprimierten Videos und verstecktem Kontaktmenü vor.
+
+::: {.solution}
+**Analyse nach Usability-Kriterien:**
+1. **Form follows function:** Versteckte Kontakte widersprechen Maiks Hauptziel (schnelle Kontaktaufnahme mobiler Kunden). Kontaktdaten gehören gut sichtbar im Header/F-Schema platziert.
+2. **Ladezeit & Performance:** Große Videos auf mobilen Geräten im Mobilfunknetz dauern zu lange. Nutzer springen nach der 3-Sekunden-Regel ab.
+3. **Zielgruppenorientierung:** Wohnmobilbesitzer suchen oft unterwegs Hilfe bei Problemen; Barrierefreiheit, lesbare Schriftgrößen und schnelle Ladezeiten sind entscheidend.
+:::
+:::
+
+::: {.case-study}
+#### Fallbeispiel B: Relevanz von Cookie-Bannern & Impressum
+Eine kleine Reparatur-Website nutzt ausschließlich lokal gehostetes HTML/CSS ohne Tracking-Skripte oder Google Fonts. Der Inhaber fragt: Brauche ich einen Cookie-Banner und ein Impressum?
+
+::: {.solution}
+**Rechtliche Bewertung:**
+1. **Impressumspflicht (§ 5 DDG):** JA! Da die Website geschäftsmäßig Dienstleistungen anbietet, ist ein Impressum mit ladungsfähiger Adresse und E-Mail/Telefon zwingend erforderlich.
+2. **Cookie-Banner (§ 25 TDDDG):** NEIN! Da keine technisch nicht-notwendigen Cookies oder Tracking-Skripte gesetzt werden, ist kein Banner erforderlich. Ein Banner würde nur die UX verschlechtern.
+:::
+:::
+
+---
+
+## 4. Active Recall (Lückentexte / Drag & Drop)
+
+::: {.drag-exercise}
+Beim Vibe-Coding wird Code per *natürlicher Sprache* generiert. Der Entwickler darf diesen jedoch nicht blind kopieren, sondern muss *algorithmischen Skeptizismus* walten lassen. Die wichtigste Referenz zum Abgleich von Web-APIs ist das *MDN (Mozilla Developer Network)*. Für das Design gilt der Grundsatz *Form follows function*.
+:::
+
+::: {.drag-exercise}
+In der lokalen Webentwicklung dient *XAMPP* als Serverumgebung mit dem Webserver *Apache*. Dateien müssen im Ordner *htdocs* abgelegt werden. Zur Versionskontrolle wird *Git* genutzt. Bei Cookie-Bannern fordert die DSGVO, dass der Button zum *Ablehnen* visuell gleichwertig zum Akzeptieren-Button gestaltet ist.
+:::
+
+---
+
+## 5. Quick-Check (Klausurrelevantes Quiz)
+
+### Bereich 1: Lernressourcen & Digital Shepherd
+
+::: {.quick-check}
+Was zeichnet das Mozilla Developer Network (MDN) im Vergleich zu anderen Dokumentationsquellen aus?
+
+- MDN bietet fertige KI-Prompts zum Kopieren an.
+- **MDN ist die präziseste und verlässlichste Standard-Dokumentation für HTML, CSS und JavaScript zum Prüfen von KI-Code.**
+- MDN ist der einzige Browser, der Web-APIs direkt ausführt.
+
+> Bei KI-generiertem Code ist der „Algorithmische Skeptizismus“ Pflicht – jede Syntax sollte gegen das MDN geprüft werden.
+:::
+
+::: {.quick-check}
+Welche Aufgabe beschreibt die Rolle des „Digital Shepherd“ (Digitalen Hirten)?
+
+- Er überlässt der KI die komplette Verantwortung für das Webprojekt.
+- **Er leitet KI-Tools gezielt an und prüft deren Code kritisch auf Semantik, Barrierefreiheit, Performance und Sicherheit.**
+- Er schreibt ausschließlich Assembler-Code im Terminal.
+
+> Prompting ersetzt kein Grundlagenwissen: Der Digital Shepherd beherrscht die HTML-/CSS-/JS-Standards, um KI-Ergebnisse qualifiziert zu auditieren.
+:::
+
+::: {.quick-check}
+Wofür wird die Web-Ressource „Can I Use“ primär genutzt?
+
+- Zum Auslesen von MySQL-Datenbanken in XAMPP.
+- **Zum Prüfen der Browserunterstützung moderner HTML-, CSS- und JS-Funktionen in Zielbrowsern.**
+- Zum Erstellen von Git-Commits.
+
+> „Can I Use“ zeigt exakt an, in welchen Browserversionen ein Web-Feature nativ unterstützt wird und ob Polyfills nötig sind.
+:::
+
+---
+
+### Bereich 2: Software, Tools & Git
+
+::: {.quick-check}
+Was unterscheidet den KI-Editor Cursor von Antigravity?
+
+- Cursor unterstützt keine VS Code Extensions.
+- **Cursor ist ein KI-gestützter Fork von VS Code mit Inline-Autocomplete, während Antigravity als agentischer Assistent ganze Workflows autonom plant und umsetzt.**
+- Antigravity läuft ausschließlich im Browser ohne Dateizugriff.
+
+> Beide Tools nutzen moderne KI, jedoch unterscheidet sich ihr Grad an Autonomie und Projektkontext-Integration.
+:::
+
+::: {.quick-check}
+In welchem Verzeichnis von XAMPP müssen Webprojekte abgelegt werden, damit sie lokal unter `http://localhost/` erreichbar sind?
+
+- `C:/xampp/apache/bin`
+- **`C:/xampp/htdocs`**
+- `C:/xampp/php/www`
+
+> Das Verzeichnis `htdocs` ist der sogenannte Document Root des Apache-Webservers in XAMPP.
+:::
+
+::: {.quick-check}
+Was ist der Hauptzweck des Versionskontrollsystems Git?
+
+- Das automatische Designen von responsive Webseiten.
+- **Das lückenlose Protokollieren von Codeänderungen, Wiederherstellen früherer Zustände und parallele Arbeiten in Branches.**
+- Das Rendern von Quarto-Dateien als PDF.
+
+> Git zeichnet die Historie eines Projektes auf und ermöglicht die Zusammenarbeit über Plattformen wie GitHub.
+:::
+
+---
+
+### Bereich 3: Gutes Webdesign, Usability & SEO
+
+::: {.quick-check}
+Was bedeutet das Gestaltungsprinzip „Form follows function“ im Webdesign?
+
+- Die Optik einer Website ist wichtiger als ihre Bedienbarkeit.
+- **Jedes Designelement muss sowohl optisch ansprechend als auch funktional sein; kein Element ohne Zweck.**
+- Webseiten müssen immer schwarz-weiß gestaltet sein.
+
+> Gutes Webdesign stellt die Usability in den Vordergrund. Ästhetik darf die Funktion niemals behindern.
+:::
+
+::: {.quick-check}
+Wie scannen Nutzer eine Webseite in westlichen Kulturkreisen typischerweise (F-Schema)?
+
+- Von unten rechts nach oben links in Diagonallinien.
+- **Von oben links nach rechts, dann weiter unten erneut von links nach rechts und am linken Rand entlang nach unten.**
+- Von der Mitte kreisförmig nach außen.
+
+> Das F-Schema erklärt, warum Logos oben links und Hauptnavigationsleisten im Kopfbereich platziert werden.
+:::
+
+::: {.quick-check}
+Warum ist Mobile-First-Indexing für die Suchmaschinenoptimierung (SEO) entscheidend?
+
+- Weil Desktop-Monitore von Google nicht mehr unterstützt werden.
+- **Weil Google primär die mobile Version einer Website für das Ranking heranzieht, da über 60 % des Web-Traffics von Smartphones stammt.**
+- Weil Mobile-First-Webseiten keine Bilder enthalten dürfen.
+
+> Responsive Design und schnelle mobile Ladezeiten sind direkte SEO-Rankingfaktoren (Core Web Vitals).
+:::
+
+::: {.quick-check}
+Was besagt die 3-Sekunden-Regel bezüglich Webseiten-Performance?
+
+- Nach 3 Sekunden wird die Website automatisch geschlossen.
+- **Springen viele Nutzer ab, wenn eine Seite länger als 3 Sekunden lädt (Absprungrate/Bounce Rate steigt).**
+- Google entfernt Seiten aus dem Index, die älter als 3 Sekunden sind.
+
+> Kurze Ladezeiten verhindern Nutzerverluste und verbessern das Ranking in Suchmaschinen.
+:::
+
+---
+
+### Bereich 4: Rechtliche Grundlagen & Datenschutz
+
+::: {.quick-check}
+Welche Angaben sind gemäß § 5 DDG Pflichtbestandteil eines rechtssicheren Impressums?
+
+- Nur die Vor- und Nachnamen der Entwickler.
+- **Ladungsfähige physische Adresse (kein Postfach) sowie schnelle Kontaktmöglichkeiten wie E-Mail und Telefonnummer.**
+- Die kompletten Quellcodes der HTML-Dateien.
+
+> Ein Impressum fordert eine ladungsfähige Anschrift und direkte Kontaktmedien zur Anbieterkennzeichnung.
+:::
+
+::: {.quick-check}
+Warum benötigt nahezu jede öffentliche Website eine Datenschutzerklärung (Art. 13 DSGVO)?
+
+- Weil HTML-Code urheberrechtlich geschützt ist.
+- **Weil bereits beim Aufruf der Seite die IP-Adresse des Nutzers in den Server-Logfiles als personenbezogenes Datum verarbeitet wird.**
+- Weil Google Analytics auf jeder Website installiert sein muss.
+
+> Auch ohne Kontaktformulare oder Tracking verarbeitet der Webserver die IP-Adresse, was die Informationspflicht nach DSGVO auslöst.
+:::
+
+::: {.quick-check}
+Welche visuelle Anforderung stellt die DSGVO / TDDDG an den Ablehnen-Button eines Cookie-Consent-Banners?
+
+- Der Ablehnen-Button muss in hellgrauer kleiner Schrift versteckt werden.
+- **Der Ablehnen-Button muss auf derselben Ebene und visuell gleichwertig zum Akzeptieren-Button gestaltet sein.**
+- Es darf gar keinen Ablehnen-Button geben.
+
+> Nudging (visuelles Steuern zum Akzeptieren) ist unzulässig; Akzeptieren und Ablehnen müssen gleichwertig angeboten werden.
+:::

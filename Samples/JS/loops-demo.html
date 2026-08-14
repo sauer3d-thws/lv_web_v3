@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schleifen & Iteration Praxis-Demo</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 24px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 { color: #005a9c; font-size: 1.4rem; margin-bottom: 8px; }
+        p { color: #666; font-size: 0.95rem; margin-bottom: 20px; }
+        .button-group { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+        button { background: #005a9c; color: white; border: none; padding: 10px 14px; font-size: 0.9rem; border-radius: 4px; cursor: pointer; flex: 1 1 40%; }
+        button:hover { background: #004070; }
+        .console-output { background: #1e1e1e; color: #4ec9b0; font-family: 'Consolas', 'Courier New', monospace; padding: 16px; border-radius: 6px; min-height: 140px; font-size: 0.9rem; white-space: pre-wrap; overflow-x: auto; }
+    </style>
+</head>
+<body>
+
+    <h1>Schleifen & Iteration Praxis-Test</h1>
+    <p>Teste die verschiedenen Schleifentypen direkt in der Konsole unten:</p>
+
+    <div class="button-group">
+        <button id="btnForOf">1. for...of (Werte lesen)</button>
+        <button id="btnForIn">2. for...in (Objekt-Keys)</button>
+        <button id="btnWhile">3. while (Countdown)</button>
+        <button id="btnBreak">4. break & continue</button>
+    </div>
+
+    <div id="output" class="console-output">// Klicke einen Button oben, um das Ergebnis zu sehen...</div>
+
+    <script>
+        const output = document.getElementById('output');
+
+        function log(msg) { output.innerText += msg + "\n"; }
+        function clearLog() { output.innerText = ""; }
+
+        // 1. for...of für Arrays (Werte durchlaufen)
+        document.getElementById('btnForOf').addEventListener('click', () => {
+            clearLog();
+            log("=== 1. for...of (Werte eines Arrays durchlaufen) ===");
+            const fruechte = ["Apfel 🍎", "Banane 🍌", "Kirsche 🍒", "Drachenfrucht 🐉"];
+            for (const frucht of fruechte) {
+                log(`- Frucht im Warenkorb: ${frucht}`);
+            }
+        });
+
+        // 2. for...in für Objekte (Keys durchlaufen)
+        document.getElementById('btnForIn').addEventListener('click', () => {
+            clearLog();
+            log("=== 2. for...in (Eigenschaften eines Objekts inspizieren) ===");
+            const produkt = { id: 101, name: "Geovis-Laptop", preis: 899, aufLager: true };
+            for (const key in produkt) {
+                log(`Eigenschaft "${key}" ➔ Wert: ${produkt[key]}`);
+            }
+        });
+
+        // 3. while-Schleife (Bedingte Ausführung)
+        document.getElementById('btnWhile').addEventListener('click', () => {
+            clearLog();
+            log("=== 3. while-Schleife (Lagerbestand abarbeiten) ===");
+            let lagerbestand = 5;
+            while (lagerbestand > 0) {
+                log(`Verkaufe Artikel! Restbestand: ${lagerbestand - 1}`);
+                lagerbestand--;
+            }
+            log("🛑 Lager ist jetzt leer!");
+        });
+
+        // 4. for mit break und continue
+        document.getElementById('btnBreak').addEventListener('click', () => {
+            clearLog();
+            log("=== 4. Zählschleife mit continue & break ===");
+            for (let i = 1; i <= 6; i++) {
+                if (i === 3) {
+                    log(`⚠️ i = ${i} wird übersprungen (continue)`);
+                    continue;
+                }
+                if (i === 5) {
+                    log(`🛑 Schleife wird bei i = ${i} komplett abgebrochen (break)`);
+                    break;
+                }
+                log(`Verarbeite Element i = ${i}`);
+            }
+        });
+    </script>
+
+</body>
+</html>

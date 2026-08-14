@@ -1,0 +1,1661 @@
+---
+title: "Kapitel 3: CSS3-Styling, Layoutkonzepte, Typografie, Farben, Moderne Layouttechniken & Mobile First"
+subtitle: "Interaktives Selbstlern-Quiz | THWS Webprogrammierung"
+date: last-modified
+lang: de
+
+author:
+  - name: Stefan Sauer
+    email: stefan.sauer@thws.de
+    role: Fachlehrer
+    affiliation: THWS Geovisualisierung & Vermessung
+
+semester: "WS 26/27"
+course: "Webprogrammierung"
+version: "2.0"
+
+include-after-body:
+  - _extensions/moodle/interactions.js
+
+format:
+  moodle-html: default
+---
+
+# 🎯 Umfassendes Selbstlern-Quiz & Wissens-Check
+
+Willkommen zum erweiterten interaktiven Selbstlern-Quiz für **Kapitel 3: CSS3-Styling, Layoutkonzepte, Typografie, Farben, Moderne Layouttechniken & Mobile First**. Überprüfen und vertiefen Sie Ihr Wissen zu folgenden Themenbereichen:
+
+1. **Das CSS-Boxmodell & Box-Sizing** (Content, Padding, Border, Margin, `content-box` vs. `border-box`, Margin-Kollaps)
+2. **Fonts, Font-Stacks, Google Fonts & Datenschutz** (Systemschriften, Websichere Schriften, generische Familien, Google Fonts Abmahnrisiko nach DSGVO, Lokales Hosting mit `@font-face`)
+3. **Die 10 Schriftgebote der Web-Typografie** (Schriftgröße, Zeilenbreite, Zeilenabstand, Laufweite, Kontrast, Struktur, Schrifttypen, Versalien, Fallbacks, Weiterbildung)
+4. **CSS-Farbdefinitionen** (Farbnamen, RGB, RGBA, Hexadezimal-Codes `#RRGGBB` / `#RGB`, HSL & HSLA)
+5. **Maßeinheiten in CSS** (Absolute Einheiten `px`, `pt`, `in`, `cm`, `mm` vs. Relative Einheiten `em`, `rem`, Viewport `vw`, `vh`, `vmin`, `vmax`, `%` & Best Practices)
+6. **Ordnerstrukturen für Webprojekte & Startdatei** (`index.html`, `DirectoryIndex`, `httpd.conf`, Standard-Unterordner `css/`, `img/`, `js/`, `fonts/`)
+7. **Datei- und Ordner-Benennungskonventionen** (Kleinschreibung, Case-Sensitivity auf Webservern, keine Umlaute/Sonderzeichen/Leerzeichen, Trennstriche)
+8. **Pfadnavigation & Referenzierung** (Relative Pfade, Verzeichniswechsel mit `../` und `../../`, absolute Web-URIs `https://...` vs. unzulässige Windows-Pfade `C:\...`)
+9. **Block- vs. Inline-Elemente** (Block-bildend mit Zeilenumbruch und 100% Breite vs. Inline im Textfluss mit Inhaltsbreite)
+10. **Neutrale Strukturelemente (`<div>` & `<span>`) & Divitis-Vermeidung** (Semantikfreie Container, Layout-Wrapper vs. Inline-Span, HTML5-Semantik als Vorzug)
+11. **Kommentare in HTML und CSS** (`<!-- HTML-Kommentar -->` vs. `/* CSS-Kommentar */`, Einsatz für Struktur, Doku & Fehlersuche)
+12. **Klassische Layout-Typen** (Fixed, Fluid und Elastic Layouts, deren Eigenschaften, Maßeinheiten und Einsatzszenarien)
+13. **Adaptive vs. Responsive Webdesign** (RWD mit kontinuierlich flüssigem Layout & Media Queries vs. AWD mit diskreten, gerätespezifischen Layouts)
+14. **Moderne CSS-Layout-Techniken** (Eindimensionale Ausrichtung mit Flexbox vs. Zweidimensionales Rastersystem mit CSS Grid)
+15. **Mobile-First-Philosophie & Progressive Enhancement** (Warum Mobile First? Content-Fokussierung, Performance, Ladezeiten, Touch-Optimierung)
+16. **CSS Media Queries & Medienmerkmale** (`@media`, Medientypen `screen`, `print`, Merkmale `min-width`, `orientation`, `prefers-color-scheme`, `hover`, logische Operatoren `and`, `not`, `only`, Komma `,`)
+17. **Viewport-Meta-Tag & Breakpoint-Architektur** (`<meta name="viewport" ...>`, gängige Breakpoints 576px, 768px, 992px, 1200px, Kaskaden-Reihenfolge & Best Practices)
+
+---
+
+## 1. Kernbegriffe (Flip-Cards)
+
+Klicken oder tippen Sie auf die Karten, um die Vorder- und Rückseite zu wenden:
+
+::: {.flip-card}
+#### Was ist das CSS-Boxmodell?
+Jedes HTML-Element wird vom Browser als rechteckige Box gerendert. Diese besteht aus vier verschachtelten Schichten von innen nach außen: **Content** (Inhalt), **Padding** (Innenabstand), **Border** (Rahmen) und **Margin** (Außenabstand).
+:::
+
+::: {.flip-card}
+#### Was unterscheidet `content-box` von `border-box`?
+Bei **`content-box`** (CSS-Standard) definiert `width` nur den reinen Inhalt; Padding und Border werden zur Gesamtbreite addiert. Bei **`border-box`** (Best Practice) schließt `width` Padding und Border bereits ein, was Ausbrüche aus dem Layout verhindert.
+:::
+
+::: {.flip-card}
+#### Was versteht man unter „Margin-Kollaps“?
+Treffen zwei vertikale Außenabstände (Margins) aufeinander, addieren sie sich nicht, sondern **verschmelzen** zum größeren der beiden Einzelwerte. Horizontale Margins und Paddings kollabieren hingegen niemals.
+:::
+
+::: {.flip-card}
+#### Was ist ein „Font-Stack“ in CSS?
+Ein **Font-Stack** ist eine durch Kommas getrennte Prioritätenliste (Fallback-Liste) in `font-family` (z. B. `font-family: Arial, Helvetica, sans-serif;`). Der Browser prüft die Schriften von links nach rechts und rendert die erste lokal verfügbare.
+:::
+
+::: {.flip-card}
+#### Was sind generische Schriftfamilien?
+Generische Schriftfamilien bilden den systemunabhängigen Notfall-Fallback am Ende jedes Font-Stacks. Die wichtigsten sind: **`sans-serif`** (serifenlos), **`serif`** (mit Serifen), **`monospace`** (feste Zeichenbreite), **`cursive`** (Schreibschrift), **`fantasy`** (dekorativ) und **`system-ui`**.
+:::
+
+::: {.flip-card}
+#### Was sind „websichere Schriftarten“?
+Schriftarten, die auf nahezu allen Betriebssystemen (Windows, macOS, Linux, iOS, Android) ab Werk vorinstalliert sind (z. B. Arial, Verdana, Georgia, Times New Roman, Courier New). Sie erfordern keinen Download und sind 100 % DSGVO-konform.
+:::
+
+::: {.flip-card}
+#### Warum führte die CDN-Einbindung von Google Fonts zu Abmahnungen?
+Beim direkten Einbinden über die Google-Server (`fonts.googleapis.com`) wird bei jedem Seitenaufruf automatisch die **IP-Adresse des Besuchers an Google in die USA übertragen**. Laut Urteil des LG München (2022) verstößt dies ohne vorherige Einwilligung gegen die DSGVO.
+:::
+
+::: {.flip-card}
+#### Wie bindet man Webfonts DSGVO-konform ein?
+Durch **lokales Hosting (Self-Hosting)**: Die Schriftdateien (vorzugsweise im modernen, komprimierten Format `.woff2` und `.woff`) werden auf den eigenen Webserver hochgeladen und per CSS-Regel **`@font-face`** lokal eingebunden.
+:::
+
+::: {.flip-card}
+#### Was besagt das Schriftgebot zur optimalen Zeilenbreite?
+Die optimale Zeilenlänge für Fließtext liegt bei **ca. 45 bis 75 Zeichen** (maximal ca. 70–80 Zeichen pro Zeile). Zu lange Zeilen ermüden das Auge beim Zeilensprung; zu kurze Zeilen zerreißen den Lesefluss.
+:::
+
+::: {.flip-card}
+#### Welcher Zeilenabstand (`line-height`) wird im Web empfohlen?
+Für Fließtext hat sich ein relativer Zeilenabstand von **`1.4` bis `1.6`** (140 % bis 160 % der Schriftgröße) etabliert. Einheitenlose Werte (z. B. `line-height: 1.5;`) sind Best Practice, da sie proportional an Kind-Elemente vererbt werden.
+:::
+
+::: {.flip-card}
+#### Wie funktioniert die Hexadezimal-Farbangabe `#RRGGBB`?
+Farben werden im Hexadezimalsystem (Basis 16: `0–9`, `A–F`) definiert. Die ersten zwei Stellen stehen für Rot, die mittleren für Grün und die letzten zwei für Blau (`#00` = kein Licht, `#FF` = 255 = maximale Helligkeit). `#FFFFFF` ist Weiß, `#000000` ist Schwarz.
+:::
+
+::: {.flip-card}
+#### Was bedeuten die Werte im HSL-Farbmodell?
+**H (Hue / Farbton):** Winkel auf dem Farbkreis von 0° bis 360° (0° = Rot, 120° = Grün, 240° = Blau). **S (Saturation / Sättigung):** 0 % (Grau) bis 100 % (Vollfarbe). **L (Lightness / Helligkeit):** 0 % (Schwarz) bis 100 % (Weiß); 50 % ist reiner Farbton.
+:::
+
+::: {.flip-card}
+#### Was ist der Unterschied zwischen `em` und `rem`?
+**`em`** bezieht sich auf die Schriftgröße des direkten **Elternelements** und kann bei Verschachtelungen unerwünscht multiplizieren. **`rem`** (*Root-em*) bezieht sich immer fest auf die Schriftgröße des **`<html>`-Wurzelelements** (standardmäßig 16px).
+:::
+
+::: {.flip-card}
+#### Was bedeuten die Viewport-Einheiten `vw`, `vh`, `vmin` und `vmax`?
+`1vw` = 1 % der Viewport-Breite, `1vh` = 1 % der Viewport-Höhe. **`vmin`** wählt den kleineren Wert aus Breite und Höhe (ideal für quadratische Elemente); **`vmax`** wählt den größeren Wert.
+:::
+
+::: {.flip-card}
+#### Warum muss die Startdatei eines Webprojekts fast immer `index.html` heißen?
+Webserver (z. B. Apache, Nginx) suchen beim Aufruf eines Verzeichnisses (z. B. `https://thws.de/`) automatisch nach der Standard-Startdatei. Diese ist in der Serverkonfiguration (`httpd.conf` via Direktive `DirectoryIndex`) standardmäßig auf **`index.html`** festgelegt.
+:::
+
+::: {.flip-card}
+#### Welche Standard-Unterordner gehören in jedes Webprojekt?
+Zur sauberen Trennung von Inhalten und Assets: **`css/`** für Stylesheets (`style.css`), **`img/`** oder `images/` für Grafiken, **`js/`** für JavaScript-Dateien, **`fonts/`** für lokale Schriftarten und **`html/`** oder `pages/` für weitere Unterseiten.
+:::
+
+::: {.flip-card}
+#### Welche vier Benennungsregeln gelten für Web-Dateien?
+1. **Nur Kleinschreibung** (UNIX-Server unterscheiden `Index.HTML` von `index.html` $\rightarrow$ 404-Fehler).
+2. **Keine Umlaute** (`ae`, `oe`, `ue` statt `ä`, `ö`, `ü`).
+3. **Keine Sonderzeichen/Leerzeichen** (vermeidet `%20` Encoding-Bugs).
+4. **Bindestriche `-` statt Unterstriche `_` oder Leerzeichen** zur Worttrennung.
+:::
+
+::: {.flip-card}
+#### Wie funktioniert die relative Pfadnavigation mit `../`?
+Relative Pfade orientieren sich immer an der Datei, in der man sich gerade befindet. **`../`** springt im Verzeichnisbaum **eine Ordnerebene nach oben** (zum übergeordneten Ordner). Zwei Ebenen höher erreicht man mit **`../../`**.
+:::
+
+::: {.flip-card}
+#### Warum sind lokale Windows-Pfade wie `C:\Projekte\img\logo.png` im Web verboten?
+Lokale Dateipfade mit Laufwerksbuchstaben existieren nur auf dem Rechner des Autors, nicht aber auf den Geräten der Webseitenbesucher. Zudem blockieren moderne Webbrowser Zugriffe auf das lokale Dateisystem aus Sicherheitsgründen.
+:::
+
+::: {.flip-card}
+#### Was unterscheidet Block- von Inline-Elementen?
+**Block-Elemente** (z. B. `<div>`, `<p>`, `<h1>`-`<h6>`, `<header>`, `<article>`) beginnen immer auf einer **neuen Zeile** und nehmen standardmäßig die volle verfügbare Breite (100 %) ein. **Inline-Elemente** (z. B. `<span>`, `<a>`, `<strong>`, `<img>`) fließen **im normalen Textstrom** mit und belegen nur die Breite ihres Inhalts.
+:::
+
+::: {.flip-card}
+#### Wann verwendet man `<div>` und `<span>` und was ist „Divitis“?
+`<div>` (Block) und `<span>` (Inline) sind **neutrale Container ohne semantische Bedeutung**, gedacht rein für CSS-Styling oder Layout-Wrapper. **Divitis (Div-Suppe)** bezeichnet die schlechte Praxis, alles mit verschachtelten `<div>`-Tags aufzubauen, anstatt aussagekräftige HTML5-Elemente (`<header>`, `<nav>`, `<main>`, `<article>`, `<footer>`) zu nutzen.
+:::
+
+::: {.flip-card}
+#### Wie lautet die Syntax für Kommentare in HTML und CSS?
+- **HTML-Kommentar:** `<!-- Dies ist ein HTML-Kommentar -->`
+- **CSS-Kommentar:** `/* Dies ist ein CSS-Kommentar */`
+Kommentare werden vom Browser nicht dargestellt und dienen der Dokumentation, Strukturierung sowie dem Deaktivieren von Code zur Fehlersuche.
+:::
+
+::: {.flip-card}
+#### Was kennzeichnet ein „Fixed Layout“ (Starres Layout)?
+Ein Fixed Layout verwendet **feste Breiten in Pixeln (`px`)**. Es passt sich nicht an die Bildschirmgröße an. Ist der Viewport kleiner als das Layout, entsteht ein störender horizontaler Scrollbalken; auf großen Monitoren entsteht viel ungenutzter Leerraum.
+:::
+
+::: {.flip-card}
+#### Was zeichnet ein „Fluid Layout“ (Flüssiges Layout) aus?
+Ein Fluid Layout nutzt **relative Einheiten wie Prozentwerte (`%`)** für Spaltenbreiten. Die Elemente dehnen oder stauchen sich proportional zur Fensterbreite und füllen stets den verfügbaren Platz aus. Es ist das Fundament des modernen Responsive Webdesigns.
+:::
+
+::: {.flip-card}
+#### Was versteht man unter einem „Elastic Layout“ (Elastisches Layout)?
+Ein Elastic Layout basiert auf der **Schriftgröße (definiert in `em` oder `rem`)**. Vergrößert der Nutzer die Basisschriftart im Browser (Zoom/Accessibility), wachsen alle Boxen und Abstände proportional mit. Dies sichert perfekte Lesbarkeit, ist jedoch anspruchsvoll im Entwurf.
+:::
+
+::: {.flip-card}
+#### Was ist der Unterschied zwischen Responsive (RWD) und Adaptive Webdesign (AWD)?
+**Responsive Webdesign (RWD)** setzt auf **ein einziges, flüssiges Layout**, das mittels Fluid Grids und Media Queries stufenlos auf jede Bildschirmgröße skaliert. **Adaptive Webdesign (AWD)** liefert **mehrere feste, getrennte Layouts** für vordefinierte Breakpoints (z. B. Smartphone, Tablet, Desktop) aus.
+:::
+
+::: {.flip-card}
+#### Was zeichnet Flexbox als 1D-Layoutmodell aus?
+Flexbox (*Flexible Box Layout*) arbeitet **eindimensional (1D)** – es steuert die Anordnung entweder entlang einer Zeile (`row`) **oder** einer Spalte (`column`). Es ist ideal zum dynamischen Verteilen von freiem Raum, für Navigationen, Toolbars und zum mühelosen Zentrieren von Elementen.
+:::
+
+::: {.flip-card}
+#### Was zeichnet CSS Grid als 2D-Layoutmodell aus?
+CSS Grid ist ein **zweidimensionales (2D)** Rastersystem, das Zeilen **und** Spalten gleichzeitig steuert. Es ermöglicht das exakte Platzieren von Elementen in Spuren (`grid-template-columns`, `grid-template-rows`) und ist das mächtigste Werkzeug für das gesamte Seitenlayout.
+:::
+
+::: {.flip-card}
+#### Wie werden CSS Grid und Flexbox im Webdesign optimal kombiniert?
+**CSS Grid** wird für das übergeordnete 2D-Seitenraster (Header, Navigation, Hauptinhalt, Sidebar, Footer) eingesetzt. **Flexbox** übernimmt die flexible 1D-Ausrichtung der Komponenten innerhalb der Grid-Bereiche (z. B. Menüeinträge in der Navigationsleiste oder Buttons in Cards).
+:::
+
+::: {.flip-card}
+#### Warum ist die Mobile-First-Strategie heute der Standardansatz?
+Über 55 % des weltweiten Webtraffics stammt von mobilen Endgeräten. Mobile First erzwingt die **Fokussierung auf das Wesentliche (Content First)**, spart Ladezeiten bei langsamen Mobilfunknetzen und folgt dem Prinzip des **Progressive Enhancement** (von schlanken mobilen Basisstilen zu komplexeren Desktop-Features).
+:::
+
+::: {.flip-card}
+#### Wie wird Mobile First im CSS technisch umgesetzt?
+Im Mobile-First-Ansatz wird das **Standard-CSS außerhalb jeglicher Media Query für das kleinste Gerät (Smartphone)** geschrieben. Mit aufsteigenden **`@media (min-width: ...)`** Media Queries werden schrittweise Mehrspaltigkeit, größere Abstände und Desktop-Elemente hinzugefügt.
+:::
+
+::: {.flip-card}
+#### Wozu dient der Viewport-Meta-Tag im HTML `<head>`?
+`<meta name="viewport" content="width=device-width, initial-scale=1.0">` teilt dem mobilen Browser mit, die **virtuelle Darstellungsbreite exakt auf die physische Bildschirmbreite** des Geräts zu setzen und den Zoom-Faktor auf 1:1 zu initialisieren. Ohne diesen Tag rendern Mobilgeräte Webseiten winzig auf einem virtuellen 980px-Desktop.
+:::
+
+::: {.flip-card}
+#### Was unterscheidet Medientypen von Medienmerkmalen in CSS?
+**Medientypen (Media Types)** definieren das Ausgabegerät (`all`, `screen`, `print`, `speech`). **Medienmerkmale (Media Features)** prüfen spezifische Geräteeigenschaften wie Breite (`min-width`), Orientierung (`orientation: landscape`), Kontrast oder Farbschema (`prefers-color-scheme: dark`).
+:::
+
+::: {.flip-card}
+#### Wie funktionieren logische Operatoren in CSS Media Queries?
+- **`and`:** Alle verknüpften Bedingungen müssen wahr sein (z. B. `screen and (min-width: 768px)`).
+- **`,` (Komma):** Fungiert als logisches **ODER** (mindestens eine Bedingung muss erfüllt sein).
+- **`not`:** Negiert die gesamte Abfrage (z. B. `not print`).
+- **`only`:** Verhindert Fehlinterpretationen in sehr alten Browsern.
+:::
+
+::: {.flip-card}
+#### Warum müssen Media Queries in aufsteigender Reihenfolge im CSS stehen?
+Durch die **CSS-Kaskade (Cascade)** überschreibt eine spätere Regel eine frühere bei gleicher Spezifität. Werden `min-width`-Queries aufsteigend notiert (`576px` $\rightarrow$ `768px` $\rightarrow$ `992px` $\rightarrow$ `1200px`), überschreiben Desktop-Stile gezielt die vorherigen mobilen bzw. Tablet-Regeln.
+:::
+
+::: {.flip-card}
+#### Was versteht man unter „Content-driven Breakpoints“?
+Breakpoints sollten **nicht starr an konkreten Gerätemodellen** (wie „iPhone 15“ oder „Galaxy S24“) ausgerichtet werden, sondern dort gesetzt werden, **wo das Layout und der Inhalt unleserlich werden oder optisch brechen** („Break when content breaks“).
+:::
+
+---
+
+## 2. Lückentext-Übungen (Active Recall)
+
+Klicken Sie auf ein Wort im Pool und setzen Sie es in die passende Lücke ein:
+
+### Übung 1: Box-Modell & Box-Sizing
+
+::: {.drag-exercise}
+Das CSS-Boxmodell gliedert jedes Element in vier Bereiche: Der innerste Bereich ist der *Content*, gefolgt vom Innenabstand *Padding*, der die Hintergrundfarbe des Elements erbt. Darum liegt der Rahmen *Border* und als äußerer Abstandhalter fungiert das *Margin*. Während bei *content-box* Padding und Rahmen zur definierten Breite addiert werden, schließt der globale Best-Practice-Wert *border-box* diese Maße in die Gesamtbreite ein.
+:::
+
+### Übung 2: Fonts, DSGVO & @font-face
+
+::: {.drag-exercise}
+Schriften im Web werden über einen *Font-Stack* deklariert, der mit einer generischen Familie wie *sans-serif* abschließen sollte. Das direkte Nachladen von Schriften über das Google-CDN überträgt die *IP-Adresse* der Webseitenbesucher in die USA und führte in Deutschland zu rechtlichen *Abmahnungen*. Um Webseiten rechtssicher und DSGVO-konform zu betreiben, lädt man Schriftdateien im Format *woff2* herunter und bindet sie lokal über die CSS-Regel *@font-face* ein.
+:::
+
+### Übung 3: Typografie & die Schriftgebote
+
+::: {.drag-exercise}
+Für barrierefreie Web-Typografie sollte die Zeilenlänge von Fließtext maximal *70* Zeichen betragen, um dem Auge den Zeilensprung zu erleichtern. Der optimale Zeilenabstand liegt bei *1.5* bzw. 150 %. Um harmonische Layouts zu gestalten, sollten maximal *zwei* Schrifttypen kombiniert werden. Großbuchstaben für Menüs oder Akzente sollten nicht manuell im HTML eingetippt, sondern per CSS mit *uppercase* gesteuert werden.
+:::
+
+### Übung 4: CSS-Farbsysteme
+
+::: {.drag-exercise}
+In CSS gibt es 141 vordefinierte *Farbnamen*. Bei der Angabe *rgba* steuert ein vierter Parameter den Alpha-Kanal zwischen 0.0 und *1.0* für die Transparenz. Im intuitiven *hsl*-Modell beschreibt der erste Wert den Farbton auf dem Farbkreis von 0 bis *360* Grad, während der Hexadezimalcode *#ff0000* für reines Rot steht.
+:::
+
+### Übung 5: Maßeinheiten & Skalierung
+
+::: {.drag-exercise}
+Die Maßeinheit *px* ist absolut und orientiert sich an Monitor-Bildpunkten. Dagegen bezieht sich die relative Einheit *em* auf das Elternelement, was in tief verschachtelten Listen zum *Multiplikationseffekt* führen kann. Für konsistente Schriftgrößen empfiehlt sich *rem*, das sich auf das *html*-Wurzelelement bezieht. Für bildschirmfüllende Hero-Sektionen nutzt man *vh* für 100 % der Fensterhöhe.
+:::
+
+### Übung 6: Ordnerstruktur & Dateibenennung
+
+::: {.drag-exercise}
+Die Startdatei einer Website muss im Root-Verzeichnis liegen und *index.html* heißen, weil Webserver wie Apache danach standardmäßig über die Direktive *DirectoryIndex* suchen. Bei der Benennung von Web-Dateien gilt ausnahmslos *Kleinschreibung*, da Webserver Groß- und Kleinschreibung unterscheiden. Umlaute werden umschrieben und Wörter durch einen *Bindestrich* getrennt.
+:::
+
+### Übung 7: Pfadnavigation & Verlinkung
+
+::: {.drag-exercise}
+Ein *relativer* Pfad bezieht sich immer auf die Position der aktuellen Datei. Um aus einer Unterseite eine Ebene nach oben zu wechseln, nutzt man die Syntax *../* . Externe Links im WWW erfordern stets die Angabe des *Protokolls* wie `https://`. Lokale Pfadangaben mit Laufwerksbuchstaben wie `C:\` führen auf Webservern unweigerlich zu *404-Fehlern*.
+:::
+
+### Übung 8: Block-, Inline-Elemente & neutrale Container
+
+::: {.drag-exercise}
+Ein *Block-Element* wie `<p>` oder `<div>` erzeugt im Dokumentenfluss automatisch einen *Zeilenumbruch* und belegt 100 % der Containerbreite. Ein *Inline-Element* wie `<span>` oder `<a>` bleibt im Textfluss. Das semantikfreie Block-Element *div* und das Inline-Element *span* sollten sparsam eingesetzt werden, um die sogenannte *Divitis* zu vermeiden.
+:::
+
+### Übung 9: Kommentare in HTML & CSS
+
+::: {.drag-exercise}
+In HTML werden Kommentare mit *<!--* eingeleitet und mit *-->* geschlossen. In Stylesheets nutzt man hingegen die CSS-Kommentarsyntax *slash-sternchen*. Kommentare werden beim *Rendering* vom Browser ignoriert und dienen der Strukturierung, Dokumentation und *Fehlersuche*.
+:::
+
+### Übung 10: Klassische Layout-Typen (Fixed, Fluid, Elastic)
+
+::: {.drag-exercise}
+Ein starres Layout arbeitet mit festen *Pixeln* und erzeugt auf kleinen Screens horizontale *Scrollbalken*. Dagegen nutzt ein flüssiges Layout relative *Prozentwerte*, um sich der Bildschirmbreite anzupassen. Das elastische Layout basiert auf Maßeinheiten wie *rem* und skaliert synchron zur Schriftgröße, was einen großen Vorteil für die *Barrierefreiheit* bietet.
+:::
+
+### Übung 11: Responsive vs. Adaptive Webdesign
+
+::: {.drag-exercise}
+Das moderne *Responsive* Webdesign verwendet ein einziges *flüssiges* Layout, das mit Media Queries auf alle Displaygrößen skaliert und eine gemeinsame *Codebase* besitzt. Dagegen liefert *Adaptive* Webdesign für jeden der vordefinierten *Breakpoints* ein eigenständiges, separates Layout aus.
+:::
+
+### Übung 12: Flexbox vs. CSS Grid
+
+::: {.drag-exercise}
+Das Layout-Modell Flexbox ist *eindimensional* und steuert Elemente entweder horizontal oder vertikal, was perfekt für die *Ausrichtung* von Menüleisten ist. Dagegen spannt CSS *Grid* ein *zweidimensionales* System auf, mit dem Entwickler komplexe Seitenlayouts mit *Zeilen* und Spalten gleichzeitig definieren können.
+:::
+
+### Übung 13: Die Mobile-First-Philosophie & Progressive Enhancement
+
+::: {.drag-exercise}
+Beim *Mobile First* Design beginnt die Entwicklung mit dem kleinsten Bildschirm, wodurch *Ladezeiten* bei mobilen Geräten minimiert werden. Durch das Prinzip des *Progressive Enhancement* werden einfache Basisstile schrittweise mit *min-width* erweitert. Große klickbare Buttons erleichtern die *Touch*-Bedienung auf Smartphones.
+:::
+
+### Übung 14: CSS Media Queries & Logische Operatoren
+
+::: {.drag-exercise}
+Für Bildschirmausgaben verwendet man den Medientyp *screen*, während für Druckerzeugnisse der Typ *print* deklariert wird. Mehrere Bedingungen verknüpft man mit dem logischen Operator *and*. Um das Display-Querformat abzufragen, setzt man das Medienmerkmal *orientation* auf landscape, während mit prefers-color-scheme auf *dark* Mode reagiert werden kann.
+:::
+
+### Übung 15: Viewport-Konfiguration & Breakpoint-Best-Practices
+
+::: {.drag-exercise}
+Im HTML `<head>` muss der Meta-Tag *viewport* mit dem Attribut *device-width* eingebunden werden, um fehlerhaftes Zoom-Verhalten mobiler Browser zu verhindern. Im CSS sollten Breakpoints immer in *aufsteigender* Reihenfolge notiert werden, damit die CSS-*Kaskade* Desktop-Styles wirksam macht. Gutes Responsive Design setzt Breakpoints dort, wo der *Inhalt* umbricht.
+:::
+
+---
+
+## 3. Fallstudien & Praxis-Szenarien
+
+::: {.case-study}
+#### Fallstudie A: Das ausbrechende Layout & die Box-Sizing-Falle
+**Szenario:** Ein Junior-Entwickler gestaltet ein zweispaltiges Grid-Layout. Jeder Container erhält die CSS-Klassen:
+```css
+.column {
+  width: 50%;
+  padding: 20px;
+  border: 2px solid #333;
+  float: left;
+}
+```
+Überraschenderweise stehen die beiden Spalten nicht nebeneinander, sondern brechen untereinander um.
+
+**Aufgabenstellung:**
+1. Erklären Sie mathematisch, warum die beiden Spalten nebeneinander nicht in den Container passen.
+2. Nennen und implementieren Sie die universelle CSS-Lösung, die dieses Problem im gesamten Projekt dauerhaft behebt.
+
+::: {.solution}
+**Musterlösung:**
+1. **Mathematische Ursache:** Standardmäßig gilt `box-sizing: content-box`. Die Gesamtbreite einer Spalte berechnet sich wie folgt:
+   $$\text{Gesamtbreite} = \text{width} + 2 \times \text{padding} + 2 \times \text{border} = 50\% + 40\text{px} + 4\text{px} = 50\% + 44\text{px}$$
+   Zwei Spalten nebeneinander benötigen $100\% + 88\text{px}$. Da dies die verfügbare Breite von $100\%$ überschreitet, bricht die zweite Spalte nach unten um.
+2. **CSS-Lösung:** Universelles Zurücksetzen auf `border-box` über den Universal-Selektor:
+```css
+* {
+  box-sizing: border-box;
+}
+```
+Mit `border-box` werden Padding (20px) und Border (2px) in die `50%` eingerechnet. Jede Spalte belegt exakt `50%`, sodass beide perfekt nebeneinander Platz finden.
+:::
+:::
+
+::: {.case-study}
+#### Fallstudie B: DSGVO-Abmahnung wegen Google Fonts & Refaktorisierung
+**Szenario:** Ein lokaler Verein erhält ein anwaltliches Abmahnschreiben mit einer Schadenersatzforderung von 250 Euro, weil auf der Vereins-Webseite Google Fonts über folgenden CDN-Link im `<head>` eingebunden ist:
+`<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">`
+
+**Aufgabenstellung:**
+1. Erläutern Sie die datenschutzrechtliche Begründung der Abmahnung (Urteil LG München 2022).
+2. Beschreiben Sie die Schritte zur vollständigen Bereinigung und implementieren Sie die DSGVO-konforme Einbindung per `@font-face` für den Webfont `Roboto` im Format `woff2`.
+
+::: {.solution}
+**Musterlösung:**
+1. **Datenschutzrechtliche Begründung:** Beim Laden über das Google-CDN baut der Browser des Besuchers automatisch eine direkte Verbindung zu den Google-Servern in den USA auf. Dabei wird die dynamische IP-Adresse des Nutzers übertragen. Da die IP-Adresse nach Art. 4 Nr. 1 DSGVO ein personenbezogenes Datum darstellt und die Übermittlung ohne vorherige explizite Einwilligung (Opt-in) oder berechtigtes Interesse erfolgt, liegt ein DSGVO-Verstoß vor (LG München I, Az. 3 O 17493/20).
+2. **Schritte zur Bereinigung:**
+   - CDN-Link `<link href="https://fonts.googleapis.com/...">` aus dem HTML `<head>` entfernen.
+   - Schriftdateien (z. B. `roboto-v30-latin-regular.woff2`, `roboto-v30-latin-700.woff2`) herunterladen und im Webverzeichnis `/fonts/` ablegen.
+   - Lokale Deklaration in der CSS-Datei:
+```css
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/roboto-v30-latin-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/roboto-v30-latin-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  font-family: "Roboto", Arial, sans-serif;
+}
+```
+:::
+:::
+
+::: {.case-study}
+#### Fallstudie C: Der kaskadierende `em`-Multiplikationsfehler
+**Szenario:** Ein Online-Shop besitzt eine tief verschachtelte Kategoriestruktur in Form von ungeordneten Listen (`<ul>`). Der Webdesigner hat im Stylesheet folgende Regel deklariert:
+```css
+body {
+  font-size: 16px;
+}
+ul {
+  font-size: 1.5em;
+}
+```
+Auf Unterkategorie-Ebene 3 ist die Schrift riesig und sprengt das gesamte Layout.
+
+**Aufgabenstellung:**
+1. Berechnen Sie die effektive Pixel-Schriftgröße für Texte auf Ebene 1, Ebene 2 und Ebene 3.
+2. Erklären Sie, warum `rem` dieses Problem löst, und geben Sie den korrigierten CSS-Code an.
+
+::: {.solution}
+**Musterlösung:**
+1. **Berechnung der Kaskadierung:**
+   - **Ebene 1 (`ul`):** $16\text{px} \times 1.5 = \mathbf{24\text{px}}$
+   - **Ebene 2 (`ul ul`):** $24\text{px} \times 1.5 = \mathbf{36\text{px}}$
+   - **Ebene 3 (`ul ul ul`):** $36\text{px} \times 1.5 = \mathbf{54\text{px}}$ (Faktor $1.5^3 = 3.375$)
+2. **Lösung mit `rem`:** `rem` (*Root-em*) bezieht sich immer statisch auf die Basis-Schriftgröße des `<html>`-Wurzelelements (16px), unabhängig von der Verschachtelungstiefe.
+```css
+body {
+  font-size: 1rem; /* 16px */
+}
+ul {
+  font-size: 1.1rem; /* 17.6px auf ALLEN Ebenen */
+}
+```
+:::
+:::
+
+::: {.case-study}
+#### Fallstudie D: Der 404-Fehler & relative Pfadnavigation über Ordnerebenen
+**Szenario:** Ein Webprojekt besitzt folgende Verzeichnisstruktur:
+```text
+projekt-root/
+├── css/
+│   └── style.css
+├── img/
+│   └── logo.png
+│   └── team/
+│       └── chef.jpg
+├── pages/
+│   └── service/
+│       └── beratung.html
+└── index.html
+```
+In der Datei `pages/service/beratung.html` hat ein Entwickler versucht, das Stylesheet und die Bilder einzubinden:
+```html
+<link rel="stylesheet" href="css/style.css">
+<img src="img/logo.png" alt="Logo">
+<img src="C:\Webprojekt\img\team\chef.jpg" alt="Chef">
+```
+Kein einziges Bild und kein Style wird auf dem Webserver geladen (404 Not Found & geblockte Ressourcen).
+
+**Aufgabenstellung:**
+1. Erläutern Sie genau, warum alle drei Pfade aus Sicht der Datei `beratung.html` fehlerhaft sind.
+2. Geben Sie die drei fehlerfreien relativen Pfade für `beratung.html` an.
+
+::: {.solution}
+**Musterlösung:**
+1. **Fehleranalyse:**
+   - `css/style.css`: Da sich `beratung.html` im Unterordner `pages/service/` befindet, sucht der Browser die Datei fälschlicherweise unter `pages/service/css/style.css`.
+   - `img/logo.png`: Der Browser sucht unter `pages/service/img/logo.png`, was ebenfalls zu einem 404-Fehler führt.
+   - `C:\Webprojekt\...`: Ein absoluter Windows-Systempfad existiert auf dem Webserver nicht. Zudem sperrt der Browser aus Sicherheitsgründen den Zugriff auf lokale Dateisysteme über HTTP.
+2. **Korrigierte relative Pfade (2 Ebenen nach oben mit `../../`):**
+```html
+<!-- Zwei Ebenen hoch in die Root, dann in den Zielordner: -->
+<link rel="stylesheet" href="../../css/style.css">
+<img src="../../img/logo.png" alt="Logo">
+<img src="../../img/team/chef.jpg" alt="Chef">
+```
+:::
+:::
+
+::: {.case-study}
+#### Fallstudie E: Sanierung einer semantikfreien „Div-Suppe“ (Divitis)
+**Szenario:** Bei einem Code-Audit stoßen Sie auf folgendes HTML-Grundgerüst:
+```html
+<div id="kopfbereich">
+  <div id="logo"><img src="img/logo.png" alt="Firma"></div>
+  <div id="menue">
+    <a href="index.html">Start</a>
+    <a href="team.html">Team</a>
+  </div>
+</div>
+<div id="hauptteil">
+  <div class="beitrag">
+    <div class="titel">Webdesign Trends</div>
+    <div class="text">Hier steht der Fließtext...</div>
+  </div>
+</div>
+<div id="seitenleiste">Werbung & News</div>
+<div id="fusszeile">&copy; 2026 Firma GmbH</div>
+```
+
+**Aufgabenstellung:**
+1. Begründen Sie, warum diese reine `<div>`-Struktur gravierende Nachteile für Barrierefreiheit (Screenreader) und Suchmaschinen-Ranking (SEO) hat.
+2. Refaktorisieren Sie den Quellcode vollständig unter Einsatz valider HTML5-Semantik-Elemente und erläutern Sie, wann `<div>` und `<span>` weiterhin legitim sind.
+
+::: {.solution}
+**Musterlösung:**
+1. **Nachteile der Divitis:**
+   - Ein `<div>` besitzt keinerlei semantische Bedeutung.
+   - **Screenreader & Barrierefreiheit:** Sehbehinderte Nutzer können Webseiten nicht anhand von Landmarken (z. B. „Springe zu Navigation“ oder „Hauptinhalt“) ansteuern.
+   - **SEO:** Suchmaschinen-Crawler (wie Googlebot) können die Gewichtung der Inhalte (was ist Navigation, was redaktioneller Hauptbeitrag, was Fußzeile) nicht interpretieren.
+2. **Refaktorisierter HTML5-Code:**
+```html
+<header>
+  <img src="img/logo.png" alt="Firma">
+  <nav aria-label="Hauptnavigation">
+    <a href="index.html">Start</a>
+    <a href="team.html">Team</a>
+  </nav>
+</header>
+
+<main>
+  <article>
+    <h1>Webdesign Trends</h1>
+    <p>Hier steht der Fließtext...</p>
+  </article>
+</main>
+
+<aside>
+  <h2>Werbung & News</h2>
+</aside>
+
+<footer>
+  <p>&copy; 2026 Firma GmbH</p>
+</footer>
+```
+*Legitimer Einsatz von `<div>` und `<span>`:* `<div>` bleibt als semantikfreier Layout-Wrapper (z. B. CSS-Flexbox/Grid-Container) legitim, wenn keine inhaltliche Bedeutung vorliegt. `<span>` dient ausschließlich zur visuellen Hervorhebung von Textteilen im Fließtext (z. B. farbliche Kennzeichnung per CSS).
+:::
+:::
+
+::: {.case-study}
+#### Fallstudie F: Architektur-Entscheidung: Responsive (RWD) vs. Adaptive (AWD)
+**Szenario:** Eine Universität plant den Relaunch ihres Hochschulportals. Ein Teil des Entwicklerteams schlägt vor, drei komplett getrennte, starre Webseiten für Desktop, iPad und iPhone zu programmieren (Adaptive Design). Das UI/UX-Team plädiert stattdessen für ein einheitliches Responsive Design mit elastischen Schriftgrößen.
+
+**Aufgabenstellung:**
+1. Vergleichen Sie Responsive und Adaptive Webdesign hinsichtlich Wartbarkeit, Gerätezukunftssicherheit und Entwicklungsaufwand.
+2. Begründen Sie, warum Responsive Webdesign mit relativen Einheiten (`rem`, `%`) die überlegene Wahl für das Campus-Portal ist.
+
+::: {.solution}
+**Musterlösung:**
+1. **Vergleich:**
+   - **Wartbarkeit & Aufwand:** Adaptive Webdesign erfordert die Pflege mehrerer getrennter Layouts. Jede Text- oder Funktionsänderung muss mehrfach implementiert werden. Responsive Webdesign basiert auf einer einzigen gemeinsamen Codebase.
+   - **Zukunftssicherheit:** Adaptive Layouts brechen auf neuen Geräten mit unvorhergesehenen Displaymaßen (z. B. Foldables, neue Tablet-Größen) zusammen. Ein Responsive Fluid Layout passt sich stufenlos an jeden Bildschirm an.
+2. **Begründung für das Campus-Portal:**
+   - Hohe Vielfalt an Endgeräten bei Studierenden und Dozierenden (Smartphones, Laptops, 4K-Monitore).
+   - Hervorragende Barrierefreiheit durch `rem`-Einheiten: Studierende mit Sehbehinderung können den Browser-Zoom nutzen, ohne dass das Layout zerbricht.
+   - Niedrigere Gesamtbetriebskosten (TCO) durch eine wartungsfreundliche Codebasis.
+:::
+:::
+
+::: {.case-study}
+#### Fallstudie G: Refactoring von Float-Layouts zu CSS Grid & Flexbox
+**Szenario:** Eine bestehende Unternehmensseite nutzt veralteten CSS-Float-Code für ein 2-Spalten-Layout mit Navigationsleiste:
+```css
+/* Veralteter Float-Hack */
+.sidebar { float: left; width: 250px; }
+.content { float: left; width: calc(100% - 250px); }
+.clearfix::after { content: ""; display: table; clear: both; }
+```
+Bei unterschiedlichen Inhaltslängen entstehen unschöne Überlappungen und die Wartung der Clearfix-Klassen ist fehleranfällig.
+
+**Aufgabenstellung:**
+1. Erklären Sie die strukturellen Nachteile von Float-basierten Layouts.
+2. Erstellen Sie ein modernes, sauberes Refactoring unter kombinierter Nutzung von **CSS Grid** für das übergeordnete Seitenraster und **Flexbox** für die Menüeinträge der Navigation.
+
+::: {.solution}
+**Musterlösung:**
+1. **Nachteile von Floats:** `float` wurde ursprünglich nur für das Umfließen von Bildern im Fließtext geschaffen, nicht für ganze Seitenlayouts. Floats fallen aus dem normalen Dokumentenfluss heraus, was manuelle `clear`-Hacks (Clearfix) erzwingt, vertikales Zentrieren fast unmöglich macht und bei dynamischen Inhalten zu Layout-Brüchen führt.
+2. **Modernes CSS Grid & Flexbox Refactoring:**
+```css
+/* 2D-Seitenraster mit CSS Grid */
+.layout-container {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header  header"
+    "sidebar main"
+    "footer  footer";
+  min-height: 100vh;
+  gap: 20px;
+}
+
+header  { grid-area: header; }
+sidebar { grid-area: sidebar; }
+main    { grid-area: main; }
+footer  { grid-area: footer; }
+
+/* 1D-Navigation mit Flexbox */
+nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+```
+:::
+:::
+
+::: {.case-study}
+#### Fallstudie H: Refactoring von Desktop-First (`max-width`) zu Mobile-First (`min-width`)
+**Szenario:** Ein Entwickler hat ein Shop-Layout nach dem veralteten Desktop-First-Prinzip (Graceful Degradation) aufgebaut. Im CSS wimmelt es von absteigenden `max-width`-Queries und zahllosen "Un-Styling"-Überschreibungen:
+```css
+/* Veraltetes Desktop-First */
+.nav-menu { display: flex; flex-direction: row; width: 800px; }
+.hero-banner { height: 600px; background-image: url('huge-desktop.jpg'); }
+.sidebar { display: block; width: 300px; float: left; }
+
+@media (max-width: 768px) {
+  .nav-menu { flex-direction: column; width: 100%; }
+  .hero-banner { height: 250px; background-image: url('small-mobile.jpg'); }
+  .sidebar { display: none; width: auto; float: none; }
+}
+```
+
+**Aufgabenstellung:**
+1. Erläutern Sie die gravierenden Nachteile von Desktop-First hinsichtlich Performance auf Smartphones und CSS-Wartbarkeit.
+2. Refaktorisieren Sie den CSS-Code nach der **Mobile-First-Philosophie** mit Basisstilen und einer additiven `@media (min-width: 768px)`-Regel.
+
+::: {.solution}
+**Musterlösung:**
+1. **Nachteile von Desktop-First:**
+   - **Performance-Verlust auf Mobilgeräten:** Der Browser lädt initial oft schwere Desktop-Ressourcen (z. B. `huge-desktop.jpg`), bevor er merkt, dass er auf einem kleinen Smartphone ist.
+   - **Hoher CSS-Overhead ("Un-Styling"):** Mobilgeräte müssen Desktop-Eigenschaften aufwendig neutralisieren (`display: none`, `float: none`, Breiten zurücksetzen).
+   - **Wartungsaufwand:** Jede neue Desktop-Funktion muss nachträglich für kleinere Bildschirme mühsam deaktiviert werden.
+2. **Sauberes Mobile-First Refactoring (mit `min-width`):**
+```css
+/* 1. Basis-Stile für Mobilgeräte (Default außerhalb von Media Queries) */
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.hero-banner {
+  height: 250px;
+  background-image: url('small-mobile.jpg');
+  background-size: cover;
+}
+.sidebar {
+  display: none; /* Auf Mobilgeräten standardmäßig ausgeblendet */
+}
+
+/* 2. Progressive Enhancement für Tablets & Desktops */
+@media (min-width: 768px) {
+  .nav-menu {
+    flex-direction: row;
+    width: auto;
+  }
+  .hero-banner {
+    height: 600px;
+    background-image: url('huge-desktop.jpg');
+  }
+  .sidebar {
+    display: block;
+    width: 300px;
+  }
+}
+```
+:::
+:::
+
+::: {.case-study}
+#### Fallstudie I: Druckoptimierung (`@media print`) & Sensorik-Queries
+**Szenario:** Eine Web-Applikation zur Buchung von Zugtickets sieht auf dem Bildschirm hervorragend aus. Beim Ausdrucken der Fahrkarte über den Browser entstehen jedoch schwarze Farbflächen, Seitenzahlen fehlen und riesige Werbebanner verbrauchen teure Druckertinte. Zudem funktionieren Hover-Menüs auf Touch-Tablets nicht zuverlässig.
+
+**Aufgabenstellung:**
+1. Erstellen Sie ein CSS-Druck-Stylesheet mit `@media print`, das Navigation, Footer und Werbe-Container ausblendet, den Hintergrund auf Weiß setzt und Links lesbar ausgibt.
+2. Formulieren Sie eine Media Query, die prüft, ob das Gerät einen Touchscreen ohne echten Mauszeiger (`hover: none`) besitzt, und blenden Sie dort klickbare Aufklapp-Icons ein.
+
+::: {.solution}
+**Musterlösung:**
+1. **Print-Stylesheet mit `@media print`:**
+```css
+@media print {
+  /* Unnötige UI-Elemente für den Druck ausblenden */
+  header nav, footer, .banner-ad, .btn-action {
+    display: none !important;
+  }
+  
+  /* Tinten- und Papiersparende Farben erzwingen */
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-size: 12pt;
+  }
+  
+  /* Ziel-URLs von Hyperlinks nach dem Linktext in Klammern drucken */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.9em;
+    color: #555555;
+  }
+}
+```
+2. **Sensorik-Query für Touchscreens ohne Hover-Fähigkeit:**
+```css
+@media (hover: none) and (pointer: coarse) {
+  /* Touch-optimierte Bedienung: Größere Buttons & sichtbare Pfeilsymbole */
+  .menu-toggle-btn {
+    display: inline-block;
+    min-width: 48px;
+    min-height: 48px;
+  }
+  .dropdown-content {
+    position: static; /* Kein Hover-Popup, sondern direktes Ausklappen */
+  }
+}
+```
+:::
+:::
+
+---
+
+## 4. Detaillierte Fachvertiefungen (Deep Dives)
+
+### Deep Dive 1: Das CSS-Boxmodell & Abstandseigenschaften
+
+Jedes auf einer Webseite gerenderte Element erzeugt ein rechteckiges Box-Objekt. Die Eigenschaften im Detail:
+
+```
++-------------------------------------------------------+
+|                       MARGIN                          |
+|  +-------------------------------------------------+  |
+|  |                    BORDER                       |  |
+|  |  +-------------------------------------------+  |  |
+|  |  |                 PADDING                   |  |  |
+|  |  |  +-------------------------------------+  |  |  |
+|  |  |  |              CONTENT                |  |  |  |
+|  |  |  |        (Text, Bild, etc.)           |  |  |  |
+|  |  |  +-------------------------------------+  |  |  |
+|  |  +-------------------------------------------+  |  |
+|  +-------------------------------------------------+  |
++-------------------------------------------------------+
+```
+
+- **Content:** Reiner Inhaltsbereich, definiert durch `width` und `height`.
+- **Padding:** Transparenter Innenabstand zwischen Inhalt und Rahmen. Erweitert den Hintergrund des Elements. Negative Werte sind unzulässig.
+- **Border:** Sichtbarer oder unsichtbarer Rahmen, der das Padding umschließt (`border: 1px solid #ccc;`).
+- **Margin:** Äußerer Abstand zu benachbarten Elementen. Kann negative Werte annehmen (z. B. `margin-top: -10px;` zum Überlappen). Vertikale Margins kollabieren.
+
+**Kurzschreibweisen für Margin und Padding (Uhrzeigersinn):**
+- `margin: 10px;` $\rightarrow$ 10px auf allen 4 Seiten.
+- `margin: 10px 20px;` $\rightarrow$ Oben/Unten: 10px, Links/Rechts: 20px.
+- `margin: 10px 15px 20px 25px;` $\rightarrow$ Oben: 10px, Rechts: 15px, Unten: 20px, Links: 25px (TOP, RIGHT, BOTTOM, LEFT).
+- `margin: 0 auto;` $\rightarrow$ Zentriert ein Block-Element mit fester Breite horizontal.
+
+---
+
+### Deep Dive 2: Web-Typografie, Font-Stacks & websichere Schriftarten
+
+Da Schriften nicht automatisch in HTML eingebettet sind, greift der Browser standardmäßig auf die lokal auf dem Betriebssystem des Benutzers installierten Schriftdateien zu.
+
+**Der Font-Stack:**
+```css
+body {
+  font-family: "Helvetica Neue", Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+```
+- **Priorität von links nach rechts:** Der Browser prüft der Reihe nach, ob die Schriftart installiert ist.
+- **Anführungszeichen:** Schriftartnamen mit Leerzeichen (z. B. `"Times New Roman"`, `"Trebuchet MS"`) müssen in Anführungszeichen gesetzt werden.
+- **Generischer Abschluss:** Jeder Font-Stack **muss** mit einer generischen Familie enden (`sans-serif`, `serif`, `monospace`), damit der Browser bei Fehlen aller spezifischen Schriften auf die System-Standardschriftart zurückgreift.
+
+**Die wichtigsten Websicheren Schriften:**
+- **Serifenlos (Sans-Serif):** Arial, Helvetica, Verdana, Trebuchet MS, Tahoma, Lucida Sans.
+- **Mit Serifen (Serif):** Georgia, Times New Roman.
+- **Nichtproportional (Monospace):** Courier New.
+
+---
+
+### Deep Dive 3: Google Fonts, DSGVO & Lokales Hosting (@font-face)
+
+Google Fonts ist die weltweit größte Sammlung freier Webfonts. Das dynamische Einbinden via Google-CDN stellt in der EU jedoch ein Datenschutzrisiko dar:
+
+```
+[Browser Client] --- 1. HTTP Request (überträgt IP) ---> [Google CDN Server (USA)]
+[Browser Client] <--- 2. Font CSS / WOFF2 -------------- [Google CDN Server (USA)]
+```
+
+**Rechtssichere Alternative: Self-Hosting:**
+1. Schriftart bei Google Fonts oder [Bunny Fonts](https://fonts.bunny.net/) herunterladen.
+2. Webfont-Dateien (`.woff2` für moderne Browser, `.woff` als Fallback) im Projektordner `/fonts/` speichern.
+3. Deklaration im CSS mittels `@font-face`:
+
+```css
+@font-face {
+  font-family: 'Open Sans';
+  src: url('../fonts/open-sans-v34-latin-regular.woff2') format('woff2'),
+       url('../fonts/open-sans-v34-latin-regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap; /* Verhindert unsichtbaren Text während des Ladens (FOIT) */
+}
+```
+
+---
+
+### Deep Dive 4: Die 10 Schriftgebote für Webdesigner
+
+1. **Schriftgröße:** Relative Größen (`rem`) bevorzugen, damit Browser-Zoomeinstellungen für Barrierefreiheit wirksam bleiben.
+2. **Zeilenbreite (Line Length):** Maximal **45 bis 75 Zeichen** pro Zeile für Fließtexte.
+3. **Zeilenabstand (`line-height`):** Idealwert **1.4 bis 1.6** (140–160 %).
+4. **Laufweite (`letter-spacing`):** Nur dezent für Überschriften einsetzen; Fließtext nicht künstlich spreizen.
+5. **Kontrast:** Mindestkontrast nach WCAG 2.1 AA von 4.5:1 für Fließtext einhalten.
+6. **Struktur:** Semantische HTML-Elemente (`h1` bis `h6`, `p`, `ul`, `ol`, `strong`, `em`) gezielt nutzen.
+7. **Maximal zwei Schrifttypen:** z. B. eine markante Serifenschrift für Headlines und eine klare Sans-Serif für Fließtext.
+8. **Versalien:** Reine Großbuchstaben im Fließtext meiden. Für Buttons/Badges per CSS `text-transform: uppercase;` steuern.
+9. **Standardschriften:** Font-Stack immer mit verlässlichen System-Schriften und generischem Fallback absichern.
+10. **Fortbildung:** Typografische Trends, Variable Fonts und Barrierefreiheitsrichtlinien kontinuierlich vertiefen.
+
+---
+
+### Deep Dive 5: CSS-Farbdefinitionen im Vergleich
+
+In CSS stehen vier Hauptmethoden zur Farbdeklaration zur Verfügung:
+
+| Methode | Syntax-Beispiel | Transparenz | Anwendungsbereich / Vorteile |
+| :--- | :--- | :--- | :--- |
+| **Farbnamen** | `color: tomato;` | Nein | 141 benannte Farben, schnell für Prototypen |
+| **Hexadezimal** | `color: #ff7675;` | Ja (`#RRGGBBAA`) | Standard im Web, extrem kompakt, 3-stellige Kurzform `#F05` |
+| **RGB / RGBA** | `color: rgba(255, 118, 117, 0.8);` | Ja (0.0 bis 1.0) | Sehr verbreitet, kanalbasiert (0 bis 255) |
+| **HSL / HSLA** | `color: hsla(197, 100%, 50%, 0.9);` | Ja (0.0 bis 1.0) | Hochgradig intuitiv für Farbvariationen & Designsysteme |
+
+```css
+/* Farbton-Variation im HSL-Modell kinderleicht: */
+--primary-base:  hsl(210, 80%, 50%); /* Basis-Blau */
+--primary-light: hsl(210, 80%, 75%); /* Hellere Nuance */
+--primary-dark:  hsl(210, 80%, 25%); /* Dunklere Nuance */
+```
+
+---
+
+### Deep Dive 6: Absolute vs. Relative Maßeinheiten
+
+CSS unterscheidet zwei grundlegende Kategorien von Einheiten:
+
+**1. Absolute Maßeinheiten:**
+- **`px` (Pixel):** 1px = 1 physischer Bildschirm-Pixel (auf 96 DPI Basis). Universell für Borders, Schatten und feine Details.
+- **Physische Einheiten (`pt`, `in`, `cm`, `mm`):** `1pt = 1/72 in`. Ausschließlich für Druckausgaben (`@media print`) verwenden, da Monitore stark unterschiedliche Pixeldichten (PPI) aufweisen.
+
+**2. Relative Maßeinheiten:**
+- **`em`:** Relativ zur Schriftgröße des **Elternelements** (1.5em = 150 % der Elternschriftgröße).
+- **`rem` (*Root-em*):** Relativ zur Schriftgröße des **`<html>`-Elements** (Standard 16px). Verhindert Multiplikationsfehler und sichert Accessibility.
+- **`%`:** Bezieht sich bei Breiten/Höhen auf den umschließenden Container, bei Schriften auf das Elternelement.
+- **`vw` / `vh`:** 1 % der aktuellen Viewport-Breite bzw. -Höhe.
+- **`vmin` / `vmax`:** 1 % der kleineren bzw. größeren Viewport-Dimension.
+
+---
+
+### Deep Dive 7: Ordnerstrukturen & Dateibenennungskonventionen
+
+Eine standardisierte Projektstruktur verhindert Chaos und fehlerhafte Verlinkungen:
+
+```text
+mein-webprojekt/
+├── css/              # Alle Stylesheets (z. B. style.css, reset.css)
+├── img/              # Bilder, Icons, Logos (z. B. logo.svg, hero.webp)
+├── js/               # JavaScript-Dateien (z. B. main.js, app.js)
+├── fonts/            # Lokale Webfonts (z. B. roboto.woff2)
+├── pages/            # Unterseiten (z. B. ueber-uns.html, kontakt.html)
+└── index.html        # Startseite im Stammverzeichnis (Root)
+```
+
+**Verbindliche Benennungskonventionen für Dateien:**
+- **Strikte Kleinschreibung:** UNIX/Linux-Webserver unterscheiden `bild.jpg` von `Bild.JPG`.
+- **Keine Leerzeichen:** Leerzeichen werden in URLs zu `%20` konvertiert (z. B. `mein%20foto.jpg`). Stattdessen Bindestrich verwenden: `mein-foto.jpg`.
+- **Keine Umlaute/Sonderzeichen:** Keine Zeichen wie `ä`, `ö`, `ü`, `ß`, `?`, `&`, `#`. Umschreiben: `ueber-uns.html`, `gross.html`.
+
+---
+
+### Deep Dive 8: Relative vs. Absolute Pfadnavigation (`../`)
+
+Beim Einbinden von Ressourcen und Setzen von Links unterscheidet man:
+
+```text
+Aktueller Standort: /pages/service/beratung.html
+Ziel 1: /index.html               --> href="../../index.html" (2 Ebenen hoch)
+Ziel 2: /css/style.css            --> href="../../css/style.css" (2 Ebenen hoch, in css/)
+Ziel 3: /pages/kontakt.html       --> href="../kontakt.html" (1 Ebene hoch, in pages/)
+Ziel 4: /pages/service/agb.html   --> href="agb.html" (gleicher Ordner)
+```
+
+- **Relativer Pfad:** Geht immer von der aktuellen Datei aus. Vorteil: Funktioniert auf jedem Server und lokal identisch.
+- **Absoluter Web-Pfad (URL):** Beginnt mit Protokoll (`https://example.com/logo.png`). Für externe Links.
+- **Absoluter Root-Pfad (`/`):** Beginnt mit Slash (`/img/logo.png`). Geht vom Webserver-Wurzelverzeichnis aus.
+- **Lokaler Dateipfad (`C:\...`):** Absolutes No-Go für Webseiten.
+
+---
+
+### Deep Dive 9: Block- vs. Inline-Elemente & neutrale Container (`<div>` vs. `<span>`)
+
+| Merkmal | Block-Elemente (`<div>`, `<p>`, `<h1>`, `<header>`, `<article>`) | Inline-Elemente (`<span>`, `<a>`, `<strong>`, `<em>`, `<img>`) |
+| :--- | :--- | :--- |
+| **Zeilenumbruch** | Beginnt immer auf einer neuen Zeile | Bleibt im Textfluss (kein Umbruch) |
+| **Breite** | Nimmt standardmäßig 100 % der Elternbreite ein | Nur so breit wie der Inhalt selbst |
+| **Höhe / Breite per CSS** | `width` und `height` voll steuerbar | `width` und `height` haben keine Wirkung (außer bei `<img>`) |
+| **Margin / Padding** | Vertikal und horizontal voll wirksam | Vertikales Margin/Padding schiebt Nachbarzeilen nicht weg |
+
+**Neutrale Elemente:**
+- **`<div>` (Block):** Gruppiert Block-Elemente, Bilder oder Abschnitte für Layout-Raster (CSS Grid/Flexbox).
+- **`<span>` (Inline):** Markiert Textpassagen im Fließtext zur farblichen oder typografischen Formatierung.
+- **Goldene Regel:** Bevor ein `<div>` gewählt wird, prüfen, ob ein HTML5-Tag (`<main>`, `<section>`, `<article>`, `<nav>`, `<aside>`) semantisch passender ist.
+
+---
+
+### Deep Dive 10: Kommentare in HTML & CSS
+
+Kommentare sind Entwickler-Notizen, die vom Browser beim Seitenaufbau vollständig ignoriert werden:
+
+**HTML-Kommentare:**
+```html
+<!-- ========================================== -->
+<!-- HAUPTNAVIGATION                           -->
+<!-- ========================================== -->
+<nav>
+  <!-- <li><a href="archiv.html">Temporär deaktiviert</a></li> -->
+  <ul>
+    <li><a href="index.html">Startseite</a></li>
+  </ul>
+</nav>
+```
+
+**CSS-Kommentare:**
+```css
+/* ==========================================
+   BUTTON-STYLES & HOVER-EFFEKTE
+   ========================================== */
+.btn-primary {
+  background-color: #0984e3;
+  /* color: red;  -- Vorheriger Testwert */
+  color: #ffffff;
+}
+```
+
+---
+
+### Deep Dive 11: Klassische Layout-Typen im Vergleich (Fixed, Fluid, Elastic)
+
+| Layout-Typ | Maßeinheiten | Verhalten bei Viewport-Änderung | Vor- und Nachteile |
+| :--- | :--- | :--- | :--- |
+| **Fixed (Starr)** | `px` | Breite bleibt absolut starr. | ❌ Horizontale Scrollbalken auf Mobilgeräten; Leerraum auf 4K. Heute obsolet. |
+| **Fluid (Flüssig)** | `%`, `vw` | Passt sich prozentual an den Viewport an. | ✅ Füllt den Bildschirm; ❌ Sehr lange Zeilen auf Ultra-Wide Monitoren ohne `max-width`. |
+| **Elastic (Elastisch)** | `em`, `rem`, `ch` | Skaliert synchron mit der Schriftgröße. | ✅ Exzellente Barrierefreiheit (WCAG); ❌ Komplexeres CSS-Design. |
+
+```css
+/* Best-Practice-Kombination: Fluid mit elastischen Schriften und Breiten-Schranken */
+.container {
+  width: 90%;          /* Fluid */
+  max-width: 1200px;   /* Verhindert unleserlich breite Zeilen */
+  margin: 0 auto;      /* Horizontale Zentrierung */
+  font-size: 1.1rem;   /* Elastic */
+}
+```
+
+---
+
+### Deep Dive 12: Responsive Webdesign (RWD) vs. Adaptive Webdesign (AWD)
+
+```
+[RESPONSIVE DESIGN (RWD)]
+Ein einziges flüssiges Layout + Media Queries
+Display 320px ----> 768px ----> 1024px ----> 2560px
+(Stufenlose, flüssige Anpassung auf ALLE Geräte)
+
+[ADAPTIVE DESIGN (AWD)]
+Diskrete feste Layouts für feste Breakpoints
+Smartphone-Layout (320px) | Tablet-Layout (768px) | Desktop-Layout (1024px)
+(Springt an festen Schwellenwerten; statisch dazwischen)
+```
+
+- **Responsive Webdesign (RWD):** Moderner Standard. Eine Codebase für alle Geräte. Zukunftsfähig für alle Bildschirmauflösungen.
+- **Adaptive Webdesign (AWD):** Spezialfall. Oft verwendet bei mobilen Spezialanwendungen (z. B. extrem reduzierte mobile Bank-App-Websites) oder beim nachträglichen Hinzufügen einer mobilen Version zu sehr alten Desktop-Portalen.
+
+---
+
+### Deep Dive 13: Moderne CSS-Layouttechniken: Flexbox (1D) vs. CSS Grid (2D)
+
+```
+       FLEXBOX (1D)                     CSS GRID (2D)
+  (Zeile ODER Spalte)              (Zeilen UND Spalten)
++------------------------+      +-----------+-----------+
+| [Item 1] [Item 2] [I3] |      | [Header]              |
++------------------------+      +-----------+-----------+
+                                | [Sidebar] | [Main]    |
+                                +-----------+-----------+
+                                | [Footer]              |
+                                +-----------+-----------+
+```
+
+**Flexbox (1D-Layout):**
+```css
+.nav-list {
+  display: flex;
+  justify-content: space-between; /* Gleichmäßige Verteilung */
+  align-items: center;            /* Vertikale Zentrierung */
+  gap: 1.5rem;
+}
+```
+
+**CSS Grid (2D-Layout):**
+```css
+.site-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  grid-template-rows: auto 1fr auto;
+  gap: 2rem;
+  min-height: 100vh;
+}
+```
+
+---
+
+### Deep Dive 14: Das Mobile-First-Prinzip & Progressive Enhancement
+
+Beim **Mobile-First-Ansatz** (von Luke Wroblewski geprägt) beginnt die Konzeption und Programmierung einer Website mit der kleinsten Bildschirmgröße (Smartphone):
+
+```
++-----------------------------------------------------------+
+| 1. MOBILE BASIS-STILE (Standard-CSS)                      |
+|    - 1-Spalten-Layout (width: 100%)                       |
+|    - Große Touch-Flächen (min. 44x44px)                   |
+|    - Schlanke Assets & Schriften                          |
++-----------------------------------------------------------+
+                             |
+                             v  @media (min-width: 768px)
++-----------------------------------------------------------+
+| 2. TABLET-ERWEITERUNG                                     |
+|    - 2-Spalten-Layout                                     |
+|    - Horizontale Navigationsleiste                        |
++-----------------------------------------------------------+
+                             |
+                             v  @media (min-width: 992px / 1200px)
++-----------------------------------------------------------+
+| 3. DESKTOP-ERWEITERUNG                                    |
+|    - Mehrspaltige Raster & Sidebars                       |
+|    - Große Hero-Bilder & Hover-Effekte                    |
++-----------------------------------------------------------+
+```
+
+**Warum Mobile First?**
+1. **Performance & Ladezeit:** Mobilgeräte über Mobilfunknetze laden nur die absolut notwendigen Basis-Ressourcen.
+2. **Content First:** Zwingt Designer dazu, sich auf die wichtigsten Kernaussagen und Funktionen zu konzentrieren.
+3. **Progressive Enhancement:** Ein solides Grundgerüst funktioniert auf jedem Gerät; fortschrittliche Displaygrößen erhalten zusätzliche Vorzüge.
+
+---
+
+### Deep Dive 15: CSS Media Queries – Medientypen, Merkmale & Logische Operatoren
+
+Eine Media Query besteht aus einem optionalen Medientyp gefolgt von beliebig vielen Medienmerkmalen:
+
+```css
+@media [not|only] medientyp and (medienmerkmal: wert) {
+  /* CSS-Regeln */
+}
+```
+
+**1. Medientypen (Media Types):**
+- **`all`:** Für alle Ausgabegeräte (Standard, wenn weggelassen).
+- **`screen`:** Für Bildschirme (Monitore, Tablets, Smartphones).
+- **`print`:** Für Druckausgaben und Druckvorschau.
+- **`speech`:** Für Screenreader und Sprachausgabegeräte.
+
+**2. Wichtige Medienmerkmale (Media Features):**
+- **`min-width` / `max-width`:** Minimale bzw. maximale Viewport-Breite.
+- **`orientation`:** `portrait` (Hochformat) oder `landscape` (Querformat).
+- **`prefers-color-scheme`:** `light` oder `dark` (Reaktion auf Systemeinstellungen des Betriebssystems).
+- **`hover`:** `hover` (z. B. Mauszeiger) oder `none` (Touchscreen).
+- **`pointer`:** `fine` (Maus) oder `coarse` (Finger auf Touchscreen).
+
+**3. Logische Operatoren:**
+```css
+/* 1. Logisches UND (and): Bildschirm UND mindestens 768px */
+@media screen and (min-width: 768px) { ... }
+
+/* 2. Logisches ODER (Komma): Querformat ODER ab 1024px */
+@media (orientation: landscape), (min-width: 1024px) { ... }
+
+/* 3. Logisches NICHT (not): Negiert den gesamten Ausdruck */
+@media not print { ... }
+```
+
+---
+
+### Deep Dive 16: Viewport Meta-Tag, Breakpoints & Best-Practice-Workflow
+
+#### 1. Der unverzichtbare Viewport Meta-Tag
+Ohne diesen Tag im HTML `<head>` simulieren mobile Browser einen ca. 980px breiten Desktop-Bildschirm und verkleinern die Seite unleserlich:
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+- `width=device-width`: Setzt die Seitenbreite auf die physikalische Breite des Mobilgeräts.
+- `initial-scale=1.0`: Verhindert initiales automatisches Zoomen.
+
+#### 2. Standard-Breakpoints im Überblick
+
+| Breakpoint | CSS-Query | Typische Zielgeräte |
+| :--- | :--- | :--- |
+| **Mobile (Basis)** | *(keine Query - Default)* | Smartphones im Hochformat ($< 576\text{px}$) |
+| **Small (`sm`)** | `@media (min-width: 576px)` | Große Smartphones im Querformat |
+| **Medium (`md`)** | `@media (min-width: 768px)` | Tablets im Hochformat / kleine Laptops |
+| **Large (`lg`)** | `@media (min-width: 992px)` | Laptops und Standard-Desktops |
+| **Extra Large (`xl`)** | `@media (min-width: 1200px)` | Große Desktop-Monitore / Widescreen |
+| **Extra Extra Large (`xxl`)** | `@media (min-width: 1400px)` | 2K / 4K Ultra-Wide Displays |
+
+#### 3. Vier goldene Regeln für Media Queries
+1. **Mobile First (`min-width`):** Immer mit `min-width` aufbauen, niemals `max-width` und `min-width` chaotisch mischen.
+2. **Kaskaden-Reihenfolge:** Media Queries immer **am Ende des Stylesheets in aufsteigender Reihenfolge** notieren.
+3. **Relative Maßeinheiten:** Breitenbegrenzungen mit `max-width` (z. B. `max-width: 1200px; margin: 0 auto;`) sichern Lesbarkeit auf Riesen-Monitoren.
+4. **Flexible Bilder:** Grundregel für jedes responsive Bild:
+```css
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+```
+
+---
+
+## 5. Klausurrelevantes Quick-Check Quiz
+
+Testen Sie Ihr Wissen mit den folgenden Prüfungsfragen:
+
+### Bereich 1: CSS Box-Modell & Box-Sizing
+
+::: {.quick-check}
+Aus welchen vier Schichten besteht das CSS-Boxmodell von innen nach außen betrachtet?
+
+- **Content (Inhalt), Padding (Innenabstand), Border (Rahmen), Margin (Außenabstand)**
+- Margin, Border, Padding, Content
+- Header, Main, Aside, Footer
+
+> Das CSS-Boxmodell schachtelt sich vom eigentlichen Inhalt (Content) über den Innenabstand (Padding) und den Rahmen (Border) bis zum Außenabstand (Margin).
+:::
+
+::: {.quick-check}
+Welche Auswirkung hat die CSS-Regel `* { box-sizing: border-box; }` auf die Breitenberechnung von Elementen?
+
+- Padding und Border werden zusätzlich zur definierten `width` addiert.
+- Alle Rahmen und Abstände werden auf 0 Pixel zurückgesetzt.
+- **Die deklarierte `width` beinhaltet bereits Content, Padding und Border; Elemente brechen nicht unerwartet aus dem Layout aus.**
+
+> Mit `border-box` bleibt ein Element mit `width: 300px` exakt 300px breit, selbst wenn Innenabstände (`padding`) oder Rahmen (`border`) hinzugefügt werden.
+:::
+
+::: {.quick-check}
+Welche Aussage zu `margin` (Außenabstand) und `padding` (Innenabstand) ist fachlich zutreffend?
+
+- Padding kann negative Werte annehmen, um Boxen zu verkleinern.
+- **Margin erzeugt transparenten Abstand außerhalb der Box und kann negativ sein; Padding erbt die Hintergrundfarbe des Elements und darf nicht negativ sein.**
+- Margin vergrößert die klickbare Fläche von Buttons, Padding nicht.
+
+> Padding gehört zum Innenleben der Box (Klickfläche und Hintergrundfarbe dehnen sich aus). Margin ist der äußere Abstandshalter zu Nachbarn.
+:::
+
+---
+
+### Bereich 2: Schriften, Font-Stack & websichere Fonts
+
+::: {.quick-check}
+Wie verarbeitet der Webbrowser die Eigenschaft `font-family: "Helvetica Neue", Arial, sans-serif;`?
+
+- Er lädt alle drei Schriftarten gleichzeitig herunter und kombiniert sie.
+- Er zeigt den Text in Courier New an, falls keine Lizenz vorliegt.
+- **Er prüft die Schriften von links nach rechts und rendert die erste auf dem Client verfügbare; existiert keine davon, wählt er die System-Standardschrift ohne Serifen.**
+
+> Der Font-Stack dient als Fallback-Kaskade von spezifischen Wunschschriften bis zur universellen generischen Systemkategorie.
+:::
+
+::: {.quick-check}
+Wann müssen Schriftnamen im Font-Stack zwingend in Anführungszeichen gesetzt werden?
+
+- **Wenn der Schriftname Leerzeichen oder Sonderzeichen enthält (z. B. "Times New Roman" oder "Trebuchet MS").**
+- Wenn der Schriftname länger als 10 Zeichen ist.
+- Ausschließlich bei kostenpflichtigen Schriftarten.
+
+> Mehrteilige Schriftnamen mit Leerzeichen erfordern Anführungszeichen, damit der CSS-Parser sie als einen zusammenhängenden Namen interpretiert.
+:::
+
+::: {.quick-check}
+Welche der folgenden Schriftarten zählt zu den klassischen websicheren Schriften mit Serifen?
+
+- Arial
+- **Georgia**
+- Verdana
+
+> Georgia und Times New Roman sind die am weitesten verbreiteten websicheren Serifenschriften. Arial und Verdana sind serifenlos (Sans-Serif).
+:::
+
+---
+
+### Bereich 3: Google Fonts & Datenschutz (DSGVO)
+
+::: {.quick-check}
+Warum ist die dynamische Einbindung von Google Fonts über `<link href="https://fonts.googleapis.com/...">` in der EU rechtlich riskant?
+
+- Weil Google für jeden Seitenaufruf Gebühren verlangt.
+- Weil Google Fonts die Ladezeit der Webseite grundsätzlich verzehnfacht.
+- **Weil beim Aufruf der Webseite die IP-Adresse des Nutzers ungefragt an Google-Server in den USA übertragen wird (DSGVO-Verstoß ohne Opt-in).**
+
+> Nach dem Urteil des LG München I (2022) stellt die unautorisierte Übermittlung dynamischer IP-Adressen an US-Server einen abmahnfähigen Eingriff in das informationelle Selbstbestimmungsrecht dar.
+:::
+
+::: {.quick-check}
+Welche Vorgehensweise gewährleistet eine 100 % DSGVO-konforme Nutzung von Google Fonts?
+
+- **Die Schriftdateien (.woff2/.woff) herunterladen, auf dem eigenen Server speichern und per @font-face lokal einbinden (Self-Hosting).**
+- Ein Cookie-Banner ohne Ablehnen-Button schalten.
+- Die Schriftart im HTML-Code in Versalien schreiben.
+
+> Durch lokales Hosting (Self-Hosting) erfolgt der Download direkt vom eigenen Webserver; es fließen keinerlei Nutzerdaten an Drittanbieter wie Google.
+:::
+
+::: {.quick-check}
+Welches moderne Webfont-Dateiformat bietet die beste Kompression und wird heute für @font-face bevorzugt?
+
+- .ttf (TrueType Font)
+- **.woff2 (Web Open Font Format 2)**
+- .bmp (Bitmap)
+
+> `.woff2` nutzt den extrem effizienten Brotli-Kompressionsalgorithmus und spart ca. 30 % Dateigröße gegenüber dem Vorgänger `.woff` ein.
+:::
+
+---
+
+### Bereich 4: Die 10 Schriftgebote & Typografie-Regeln
+
+::: {.quick-check}
+Was besagt die typografische Faustregel zur optimalen Zeilenlänge (Zeilenbreite) von Fließtext im Web?
+
+- **Eine Zeile sollte etwa 45 bis 75 Zeichen (bzw. max. ca. 70–80 Zeichen) umfassen.**
+- Eine Zeile sollte mindestens 150 bis 200 Zeichen umfassen.
+- Die Zeilenbreite muss exakt der vollen Monitorbreite entsprechen.
+
+> Zu lange Zeilen erschweren das Wiederfinden des Zeilenanfangs beim Umspringen; zu kurze Zeilen zerreißen den Lesefluss durch ständige Sprünge.
+:::
+
+::: {.quick-check}
+Welcher relative Zeilenabstand (`line-height`) hat sich für Fließtext im Web als optimaler Standard etabliert?
+
+- line-height: 0.8;
+- line-height: 3.5;
+- **line-height: 1.4 bis 1.6; (140 % bis 160 %)**
+
+> Ein Zeilenabstand von `1.4` bis `1.6` verleiht Textblöcken ausreichend Weißraum (Durchschuss), ohne dass Zeilen optisch auseinanderfallen.
+:::
+
+::: {.quick-check}
+Wie sollten durchgängige Großbuchstaben (Versalien) im Webdesign technisch umgesetzt werden?
+
+- Indem der Redakteur den Text mit gedrückter Caps-Lock-Taste in das HTML tippt.
+- **Indem der Text normal gemischt im HTML geschrieben und per CSS über `text-transform: uppercase;` in Großbuchstaben umgewandelt wird.**
+- Durch die Einbindung eines speziellen Großbuchstaben-JavaScript-Plugins.
+
+> `text-transform: uppercase;` trennt Semantik von Design. Screenreader lesen den Text fehlerfrei vor und bei Designänderungen muss kein HTML editiert werden.
+:::
+
+---
+
+### Bereich 5: CSS-Farbwerte & Maßeinheiten
+
+::: {.quick-check}
+Wie viele Bits bzw. Bytes umfasst ein klassischer Hexadezimal-Farbcode wie `#FF5733`?
+
+- **24 Bit (3 Bytes – jeweils 8 Bit / 0–255 für Rot, Grün und Blau)**
+- 8 Bit (1 Byte)
+- 64 Bit (8 Bytes)
+
+> Jedes Hex-Paar (`FF`, `57`, `33`) repräsentiert einen 8-Bit-Wert von 0 bis 255. 3 Kanäle à 8 Bit ergeben True Color mit 16,7 Millionen darstellbaren Farben.
+:::
+
+::: {.quick-check}
+Welche Werte stehen im HSL-Farbmodell `hsl(120, 100%, 50%)` für Farbton, Sättigung und Helligkeit?
+
+- Rot bei 120 %, maximale Dunkelheit
+- Reines Blau mit 120 Pixel Deckkraft
+- **Reines Grün (120° auf dem Farbkreis), 100 % Farbsättigung, 50 % mittlere Helligkeit**
+
+> Auf dem Farbkreis liegt Rot bei 0°, Grün bei 120° und Blau bei 240°. Bei 50 % Helligkeit und 100 % Sättigung leuchtet die Vollfarbe.
+:::
+
+::: {.quick-check}
+Warum ist die Maßeinheit `rem` für Fließtext-Schriftgrößen im modernen Responsive Webdesign der Einheit `em` überlegen?
+
+- Weil `rem` nur auf Apple-Geräten funktioniert.
+- **Weil sich `rem` immer fest auf das Wurzel-Element (html) bezieht und unkontrollierte Multiplikations-Kaskaden in verschachtelten Elementen verhindert.**
+- Weil `rem` kleineren Speicherplatz in der CSS-Datei belegt.
+
+> `rem` garantiert vorhersehbare Schriftgrößen im gesamten DOM-Baum und respektiert die vom Nutzer im Browser eingestellte Grundschriftgröße für optimale Barrierefreiheit.
+:::
+
+---
+
+### Bereich 6: Ordnerstruktur & Startdatei (`index.html`)
+
+::: {.quick-check}
+Warum muss die Startseite einer Webpräsenz im Stammverzeichnis (Root) standardmäßig `index.html` heißen?
+
+- Weil der W3C-Standard andere Dateinamen für HTML5 verbietet.
+- **Weil Webserver (wie Apache) über die Direktive `DirectoryIndex` standardmäßig nach `index.html` suchen, wenn kein konkreter Dateiname in der URL angegeben wird.**
+- Weil Browser ohne `index.html` die Ausführung von CSS verweigern.
+
+> Gibt ein Nutzer z. B. `www.thws.de` ein, liefert der Webserver automatisch die Datei `index.html` aus dem Root-Verzeichnis aus.
+:::
+
+::: {.quick-check}
+Welche Dateibenennung verstößt gegen die Best Practices für Webserver?
+
+- `kontakt-anfrage.html`
+- `ueber-uns.html`
+- **`Über Uns_2026.HTML`**
+
+> `Über Uns_2026.HTML` enthält Großbuchstaben, Leerzeichen, Umlaute und einen Unterstrich. Auf UNIX-Servern führt dies zu Encoding- und Verlinkungsfehlern.
+:::
+
+::: {.quick-check}
+In welchem Verzeichnis sollten Stylesheets (`style.css`) in einem sauberen Webprojekt abgelegt werden?
+
+- Direkt im Systemordner `C:\Windows\Fonts\`
+- **In einem separaten Unterordner `css/` direkt unterhalb des Stammverzeichnisses**
+- Zusammen mit den Bilddateien im Ordner `img/`
+
+> Unterordner wie `css/`, `img/`, `js/` und `fonts/` trennen Styles, Medien, Skripte und Schriften logisch vom HTML.
+:::
+
+---
+
+### Bereich 7: Relative & absolute Pfad-Navigation
+
+::: {.quick-check}
+Wie bindet die Datei `pages/service/beratung.html` ein Bild ein, das unter `img/logo.png` im Projekt-Root liegt?
+
+- `<img src="img/logo.png" alt="Logo">`
+- **`<img src="../../img/logo.png" alt="Logo">`**
+- `<img src="../img/logo.png" alt="Logo">`
+
+> Da `beratung.html` zwei Verzeichnisebenen tief liegt (`pages/service/`), muss man mit `../../` zwei Ebenen nach oben in den Root-Ordner springen und dann in `img/logo.png` navigieren.
+:::
+
+::: {.quick-check}
+Was geschieht, wenn ein Bild mit dem Pfad `src="C:\Users\Admin\Bilder\foto.jpg"` auf einer veröffentlichten Website eingebunden wird?
+
+- **Das Bild wird bei Webseitenbesuchern nicht angezeigt (Broken Image), da der lokale Dateipfad auf fremden Geräten nicht existiert und Browser lokale Zugriffe blockieren.**
+- Der Webserver lädt das Bild automatisch aus der Cloud des Besuchers nach.
+- Das Bild wird automatisch in eine Vektorgrafik konvertiert.
+
+> Absolute Systempfade mit Laufwerksbuchstaben sind lokal gebunden und funktionieren im Web niemals.
+:::
+
+::: {.quick-check}
+Wann ist die Verwendung eines absoluten Pfads mit vollständiger URL (`https://...`) zwingend erforderlich?
+
+- **Bei externen Hyperlinks, die auf fremde Webseiten oder Ressourcen außerhalb der eigenen Domain verweisen.**
+- Beim Verlinken von Unterseiten innerhalb des eigenen Webprojekts.
+- Beim Einbinden von lokal gehosteten `@font-face` Schriften.
+
+> Externe Domains außerhalb des eigenen Webservers können nur über die vollständige absolute URL inklusive Protokoll (`https://`) angesteuert werden.
+:::
+
+---
+
+### Bereich 8: Block- vs. Inline-Elemente & neutrale Container
+
+::: {.quick-check}
+Welches Verhalten zeichnet ein HTML-Block-Element (z. B. `<p>`, `<div>`, `<h1>`, `<article>`) im Standard-Dokumentenfluss aus?
+
+- Es bleibt mitten im Fließtext ohne Umbruch und belegt nur die Textbreite.
+- **Es erzeugt vor und nach sich einen Zeilenumbruch und dehnt sich über die gesamte verfügbare Containerbreite (100 %) aus.**
+- Es kann ausschließlich über JavaScript dargestellt werden.
+
+> Block-Elemente bilden einen eigenen rechteckigen Block, brechen die Zeile um und nehmen standardmäßig 100 % Breite ein.
+:::
+
+::: {.quick-check}
+Welches Paar besteht ausschließlich aus neutralen Elementen ohne eigene semantische Bedeutung?
+
+- `<header>` und `<nav>`
+- `<article>` und `<section>`
+- **`<div>` (Block-Container) und `<span>` (Inline-Container)**
+
+> `<div>` und `<span>` transportieren keinerlei inhaltliche Bedeutung. Sie dienen rein dem CSS-Styling, Scripting oder als Layout-Wrapper.
+:::
+
+::: {.quick-check}
+Was versteht man unter dem Begriff „Divitis“ (Div-Suppe)?
+
+- **Die unsaubere Praxis, eine Webseite ausschließlich aus verschachtelten `<div>`-Containern aufzubauen, anstatt semantische HTML5-Elemente (`<header>`, `<nav>`, `<main>` etc.) zu nutzen.**
+- Einen CSS-Syntaxfehler beim Deklarieren von Box-Sizing.
+- Eine automatische Sicherheitswarnung des Webservers bei zu vielen Unterordnern.
+
+> Divitis schadet der Barrierefreiheit für Screenreader und verschlechtert das Ranking in Suchmaschinen, da die Struktur keine inhaltliche Bedeutung trägt.
+:::
+
+---
+
+### Bereich 9: HTML- und CSS-Kommentare
+
+::: {.quick-check}
+Wie wird ein Kommentar in einem CSS-Stylesheet korrekt notiert?
+
+- `<!-- Dies ist ein CSS-Kommentar -->`
+- **`/* Dies ist ein CSS-Kommentar */`**
+- `// Dies ist ein CSS-Kommentar`
+
+> CSS unterstützt standardmäßig ausschließlich die C-Block-Kommentarsyntax `/* ... */`. `<!-- ... -->` ist die HTML-Syntax.
+:::
+
+::: {.quick-check}
+Welche Aussage zur Funktion von Kommentaren in HTML und CSS ist zutreffend?
+
+- Kommentare werden vom Browser als Tooltips für sehbehinderte Nutzer vorgelesen.
+- **Kommentare werden vom Browser beim Rendering vollständig ignoriert und dienen Entwicklern zur Dokumentation, Strukturierung und Fehlersuche.**
+- Kommentare sind im Quelltext für Besucher niemals einsehbar.
+
+> Kommentare sind Notizen im Quellcode für Entwickler (und im Page Source einsehbar), haben aber keinerlei Einfluss auf die optische Darstellung.
+:::
+
+---
+
+### Bereich 10: Klassische Layout-Typen (Fixed, Fluid, Elastic)
+
+::: {.quick-check}
+Welches gravierende Problem tritt bei reinen „Fixed Layouts“ mit festen Pixelbreiten auf mobilen Endgeräten auf?
+
+- Die Bilder werden automatisch invertiert dargestellt.
+- **Das Layout passt sich nicht an kleine Bildschirme an, wodurch störende horizontale Scrollbalken entstehen.**
+- Die Farben werden durch den Browser auf Schwarz-Weiß reduziert.
+
+> Fixed Layouts haben eine starre Pixelbreite. Ist das Smartphone-Display schmaler, muss der Nutzer horizontal scrollen.
+:::
+
+::: {.quick-check}
+Welche Maßeinheiten bilden die primäre Grundlage für ein „Fluid Layout“ (Flüssiges Layout)?
+
+- Millimeter (mm) und Zentimeter (cm)
+- **Relative Einheiten wie Prozent (%) und Viewport-Breite (vw)**
+- Ausschließlich feste Pixelangaben (px)
+
+> Prozentwerte und Viewport-Einheiten erlauben es Elementen, stufenlos proportional zur Fensterbreite mitzufließen.
+:::
+
+::: {.quick-check}
+Welcher entscheidende didaktische und funktionale Vorteil zeichnet ein „Elastic Layout“ aus?
+
+- **Es skaliert alle Container- und Textdimensionen proportional mit, wenn der Benutzer die Schriftgröße im Browser vergrößert (optimale Accessibility).**
+- Es benötigt keinerlei CSS-Regeln und funktioniert nur mit HTML.
+- Es verbraucht weniger Akkuleistung auf Mobilgeräten.
+
+> Da Elastic Layouts auf Einheiten wie `em` oder `rem` basieren, wächst das gesamte Interface synchron zur benutzerdefinierten Schriftgröße mit.
+:::
+
+---
+
+### Bereich 11: Responsive vs. Adaptive Webdesign
+
+::: {.quick-check}
+Was ist das zentrale Wesensmerkmal von Responsive Webdesign (RWD)?
+
+- Für jedes Display-Modell wird eine eigene URL (z. B. `m.website.de`) angelegt.
+- **Ein einziges, flüssiges Layout passt sich über Media Queries und Fluid Grids kontinuierlich an jede Bildschirmgröße an.**
+- Das Layout funktioniert ausschließlich auf Desktop-Computern.
+
+> Responsive Webdesign verwendet eine gemeinsame Codebase, die stufenlos auf Smartphones, Tablets und Monitore reagiert.
+:::
+
+::: {.quick-check}
+Wie unterscheidet sich Adaptive Webdesign (AWD) von Responsive Webdesign?
+
+- Adaptive Webdesign nutzt ausschließlich CSS Grid ohne HTML.
+- **Adaptive Webdesign liefert für spezifische, diskrete Breakpoints feste Layouts aus, anstatt stufenlos zu fließen.**
+- Adaptive Webdesign ist für Touchscreens ungeeignet.
+
+> Adaptive Layouts schalten sprunghaft zwischen festen Layout-Varianten (z. B. 320px, 768px, 1024px) um.
+:::
+
+::: {.quick-check}
+In welchem Szenario ist Adaptive Webdesign gegenüber Responsive Design noch heute vertretbar?
+
+- **Wenn für sehr alte Legacy-Desktopseiten mit minimalem Budget eine separate mobile Ansicht ergänzt werden soll oder für extrem spezialisierte Mobile-UX-Flows.**
+- Bei jedem modernen Webseiten-Relaunch ab 2026.
+- Ausschließlich bei behördlichen Webauftritten nach BITV.
+
+> RWD ist der universelle Standard; AWD bleibt Nischenanwendungen oder der Altlasten-Sanierung vorbehalten.
+:::
+
+---
+
+### Bereich 12: Moderne Layout-Techniken (Flexbox & CSS Grid)
+
+::: {.quick-check}
+Welche fundamentale Dimensionierung unterscheidet Flexbox von CSS Grid?
+
+- Flexbox ist dreidimensional, Grid ist zweidimensional.
+- **Flexbox ist ein eindimensionales Modell (1D: Zeile oder Spalte), während CSS Grid zweidimensional arbeitet (2D: Zeilen und Spalten gleichzeitig).**
+- Flexbox kann nur für Bilder verwendet werden, Grid nur für Texte.
+
+> Flexbox ordnet Elemente entlang einer Hauptachse an; Grid spannt ein vollwertiges horizontales und vertikales Koordinatennetz auf.
+:::
+
+::: {.quick-check}
+Für welchen Anwendungsfall ist Flexbox besonders prädestiniert?
+
+- **Für Navigationsleisten, Button-Gruppen, Toolbars und das vertikale Zentrieren von Komponenten.**
+- Für das übergeordnete Makro-Layout einer gesamten Zeitungs-Webseite.
+- Für den tabellarischen Datenexport nach Excel.
+
+> Flexbox glänzt bei 1D-Ausrichtungen und dynamischer Raumverteilung zwischen einzelnen UI-Elementen.
+:::
+
+::: {.quick-check}
+Mit welcher CSS-Grid-Eigenschaft definiert man ein Spaltenraster mit einer festen 250px-Sidebar und einer flexibel verbleibenden Inhaltsspalte?
+
+- `grid-columns: 250px auto;`
+- **`grid-template-columns: 250px 1fr;`**
+- `flex-direction: 250px 1fr;`
+
+> `1fr` (Fractional Unit) weist der Hauptspalte den gesamten verbleibenden freien Raum nach Abzug der 250px-Sidebar zu.
+:::
+
+::: {.quick-check}
+Was ist die empfohlene Best-Practice-Architektur für moderne Web-Layouts?
+
+- Ausschließlich Float-Layouts mit Clearfix-Hacks verwenden.
+- Entweder nur Grid ODER nur Flexbox für das gesamte Projekt einsetzen.
+- **CSS Grid für das übergeordnete 2D-Seitenraster einsetzen und Flexbox für die Ausrichtung der Komponenten innerhalb der Grid-Bereiche nutzen.**
+
+> Die Symbiose aus Grid (Makro-Layout) und Flexbox (Mikro-Komponenten) vereint maximale Flexibilität mit sauberstem Code.
+:::
+
+---
+
+### Bereich 13: Mobile-First-Konzept & Viewport-Meta-Tag
+
+::: {.quick-check}
+Was passiert auf einem Smartphone, wenn im `<head>` einer HTML-Seite der Viewport-Meta-Tag `<meta name="viewport" content="width=device-width, initial-scale=1.0">` fehlt?
+
+- Die Webseite stürzt mit einer Fehlermeldung ab.
+- **Der mobile Browser rendert die Seite auf einer virtuellen Desktop-Breite (ca. 980px) und skaliert sie winzig klein herunter, sodass Nutzer manuell zoomen müssen.**
+- Alle CSS-Stylesheets werden ignoriert und nur reiner Text angezeigt.
+
+> Ohne Viewport-Tag geht der Mobil-Browser von einer alten Desktop-Seite aus und verkleinert das gesamte 980px-Layout auf den kleinen Screen.
+:::
+
+::: {.quick-check}
+Welche Strategie beschreibt das technische Vorgehen bei „Mobile First“ im CSS am treffendsten?
+
+- **Standard-CSS wird für das kleinste Display (1-Spalten-Layout) definiert; mit aufsteigenden `@media (min-width: ...)` Regeln werden stufenweise Desktop-Features ergänzt.**
+- Man programmiert zuerst das 4K-Desktop-Layout und blendet mit `max-width` Elemente für Mobiltelefone aus.
+- Man erstellt für jedes Smartphone-Modell ein eigenes CSS-Dokument.
+
+> Mobile First basiert auf Progressive Enhancement: Das Basis-CSS ist schlank und mobiloptimiert; größere Bildschirme erhalten additiv erweiterte Stile.
+:::
+
+::: {.quick-check}
+Warum führt der Ansatz „Desktop First“ (`max-width`) auf Mobilgeräten oft zu schlechterer Performance?
+
+- Weil Handys keine `max-width` Abfragen verstehen.
+- **Weil mobile Browser initial schwere Desktop-Styles und große Hintergrundbilder parsen und laden, nur um sie danach mit Overrides zu neutralisieren.**
+- Weil Desktop-First die Akkulaufzeit um 90 % senkt.
+
+> Desktop First erzwingt "Graceful Degradation" – Mobilgeräte müssen unnötige Datenmengen laden und aufwendig überschreiben.
+:::
+
+---
+
+### Bereich 14: Media Queries, Medientypen & Medienmerkmale
+
+::: {.quick-check}
+Welche Media Query blendet ein Element ausschließlich bei der Druckausgabe auf Papier aus?
+
+- `@media screen and (min-width: 1024px) { ... }`
+- **`@media print { .no-print { display: none; } }`**
+- `@media (orientation: portrait) { ... }`
+
+> Der Medientyp `print` gilt zielgerichtet für Druckerdialoge und PDF-Exporte des Browsers.
+:::
+
+::: {.quick-check}
+Was bedeutet die Media Query `@media screen and (min-width: 768px) and (orientation: landscape)`?
+
+- **Die CSS-Regeln gelten nur auf Bildschirmen, die mindestens 768px breit sind UND sich im Querformat befinden.**
+- Die CSS-Regeln gelten auf allen Druckern ab 768 Pixeln.
+- Die CSS-Regeln gelten entweder auf Bildschirmen ab 768px ODER im Hochformat.
+
+> Der Operator `and` verlangt, dass sämtliche verknüpften Bedingungen zeitgleich wahr sind.
+:::
+
+::: {.quick-check}
+Mit welchem CSS-Medienmerkmal kann die Webseite auf den vom Nutzer im Betriebssystem gewählten „Dark Mode“ reagieren?
+
+- `@media (dark-mode: active)`
+- `@media (theme: black)`
+- **`@media (prefers-color-scheme: dark)`**
+
+> `prefers-color-scheme: dark` ermöglicht das automatische Umschalten auf augenschonende dunkle Farbpaletten ohne JavaScript.
+:::
+
+::: {.quick-check}
+Welches Medienmerkmal erkennt zuverlässig, ob der Nutzer ein Gerät mit Touchscreen ohne echten Mauszeiger bedient?
+
+- `@media (screen: touch)`
+- **`@media (hover: none) and (pointer: coarse)`**
+- `@media (mouse: false)`
+
+> `hover: none` signalisiert das Fehlen einer Mausüberfahrung; `pointer: coarse` steht für ungenauere Eingaben wie Fingerbedienung.
+:::
+
+---
+
+### Bereich 15: Breakpoint-Strategien & Responsive Best Practices
+
+::: {.quick-check}
+Nach welchem didaktischen Leitsatz sollten Breakpoints in einem professionellen Webprojekt gesetzt werden?
+
+- **„Break when the content breaks“ – Breakpoints werden dort definiert, wo das Layout oder die Lesbarkeit des Inhalts leidet, nicht an starren Gerätemodellen.**
+- Breakpoints müssen exakt auf die Pixelmaße der aktuellen drei meistverkauften iPhones gelegt werden.
+- Jede Webseite darf maximal exakt einen einzigen Breakpoint bei 800px besitzen.
+
+> Neue Smartphones erscheinen monatlich mit wechselnden Auflösungen. Content-driven Breakpoints garantieren dauerhafte Gerätezukunftssicherheit.
+:::
+
+::: {.quick-check}
+In welcher Reihenfolge müssen `@media (min-width: ...)` Abfragen im CSS notiert werden, damit die Kaskade korrekt greift?
+
+- In absteigender Reihenfolge (z. B. 1200px vor 768px vor 576px).
+- In alphabetischer Reihenfolge nach Selektoren.
+- **In aufsteigender Reihenfolge (z. B. Basis $\rightarrow$ 576px $\rightarrow$ 768px $\rightarrow$ 992px $\rightarrow$ 1200px).**
+
+> Durch die CSS-Kaskade überschreibt eine später notierte Regel eine frühere. Größere `min-width`-Breakpoints müssen daher weiter unten stehen.
+:::
+
+::: {.quick-check}
+Welche universelle CSS-Regel stellt sicher, dass eingebundene Bilder responsiv bleiben und niemals über ihren Elterncontainer hinausragen?
+
+- `img { width: 1000px; height: 1000px; }`
+- **`img { max-width: 100%; height: auto; display: block; }`**
+- `img { float: left; overflow: hidden; }`
+
+> `max-width: 100%` skaliert das Bild flexibel herunter, falls der Container schmaler wird, und `height: auto` bewahrt das proportionale Seitenverhältnis.
+:::

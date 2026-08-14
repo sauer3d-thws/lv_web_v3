@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularverarbeitung & Validierung Demo</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            max-width: 750px;
+            margin: 40px auto;
+            padding: 24px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 { color: #005a9c; font-size: 1.4rem; margin-bottom: 8px; }
+        p.description { color: #666; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; }
+        
+        .demo-section {
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+            background: #fafafa;
+        }
+        .demo-section h2 { font-size: 1.05rem; color: #005a9c; margin-top: 0; margin-bottom: 12px; }
+
+        .form-group { margin-bottom: 14px; position: relative; }
+        .form-group label { display: block; font-size: 0.88rem; margin-bottom: 4px; font-weight: bold; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 9px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        .form-group input:invalid { border-color: #dc3545; }
+        .form-group input:valid { border-color: #28a745; }
+
+        .char-counter { font-size: 0.78rem; color: #666; float: right; margin-top: 2px; }
+        .error-hint { font-size: 0.8rem; color: #dc3545; display: none; margin-top: 4px; }
+
+        .button-group { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
+        button {
+            background: #005a9c;
+            color: white;
+            border: none;
+            padding: 9px 15px;
+            font-size: 0.88rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-weight: 500;
+        }
+        button:hover { background: #004070; }
+        button.secondary { background: #6c757d; }
+        button.secondary:hover { background: #5a6268; }
+
+        .console-output {
+            background: #1e1e1e;
+            color: #4ec9b0;
+            font-family: 'Consolas', 'Courier New', monospace;
+            padding: 16px;
+            border-radius: 6px;
+            min-height: 150px;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+        .info-box {
+            background: #eef6fc;
+            border-left: 4px solid #005a9c;
+            padding: 14px 16px;
+            font-size: 0.88rem;
+            color: #1a385c;
+            border-radius: 0 4px 4px 0;
+            margin-top: 24px;
+        }
+        .info-box ul { margin: 8px 0 0 18px; padding: 0; }
+        .info-box li { margin-bottom: 6px; }
+    </style>
+</head>
+<body>
+
+    <h1>Formularverarbeitung &amp; Validierung Praxis-Test</h1>
+    <p class="description">
+        Lerne das Abfangen von Formular-Ereignissen (<code>submit</code>, <code>input</code>, <code>change</code>), 
+        die einfache Datenextraktion mit der <strong>FormData API</strong> und die native Validierung mit der 
+        <strong>Constraint Validation API</strong>.
+    </p>
+
+    <!-- FORMULARBEREICH -->
+    <div class="demo-section">
+        <h2>Geodaten-Erfassungsformular</h2>
+        
+        <form id="poiForm" novalidate>
+            <!-- Feld 1: Input Event (Live Zeichenzähler) -->
+            <div class="form-group">
+                <label for="poiTitle">POi Name / Bezeichnung (Pflichtfeld):</label>
+                <input type="text" id="poiTitle" name="title" required minlength="3" maxlength="30" placeholder="z. B. Alte Mainbrücke">
+                <span id="charCounter" class="char-counter">0 / 30 Zeichen</span>
+                <div id="titleError" class="error-hint">Bitte mindestens 3 Zeichen eingeben!</div>
+            </div>
+
+            <!-- Feld 2: Change Event (Kategorie-Auswahl) -->
+            <div class="form-group">
+                <label for="poiCategory">Kategorie wählen:</label>
+                <select id="poiCategory" name="category">
+                    <option value="sightseeing">Sehenswürdigkeit</option>
+                    <option value="education">Hochschule / Bildung</option>
+                    <option value="transportation">Verkehrsknotenpunkt</option>
+                </select>
+            </div>
+
+            <!-- Feld 3: E-Mail mit nativer Validierung -->
+            <div class="form-group">
+                <label for="reporterEmail">E-Mail des Erfassers (Pflichtfeld):</label>
+                <input type="email" id="reporterEmail" name="email" required placeholder="name@thws.de">
+                <div id="emailError" class="error-hint">Bitte eine gültige E-Mail-Adresse eingeben!</div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" id="btnSubmit">1. Formular absenden &amp; mit FormData extrahieren</button>
+                <button type="button" id="btnCheckValidity" class="secondary">2. Validation API manuell prüfen</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Live Console Output -->
+    <h2>Live JavaScript Konsole:</h2>
+    <div id="consoleLog" class="console-output">> Konsole bereit. Tippe in die Formularfelder oben...</div>
+
+    <div class="info-box">
+        <strong>💡 Gezeigte Kernkonzepte im Code:</strong>
+        <ul>
+            <li><code>input</code>-Event: Reagiert live bei jedem Tastendruck (ideal für Zeichenzähler &amp; Live-Suche).</li>
+            <li><code>change</code>-Event: Reagiert, wenn die Auswahl in einem Dropdown/Select geändert wird.</li>
+            <li><code>new FormData(form)</code>: Liest alle Formulardaten automatisch auf einmal aus.</li>
+            <li><code>Object.fromEntries(formData)</code>: Wandelt FormData direkt in ein JavaScript-Objekt um.</li>
+            <li><code>form.checkValidity()</code> &amp; <code>input.validity</code>: Native Validierung vor dem Absenden.</li>
+        </ul>
+    </div>
+
+    <script>
+        // ==========================================================================
+        // HILFSFUNKTIONEN FÜR KONSOLE
+        // ==========================================================================
+        const consoleLog = document.getElementById('consoleLog');
+
+        function log(message) {
+            consoleLog.textContent += '\n> ' + message;
+            consoleLog.scrollTop = consoleLog.scrollHeight;
+        }
+
+        function clearLog() {
+            consoleLog.textContent = '> Konsole geleert.';
+        }
+
+
+        /* ==========================================================================
+           1. FORMULAR-EREIGNISSE: input UND change
+           ========================================================================== */
+
+        const poiTitleInput = document.getElementById('poiTitle');
+        const charCounter = document.getElementById('charCounter');
+        const poiCategorySelect = document.getElementById('poiCategory');
+
+        /**
+         * DAS 'input'-EREIGNIS:
+         * Feuert SOFORT bei jeder Änderung des Feldinhaltes (Tastendruck, Einfügen, Löschen).
+         * Perfekt für Live-Validierung, Zeichenzähler oder Sofort-Filterung.
+         */
+        poiTitleInput.addEventListener('input', (event) => {
+            const currentLength = event.target.value.length;
+            charCounter.textContent = `${currentLength} / 30 Zeichen`;
+            
+            // Live-Prüfung der Mindestlänge
+            if (currentLength > 0 && currentLength < 3) {
+                document.getElementById('titleError').style.display = 'block';
+            } else {
+                document.getElementById('titleError').style.display = 'none';
+            }
+        });
+
+        /**
+         * DAS 'change'-EREIGNIS:
+         * Feuert, wenn ein Wert geändert wurde und das Feld den Fokus verliert 
+         * ODER bei <select> Dropdowns sofort nach Auswahltätigung.
+         */
+        poiCategorySelect.addEventListener('change', (event) => {
+            clearLog();
+            log(`[EVENT 'change'] Neue Kategorie gewählt: "${event.target.value}"`);
+        });
+
+
+        /* ==========================================================================
+           2. NATIVE FORMULARVALIDIERUNG (Constraint Validation API)
+           ========================================================================== */
+
+        const poiForm = document.getElementById('poiForm');
+        const btnCheckValidity = document.getElementById('btnCheckValidity');
+
+        // Manuelle Validierungsprüfung per Button
+        btnCheckValidity.addEventListener('click', () => {
+            clearLog();
+            log('[VALIDATION CHECK] Prüfe Formular mit checkValidity()...');
+
+            // form.checkValidity() prüft alle inputs im Formular auf HTML5-Regeln (required, minlength, type=email)
+            const isValid = poiForm.checkValidity();
+
+            if (isValid) {
+                log('✅ Alle Formularfelder sind VALID und korrekt ausgefüllt.');
+            } else {
+                log('❌ Das Formular enthält UNGÜLTIGE Eingaben:');
+                
+                // Einzelne Felder detailliert untersuchen
+                const emailInput = document.getElementById('reporterEmail');
+                if (!emailInput.validity.valid) {
+                    log(`-> E-Mail Fehler: typeMismatch=${emailInput.validity.typeMismatch}, valueMissing=${emailInput.validity.valueMissing}`);
+                }
+                if (!poiTitleInput.validity.valid) {
+                    log(`-> Name Fehler: tooShort=${poiTitleInput.validity.tooShort}, valueMissing=${poiTitleInput.validity.valueMissing}`);
+                }
+            }
+        });
+
+
+        /* ==========================================================================
+           3. FORMULAR ABSENDEN & DATENEXTRAKTION MIT FORMDATA API
+           ========================================================================== */
+
+        /**
+         * DAS 'submit'-EREIGNIS UND DIE FORMDATA API:
+         * 1. event.preventDefault() stoppt das Neuladen der Seite.
+         * 2. checkValidity() stellt sicher, dass nur gültige Daten verarbeitet werden.
+         * 3. new FormData(form) extrahiert alle Eingaben in einem einzigen Schritt!
+         */
+        poiForm.addEventListener('submit', (event) => {
+            // 1. Browser-Standard-Submit verhindern
+            event.preventDefault();
+            clearLog();
+
+            log("[EVENT 'submit'] Formular-Absenden abgefangen.");
+
+            // 2. Native Validierung vor der Verarbeitung prüfen
+            if (!poiForm.checkValidity()) {
+                log('❌ Absenden abgebrochen: Formular ist ungültig!');
+                // HTML5 Standard-Fehlermeldungen im Browser auslösen
+                poiForm.reportValidity();
+                return;
+            }
+
+            log('✅ Validierung erfolgreich! Extrahiere Daten mit FormData API...');
+
+            // 3. FormData-Objekt aus dem Formular-Element erzeugen
+            // Erfordert, dass die HTML-Inputs ein 'name'-Attribut besitzen! (z.B. name="title")
+            const formData = new FormData(poiForm);
+
+            // Einzelne Werte auslesen per formData.get(key)
+            log(`FormData.get('title'): "${formData.get('title')}"`);
+            log(`FormData.get('category'): "${formData.get('category')}"`);
+            log(`FormData.get('email'): "${formData.get('email')}"`);
+
+            // 4. FormData in ein einfaches JavaScript-Objekt umwandeln
+            const formObject = Object.fromEntries(formData);
+
+            log('[FORMDATA EXTRACTED] Als fertiges JS-Objekt (z. B. für fetch / JSON):');
+            log(JSON.stringify(formObject, null, 2));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Fixed Layout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            width: 800px; /* Fixed width */
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 2px solid #333;
+        }
+        header {
+            background-color: #3498db;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+            background-color: #ecf0f1;
+        }
+        .box {
+            width: 760px; /* Fixed width */
+            height: 100px;
+            background-color: #2ecc71;
+            margin-bottom: 10px;
+            color: white;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Fixed Layout</h1>
+            <!-- BESONDERHEIT:
+                 Dieses Layout verwendet feste Pixelwerte (px) für die Breite (z.B. 800px).
+                 Es passt sich nicht an die Bildschirmgröße an, was auf kleinen Bildschirmen
+                 zu horizontalen Scrollbalken führt. Es ist starr, aber exakt kontrollierbar. -->
+        </header>
+        <main>
+            <div class="box">Container 1 (Breite: 760px)</div>
+            <div class="box">Container 2 (Breite: 760px)</div>
+        </main>
+    </div>
+</body>
+</html>

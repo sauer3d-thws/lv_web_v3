@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asynchrone Programmierung & Fetch API Demo</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            max-width: 750px;
+            margin: 40px auto;
+            padding: 24px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 { color: #005a9c; font-size: 1.4rem; margin-bottom: 8px; }
+        p.description { color: #666; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; }
+        
+        .demo-section {
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+            background: #fafafa;
+        }
+        .demo-section h2 { font-size: 1.05rem; color: #005a9c; margin-top: 0; margin-bottom: 12px; }
+
+        .button-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; }
+        button {
+            background: #005a9c;
+            color: white;
+            border: none;
+            padding: 9px 15px;
+            font-size: 0.88rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-weight: 500;
+        }
+        button:hover { background: #004070; }
+        button.secondary { background: #6c757d; }
+        button.secondary:hover { background: #5a6268; }
+        button.danger { background: #dc3545; }
+        button.danger:hover { background: #bd2130; }
+
+        /* Geodaten-Anzeige */
+        .geo-card-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-top: 10px; }
+        .geo-card {
+            background: white;
+            border: 1px solid #cce0f0;
+            padding: 12px;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+        }
+        .geo-card h3 { margin: 0 0 6px 0; font-size: 0.95rem; color: #005a9c; }
+        .geo-card p { margin: 2px 0; font-size: 0.82rem; color: #555; }
+        .geo-card .coords { font-family: monospace; color: #2b78e4; font-weight: bold; }
+
+        .console-output {
+            background: #1e1e1e;
+            color: #4ec9b0;
+            font-family: 'Consolas', 'Courier New', monospace;
+            padding: 16px;
+            border-radius: 6px;
+            min-height: 150px;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+        .info-box {
+            background: #eef6fc;
+            border-left: 4px solid #005a9c;
+            padding: 14px 16px;
+            font-size: 0.88rem;
+            color: #1a385c;
+            border-radius: 0 4px 4px 0;
+            margin-top: 24px;
+        }
+        .info-box ul { margin: 8px 0 0 18px; padding: 0; }
+        .info-box li { margin-bottom: 6px; }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .status-idle { background: #e2e8f0; color: #475569; }
+        .status-loading { background: #fef08a; color: #854d0e; }
+        .status-success { background: #bbf7d0; color: #166534; }
+        .status-error { background: #fecaca; color: #991b1b; }
+    </style>
+</head>
+<body>
+
+    <h1>Asynchrone Programmierung & Fetch API Praxis-Test</h1>
+    <p class="description">
+        Lade interaktiv die externe Datei <code>orte.geojson</code> per <code>fetch()</code> und <code>async / await</code>.
+        Beobachte den asynchronen Ablauf und die Fehlerbehandlung in der Konsole.
+    </p>
+
+    <!-- Testbereich: Externe Geodaten abrufen -->
+    <div class="demo-section">
+        <h2>Geodaten-Abruf aus externer GeoJSON-Datei (<code>orte.geojson</code>)</h2>
+        <div class="button-group">
+            <button id="btnFetchGeo">1. Externe orte.geojson laden (Erfolg)</button>
+            <button id="btnFetchError" class="danger">2. Nicht existierende Datei laden (404-Fehler)</button>
+            <button id="btnClear" class="secondary">Zurücksetzen</button>
+        </div>
+
+        <div id="statusBadge" class="status-badge status-idle">Status: Bereit</div>
+        
+        <div id="geoContainer" class="geo-card-container">
+            <!-- Dynamisch geladene Geodaten werden hier eingefügt -->
+        </div>
+    </div>
+
+    <!-- Live Console Output -->
+    <h2>Live JavaScript Konsole:</h2>
+    <div id="consoleLog" class="console-output">> Konsole bereit. Klicke auf '1. Externe orte.geojson laden'...</div>
+
+    <div class="info-box">
+        <strong>💡 Gezeigte Kernkonzepte im Code:</strong>
+        <ul>
+            <li><code>async function</code>: Kennzeichnet eine Funktion als asynchron.</li>
+            <li><code>await fetch('orte.geojson')</code>: Echtes Abrufen einer externen Datei über den Webserver.</li>
+            <li><code>await response.json()</code>: Parsen der empfangenen GeoJSON-Datei in ein JS-Objekt.</li>
+            <li><code>try ... catch</code>: Sauberes Abfangen von Netzwerkfehlern oder fehlerhaften Dateipfaden (z. B. 404).</li>
+        </ul>
+    </div>
+
+    <script>
+        // ==========================================================================
+        // HILFSFUNKTIONEN FÜR KONSOLE UND STATUS-ANZEIGE
+        // ==========================================================================
+        const consoleLog = document.getElementById('consoleLog');
+        const statusBadge = document.getElementById('statusBadge');
+        const geoContainer = document.getElementById('geoContainer');
+
+        function log(message) {
+            consoleLog.textContent += '\n> ' + message;
+            consoleLog.scrollTop = consoleLog.scrollHeight;
+        }
+
+        function clearLog() {
+            consoleLog.textContent = '> Konsole geleert.';
+        }
+
+        function setStatus(text, typeClass) {
+            statusBadge.textContent = 'Status: ' + text;
+            statusBadge.className = 'status-badge ' + typeClass;
+        }
+
+
+        /* ==========================================================================
+           ASYNCHRONE GEODATEN-FUNKTION (fetch + async / await + try/catch)
+           ========================================================================== */
+
+        /**
+         * Hauptfunktion zum asynchronen Abrufen von Geodaten aus einer externen Datei.
+         * Das Schlüsselwort 'async' kennzeichnet die Funktion als asynchron.
+         * 
+         * @param {string} url - Der Pfad bzw. die URL zur externen JSON/GeoJSON-Datei
+         */
+        async function ladeGeodaten(url) {
+            clearLog();
+            geoContainer.innerHTML = '';
+            setStatus('Lade externe Geodaten...', 'status-loading');
+            
+            log(`[START] Asynchrone Anfrage per fetch('${url}') gestartet...`);
+
+            // try ... catch fängt Netzwerk- oder Verarbeitungsfehler sauber ab
+            try {
+                // SCHRITT 1: HTTP-Anfrage an den Server / das Dateisystem senden (fetch)
+                // 'await' pausiert die Funktion an dieser Stelle, bis die HTTP-Antwort eintrifft,
+                // OHNE die Webseite oder das UI zu blockieren!
+                const response = await fetch(url);
+
+                log(`[RESPONSE EMPFANGEN] HTTP Status: ${response.status} (${response.statusText})`);
+
+                // Prüfen, ob die Datei gefunden wurde und der Server HTTP-Status 200 (OK) zurückgibt
+                if (!response.ok) {
+                    throw new Error(`HTTP-Fehler! Datei nicht gefunden oder Server-Fehler (Statuscode: ${response.status})`);
+                }
+
+                // SCHRITT 2: Textinhalt der GeoJSON-Datei in ein JS-Objekt umwandeln
+                // Das Parsen des JSON-Strings geschieht ebenfalls asynchron per 'await'
+                const geoData = await response.json();
+                
+                log(`[JSON GEPARST] ${geoData.features.length} GeoJSON Features aus '${url}' geladen.`);
+                setStatus('Erfolgreich geladen', 'status-success');
+
+                // SCHRITT 3: Empfangene Geodaten dynamisch im DOM darstellen
+                rendereGeodaten(geoData);
+
+            } catch (error) {
+                // Bei Fehlern (z.B. 404 Datei nicht gefunden oder CORS-Sperre ohne Webserver) wird catch ausgeführt
+                log(`[FEHLER ABGEFANGEN] ${error.message}`);
+                setStatus('Fehler beim Laden!', 'status-error');
+            }
+        }
+
+
+        /**
+         * Hilfsfunktion zum Rendern der empfangenen GeoJSON-Features in HTML-Karten
+         */
+        function rendereGeodaten(geoData) {
+            geoData.features.forEach(feature => {
+                const props = feature.properties;
+                const coords = feature.geometry.coordinates; // [lng, lat]
+
+                const cardHtml = `
+                    <div class="geo-card">
+                        <h3>📍 ${props.name}</h3>
+                        <p><strong>Kategorie:</strong> ${props.kategorie}</p>
+                        <p><strong>Stadt:</strong> ${props.stadt}</p>
+                        <p class="coords">Lng: ${coords[0]} | Lat: ${coords[1]}</p>
+                    </div>
+                `;
+                geoContainer.insertAdjacentHTML('beforeend', cardHtml);
+            });
+            log(`[DOM-UPDATED] ${geoData.features.length} Karten im HTML gerendert.`);
+        }
+
+
+        /* ==========================================================================
+           EVENT-LISTENER FÜR DIE STEUERUNGS-BUTTONS
+           ========================================================================== */
+
+        // Button 1: Erfolgreicher Abruf der externen Datei orte.geojson
+        document.getElementById('btnFetchGeo').addEventListener('click', () => {
+            ladeGeodaten('orte.geojson');
+        });
+
+        // Button 2: Fehlerhafter Aufruf an eine nicht existierende Datei (404 Test)
+        document.getElementById('btnFetchError').addEventListener('click', () => {
+            ladeGeodaten('nicht-existierende-datei.json');
+        });
+
+        // Button 3: Zurücksetzen
+        document.getElementById('btnClear').addEventListener('click', () => {
+            clearLog();
+            geoContainer.innerHTML = '';
+            setStatus('Bereit', 'status-idle');
+        });
+    </script>
+</body>
+</html>

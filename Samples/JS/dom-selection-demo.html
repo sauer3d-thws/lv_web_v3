@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM-Selektion & Traversierung Demo</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 24px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 { color: #005a9c; font-size: 1.4rem; margin-bottom: 8px; }
+        p.description { color: #666; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; }
+        
+        /* Beispiel-DOM-Struktur für die Demonstration */
+        .demo-container {
+            border: 2px dashed #005a9c;
+            padding: 16px;
+            border-radius: 6px;
+            background: #f0f7fc;
+            margin-bottom: 20px;
+        }
+        .card-list { margin: 10px 0; padding: 0; list-style: none; }
+        .card-item { background: white; border: 1px solid #ccc; padding: 10px; border-radius: 4px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .card-item.active { border-color: #005a9c; background: #eef6fc; font-weight: bold; }
+        
+        .button-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        button { background: #005a9c; color: white; border: none; padding: 10px 12px; font-size: 0.88rem; border-radius: 4px; cursor: pointer; text-align: center; font-weight: 500; transition: background 0.2s; }
+        button:hover { background: #004070; }
+        
+        .console-output { background: #1e1e1e; color: #4ec9b0; font-family: 'Consolas', 'Courier New', monospace; padding: 16px; border-radius: 6px; min-height: 160px; font-size: 0.9rem; white-space: pre-wrap; line-height: 1.4; }
+        .info-box { background: #eef6fc; border-left: 4px solid #005a9c; padding: 14px 16px; font-size: 0.88rem; color: #1a385c; border-radius: 0 4px 4px 0; margin-top: 24px; }
+        .info-box ul { margin: 8px 0 0 18px; padding: 0; }
+        .info-box li { margin-bottom: 6px; }
+    </style>
+</head>
+<body>
+
+    <h1>DOM-Selektion & Baum-Traversierung Praxis-Test</h1>
+    <p class="description">
+        Diese Demodatei veranschaulicht das Document Object Model (DOM), gezieltes Selektieren
+        mit <code>querySelector()</code> / <code>querySelectorAll()</code> und das Navigieren (Traversieren) im Baum.
+    </p>
+
+    <!-- Statische HTML-Struktur zur Demonstration der DOM-Traversierung -->
+    <div id="mainContainer" class="demo-container">
+        <strong>Verschachtelte DOM-Struktur:</strong>
+        <ul id="cardList" class="card-list">
+            <li class="card-item" data-id="101">
+                <span>Eintrag 1 (Standard)</span>
+                <button class="select-btn">Aktion</button>
+            </li>
+            <li class="card-item active" data-id="102">
+                <span>Eintrag 2 (Aktiv)</span>
+                <button class="select-btn">Aktion</button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="button-grid">
+        <button id="btnSingle">1. querySelector()</button>
+        <button id="btnAll">2. querySelectorAll()</button>
+        <button id="btnParent">3. parentElement & children</button>
+        <button id="btnClosest">4. closest(selector)</button>
+    </div>
+
+    <div id="output" class="console-output">// Klicke einen Button oben, um das Ergebnis zu sehen...</div>
+
+    <div class="info-box">
+        <strong>💡 Zeilenweise Erläuterung der Selektion & Traversierung:</strong>
+        <ul>
+            <li><strong><code>querySelector()</code>:</strong> Findet das <em>erste</em> passende Element per CSS-Selektor.</li>
+            <li><strong><code>querySelectorAll()</code>:</strong> Findet <em>alle</em> passenden Elemente als durchlaufbare <code>NodeList</code>.</li>
+            <li><strong><code>parentElement</code>:</strong> Wandert genau eine Ebene nach oben zum Vater-Element.</li>
+            <li><strong><code>children</code>:</strong> Gibt alle direkten HTML-Kinder des aktuellen Elements zurück.</li>
+            <li><strong><code>closest()</code>:</strong> Wandert nach oben und sucht den nächsten passenden Eltern-Container.</li>
+        </ul>
+    </div>
+
+    <script>
+        // Referenz auf das Terminal-Ausgabefeld im HTML holen
+        const output = document.getElementById('output');
+
+        // Hilfsfunktion: Hängt Textzeilen an das Ausgabefeld an
+        function log(text) { output.innerText += text + "\n"; }
+
+        // Hilfsfunktion: Leert das Ausgabefeld vor jedem neuen Test
+        function clearLog() { output.innerText = ""; }
+
+
+        /* ==========================================================================
+           ABSCHNITT 1: GEZIELTES SELEKTIEREN EINES EINZELNEN ELEMENTS (querySelector)
+           ========================================================================== */
+        
+        // Event-Listener für Button 1 (querySelector)
+        document.getElementById('btnSingle').addEventListener('click', () => {
+            clearLog();
+            log("=== 1. querySelector() ===");
+            
+            // Zeile 1: Selektiert das EINZELNE Element mit der ID "mainContainer".
+            // Der Raute-Präfix (#) gibt an, dass nach einer HTML-ID gesucht wird.
+            // Rückgabewert: Das Element-Objekt oder null (falls nicht vorhanden).
+            const mainContainer = document.querySelector("#mainContainer");
+            log(`Selektiert per ID (#mainContainer): <${mainContainer.tagName.toLowerCase()} class="${mainContainer.className}">`);
+
+            // Zeile 2: Selektiert das ERSTE Element, das BEIDE Klassen (.card-item UND .active) besitzt.
+            // Der Punkt-Präfix (.) steht für CSS-Klassennamen.
+            const activeCard = document.querySelector(".card-item.active");
+
+            // Zeile 3: Scoped Selektion innerhalb eines bereits selektierten Elements:
+            // activeCard.querySelector("span") sucht NUR innerhalb von 'activeCard' nach einem <span>-Tag!
+            const spanText = activeCard.querySelector("span").innerText;
+            log(`Erstes kurse-Element mit .active:   Text = "${spanText}"`);
+        });
+
+
+        /* ==========================================================================
+           ABSCHNITT 2: SELEKTIEREN MEHRERER ELEMENTE (querySelectorAll & NodeList)
+           ========================================================================== */
+        
+        // Event-Listener für Button 2 (querySelectorAll)
+        document.getElementById('btnAll').addEventListener('click', () => {
+            clearLog();
+            log("=== 2. querySelectorAll() ===");
+            
+            // Zeile 1: Selektiert ALLE Elemente im gesamten Dokument, die die Klasse ".card-item" tragen.
+            // Rückgabewert: Eine 'NodeList' (eine Array-ähnliche Sammlung aller gefundenen HTML-Knoten).
+            const alleKarten = document.querySelectorAll(".card-item");
+            log(`Anzahl gefundener '.card-item' Elemente: ${alleKarten.length}\n`);
+
+            // Zeile 2: Eine NodeList besitzt die Methode .forEach(), um alle Elemente nacheinander zu durchlaufen.
+            // Parameter 1 ('karte'): Das aktuelle HTML-Element im jeweiligen Durchlauf.
+            // Parameter 2 ('index'): Der 0-basierte Zählerstand (0, 1, 2, ...).
+            alleKarten.forEach((karte, index) => {
+                
+                // Zeile 3: Auslesen des benutzerdefinierten HTML-Attributes (data-id="101") über das dataset-Objekt.
+                const dataId = karte.dataset.id;
+                
+                // Zeile 4: Gezielte Unter-Selektion des <span>-Tags innerhalb der aktuellen 'karte'.
+                const textInhalt = karte.querySelector("span").innerText;
+                log(`Item ${index + 1}: Data-ID=${dataId}, Text="${textInhalt}"`);
+            });
+        });
+
+
+        /* ==========================================================================
+           ABSCHNITT 3: TRAVERSIERUNG: NACH OBEN (parentElement) UND NACH UNTEN (children)
+           ========================================================================== */
+        
+        // Event-Listener für Button 3 (parentElement & children)
+        document.getElementById('btnParent').addEventListener('click', () => {
+            clearLog();
+            log("=== 3. parentElement & children ===");
+            
+            // Ausgangselement: Die ungeordnete Liste <ul> mit der ID "cardList".
+            const ul = document.querySelector("#cardList");
+            
+            // Zeile 1: Traversierung NACH OBEN in der Hierarchie über 'parentElement'.
+            // Greift auf den direkt übergeordneten Elternknoten im DOM-Baum zu (hier das <div> mit ID #mainContainer).
+            const vaterElement = ul.parentElement;
+            log(`Vater-Element von <ul>: <${vaterElement.tagName.toLowerCase()} id="${vaterElement.id}">`);
+
+            // Zeile 2: Traversierung NACH UNTEN in der Hierarchie über 'children'.
+            // Liefert eine 'HTMLCollection' aller DIREKTEN Kind-Elemente (hier die zwei <li>-Knoten).
+            const kinder = ul.children;
+            log(`Anzahl direkter Kinder von <ul>: ${kinder.length}`);
+            
+            // Zeile 3: Zugriff auf das 1. Kind-Element über den gewohnten Index [0].
+            log(`1. Kind-Tag: <${kinder[0].tagName.toLowerCase()}>`);
+        });
+
+
+        /* ==========================================================================
+           ABSCHNITT 4: TRAVERSIERUNG MIT closest(): HOCHWANDERN ZUM PASSENDEN PARENT
+           ========================================================================== */
+        
+        // Event-Listener für Button 4 (closest)
+        document.getElementById('btnClosest').addEventListener('click', () => {
+            clearLog();
+            log("=== 4. closest(selector) ===");
+            
+            // Ausgangselement: Ein kleiner Button tief drinnen im DOM-Baum (Klasse ".select-btn").
+            const btn = document.querySelector(".select-btn");
+            log(`Ausgangselement: <${btn.tagName.toLowerCase()} class="${btn.className}">`);
+
+            // Zeile 1: Die Methode .closest(cssSelektor) wandert im DOM-Baum nach OBEN (Vorfahren).
+            // Sie prüft das Element selbst und alle Elternknoten, bis der ERSTE Knoten gefunden wird,
+            // der dem übergebenen CSS-Selektor (hier ".card-item") entspricht.
+            // Extrem wichtig für Event-Delegation und Klick-Handling auf Unter-Elementen!
+            const umgebendeKarte = btn.closest(".card-item");
+            
+            log(`\nNächstgelegener '.card-item' Container per .closest():`);
+            log(`➔ Data-ID: ${umgebendeKarte.dataset.id}`);
+            log(`➔ Inhalt: ${umgebendeKarte.querySelector("span").innerText}`);
+        });
+    </script>
+
+</body>
+</html>

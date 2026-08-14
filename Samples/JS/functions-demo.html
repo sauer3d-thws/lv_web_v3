@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funktionen & Arrow Functions Praxis-Demo</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            max-width: 680px;
+            margin: 40px auto;
+            padding: 24px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 { color: #005a9c; font-size: 1.4rem; margin-bottom: 8px; }
+        p.description { color: #666; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; }
+        .button-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        button { background: #005a9c; color: white; border: none; padding: 10px 12px; font-size: 0.9rem; border-radius: 4px; cursor: pointer; text-align: center; font-weight: 500; transition: background 0.2s; }
+        button:hover { background: #004070; }
+        .console-output { background: #1e1e1e; color: #4ec9b0; font-family: 'Consolas', 'Courier New', monospace; padding: 16px; border-radius: 6px; min-height: 160px; font-size: 0.9rem; white-space: pre-wrap; line-height: 1.4; }
+        .info-box { background: #eef6fc; border-left: 4px solid #005a9c; padding: 14px 16px; font-size: 0.88rem; color: #1a385c; border-radius: 0 4px 4px 0; margin-top: 24px; }
+        .info-box ul { margin: 8px 0 0 18px; padding: 0; }
+        .info-box li { margin-bottom: 6px; }
+    </style>
+</head>
+<body>
+
+    <h1>Funktionen & Arrow Functions Praxis-Test</h1>
+    <p class="description">
+        Diese Demodatei zeigt didaktisch aufbereitet die vier Kernkonzepte von JavaScript-Funktionen:
+        Default-Parameter, Rest-Parameter, Arrow Functions und Closures.
+    </p>
+
+    <div class="button-grid">
+        <button id="btnDefault">1. Default-Parameter</button>
+        <button id="btnRest">2. Rest-Parameter (...args)</button>
+        <button id="btnArrow">3. Arrow Functions (=>)</button>
+        <button id="btnClosure">4. Closures (Zähler-State)</button>
+    </div>
+
+    <div id="output" class="console-output">// Klicke einen Button oben, um das Ergebnis zu sehen...</div>
+
+    <div class="info-box">
+        <strong>💡 Zeilenweise Erklärung der Themen:</strong>
+        <ul>
+            <li><strong>1. Default-Parameter:</strong> Vorgabewerte in der Funktionssignatur verhindern <code>undefined</code>-Fehler.</li>
+            <li><strong>2. Rest-Parameter:</strong> Der <code>...</code>-Operator bündelt beliebig viele Argumente in ein echtes Array.</li>
+            <li><strong>3. Arrow Functions:</strong> Prägnante Pfeilsyntax mit implizitem Return in Array-Methoden wie <code>.map()</code>.</li>
+            <li><strong>4. Closures:</strong> Innere Funktionen behalten den Zugriff auf private Variablen ihres äußeren Scopes.</li>
+        </ul>
+    </div>
+
+    <script>
+        // Referenz auf das Ausgabefeld im DOM holen
+        const output = document.getElementById('output');
+
+        // Hilfsfunktion: Hängt Text mit Zeilenumbruch an das Terminal-Feld an
+        function log(text) { output.innerText += text + "\n"; }
+
+        // Hilfsfunktion: Leert das Terminal-Feld vor jedem neuen Test
+        function clearLog() { output.innerText = ""; }
+
+
+        /* ==========================================================================
+           KONZEPT 1: FUNCTION DECLARATION MIT DEFAULT-PARAMETERN
+           ========================================================================== */
+
+        // Zeile 1: Deklaration der Funktion 'formatierPreis' mit 3 Parametern.
+        // Parameter 1 ('betrag'): Pflichtparameter (muss beim Aufruf übergeben werden).
+        // Parameter 2 ('waehrung'): Default-Parameter mit Vorgabewert "€". Falls beim Aufruf weggelassen, gilt "€".
+        // Parameter 3 ('rabattPercent'): Default-Parameter mit Vorgabewert 0. Falls weggelassen, gilt 0.
+        function formatierPreis(betrag, waehrung = "€", rabattPercent = 0) {
+            
+            // Zeile 2: Errechnet den Endpreis unter Berücksichtigung des prozentualen Rabatts.
+            const endpreis = betrag * (1 - rabattPercent / 100);
+            
+            // Zeile 3: Formatierung der Ausgabe per Template Literal (Backticks ``).
+            // .toFixed(2) formatiert die Zahl auf genau 2 Nachkommastellen (z. B. "100.00").
+            return `${endpreis.toFixed(2)} ${waehrung} (Rabatt: ${rabattPercent}%)`;
+        }
+
+        // Event-Listener für Button 1 (Default-Parameter testen):
+        document.getElementById('btnDefault').addEventListener('click', () => {
+            clearLog();
+            log("=== 1. Standard-Parameter (Default Parameters) ===");
+            
+            log("Aufruf: formatierPreis(100)");
+            // Nur 1 Argument übergeben (betrag = 100). waehrung und rabattPercent nutzen ihre Defaults ("€" & 0).
+            log("➔ " + formatierPreis(100)); // Ausgabe: "100.00 € (Rabatt: 0%)"
+            
+            log("\nAufruf: formatierPreis(100, '$', 20)");
+            // Alle 3 Argumente übergeben. Die Defaults ("€" & 0) werden durch "$" und 20 überschrieben.
+            log("➔ " + formatierPreis(100, "$", 20)); // Ausgabe: "80.00 $ (Rabatt: 20%)"
+        });
+
+
+        /* ==========================================================================
+           KONZEPT 2: REST-PARAMETER (...args) FÜR VARIABLE ARGUMENTANZAHL
+           ========================================================================== */
+
+        // Zeile 1: Der Rest-Operator (...) vor dem Parameternamen 'preise' sammelt ALLE 
+        // übergebenen Argumente automatisch in ein echtes JavaScript-Array namens 'preise'.
+        // Ersetzt das alte, fehleranfällige 'arguments'-Pseudo-Objekt!
+        function berechneSumme(...preise) {
+            
+            // Zeile 2: 'preise' ist ein echtes Array und besitzt Array-Methoden wie .reduce().
+            // .reduce() iteriert durch das Array: 'summe' ist der Akkumulator (Startwert 0), 'p' ist das jeweilige Element.
+            return preise.reduce((summe, p) => summe + p, 0);
+        }
+
+        // Event-Listener für Button 2 (Rest-Parameter testen):
+        document.getElementById('btnRest').addEventListener('click', () => {
+            clearLog();
+            log("=== 2. Rest-Parameter (...preise) ===");
+            
+            log("Aufruf mit 2 Zahlen: berechneSumme(10, 20)");
+            // 'preise' wird innerhalb der Funktion zum Array [10, 20]
+            log(`➔ Summe: ${berechneSumme(10, 20)} €`);
+            
+            log("\nAufruf mit 4 Zahlen: berechneSumme(5.5, 12, 4.5, 8)");
+            // 'preise' wird innerhalb der Funktion zum Array [5.5, 12, 4.5, 8]
+            log(`➔ Summe: ${berechneSumme(5.5, 12, 4.5, 8)} €`);
+        });
+
+
+        /* ==========================================================================
+           KONZEPT 3: ARROW FUNCTIONS (=>) MIT IMPLIZITEM RETURN IN ARRAY-METHODEN
+           ========================================================================== */
+
+        // Ausgangs-Array mit Brutto-Preisen
+        const preiseBrutto = [10, 25, 50, 100];
+
+        // Zeile 1: Eine Arrow Function (Pfeilfunktion), in der Variable 'berechneNetto' gespeichert.
+        // Syntax-Regel 1: Da genau 1 Parameter ('brutto') existiert, können die runden Klammern () weggelassen werden.
+        // Syntax-Regel 2: Da die Funktion nur aus einer einzigen Zeile besteht, werden geschweifte Klammern {}
+        //                 und das 'return'-Keyword weggelassen (impliziter/automatischer Return!).
+        const berechneNetto = brutto => (brutto / 1.19).toFixed(2);
+
+        // Event-Listener für Button 3 (Arrow Functions testen):
+        document.getElementById('btnArrow').addEventListener('click', () => {
+            clearLog();
+            log("=== 3. Arrow Functions (=>) & Array.map() ===");
+            log(`Brutto-Werte:  [${preiseBrutto.join(", ")}] €`);
+            
+            // Array.map() durchläuft jedes Element von 'preiseBrutto' und wendet die Arrow Function 'berechneNetto' an.
+            // Erzeugt ein neues Array 'nettoListe' mit allen berechneten Netto-Werten.
+            const nettoListe = preiseBrutto.map(berechneNetto);
+            log(`Netto-Werte:   [${nettoListe.join(", ")}] € (ohne 19% MwSt)`);
+        });
+
+
+        /* ==========================================================================
+           KONZEPT 4: CLOSURES (FUNKTIONSABSCHLÜSSE ZUR DATENKAPSELUNG)
+           ========================================================================== */
+
+        // Zeile 1: Äußere Funktion 'erstelleWarenkorbTracker'.
+        function erstelleWarenkorbTracker() {
+            
+            // Zeile 2: Lokale Variable 'anzahlArtikel' innerhalb der äußeren Funktion.
+            // Diese Variable ist von außen (global) NICHT direkt erreichbar (Private Variable).
+            let anzahlArtikel = 0;
+            
+            // Zeile 3: Die äußere Funktion gibt ein Objekt mit zwei inneren Arrow Functions zurück.
+            return {
+                // Methode 1: Erhöht den Zähler und gibt einen Bestätigungstext zurück.
+                // Closure-Effekt: Diese innere Funktion behält Zugriff auf 'anzahlArtikel'!
+                hinzufuegen: (artikelName) => {
+                    anzahlArtikel++;
+                    return `+ "${artikelName}" hinzugefügt. (Aktuell im Korb: ${anzahlArtikel})`;
+                },
+                // Methode 2: Gibt den aktuellen Stand der gekapselten Variable zurück.
+                getAnzahl: () => anzahlArtikel
+            };
+        }
+
+        // Zeile 4: Instanziierung der Closure. 'meinKorb' enthält jetzt das zurückgegebene Objekt.
+        // Die Variable 'anzahlArtikel' lebt im geschützten Speicherbereich dieser Instanz weiter.
+        const meinKorb = erstelleWarenkorbTracker();
+
+        // Event-Listener für Button 4 (Closures testen):
+        document.getElementById('btnClosure').addEventListener('click', () => {
+            clearLog();
+            log("=== 4. Closure (Kapselung des Warenkorb-Zustands) ===");
+            
+            // Jeder Aufruf der inneren Methode .hinzufuegen() greift auf dieselbe gekapselte Variable 'anzahlArtikel' zu
+            log(meinKorb.hinzufuegen("Tastatur"));
+            log(meinKorb.hinzufuegen("Maus"));
+            log(meinKorb.hinzufuegen("Monitor"));
+            
+            // Auslesen des internen Zustands über die zweite Closure-Methode
+            log(`\nGesamtzahl aus privatem Speicher auslesen: ${meinKorb.getAnzahl()} Artikel`);
+        });
+    </script>
+
+</body>
+</html>

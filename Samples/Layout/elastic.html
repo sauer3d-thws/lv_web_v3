@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Elastic Layout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 2em; /* Elastic padding */
+            font-size: 16px; /* Base font size */
+        }
+        .container {
+            width: 40em; /* Elastic width */
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 0.2em solid #333;
+        }
+        header {
+            background-color: #9b59b6;
+            color: white;
+            padding: 1.5em;
+            text-align: center;
+        }
+        main {
+            padding: 1.5em;
+            background-color: #ecf0f1;
+        }
+        .box {
+            width: 36em; /* Elastic width */
+            min-height: 5em;
+            background-color: #1abc9c;
+            margin-bottom: 1em;
+            color: white;
+            padding: 1em;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Elastic Layout</h1>
+            <!-- BESONDERHEIT:
+                 Dieses Layout nutzt die relative Einheit 'em' für Breiten (width) und Abstände (padding).
+                 Dadurch skaliert das gesamte Layout proportional mit der eingestellten Schriftgröße des Browsers.
+                 Es ist sehr barrierefrei (z.B. beim Vergrößern der Schrift), aber erfordert umdenken beim Design. -->
+        </header>
+        <main>
+            <div class="box">Container 1 (Breite: 36em) - Skaliert mit der Schriftgröße</div>
+            <div class="box">Container 2 (Breite: 36em) - Probier es aus: STRG und +</div>
+        </main>
+    </div>
+</body>
+</html>

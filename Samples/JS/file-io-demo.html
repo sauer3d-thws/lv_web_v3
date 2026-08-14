@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datei-Export & Import (Blob & FileReader API) Demo</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            max-width: 750px;
+            margin: 40px auto;
+            padding: 24px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 { color: #005a9c; font-size: 1.4rem; margin-bottom: 8px; }
+        p.description { color: #666; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; }
+        
+        .demo-section {
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+            background: #fafafa;
+        }
+        .demo-section h2 { font-size: 1.05rem; color: #005a9c; margin-top: 0; margin-bottom: 12px; }
+
+        .form-group { margin-bottom: 10px; }
+        .form-group label { display: block; font-size: 0.85rem; margin-bottom: 4px; font-weight: bold; }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .button-group { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; margin-bottom: 5px; }
+        button {
+            background: #005a9c;
+            color: white;
+            border: none;
+            padding: 9px 15px;
+            font-size: 0.88rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-weight: 500;
+        }
+        button:hover { background: #004070; }
+        button.secondary { background: #6c757d; }
+        button.secondary:hover { background: #5a6268; }
+
+        input[type="file"] {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+
+        .file-card-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-top: 15px; }
+        .file-card {
+            background: white;
+            border: 1px solid #cce0f0;
+            border-left: 4px solid #005a9c;
+            padding: 12px;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+        }
+        .file-card h3 { margin: 0 0 6px 0; font-size: 0.95rem; color: #005a9c; }
+        .file-card p { margin: 2px 0; font-size: 0.82rem; color: #555; }
+        .file-card .coords { font-family: monospace; color: #2b78e4; font-weight: bold; }
+
+        .console-output {
+            background: #1e1e1e;
+            color: #4ec9b0;
+            font-family: 'Consolas', 'Courier New', monospace;
+            padding: 16px;
+            border-radius: 6px;
+            min-height: 150px;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            line-height: 1.4;
+        }
+        .info-box {
+            background: #eef6fc;
+            border-left: 4px solid #005a9c;
+            padding: 14px 16px;
+            font-size: 0.88rem;
+            color: #1a385c;
+            border-radius: 0 4px 4px 0;
+            margin-top: 24px;
+        }
+        .info-box ul { margin: 8px 0 0 18px; padding: 0; }
+        .info-box li { margin-bottom: 6px; }
+    </style>
+</head>
+<body>
+
+    <h1>Datei-Export &amp; Import (Blob &amp; FileReader API) Praxis-Test</h1>
+    <p class="description">
+        Obwohl JavaScript in einer isolierten Browser-Sandbox läuft, können mit der <strong>Blob API</strong> 
+        Dateien aus Formularwerten erzeugt und mit der <strong>FileReader API</strong> lokale GeoJSON-Dateien wieder eingelesen werden.
+    </p>
+
+    <!-- TEIL 1: EXPORT (FORMULAR -> GEOJSON BLOB & DOWNLOAD) -->
+    <div class="demo-section">
+        <h2>1. GeoJSON-Eigenschaften im Formular definieren &amp; exportieren (Blob API)</h2>
+        <p style="font-size: 0.88rem; color: #555;">
+            Passe die Eigenschaften für den Geodaten-Punkt an. JavaScript baut daraus dynamisch 
+            eine strukturierte GeoJSON FeatureCollection und bietet diese zum Download an.
+        </p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 8px;">
+            <div class="form-group">
+                <label for="featureName">Ortsname / Bezeichnung:</label>
+                <input type="text" id="featureName" value="Alte Mainbrücke Würzburg">
+            </div>
+            <div class="form-group">
+                <label for="featureCategory">Kategorie:</label>
+                <input type="text" id="featureCategory" value="Wahrzeichen / Brücke">
+            </div>
+            <div class="form-group">
+                <label for="featureLongitude">Längengrad (Longitude / X):</label>
+                <input type="number" step="0.001" id="featureLongitude" value="9.927">
+            </div>
+            <div class="form-group">
+                <label for="featureLatitude">Breitengrad (Latitude / Y):</label>
+                <input type="number" step="0.001" id="featureLatitude" value="49.793">
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button id="btnExportGeoJson">💾 Ausgefüllte GeoJSON-Datei erzeugen &amp; herunterladen</button>
+        </div>
+    </div>
+
+    <!-- TEIL 2: IMPORT (FILEREADER API) -->
+    <div class="demo-section">
+        <h2>2. Lokale GeoJSON-Datei wieder einlesen &amp; verarbeiten (FileReader API)</h2>
+        <p style="font-size: 0.88rem; color: #555;">Wähle die eben heruntergeladene Datei <code>geodaten_export.geojson</code> von deiner Festplatte aus, um die eingetragenen Werte zu überprüfen:</p>
+        <input type="file" id="fileInput" accept=".geojson,.json,.txt">
+        
+        <div id="importContainer" class="file-card-container">
+            <!-- Eingelesene GeoJSON Features werden hier gerendert -->
+        </div>
+    </div>
+
+    <!-- Live Console Output -->
+    <h2>Live JavaScript Konsole:</h2>
+    <div id="consoleLog" class="console-output">> Konsole bereit. Fülle das Formular oben aus und lade die GeoJSON-Datei herunter...</div>
+
+    <div class="info-box">
+        <strong>💡 Gezeigte Kernkonzepte im Code:</strong>
+        <ul>
+            <li><strong>Dynamischer GeoJSON-Aufbau:</strong> Formulardaten auslesen und in ein strukturiertes JS-Objekt (FeatureCollection) überführen.</li>
+            <li><code>new Blob([jsonString], {type})</code>: Verpackt den erzeugten JSON-String in eine Datei im Arbeitsspeicher.</li>
+            <li><code>URL.createObjectURL(blob)</code>: Erzeugt eine temporäre Download-URL für den Blob.</li>
+            <li><code>FileReader API</code>: Liest vom Nutzer ausgewählte lokale Dateien per <code>reader.readAsText()</code> asynchron ein und stellt sie wieder im DOM dar.</li>
+        </ul>
+    </div>
+
+    <script>
+        // ==========================================================================
+        // HILFSFUNKTIONEN FÜR KONSOLE UND ANZEIGE
+        // ==========================================================================
+        const consoleLog = document.getElementById('consoleLog');
+        const importContainer = document.getElementById('importContainer');
+
+        function log(message) {
+            consoleLog.textContent += '\n> ' + message;
+            consoleLog.scrollTop = consoleLog.scrollHeight;
+        }
+
+        function clearLog() {
+            consoleLog.textContent = '> Konsole geleert.';
+        }
+
+
+        /* ==========================================================================
+           TEIL 1: DATEI-EXPORT AUS FORMULARWERTEN (BLOB API)
+           ========================================================================== */
+
+        const btnExportGeoJson = document.getElementById('btnExportGeoJson');
+
+        /**
+         * Liest die Formularwerte aus, erzeugt eine GeoJSON-Datei im Arbeitsspeicher 
+         * und stößt den automatischen Download an.
+         */
+        btnExportGeoJson.addEventListener('click', () => {
+            clearLog();
+
+            // SCHRITT 1: Formularwerte aus den HTML-Eingabefeldern auslesen
+            const name = document.getElementById('featureName').value.trim() || 'Unbenannter Ort';
+            const category = document.getElementById('featureCategory').value.trim() || 'Allgemein';
+            const lng = parseFloat(document.getElementById('featureLongitude').value) || 0;
+            const lat = parseFloat(document.getElementById('featureLatitude').value) || 0;
+
+            // SCHRITT 2: Strukturierte GeoJSON FeatureCollection aus den Formularwerten aufbauen
+            const customGeoJson = {
+                "type": "FeatureCollection",
+                "features": [
+                    {
+                        "type": "Feature",
+                        "properties": {
+                            "name": name,
+                            "kategorie": category,
+                            "erstelltAm": new Date().toLocaleTimeString('de-DE')
+                        },
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [lng, lat]
+                        }
+                    }
+                ]
+            };
+
+            log(`[1. FORMULAR-EXPORT] GeoJSON-Struktur aus Formularwerten generiert:`);
+            log(`-> Name: "${name}" | Kategorie: "${category}"`);
+            log(`-> Koordinaten: Lng=${lng}, Lat=${lat}`);
+
+            // SCHRITT 3: JS-Objekt in formatierten JSON-String umwandeln
+            const jsonString = JSON.stringify(customGeoJson, null, 2);
+
+            // SCHRITT 4: Blob (Binary Large Object) im Arbeitsspeicher erzeugen
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            
+            // SCHRITT 5: Temporäre Objekt-URL für den Blob generieren
+            const blobUrl = URL.createObjectURL(blob);
+            log(`[BLOB CREATED] Speicheradresse erzeugt: ${blobUrl}`);
+
+            // SCHRITT 6: Unsichtbares <a> Element im DOM erzeugen und Download triggern
+            const downloadLink = document.createElement('a');
+            downloadLink.href = blobUrl;
+            downloadLink.download = 'geodaten_export.geojson'; // Dateiname für den Download
+            
+            // Klick simulieren
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+
+            // SCHRITT 7: Speicher der Objekt-URL wieder freigeben
+            URL.revokeObjectURL(blobUrl);
+            log('[DOWNLOAD GESTARTET] Datei "geodaten_export.geojson" wurde heruntergeladen.');
+            log('-> Wähle diese Datei nun unten bei 2. (Import) aus, um zu testen!');
+        });
+
+
+        /* ==========================================================================
+           TEIL 2: DATEI-IMPORT (FILEREADER API)
+           ========================================================================== */
+
+        const fileInput = document.getElementById('fileInput');
+
+        /**
+         * Liest eine vom Nutzer ausgewählte lokale Datei per FileReader ein
+         */
+        fileInput.addEventListener('change', (event) => {
+            clearLog();
+            importContainer.innerHTML = '';
+
+            // Ausgewählte Datei aus dem <input type="file"> holen
+            const selectedFile = event.target.files[0];
+
+            if (!selectedFile) {
+                log('[HINWEIS] Keine Datei ausgewählt.');
+                return;
+            }
+
+            log(`[2. IMPORT] Datei ausgewählt: "${selectedFile.name}" (${selectedFile.size} Bytes)`);
+
+            // SCHRITT 1: FileReader-Objekt instanziieren
+            const reader = new FileReader();
+
+            // SCHRITT 2: Event-Handler definieren, wenn das Lesen abgeschlossen ist
+            reader.onload = (e) => {
+                try {
+                    const textContent = e.target.result;
+                    log(`[READ COMPLETE] Dateiinhalt gelesen (${textContent.length} Zeichen).`);
+
+                    // SCHRITT 3: Textinhalt als JSON parsen
+                    const geoJsonObj = JSON.parse(textContent);
+
+                    if (geoJsonObj.type === 'FeatureCollection' && Array.isArray(geoJsonObj.features)) {
+                        log(`[GEOJSON PARSED] ${geoJsonObj.features.length} GeoJSON Feature(s) eingelesen!`);
+                        
+                        // Im DOM als Karten darstellen
+                        geoJsonObj.features.forEach(feature => {
+                            const name = feature.properties?.name || 'Unbenanntes Feature';
+                            const kat  = feature.properties?.kategorie || 'Keine Kategorie';
+                            const zeit = feature.properties?.erstelltAm || 'Unbekannt';
+                            const coords = feature.geometry?.coordinates || [0, 0];
+
+                            const cardHtml = `
+                                <div class="file-card">
+                                    <h3>📍 ${name}</h3>
+                                    <p><strong>Kategorie:</strong> ${kat}</p>
+                                    <p><strong>Erstellt um:</strong> ${zeit}</p>
+                                    <p class="coords">Lng: ${coords[0]} | Lat: ${coords[1]}</p>
+                                </div>
+                            `;
+                            importContainer.insertAdjacentHTML('beforeend', cardHtml);
+                        });
+
+                    } else {
+                        log('[HINWEIS] Die Datei ist zwar valides JSON, aber keine Standard-GeoJSON FeatureCollection.');
+                    }
+
+                } catch (err) {
+                    log(`[PARSING FEHLER] Konnte Datei nicht als GeoJSON parsen: ${err.message}`);
+                }
+            };
+
+            // SCHRITT 4: Lesen der Datei als Text starten
+            reader.readAsText(selectedFile);
+        });
+    </script>
+</body>
+</html>

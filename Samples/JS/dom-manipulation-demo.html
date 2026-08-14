@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamische DOM-Manipulation Demo</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 24px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 { color: #005a9c; font-size: 1.4rem; margin-bottom: 8px; }
+        p.description { color: #666; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; }
+        
+        /* Interaktiver Vorschau-Bereich */
+        .preview-box {
+            border: 2px dashed #005a9c;
+            padding: 16px;
+            border-radius: 6px;
+            background: #f0f7fc;
+            margin-bottom: 20px;
+            min-height: 100px;
+        }
+        .demo-card {
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px 14px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .demo-card.highlight {
+            border-color: #005a9c;
+            background: #eef6fc;
+            box-shadow: 0 2px 8px rgba(0,90,156,0.2);
+        }
+        
+        .button-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        button { background: #005a9c; color: white; border: none; padding: 10px 12px; font-size: 0.88rem; border-radius: 4px; cursor: pointer; text-align: center; font-weight: 500; transition: background 0.2s; }
+        button:hover { background: #004070; }
+        
+        .console-output { background: #1e1e1e; color: #4ec9b0; font-family: 'Consolas', 'Courier New', monospace; padding: 16px; border-radius: 6px; min-height: 140px; font-size: 0.9rem; white-space: pre-wrap; line-height: 1.4; }
+        .info-box { background: #eef6fc; border-left: 4px solid #005a9c; padding: 14px 16px; font-size: 0.88rem; color: #1a385c; border-radius: 0 4px 4px 0; margin-top: 24px; }
+        .info-box ul { margin: 8px 0 0 18px; padding: 0; }
+        .info-box li { margin-bottom: 6px; }
+    </style>
+</head>
+<body>
+
+    <h1>Dynamische DOM-Manipulation Praxis-Test</h1>
+    <p class="description">
+        Diese Demodatei zeigt das Erzeugen von HTML-Knoten im Speicher, das Einfügen in den DOM-Baum,
+        die Nutzung von <code>insertAdjacentHTML()</code> sowie das Steuern von Klassen mit <code>classList</code>.
+    </p>
+
+    <!-- Interaktiver Ziel-Container für dynamisch eingefügte Elemente -->
+    <div id="cardContainer" class="preview-box">
+        <div class="demo-card" data-card-id="1">
+            <span>Bestehende Karte #1</span>
+            <small>Standard-Knoten</small>
+        </div>
+    </div>
+
+    <div class="button-grid">
+        <button id="btnCreate">1. createElement() & append()</button>
+        <button id="btnInsertHtml">2. insertAdjacentHTML()</button>
+        <button id="btnToggleClass">3. classList.toggle()</button>
+        <button id="btnDataset">4. dataset auslesen/schreiben</button>
+    </div>
+
+    <div id="output" class="console-output">// Klicke einen Button oben, um die Manipulation live zu testen...</div>
+
+    <div class="info-box">
+        <strong>💡 Zeilenweise Erläuterung der DOM-Manipulation:</strong>
+        <ul>
+            <li><strong><code>document.createElement()</code>:</strong> Erzeugt ein neues Element sicher im Arbeitsspeicher.</li>
+            <li><strong><code>append()</code> / <code>prepend()</code>:</strong> Fügt fertige Knoten am Ende oder Anfang eines Ziel-Containers ein.</li>
+            <li><strong><code>insertAdjacentHTML()</code>:</strong> Parst HTML-Strings direkt an Positionen wie <code>'beforeend'</code>.</li>
+            <li><strong><code>classList.toggle()</code>:</strong> Schaltet CSS-Klassen dynamisch an oder aus.</li>
+        </ul>
+    </div>
+
+    <script>
+        // Referenz auf den Terminal-Log & Container holen
+        const output = document.getElementById('output');
+        const container = document.getElementById('cardContainer');
+
+        function log(text) { output.innerText += text + "\n"; }
+        function clearLog() { output.innerText = ""; }
+
+        let zaehler = 2; // Zähler für neu erstellte Elemente
+
+
+        /* ==========================================================================
+           ABSCHNITT 1: KNOTEN IM SPEICHER ERZEUGEN & EINFÜGEN (createElement & append)
+           ========================================================================== */
+        document.getElementById('btnCreate').addEventListener('click', () => {
+            clearLog();
+            log("=== 1. createElement() & append() ===");
+            
+            // Zeile 1: Neues <div>-Element sicher im Arbeitsspeicher erzeugen (noch nicht im HTML sichtbar!)
+            const neueKarte = document.createElement("div");
+            
+            // Zeile 2: CSS-Klasse zuweisen
+            neueKarte.className = "demo-card";
+            
+            // Zeile 3: Data-Attribut setzen (data-card-id="...")
+            neueKarte.dataset.cardId = zaehler;
+            
+            // Zeile 4: Textinhalt und Unterstruktur befüllen
+            neueKarte.innerHTML = `<span>Dynamische Karte #${zaehler}</span><small>Erzeugt per createElement()</small>`;
+            
+            // Zeile 5: Das erst im Speicher existierende Element am ENDE des Containers einfügen!
+            container.append(neueKarte);
+            
+            log(`Neues <div>-Element im Speicher erzeugt und per .append() eingefügt! (ID: ${zaehler})`);
+            zaehler++;
+        });
+
+
+        /* ==========================================================================
+           ABSCHNITT 2: HTML-STRINGS DIREKT EINFÜGEN (insertAdjacentHTML)
+           ========================================================================== */
+        document.getElementById('btnInsertHtml').addEventListener('click', () => {
+            clearLog();
+            log("=== 2. insertAdjacentHTML() ===");
+            
+            // Template-String mit HTML-Quellcode
+            const htmlString = `
+                <div class="demo-card" data-card-id="${zaehler}">
+                    <span>Schnelle Karte #${zaehler}</span>
+                    <small>via insertAdjacentHTML</small>
+                </div>
+            `;
+            
+            // Zeile: insertAdjacentHTML('beforeend', htmlString) fügt den String direkt am Ende des Containers ein!
+            // Schneller & eleganter als innerHTML += (da bestehende Event-Listener nicht zerstört werden!).
+            container.insertAdjacentHTML("beforeend", htmlString);
+            
+            log(`HTML-String direkt an Position 'beforeend' eingefügt! (ID: ${zaehler})`);
+            zaehler++;
+        });
+
+
+        /* ==========================================================================
+           ABSCHNITT 3: KLASSEN UND STILE STEUERN (classList.toggle)
+           ========================================================================== */
+        document.getElementById('btnToggleClass').addEventListener('click', () => {
+            clearLog();
+            log("=== 3. classList.toggle('highlight') ===");
+            
+            // Alle Karten im Container selektieren
+            const karten = container.querySelectorAll(".demo-card");
+            
+            // Zeile: .classList.toggle() schaltet die Klasse 'highlight' bei allen Karten um (an/aus)
+            karten.forEach(k => k.classList.toggle("highlight"));
+            
+            const istHervorgehoben = karten[0].classList.contains("highlight");
+            log(`Klasse 'highlight' umgeschaltet. Zustand aktiv: ${istHervorgehoben}`);
+        });
+
+
+        /* ==========================================================================
+           ABSCHNITT 4: DATA-ATTRIBUTE UND DATASET (data-* Attribute)
+           ========================================================================== */
+        document.getElementById('btnDataset').addEventListener('click', () => {
+            clearLog();
+            log("=== 4. element.dataset ===");
+            
+            // Erste Karte im Container holen
+            const ersteKarte = container.querySelector(".demo-card");
+            
+            // Zeile: Auslesen des HTML-Attributes 'data-card-id' via dataset.cardId
+            const aktuelleId = ersteKarte.dataset.cardId;
+            log(`Aktuelle data-card-id: ${aktuelleId}`);
+            
+            // Zeile: Schreiben / Ändern eines Data-Attributes im JS
+            ersteKarte.dataset.status = "bearbeitet";
+            log(`Neues Attribut gesetzt: data-status="${ersteKarte.dataset.status}"`);
+        });
+    </script>
+
+</body>
+</html>
