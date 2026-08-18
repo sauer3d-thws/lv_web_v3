@@ -52,7 +52,7 @@ Ein Schwerpunkt des Kurses wird auf den Grundlagen und der KI-gestützen Erstell
 
 ---
 
-### [Kapitel 1: Modul- & Arbeitsgrundlagen](kapitel/01_modul_und_arbeitsgrundlagen.html#webprogrammierung)
+### [Kapitel 1: Modul- & Arbeitsgrundlagen](kapitel/01_modul_und_arbeitsgrundlagen.html)
   - [Arbeitsgrundlagen](kapitel/01_modul_und_arbeitsgrundlagen.html#arbeitsgrundlagen)
   - [Unser Beispielprojekt](kapitel/01_modul_und_arbeitsgrundlagen.html#unser-beispielprojekt)
   - [Was ist gutes Webdesign?](kapitel/01_modul_und_arbeitsgrundlagen.html#was-ist-gutes-webdesign)
@@ -60,7 +60,7 @@ Ein Schwerpunkt des Kurses wird auf den Grundlagen und der KI-gestützen Erstell
 
 ---
 
-### [Kapitel 2: HTML5 & Webseiten-Struktur](kapitel/02_html5_und_webseiten_struktur.html#entstehung-der-html-sprache)
+### [Kapitel 2: HTML5 & Webseiten-Struktur](kapitel/02_html5_und_webseiten_struktur.html)
   - [Entstehung der HTML-Sprache](kapitel/02_html5_und_webseiten_struktur.html#entstehung-der-html-sprache)
   - [Basiswissen](kapitel/02_html5_und_webseiten_struktur.html#basiswissen)
   - [Eine Testumgebung](kapitel/02_html5_und_webseiten_struktur.html#eine-testumgebung)
@@ -71,7 +71,7 @@ Ein Schwerpunkt des Kurses wird auf den Grundlagen und der KI-gestützen Erstell
 
 ---
 
-### [Kapitel 3: CSS3 Styling, Layouts & Mobile First](kapitel/03_css3_styling_layouts_mobile.html#das-css-boxmodell)
+### [Kapitel 3: CSS3 Styling, Layouts & Mobile First](kapitel/03_css3_styling_layouts_mobile.html)
   - [Das CSS-Boxmodell](kapitel/03_css3_styling_layouts_mobile.html#das-css-boxmodell)
   - [Fonts & Google-Fonts](kapitel/03_css3_styling_layouts_mobile.html#fonts-google-fonts)
   - [Gestaltung mit Schrift](kapitel/03_css3_styling_layouts_mobile.html#gestaltung-mit-schrift)
@@ -97,7 +97,7 @@ Moderne Webentwicklung mit JavaScript und KI
 
 ---
 
-### [Kapitel 4: KI-Workflows & Spec-Driven Development (SDD)](kapitel/04_ki_workflows_und_sdd.html#ki-workflows-future-of-development)
+### [Kapitel 4: KI-Workflows & Spec-Driven Development (SDD)](kapitel/04_ki_workflows_und_sdd.html)
   - [KI Workflows (Future of Development)](kapitel/04_ki_workflows_und_sdd.html#ki-workflows-future-of-development)
   - [Spec-Driven Development (SDD)](kapitel/04_ki_workflows_und_sdd.html#spec-driven-development-sdd)
   - [KI-native Entwicklungsumgebungen](kapitel/04_ki_workflows_und_sdd.html#ki-native-entwicklungsumgebungen)
@@ -106,7 +106,7 @@ Moderne Webentwicklung mit JavaScript und KI
 
 ---
 
-### [Kapitel 5: JavaScript Grundlagen & Datenstrukturen](kapitel/05_javascript_grundlagen_und_datenstrukturen.html#javascript-grundlagen)
+### [Kapitel 5: JavaScript Grundlagen & Datenstrukturen](kapitel/05_javascript_grundlagen_und_datenstrukturen.html)
 
   - [Javascript Grundlagen](kapitel/05_javascript_grundlagen_und_datenstrukturen.html#javascript-grundlagen)
   - [Variablen und Datentypen](kapitel/05_javascript_grundlagen_und_datenstrukturen.html#variablen-und-datentypen)
@@ -117,7 +117,7 @@ Moderne Webentwicklung mit JavaScript und KI
 
 ---
 
-### [Kapitel 6: DOM, Events, Fetch API, Web APIs & Praxis-Projekt](kapitel/06_dom_events_fetch_apis_validierung_projekt.html#dom-manipulation-modernes-event-handling)
+### [Kapitel 6: DOM, Events, Fetch API, Web APIs & Praxis-Projekt](kapitel/06_dom_events_fetch_apis_validierung_projekt.html)
   - [DOM-Manipulation & Modernes Event-Handling](kapitel/06_dom_events_fetch_apis_validierung_projekt.html#dom-manipulation-modernes-event-handling)
   - [Modernes Event Handling](kapitel/06_dom_events_fetch_apis_validierung_projekt.html#modernes-event-handling)
   - [Asynchrone Programmierung & Fetch API](kapitel/06_dom_events_fetch_apis_validierung_projekt.html#asynchrone-programmierung-fetch-api)
