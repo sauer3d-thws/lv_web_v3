@@ -1,0 +1,34 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Für eine rein statische Seite ist kein Build nötig — wir deployen die Dateien aus dem Repo-Root.
+      # Falls du später ein Build-Tool verwendest, füge hier Install/Build-Schritte ein
+      # und passe 'path' unten an (z. B. ./dist oder ./public).
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: './'   # Inhalt des Repositoriums (Root). Passe an, falls die Seite in einem Unterordner liegt.
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
