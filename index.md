@@ -2,12 +2,12 @@
 marp: true
 theme: thws-sts
 paginate: true
-header: '**Webprogrammierung** <br> THWS Modul-Nr: 6322170'
+header: '**Angewandte Informatik** <br> THWS Modul-Nr: 6018017'
 math: mathjax
 ---
 
 <!-- _class: titlepage -->
-# Webprogrammierung
+# Angewandte Informatik Webprogrammierung
 ## mit KI-gestützten Workflows
 ### Modulübersicht & Gesamtes Inhaltsverzeichnis
 ### Fachlehrer Stefan Sauer | THWS Geovisualisierung
@@ -15,10 +15,13 @@ math: mathjax
 ---
 
 <!-- _class: structural-->
-# Prüfungsleistung Portfolioabgabe
+# Prüfungsleistung Schriftliche Prüfung
 ## Seminaristischer Unterricht & Übung
-### 5 SWS | 5 ECTS | Präsenzzeit 60 h | Selbststudium 90 h
-Prüfungsleistung benotete Portfolioaufgabe
+### 4 SWS | 5 ECTS | Präsenzzeit 60 h | Selbststudium 90 h
+Schriftliche Prüfung 90 Minuten
+Davon anteilig 50% Webprogrammierung.
+Prüfung mit EvaExam ohne Hilfsmittel.
+
 
 ---
 **Lehrinhalt:**
@@ -44,8 +47,8 @@ Ein Schwerpunkt des Kurses wird auf den Grundlagen und der KI-gestützen Erstell
 # Inhaltsverzeichnis
 
 ## Grundlegende Struktur der Lehrveranstaltung
-- [Lehrveranstaltungs-und-Abgabeplan](kapitel/Lehrveranstaltungs-und-Abgabeplan.html)
-- [Portfolioabgabe](kapitel/00_portfolioaufgabe.html)
+- [Lehrveranstaltungs- und Studienplan](kapitel/Lehrveranstaltungs-und-Abgabeplan.html)
+- [Portfolioaufgabe als Bonusleistung](kapitel/00_portfolioaufgabe.html)
 
 ---
 
@@ -123,3 +126,28 @@ Moderne Webentwicklung mit JavaScript und KI
   - [Zurück zum Maik: Ein Hamburger Menü (10)](kapitel/06_dom_events_fetch_apis_validierung_projekt.html#zuruck-zum-maik-ein-hamburger-menu-10)
   - [Wie gehts weiter? (11)](kapitel/06_dom_events_fetch_apis_validierung_projekt.html#wie-gehts-weiter-11)
 
+---
+
+
+<!-- _class: structural -->
+
+## Klausur- und Prüfungsvorbereitung
+Interaktive Quarto-Lernzielkontrollen & Übungsquizzes
+> Systematische Vorbereitung auf die schriftliche Prüfung (EvaExam)
+---
+### [Klausurvorbereitung: Interaktive Quarto-Quizzes](kapitel/01_modul_und_arbeitsgrundlagen_quiz.html)
+- 📝 **[Quiz 01: Modul- & Arbeitsgrundlagen](kapitel/01_modul_und_arbeitsgrundlagen_quiz.html)**
+  - Werkzeuge, DevTools, Git-Workflow & Qualitätskriterien
+- 📝 **[Quiz 02: HTML5 Semantik & Web-Recht](kapitel/02_html5_und_webseiten_struktur_quiz.html)**
+  - Semantische Struktur-Tags, Formulare, Impressum (§5 DDG), DSGVO & Accessibility
+- 📝 **[Quiz 03: CSS3 Styling, Layouts & Mobile First](kapitel/03_css3_styling_layouts_mobile_quiz.html)**
+  - Box-Modell, Flexbox, CSS-Grid, Media Queries & Responsive Design
+- 📝 **[Quiz 04: KI-Workflows & Spec-Driven Development](kapitel/04_ki_workflows_und_sdd_quiz.html)**
+  - Spec-Driven Development, Prompts, W3C-Validierung & Code-Audit
+
+---
+
+- 📝 **[Quiz 05: JavaScript Grundlagen & Datenstrukturen](kapitel/05_javascript_grundlagen_und_datenstrukturen_quiz.html)**
+  - Datentypen, Kontrollstrukturen, Scope, Arrow Functions, Arrays & Objekte
+- 📝 **[Quiz 06: DOM, Events, Web APIs & Praxis-Projekt](kapitel/06_dom_events_fetch_apis_validierung_projekt_quiz.html)**
+  - DOM-Manipulation, Event-Handling, Fetch API, LocalStorage & Formularvalidierung

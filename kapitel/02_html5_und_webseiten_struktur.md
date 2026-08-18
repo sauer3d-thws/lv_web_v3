@@ -650,7 +650,7 @@ Aber auch spezifische Domains sind möglich:
 ### FTP-Sicherheit & FTP-Clients
 - **Das Sicherheitsrisiko:** Klassisches FTP überträgt Zugangsdaten (Benutzer/Passwort) und Dateien **unverschlüsselt** im Klartext.
 - **Sichere Alternativen (Standard heute):**
-  - **SFTP (SSH File Transfer Protocol):** Komplett verschlüsselte Übertragung über SSH (Port 22).
+  - **SFTP (SSH File Transfer Protocol):** verschlüsselte Übertragung über SSH (Port 22).
   - **FTPS (FTP over SSL/TLS):** Verschlüsseltes FTP (Port 21 mit Explicit TLS oder Port 990).
 
 ![ftp-security](../img/ftp-security.png)

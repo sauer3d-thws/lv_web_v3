@@ -8,7 +8,7 @@
 
 <meta name="author" content="Stefan Sauer">
 
-<title>Kapitel 4: KI-Workflows &amp; Spec-Driven Development (SDD)</title>
+<title>Kapitel 5: JavaScript Grundlagen &amp; Datenstrukturen</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -2353,17 +2353,17 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#kernbegriffe-flip-cards" id="toc-kernbegriffe-flip-cards" class="nav-link" data-scroll-target="#kernbegriffe-flip-cards"><span class="header-section-number">1.1</span> 1. Kernbegriffe (Flip-Cards)</a></li>
   <li><a href="#deep-dives-exkurse" id="toc-deep-dives-exkurse" class="nav-link" data-scroll-target="#deep-dives-exkurse"><span class="header-section-number">1.2</span> 2. Deep Dives &amp; Exkurse</a></li>
-  <li><a href="#fallstudien-reflexionsaufgaben" id="toc-fallstudien-reflexionsaufgaben" class="nav-link" data-scroll-target="#fallstudien-reflexionsaufgaben"><span class="header-section-number">1.3</span> 3. Fallstudien &amp; Reflexionsaufgaben</a></li>
+  <li><a href="#fallstudien-praxis-szenarien" id="toc-fallstudien-praxis-szenarien" class="nav-link" data-scroll-target="#fallstudien-praxis-szenarien"><span class="header-section-number">1.3</span> 3. Fallstudien &amp; Praxis-Szenarien</a></li>
   <li><a href="#active-recall-lückentexte-drag-drop" id="toc-active-recall-lückentexte-drag-drop" class="nav-link" data-scroll-target="#active-recall-lückentexte-drag-drop"><span class="header-section-number">1.4</span> 4. Active Recall (Lückentexte / Drag &amp; Drop)</a></li>
   <li><a href="#quick-check-klausurrelevantes-quiz" id="toc-quick-check-klausurrelevantes-quiz" class="nav-link" data-scroll-target="#quick-check-klausurrelevantes-quiz"><span class="header-section-number">1.5</span> 5. Quick-Check (Klausurrelevantes Quiz)</a>
   <ul class="collapse">
-  <li><a href="#bereich-1-ki-workflows-paradigmenwechsel-in-der-webentwicklung" id="toc-bereich-1-ki-workflows-paradigmenwechsel-in-der-webentwicklung" class="nav-link" data-scroll-target="#bereich-1-ki-workflows-paradigmenwechsel-in-der-webentwicklung"><span class="header-section-number">1.5.1</span> Bereich 1: KI-Workflows &amp; Paradigmenwechsel in der Webentwicklung</a></li>
-  <li><a href="#bereich-2-spec-driven-development-sdd-scaffolding" id="toc-bereich-2-spec-driven-development-sdd-scaffolding" class="nav-link" data-scroll-target="#bereich-2-spec-driven-development-sdd-scaffolding"><span class="header-section-number">1.5.2</span> Bereich 2: Spec-Driven Development (SDD) &amp; Scaffolding</a></li>
-  <li><a href="#bereich-3-ki-native-entwicklungsumgebungen-google-antigravity" id="toc-bereich-3-ki-native-entwicklungsumgebungen-google-antigravity" class="nav-link" data-scroll-target="#bereich-3-ki-native-entwicklungsumgebungen-google-antigravity"><span class="header-section-number">1.5.3</span> Bereich 3: KI-native Entwicklungsumgebungen &amp; Google Antigravity</a></li>
-  <li><a href="#bereich-4-kontext-management-agentic-rules-konfigurationen" id="toc-bereich-4-kontext-management-agentic-rules-konfigurationen" class="nav-link" data-scroll-target="#bereich-4-kontext-management-agentic-rules-konfigurationen"><span class="header-section-number">1.5.4</span> Bereich 4: Kontext-Management, Agentic Rules &amp; Konfigurationen</a></li>
-  <li><a href="#bereich-5-die-rolle-des-digital-shepherd-code-smells-refactoring" id="toc-bereich-5-die-rolle-des-digital-shepherd-code-smells-refactoring" class="nav-link" data-scroll-target="#bereich-5-die-rolle-des-digital-shepherd-code-smells-refactoring"><span class="header-section-number">1.5.5</span> Bereich 5: Die Rolle des „Digital Shepherd“, Code Smells &amp; Refactoring</a></li>
-  <li><a href="#bereich-6-prompt-engineering-für-webkomponenten-ki-generierung" id="toc-bereich-6-prompt-engineering-für-webkomponenten-ki-generierung" class="nav-link" data-scroll-target="#bereich-6-prompt-engineering-für-webkomponenten-ki-generierung"><span class="header-section-number">1.5.6</span> Bereich 6: Prompt Engineering für Webkomponenten &amp; KI-Generierung</a></li>
-  <li><a href="#bereich-7-qualitätssicherung-validierung-von-ki-code-arbeitsmarktausblick" id="toc-bereich-7-qualitätssicherung-validierung-von-ki-code-arbeitsmarktausblick" class="nav-link" data-scroll-target="#bereich-7-qualitätssicherung-validierung-von-ki-code-arbeitsmarktausblick"><span class="header-section-number">1.5.7</span> Bereich 7: Qualitätssicherung, Validierung von KI-Code &amp; Arbeitsmarktausblick</a></li>
+  <li><a href="#bereich-1-grundlagen-sicherheitsmodell" id="toc-bereich-1-grundlagen-sicherheitsmodell" class="nav-link" data-scroll-target="#bereich-1-grundlagen-sicherheitsmodell"><span class="header-section-number">1.5.1</span> Bereich 1: Grundlagen &amp; Sicherheitsmodell</a></li>
+  <li><a href="#bereich-2-entwicklertools-fehlerdiagnose" id="toc-bereich-2-entwicklertools-fehlerdiagnose" class="nav-link" data-scroll-target="#bereich-2-entwicklertools-fehlerdiagnose"><span class="header-section-number">1.5.2</span> Bereich 2: Entwicklertools &amp; Fehlerdiagnose</a></li>
+  <li><a href="#bereich-3-skripteinbindung-ladeverhalten" id="toc-bereich-3-skripteinbindung-ladeverhalten" class="nav-link" data-scroll-target="#bereich-3-skripteinbindung-ladeverhalten"><span class="header-section-number">1.5.3</span> Bereich 3: Skripteinbindung &amp; Ladeverhalten</a></li>
+  <li><a href="#bereich-4-variablen-datentypen-vergleiche" id="toc-bereich-4-variablen-datentypen-vergleiche" class="nav-link" data-scroll-target="#bereich-4-variablen-datentypen-vergleiche"><span class="header-section-number">1.5.4</span> Bereich 4: Variablen, Datentypen &amp; Vergleiche</a></li>
+  <li><a href="#bereich-5-strings-template-literals-kontrollstrukturen" id="toc-bereich-5-strings-template-literals-kontrollstrukturen" class="nav-link" data-scroll-target="#bereich-5-strings-template-literals-kontrollstrukturen"><span class="header-section-number">1.5.5</span> Bereich 5: Strings, Template Literals &amp; Kontrollstrukturen</a></li>
+  <li><a href="#bereich-6-schleifen-funktionen" id="toc-bereich-6-schleifen-funktionen" class="nav-link" data-scroll-target="#bereich-6-schleifen-funktionen"><span class="header-section-number">1.5.6</span> Bereich 6: Schleifen &amp; Funktionen</a></li>
+  <li><a href="#bereich-7-komplexe-datenstrukturen-objekte-arrays" id="toc-bereich-7-komplexe-datenstrukturen-objekte-arrays" class="nav-link" data-scroll-target="#bereich-7-komplexe-datenstrukturen-objekte-arrays"><span class="header-section-number">1.5.7</span> Bereich 7: Komplexe Datenstrukturen: Objekte &amp; Arrays</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -2373,7 +2373,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Kapitel 4: KI-Workflows &amp; Spec-Driven Development (SDD)</h1>
+<h1 class="title">Kapitel 5: JavaScript Grundlagen &amp; Datenstrukturen</h1>
 <p class="subtitle lead">Interaktives Selbstlern-Quiz | THWS Webprogrammierung</p>
 </div>
 
@@ -2580,292 +2580,404 @@ window.addEventListener("scroll", function() {
 
 <section id="umfassendes-selbstlern-quiz-wissens-check" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> 🎯 Umfassendes Selbstlern-Quiz &amp; Wissens-Check</h1>
-<p>Willkommen zum erweiterten interaktiven Selbstlern-Quiz für <strong>Kapitel 4: KI-Workflows, Spec-Driven Development (SDD) &amp; KI-native Entwicklungsumgebungen</strong>. Überprüfen und festigen Sie Ihr didaktisches und klausurrelevantes Verständnis zu folgenden Kernbereichen:</p>
+<p>Willkommen zum interaktiven Selbstlern-Quiz für <strong>Kapitel 5: JavaScript Grundlagen und Datenstrukturen</strong>. Dieses Quiz konzentriert sich auf die <strong>zentralen Grundprinzipien und Kernkonzepte der JavaScript-Programmierung für Einsteiger</strong>:</p>
 <ol type="1">
-<li><strong>Paradigmenwechsel der Webentwicklung</strong> (Handwerkliche Kodierung vs. KI-gestützte Orchestrierung, Dirigentenrolle, Bill-Gates-Perspektive)</li>
-<li><strong>Spec-Driven Development (SDD)</strong> (Der 4-Stufen-Zyklus <code>Specify</code> <span class="math inline">\(\rightarrow\)</span> <code>Plan</code> <span class="math inline">\(\rightarrow\)</span> <code>Tasks</code> <span class="math inline">\(\rightarrow\)</span> <code>Implement</code>, Scaffolding, Verschiebung der Wertschöpfung)</li>
-<li><strong>Die Rolle des „Digital Shepherd“</strong> (Menschliche Verantwortung, Qualitätskontrolle, Semantik, Barrierefreiheit, Sicherheit, Algorithmischer Skeptizismus)</li>
-<li><strong>KI-native Entwicklungsumgebungen</strong> (Evolution vom Texteditor zur intelligenten IDE: Notepad++ vs. VS Code mit Copilot vs. Cursor vs. Google Antigravity IDE)</li>
-<li><strong>Architektur &amp; Tools von Google Antigravity</strong> (Explorer, Inhaltsfenster/Editor, Agentenfenster, Genehmigungs- und Permission-Modell)</li>
-<li><strong>Kontext-Management &amp; Agentic Rules</strong> (Projektgedächtnis, System-Prompts, <code>.cursorrules</code>, <code>GEMINI.md</code>, <code>AGENTS.md</code>, Konventionen)</li>
-<li><strong>Echtzeit-Refactoring &amp; Code Smells</strong> (Automatische Identifikation veralteter Entwurfsmuster, Float-Hacks vs. modernes Flexbox/Grid)</li>
-<li><strong>Praktische KI-Generierung von Unterseiten</strong> (Case Study „HomeSweetHome“, Asset-Management in <code>/img/</code> &amp; <code>/img/1600/</code>, Prompt-Anatomie)</li>
-<li><strong>Prompt Engineering für Webkomponenten</strong> (Präzise Vorgaben für DOM-Struktur, Semantik, CSS-Klassen und Scroll-Anker)</li>
-<li><strong>Qualitätssicherung &amp; Prüfprotokoll</strong> (Broken Links 404, Bildpfad-Referenzen, W3C-HTML5-Semantik, Responsive Viewport)</li>
+<li><strong>Rolle &amp; Funktionsweise von JavaScript</strong> (HTML = Struktur, CSS = Design, JS = Interaktion &amp; Leben; Sandbox-Sicherheitsmodell)</li>
+<li><strong>Entwicklertools &amp; Einfaches Debugging</strong> (DevTools F12, Console, <code>console.log()</code>, Breakpoints &amp; <code>debugger;</code>, häufige Fehlermeldungen)</li>
+<li><strong>Saubere Skripteinbindung &amp; Ladeverhalten</strong> (Externes Skript, das <code>defer</code>-Attribut im Head-Bereich, Trennung von Struktur und Verhalten)</li>
+<li><strong>Variablen &amp; Scopes für Einsteiger</strong> (<code>const</code> als Standard, <code>let</code> für veränderliche Werte, warum <code>var</code> vermieden wird, Block-Scope <code>{ ... }</code>)</li>
+<li><strong>Grundlegende Datentypen &amp; Vergleiche</strong> (String, Number, Boolean, <code>undefined</code>, <code>null</code>, Strikte Gleichheit <code>===</code> vs. Lose Gleichheit <code>==</code>)</li>
+<li><strong>String-Verarbeitung &amp; Template Literals</strong> (Zeichenketten verbinden mit Backticks <code>`Hallo ${name}`</code>, nützliche Methoden wie <code>.length</code>, <code>.includes()</code>)</li>
+<li><strong>Entscheidungsstrukturen</strong> (<code>if / else if / else</code> für Bereiche, <code>switch / case</code> für feste Werte, Ternärer Operator <code>? :</code> für kompakte Zuweisungen)</li>
+<li><strong>Schleifen &amp; Iteration</strong> (<code>for...of</code> für Arrays, klassische <code>for</code>-Zählschleife, <code>while</code>, Steuerung mit <code>break</code> &amp; <code>continue</code>)</li>
+<li><strong>Funktionen &amp; Arrow Functions</strong> (Klassische Funktionen mit <code>return</code>, kompakte Arrow Functions <code>=&gt;</code>, Parameter &amp; Standardwerte)</li>
+<li><strong>Objekte &amp; Arrays (Grundlagen)</strong> (Objekt-Literale <code>{ key: value }</code>, Punkt- vs. Klammer-Notation, Arrays <code>[0, 1, 2]</code>, <code>JSON.stringify()</code> &amp; <code>JSON.parse()</code>)</li>
 </ol>
 <hr>
 <section id="kernbegriffe-flip-cards" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="kernbegriffe-flip-cards"><span class="header-section-number">1.1</span> 1. Kernbegriffe (Flip-Cards)</h2>
 <p>Klicken oder tippen Sie auf die Karten, um die Vorder- und Rückseite zu wenden:</p>
-<section id="was-unterscheidet-handwerkliches-kodieren-von-ki-orchestrierung" class="level4 unnumbered unlisted flip-card">
-<h4 class="unnumbered unlisted anchored" data-anchor-id="was-unterscheidet-handwerkliches-kodieren-von-ki-orchestrierung">Was unterscheidet handwerkliches Kodieren von KI-Orchestrierung?</h4>
-<p><strong>Handwerkliches Kodieren</strong> (Status Quo) fokussiert sich auf das zeilenweise Schreiben von Syntax und das manuelle Beheben von Tippfehlern. Bei der <strong>KI-gestützten Orchestrierung</strong> agiert der Entwickler als <strong>Dirigent</strong>, der Anforderungen definiert, KI-Modelle steuert und deren Ergebnisse validiert.</p>
+<section id="welche-rolle-übernimmt-javascript-im-zusammenspiel-mit-html-und-css" class="level4 unnumbered unlisted flip-card">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="welche-rolle-übernimmt-javascript-im-zusammenspiel-mit-html-und-css">Welche Rolle übernimmt JavaScript im Zusammenspiel mit HTML und CSS?</h4>
+<p><strong>HTML</strong> bildet das statische Grundgerüst (Inhalt), <strong>CSS</strong> gestaltet das Aussehen (Design), und <strong>JavaScript</strong> haucht der Webseite Leben ein (Interaktivität, Animationen, Berechnungen und dynamische Reaktionen auf Benutzereingaben).</p>
 </section>
-<section id="was-ist-die-neue-kernkompetenz-von-webentwicklern-im-ki-zeitalter" class="level4 unnumbered unlisted flip-card">
-<h4 class="unnumbered unlisted anchored" data-anchor-id="was-ist-die-neue-kernkompetenz-von-webentwicklern-im-ki-zeitalter">Was ist die neue Kernkompetenz von Webentwicklern im KI-Zeitalter?</h4>
-<p>Nicht mehr das reine Auswendiglernen von Programmiersprachen und Syntaxdetails, sondern die <strong>präzise Problemformulierung (Intent &amp; Prompt Engineering)</strong>, das architektonische Systemverständnis und die kritische Validierung der Ergebnisse.</p>
+<section id="was-unterscheidet-ecmascript-von-einer-javascript-engine" class="level4 unnumbered unlisted flip-card">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="was-unterscheidet-ecmascript-von-einer-javascript-engine">Was unterscheidet ECMAScript von einer JavaScript-Engine?</h4>
+<p><strong>ECMAScript</strong> ist der offizielle Standard und Bauplan (das „Rezept“), der die Regeln und Syntax festlegt. Die <strong>JS-Engine</strong> (z. B. V8 in Chrome/Edge, SpiderMonkey in Firefox) ist der „Koch“ im Browser, der den JavaScript-Code zur Laufzeit interpretiert und ausführt.</p>
 </section>
-<section id="was-bedeutet-spec-driven-development-sdd" class="level4 unnumbered unlisted flip-card">
-<h4 class="unnumbered unlisted anchored" data-anchor-id="was-bedeutet-spec-driven-development-sdd">Was bedeutet „Spec-Driven Development (SDD)“?</h4>
-<p>SDD ist ein strukturierter Entwicklungsworkflow, bei dem die <strong>detaillierte Spezifikation</strong> vor der eigentlichen Codegenerierung steht. Der iterative Zyklus lautet: <strong>Specify <span class="math inline">\(\rightarrow\)</span> Plan <span class="math inline">\(\rightarrow\)</span> Tasks <span class="math inline">\(\rightarrow\)</span> Implement</strong>.</p>
+<section id="warum-läuft-javascript-im-browser-in-einer-sandbox" class="level4 unnumbered unlisted flip-card">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="warum-läuft-javascript-im-browser-in-einer-sandbox">Warum läuft JavaScript im Browser in einer Sandbox?</h4>
+<p>Aus <strong>Sicherheitsgründen</strong>. Das Sandbox-Prinzip verhindert, dass bösartiger Code fremder Webseiten direkt auf die Festplatte des Nutzers zugreift, Programme startet oder private Daten ohne Erlaubnis ausspioniert.</p>
 </section>
-<section id="warum-beginnt-der-sdd-prozess-stets-bei-der-spezifikation-und-nicht-beim-code" class="level4 unnumbered unlisted flip-card">
-<h4 class="unnumbered unlisted anchored" data-anchor-id="warum-beginnt-der-sdd-prozess-stets-bei-der-spezifikation-und-nicht-beim-code">Warum beginnt der SDD-Prozess stets bei der Spezifikation und nicht beim Code?</h4>
-<p>Weil KI-Modelle nach dem Prinzip <strong>„Garbage In, Garbage Out“</strong> arbeiten. Eine unpräzise oder lückenhafte Spezifikation führt zu halluziniertem oder semantisch falschem Code. Eine exakte Spezifikation liefert sofort einsatzbereiten Produktionscode.</p>
+<section id="warum-sollte-man-externe-skripte-im-head-bereich-mit-dem-defer-attribut-einbinden" class="level4 unnumbered unlisted flip-card">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="warum-sollte-man-externe-skripte-im-head-bereich-mit-dem-defer-attribut-einbinden">Warum sollte man externe Skripte im Head-Bereich mit dem defer-Attribut einbinden?</h4>
+<p>Das Attribut <code>defer</code> lädt die JavaScript-Datei im Hintergrund herunter, führt sie aber <strong>erst aus, nachdem das gesamte HTML-Dokument aufgebaut ist</strong>. Dadurch blockiert das Skript nicht das Laden der Seite und alle HTML-Elemente sind für JavaScript sofort auffindbar.</p>
 </section>
-<section id="was-versteht-man-unter-dem-begriff-digital-shepherd" class="level4 unnumbered unlisted flip-card">
-<h4 class="unnumbered unlisted anchored" data-anchor-id="was-versteht-man-unter-dem-begriff-digital-shepherd">Was versteht man unter dem Begriff „Digital Shepherd“?</h4>
-<p>Der Entwickler fungiert als <strong>„Hirte“ (Shepherd)</strong>, der den generierten KI-Code behütet und steuert. Er trägt die finale menschliche Verantwortung für Codequalität, W3C-Semantik, IT-Sicherheit, Barrierefreiheit und Performance.</p>
+<section id="wann-verwendet-man-const-und-wann-let" class="level4 unnumbered unlisted flip-card">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="wann-verwendet-man-const-und-wann-let">Wann verwendet man const und wann let?</h4>
+<ul>
+<li><strong><code>const</code> (Standard):</strong> Für alle Variablen, deren Wert oder Referenz sich nach der Zuweisung nicht mehr ändert.</li>
+<li><strong><code>let</code>:</strong> Nur dann, wenn der Wert der Variable später bewusst neu zugewiesen werden muss (z. B. Zähler in einer Schleife).</li>
+<li><strong><code>var</code>:</strong> Veraltet – sollte in modernem JavaScript nicht mehr verwendet werden.</li>
+</ul>
 </section>
-<section id="was-zeichnet-eine-ki-native-entwicklungsumgebung-aus" class="level4 unnumbered unlisted flip-card">
-<h4 class="unnumbered unlisted anchored" data-anchor-id="was-zeichnet-eine-ki-native-entwicklungsumgebung-aus">Was zeichnet eine „KI-native Entwicklungsumgebung“ aus?</h4>
-<p>Klassische Editoren (z. B. Notepad++) betrachten Dateien isoliert. <strong>KI-native IDEs</strong> (z. B. Google Antigravity, Cursor) besitzen ein <strong>ganzheitliches Kontextbewusstsein</strong> über das gesamte Projekt-Repository, kennen Dateibäume, Stylesheets und Abhängigkeiten.</p>
+<section id="was-bedeutet-block-scope-bei-const-und-let" class="level4 unnumbered unlisted flip-card">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="was-bedeutet-block-scope-bei-const-und-let">Was bedeutet Block-Scope bei const und let?</h4>
+<p>Variablen, die mit <code>const</code> oder <code>let</code> innerhalb von geschweiften Klammern <code>{ ... }</code> (z. B. in einem <code>if</code>-Block oder einer Schleife) deklariert werden, existieren <strong>nur innerhalb dieses Blocks</strong> und sind von außen unsichtbar.</p>
 </section>
-<section id="welche-drei-hauptkomponenten-besitzt-die-google-antigravity-ide" class="level4 unnumbered unlisted flip-card">
-<h4 class="unnumbered unlisted anchored" data-anchor-id="welche-drei-hauptkomponenten-besitzt-die-google-antigravity-ide">Welche drei Hauptkomponenten besitzt die Google Antigravity IDE?</h4>
-<ol type="1">
-<li><strong>Explorer:</strong> Dateibaum- und Projektverwaltung.</li>
-<li><strong>Inhaltsfenster / Editor:</strong> Quelltext- und Dokumentanzeige mit Diffs.</li>
-<li><strong>Agentenfenster:</strong> Interaktive Chat- und Steuerungskonsole für Prompts, Werkzeuge und Workflow-Genehmigungen.</li>
-</ol>
+<section id="warum-liefert-der-ausdruck-text-plus-zahl-eine-zeichenkette" class="level4 unnumbered unlisted flip-card">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="warum-liefert-der-ausdruck-text-plus-zahl-eine-zeichenkette">Warum liefert der Ausdruck Text plus Zahl eine Zeichenkette?</h4>
+<p>Weil der <code>+</code>-Operator bei Zeichenketten (Strings) keine mathematische Addition durchführt, sondern die Werte als Text aneinanderhängt (<strong>String-Konkatenation</strong>, z. B. <code>&quot;5&quot; + 10</code> ergibt <code>&quot;510&quot;</code>). Um zu rechnen, muss der String vorher mit <code>Number(&quot;5&quot;)</code> umgewandelt werden.</p>
 </section>
-<section id="wozu-dienen-agentic-rules-z.-b.-.cursorrules-gemini.md-agents.md" class="level4 unnumbered unlisted flip-card">
-<h4 class="unnumbered unlisted anchored" data-anchor-id="wozu-dienen-agentic-rules-z.-b.-.cursorrules-gemini.md-agents.md">Wozu dienen Agentic Rules (z. B. <code>.cursorrules</code>, <code>GEMINI.md</code>, <code>AGENTS.md</code>)?</h4>
-<p>Sie definieren <strong>dauerhafte Richtlinien und Kontextregeln</strong> für den KI-Agenten im Projekt. Darin werden Codierstandards, Framework-Vorgaben, CSS-Klassenkonventionen oder No-Gos (z. B. „Keine Inline-Styles verwenden“) verbindlich hinterlegt.</p>
+<section id="was-ist-der-unterschied-zwischen-striktem-und-losem-vergleich" class="level4 unnumbered unlisted flip-card">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="was-ist-der-unterschied-zwischen-striktem-und-losem-vergleich">Was ist der Unterschied zwischen striktem und losem Vergleich?</h4>
+<ul>
+<li><strong><code>===</code> (Strikte Gleichheit – Empfohlen!):</strong> Prüft <strong>Wert UND Datentyp</strong>. <code>&quot;5&quot; === 5</code> ergibt <code>false</code>.</li>
+<li><strong><code>==</code> (Lose Gleichheit):</strong> Versucht vor dem Vergleich die Typen automatisch umzuwandeln. <code>&quot;5&quot; == 5</code> ergibt <code>true</code> (kann zu unerwarteten Fehlern führen).</li>
+</ul>
 </section>
-<section id="was-versteht-man-unter-automatisiertem-scaffolding" class="level4 unnumbered unlisted flip-card">
-<h4 class="unnumbered unlisted anchored" data-anchor-id="was-versteht-man-unter-automatisiertem-scaffolding">Was versteht man unter automatisiertem „Scaffolding“?</h4>
-<p>Das blitzschnelle, automatisierte Erstellen von <strong>Grundgerüsten und Boilerplate-Code</strong> (z. B. HTML5-Struktur mit <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>, verknüpfter <code>style.css</code> und responsiven Containern) auf Basis eines einzigen Prompts.</p>
+<section id="welche-vorteile-bieten-template-literals-mit-backticks" class="level4 unnumbered unlisted flip-card">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="welche-vorteile-bieten-template-literals-mit-backticks">Welche Vorteile bieten Template Literals mit Backticks?</h4>
+<p>Sie ermöglichen <strong>String-Interpolation</strong> mit <code>${variable}</code>, wodurch Variablen direkt und übersichtlich in den Text eingebettet werden können, sowie <strong>mehrzeilige Texte</strong> ohne umständliche <code>+</code>-Verknüpfungen oder <code>\n</code>.</p>
 </section>
-<section id="was-sind-code-smells-und-wie-hilft-ki-beim-refactoring" class="level4 unnumbered unlisted flip-card">
-<h4 class="unnumbered unlisted anchored" data-anchor-id="was-sind-code-smells-und-wie-hilft-ki-beim-refactoring">Was sind „Code Smells“ und wie hilft KI beim Refactoring?</h4>
-<p>Code Smells sind strukturelle Schwachstellen im Code (z. B. veraltete Float-Hacks, redundanter CSS-Code, fehlende HTML5-Semantik). KI-Modelle erkennen diese Muster sofort und schlagen moderne Alternativen (z. B. CSS Grid, Flexbox, semantische Tags) vor.</p>
+<section id="welche-schleife-eignet-sich-am-besten-für-arrays" class="level4 unnumbered unlisted flip-card">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="welche-schleife-eignet-sich-am-besten-für-arrays">Welche Schleife eignet sich am besten für Arrays?</h4>
+<p>Die moderne <strong><code>for...of</code>-Schleife</strong> (<code>for (const element of array)</code>). Sie liest direkt die einzelnen Werte der Reihe nach aus, ohne dass man manuell mit einem Indexzähler (<code>i++</code>) hantieren muss.</p>
 </section>
-<section id="welche-rolle-spielt-das-sicherheits--und-permission-modell-bei-ki-agenten" class="level4 unnumbered unlisted flip-card">
-<h4 class="unnumbered unlisted anchored" data-anchor-id="welche-rolle-spielt-das-sicherheits--und-permission-modell-bei-ki-agenten">Welche Rolle spielt das Sicherheits- und Permission-Modell bei KI-Agenten?</h4>
-<p>Autonome Agenten fordern vor kritischen Aktionen (z. B. Lesen sensibler Pfade, Ausführen von Terminal-Befehlen, Datei-Änderungen) <strong>explizite Genehmigungen („Allow access?“, „Allow running command?“, „Accept all“)</strong> ein, um versehentliche Schäden zu verhindern.</p>
+<section id="was-ist-eine-arrow-function" class="level4 unnumbered unlisted flip-card">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="was-ist-eine-arrow-function">Was ist eine Arrow Function?</h4>
+<p>Eine moderne, kompakte Schreibweise für Funktionen in JavaScript (<code>=&gt;</code>). Bei Einzeilern kann das <code>function</code>-Schlüsselwort und sogar das <code>return</code> weggelassen werden: <code>const verdoppeln = x =&gt; x * 2;</code>.</p>
 </section>
-<section id="wie-verändert-ki-laut-bill-gates-den-arbeitsmarkt" class="level4 unnumbered unlisted flip-card">
-<h4 class="unnumbered unlisted anchored" data-anchor-id="wie-verändert-ki-laut-bill-gates-den-arbeitsmarkt">Wie verändert KI laut Bill Gates den Arbeitsmarkt?</h4>
-<p><em>„Computer machen uns nicht arbeitslos, aber sie verändern unseren Arbeitsalltag stark. Neue Technik nimmt uns viele schwere oder langweilige Aufgaben ab.“</em> Die Wertschöpfung verlagert sich von repetitiver Routinearbeit zu Konzeption, Steuerung und Qualitätsabnahme.</p>
+<section id="wie-greift-man-auf-eigenschaften-eines-javascript-objekts-zu" class="level4 unnumbered unlisted flip-card">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="wie-greift-man-auf-eigenschaften-eines-javascript-objekts-zu">Wie greift man auf Eigenschaften eines JavaScript-Objekts zu?</h4>
+<ul>
+<li><strong>Punkt-Notation (Standard):</strong> <code>user.name</code></li>
+<li><strong>Klammer-Notation (bei dynamischen Schlüsseln oder Sonderzeichen):</strong> <code>user[&quot;name&quot;]</code></li>
+</ul>
 </section>
-<section id="warum-darf-ki-generierter-webcode-niemals-ungeprüft-veröffentlicht-werden" class="level4 unnumbered unlisted flip-card">
-<h4 class="unnumbered unlisted anchored" data-anchor-id="warum-darf-ki-generierter-webcode-niemals-ungeprüft-veröffentlicht-werden">Warum darf KI-generierter Webcode niemals ungeprüft veröffentlicht werden?</h4>
-<p>KI garantiert keine Fehlerfreiheit. Der Entwickler muss generierten Code auf <strong>Broken Links (404), fehlerhafte Bildpfade, fehlende responsive Breakpoints, barrierefreie <code>alt</code>-Attribute und saubere CSS-Kaskaden</strong> verifizieren.</p>
+<section id="wozu-dienen-json-stringify-und-json-parse" class="level4 unnumbered unlisted flip-card">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="wozu-dienen-json-stringify-und-json-parse">Wozu dienen JSON stringify und JSON parse?</h4>
+<ul>
+<li><strong><code>JSON.stringify(obj)</code>:</strong> Wandelt ein JavaScript-Objekt in einen lesbaren <strong>Text-String (JSON)</strong> um (z. B. zum Speichern oder Versenden).</li>
+<li><strong><code>JSON.parse(text)</code>:</strong> Wandelt einen empfangenen <strong>JSON-Text</strong> wieder in ein echtes, nutzbares JavaScript-Objekt um.</li>
+</ul>
+</section>
+<section id="was-bewirkt-das-debugger-statement-im-code" class="level4 unnumbered unlisted flip-card">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="was-bewirkt-das-debugger-statement-im-code">Was bewirkt das debugger-Statement im Code?</h4>
+<p>Wenn die Entwicklertools (DevTools mit <span class="math inline">\(F12\)</span>) geöffnet sind, hält der Browser die Programmausführung an der Stelle des <code>debugger;</code>-Befehls sofort an, sodass man Variablenwerte in Ruhe untersuchen kann.</p>
 </section>
 <hr>
 </section>
 <section id="deep-dives-exkurse" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="deep-dives-exkurse"><span class="header-section-number">1.2</span> 2. Deep Dives &amp; Exkurse</h2>
-<details><summary>Deep Dive 1: Der Paradigmenwechsel – Vom Handwerk zur Orchestrierung</summary>
+<details><summary>Deep Dive 1: Das Dreigespann des Webs – HTML, CSS und JavaScript</summary>
 <ul>
-<li><strong>Handwerkliche Kodierung (Status Quo):</strong> Softwareentwicklung als zeilenweises Tippen von Syntax; Fokus auf Implementierungsdetails, Semikolons, Klammern und das manuelle Beheben von Syntaxfehlern.</li>
-<li><strong>KI-gestützte Orchestrierung (Zukunft):</strong> Der Entwickler agiert als „Dirigent“ (System-Orchestrator). Er definiert funktionale Anforderungen, steuert autonome KI-Agenten und validiert die generierten Ergebnisse.</li>
-<li><strong>Kernkompetenz:</strong> Das reine Auswendiglernen von Programmiersprachen und API-Befehlen tritt in den Hintergrund. Entscheidend wird die Fähigkeit zur <strong>präzisen Problemformulierung</strong> und ganzheitlichen <strong>Systemintegration</strong>.</li>
-</ul>
-</details>
-<details><summary>Deep Dive 2: Der 4-Stufen-Zyklus des Spec-Driven Development (SDD)</summary>
+<li><strong>HTML (Struktur):</strong> Definiert, <em>was</em> auf der Seite ist (Überschriften, Absätze, Buttons, Bilder).</li>
+<li><strong>CSS (Präsentation):</strong> Bestimmt, <em>wie</em> die Elemente aussehen (Farben, Abstände, Schriftarten, responsives Raster).</li>
+<li><strong>JavaScript (Verhalten &amp; Dynamik):</strong> Steuert, <em>wie</em> die Seite reagiert:
 <ul>
-<li><strong>1. Specify (Spezifizieren):</strong> Funktionale und nicht-funktionale Anforderungen exakt definieren (HTML5-Semantik, responsive Breakpoints, Farbkonzepte, Barrierefreiheit).</li>
-<li><strong>2. Plan (Planen):</strong> Architektur und Dateistruktur festlegen (HTML-Dateien, CSS-Stylesheets, Verzeichnisstruktur für Bild-Assets).</li>
-<li><strong>3. Tasks (Aufgaben strukturieren):</strong> Das Gesamtprojekt in atomare, logisch aufeinander aufbauende Teilaufgaben zerlegen.</li>
-<li><strong>4. Implement (Umsetzen &amp; Validieren):</strong> KI generiert Code schrittweise auf Basis der Tasks. Der Entwickler genehmigt Werkzeuge und prüft das Ergebnis.</li>
-<li><strong>Verschiebung der Wertschöpfung:</strong> Das automatisierte Scaffolding (Grundgerüst-Erstellung) von HTML, CSS und JavaScript spart bis zu 80 % der repetitiven Tipparbeit ein.</li>
-</ul>
-</details>
-<details><summary>Deep Dive 3: Die Rolle des „Digital Shepherd“ &amp; das Prinzip des algorithmischen Skeptizismus</summary>
-<ul>
-<li><strong>Menschliche Verantwortung:</strong> KI ist ein mächtiges Werkzeug, aber kein fehlerfreier Ersatz für fachliches Urteilsvermögen. Der Entwickler fungiert als „Digital Shepherd“ (Hirte), der den Output überwacht.</li>
-<li><strong>Prüfschwerpunkte des Hirten:</strong>
-<ul>
-<li><strong>Semantik:</strong> Werden echte HTML5-Strukturelemente (<code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;footer&gt;</code>) statt semantikfreier <code>&lt;div&gt;</code>-Verschachtelungen genutzt?</li>
-<li><strong>Barrierefreiheit (a11y):</strong> Enthalten alle Bilder beschreibende <code>alt</code>-Attribute?</li>
-<li><strong>Sicherheit &amp; Integrität:</strong> Werden keine unsicheren Skripte oder veraltete Bibliotheken eingebunden?</li>
-<li><strong>Pfade &amp; Assets:</strong> Stimmen relative Pfade und Groß-/Kleinschreibung aller Bilddateien?</li>
+<li>Auf Klicks, Tastatur- oder Mauseingaben reagieren (Event-Handling).</li>
+<li>Inhalte verändern oder nachladen, ohne die Seite neu aufzurufen.</li>
+<li>Berechnungen und Formularvalidierungen direkt im Browser durchführen.</li>
 </ul></li>
 </ul>
 </details>
-<details><summary>Deep Dive 4: Evolution der Entwicklungsumgebungen</summary>
+<details><summary>Deep Dive 2: Die Browser-Entwicklertools (DevTools) für Einsteiger</summary>
 <ul>
-<li><strong>Klassische Texteditoren (Notepad++, Editor):</strong> Reine Textdarstellung ohne Projektkontext; Syntax-Highlighting, aber keinerlei Verständnis über Zusammenhänge zwischen HTML- und CSS-Dateien.</li>
-<li><strong>Erweiterte IDEs mit Autocomplete (VS Code + Copilot):</strong> Kontextuelle Code-Vervollständigung auf Zeilenebene; unterstützt beim Tippen, steuert aber noch keine autonomen Multi-File-Workflows.</li>
-<li><strong>KI-native IDEs (Google Antigravity, Cursor):</strong> Ganzheitliches Repository-Bewusstsein. Der integrierte Agent kann eigenständig Projektstrukturen analysieren, neue Dateien anlegen, Stylesheets modifizieren und Terminal-Befehle vorschlagen.</li>
-</ul>
-</details>
-<details><summary>Deep Dive 5: Arbeitsbereich &amp; Sicherheitsmodell in Google Antigravity</summary>
+<li><strong>Öffnen:</strong> Taste <code>F12</code> oder <code>Rechtsklick -&gt; Untersuchen</code>.</li>
+<li><strong>Console-Tab:</strong>
 <ul>
-<li><strong>Die drei Hauptfenster:</strong>
-<ul>
-<li><strong>Explorer:</strong> Verzeichnisbaum des aktuellen Projektordners (z. B. Ordner <code>09</code> mit <code>index.html</code> und <code>/img/</code>).</li>
-<li><strong>Inhaltsfenster (Editor):</strong> Quellcode-Editor für HTML, CSS und Markdown mit integrierter Diff-Vorschau.</li>
-<li><strong>Agentenfenster:</strong> Die interaktive Steuerzentrale, in der Prompts eingegeben, Pläne diskutiert und Befehle bestätigt werden.</li>
+<li><code>console.log(&quot;Wert:&quot;, x)</code> gibt Werte im Log-Fenster aus.</li>
+<li><code>console.error(&quot;Fehler!&quot;)</code> hebt Probleme rot hervor.</li>
+<li>Interaktives Ausprobieren: Man kann beliebigen JS-Code direkt eintippen und mit Enter ausführen.</li>
 </ul></li>
-<li><strong>Permission-Modell:</strong>
+<li><strong>Sources-Tab &amp; Breakpoints:</strong>
 <ul>
-<li><code>Allow read access to this path?</code>: Bestätigung für Dateilesevorgänge.</li>
-<li><code>Allow running this command?</code>: Freigabe für Terminal- und Build-Befehle.</li>
-<li><code>Accept all</code>: Vollständige Übernahme der vorgeschlagenen Datei-Änderungen.</li>
+<li>Klick auf eine Zeilennummer setzt einen <strong>Breakpoint</strong> (Haltepunkt).</li>
+<li>Bei Auslösung stoppt das Skript: Man kann mit der Maus über Variablen fahren, um deren aktuellen Inhalt live zu sehen.</li>
+<li><strong><span class="math inline">\(F10\)</span> (Step Over):</strong> Führt die nächste Zeile aus.</li>
+<li><strong><span class="math inline">\(F8\)</span> (Resume):</strong> Lässt das Skript normal weiterlaufen.</li>
 </ul></li>
 </ul>
 </details>
-<details><summary>Deep Dive 6: Kontextbewusstsein &amp; Agentic Rules</summary>
+<details><summary>Deep Dive 3: Die 3 häufigsten Fehlermeldungen verstehen</summary>
+<ol type="1">
+<li><strong><code>ReferenceError: x is not defined</code></strong>
 <ul>
-<li><strong>Agentic Rules (<code>.cursorrules</code>, <code>GEMINI.md</code>, <code>AGENTS.md</code>):</strong> Projektbezogene Konfigurationsdateien, die der KI dauerhafte Architektur- und Codierrichtlinien vermitteln.</li>
-<li><strong>Typische Regel-Inhalte für Webprojekte:</strong>
+<li><strong>Bedeutung:</strong> Eine Variable mit dem Namen <code>x</code> existiert nicht oder der Name wurde falsch geschrieben (Tippfehler!).</li>
+</ul></li>
+<li><strong><code>TypeError: Cannot read properties of null / undefined</code></strong>
 <ul>
-<li><em>„Verwende immer valides HTML5 mit korrekter Semantik.“</em></li>
-<li><em>„Verwende für Layouts ausschließlich CSS Flexbox oder CSS Grid, niemals Float-Hacks.“</em></li>
-<li><em>„Schreibe alle Bilddateinamen exakt in Klein-/Großschreibung wie im Dateisystem vorhanden.“</em></li>
-<li><em>„Nutze für Unterseiten dieselbe style.css wie für die Hauptseite.“</em></li>
+<li><strong>Bedeutung:</strong> Es wird versucht, auf eine Eigenschaft zuzugreifen, obwohl das Element gar nicht existiert (z. B. <code>document.getElementById(&quot;falscheId&quot;).value</code>).</li>
+</ul></li>
+<li><strong><code>SyntaxError: Unexpected token</code></strong>
+<ul>
+<li><strong>Bedeutung:</strong> Ein formaler Schreibfehler im Code, z. B. eine vergessene schließende Klammer <code>)</code> oder ein fehlendes Anführungszeichen.</li>
+</ul></li>
+</ol>
+</details>
+<details><summary>Deep Dive 4: Skripteinbindung – Warum das defer-Attribut Best Practice ist</summary>
+<ul>
+<li><strong>Problem ohne defer:</strong>
+<ul>
+<li>Steht ein Skript-Tag ohne Zusatzattribute im Head-Bereich, lädt der Browser das Skript sofort herunter und führt es aus. Zu diesem Zeitpunkt ist der Body-Bereich aber noch gar nicht gelesen <span class="math inline">\(\rightarrow\)</span> <code>document.getElementById()</code> findet kein Element und liefert <code>null</code>.</li>
+</ul></li>
+<li><strong>Die moderne Lösung mit defer:</strong>
+<ul>
+<li>Wird das Skript mit <code>defer</code> im Head-Bereich platziert (<code>&lt;script defer src=&quot;app.js&quot;&gt;&lt;/script&gt;</code>), wird das Skript während des HTML-Aufbaus im Hintergrund heruntergeladen und <strong>erst nach Fertigstellung des HTML-Baums</strong> ausgeführt.</li>
 </ul></li>
 </ul>
 </details>
-<details><summary>Deep Dive 7: Code Smells erkennen &amp; KI-gestütztes Refactoring</summary>
+<details><summary>Deep Dive 5: Variablen deklarieren – const vs. let vs. altes var</summary>
 <ul>
-<li><strong>Code Smells:</strong> Veraltete, ineffiziente oder schwer wartbare Konstrukte im Quellcode.</li>
-<li><strong>Klassische Beispiele im Webbereich:</strong>
+<li><strong><code>const</code>:</strong>
 <ul>
-<li><code>float: left;</code> mit <code>.clear { clear: both; }</code> für Spaltenlayouts <span class="math inline">\(\rightarrow\)</span> Refactoring zu <code>display: flex;</code> oder <code>display: grid;</code>.</li>
-<li>Feste Breiten in Pixeln (<code>width: 960px;</code>) <span class="math inline">\(\rightarrow\)</span> Refactoring zu fluider Breite (<code>width: 100%; max-width: 1200px;</code>).</li>
-<li>Inline-Styles (<code>style=&quot;color: red;&quot;</code>) <span class="math inline">\(\rightarrow\)</span> Auslagerung in zentrale CSS-Klassen.</li>
+<li>Sollte für <strong>90 % aller Variablen</strong> verwendet werden.</li>
+<li>Verhindert, dass Variablen versehentlich überschrieben werden (<code>const steuersatz = 0.19;</code>).</li>
 </ul></li>
-<li><strong>KI-Refactoring:</strong> KI-Modelle identifizieren solche Muster in Sekundenschnelle und überführen sie automatisiert in moderne Webstandards.</li>
+<li><strong><code>let</code>:</strong>
+<ul>
+<li>Wird verwendet, wenn sich der Wert im Programmablauf ändert (<code>let zaehler = 0; zaehler++;</code>).</li>
+</ul></li>
+<li><strong>Warum kein var mehr?</strong>
+<ul>
+<li><code>var</code> gilt heute als veraltet: Es ignoriert geschweifte Klammern (<code>if</code>, <code>for</code>) und „leckt“ in äußere Bereiche durch, was zu schwer auffindbaren Fehlern führt.</li>
+</ul></li>
 </ul>
 </details>
-<details><summary>Deep Dive 8: Anatomie eines perfekten Web-Prompts</summary>
-<p>Ein didaktisch fundierter Prompt zur Generierung von Webseitenkomponenten umfasst: 1. <strong>Rolle &amp; Kontext:</strong> Festlegung des Entwicklerprofils und des Projektkontexts (z. B. Wohnmobil-Service-Website). 2. <strong>Aufgabenstellung:</strong> Eindeutiges Ziel (z. B. Erstellen der Unterseite <code>homesweethome.html</code> auf Basis der <code>index.html</code>). 3. <strong>Asset-Vorgaben:</strong> Exakte Benennung aller einzubindenden Bilddateien aus <code>/img/</code> und dem Unterordner <code>/img/1600/</code>. 4. <strong>Architektur-Constraints:</strong> Vorgabe von HTML5-Semantik (<code>&lt;article&gt;</code> für jeden Bereich), Verknüpfung mit bestehender <code>style.css</code> und Vermeidung redundanter Styles. 5. <strong>Sorgfaltsgebot:</strong> Vor dem Absenden den Prompt mehrmals sorgfältig durchlesen!</p>
+<details><summary>Deep Dive 6: Primitive Datentypen im Überblick</summary>
+<p>JavaScript unterscheidet grundlegende Datentypen: - <strong><code>string</code>:</strong> Text in Anführungszeichen (<code>&quot;Hallo&quot;</code>, <code>&#39;Welt&#39;</code>). - <strong><code>number</code>:</strong> Ganze Zahlen und Kommazahlen mit Punkt (<code>42</code>, <code>19.99</code>). - <strong><code>boolean</code>:</strong> Wahrheitswerte (<code>true</code> oder <code>false</code>). - <strong><code>undefined</code>:</strong> Variable wurde angelegt, hat aber noch keinen Wert erhalten (<code>let x;</code>). - <strong><code>null</code>:</strong> Bewusste Kennzeichnung für „kein Wert vorhanden“. - <strong>Typprüfung:</strong> Mit <code>typeof variable</code> lässt sich der Typ ermitteln (z. B. <code>typeof 42</code> <span class="math inline">\(\rightarrow\)</span> <code>&quot;number&quot;</code>).</p>
 </details>
-<details><summary>Deep Dive 9: Sub-Navigation &amp; Scroll-Anker per Prompt</summary>
+<details><summary>Deep Dive 7: Strings verarbeiten &amp; Template Literals</summary>
 <ul>
-<li><p><strong>Didaktische Herausforderung:</strong> Sehr lange Inhaltsseiten erfordern eine strukturierte Subnavigation, um gezieltes Anspringen von Abschnitten zu ermöglichen.</p></li>
-<li><p><strong>Umsetzung im HTML:</strong></p>
+<li><strong>Nützliche String-Eigenschaften &amp; Methoden:</strong>
 <ul>
-<li>Jeder <code>&lt;article&gt;</code> enthält eine Überschrift mit eindeutiger ID oder bildet selbst das Ankerziel (z. B. <code>&lt;h2 id=&quot;buero&quot;&gt;Das Büro&lt;/h2&gt;</code>).</li>
-<li>Die Subnavigation listet alle Punkte als Hyperlinks mit Hash-Referenz auf (<code>&lt;a href=&quot;#buero&quot;&gt;Das Büro&lt;/a&gt;</code>).</li>
-<li>Am Ende jedes Artikels wird ein Rücksprung-Link platziert (<code>&lt;a href=&quot;#subnavi&quot;&gt;nach oben&lt;/a&gt;</code>).</li>
+<li><code>text.length</code> <span class="math inline">\(\rightarrow\)</span> Gibt die Anzahl der Zeichen zurück (<code>&quot;Auto&quot;.length</code> ist <code>4</code>).</li>
+<li><code>text.toUpperCase()</code> / <code>text.toLowerCase()</code> <span class="math inline">\(\rightarrow\)</span> Text in Groß-/Kleinbuchstaben wandeln.</li>
+<li><code>text.includes(&quot;suchbegriff&quot;)</code> <span class="math inline">\(\rightarrow\)</span> Prüft, ob ein Wort im Text vorkommt (<code>true</code>/<code>false</code>).</li>
+<li><code>text.trim()</code> <span class="math inline">\(\rightarrow\)</span> Entfernt überflüssige Leerzeichen am Anfang und Ende.</li>
 </ul></li>
-<li><p><strong>Styling-Vorgabe (<code>style.css</code>):</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.subnavi</span> {</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">list-style</span><span class="ch">:</span> <span class="dv">none</span><span class="op">;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-color</span><span class="ch">:</span> <span class="cn">#ffffff</span><span class="op">;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">#000000</span><span class="op">;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">padding</span><span class="ch">:</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">.subnavi</span> li {</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">border-bottom</span><span class="ch">:</span> <span class="dv">1</span><span class="dt">px</span> <span class="dv">dotted</span> <span class="cn">#000000</span><span class="op">;</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">padding</span><span class="ch">:</span> <span class="dv">8</span><span class="dt">px</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><strong>Template Literals (Backticks <code>`</code>):</strong>
+<ul>
+<li>Variablen einbetten: <code>`Hallo ${vorname} ${nachname}!`</code></li>
+<li>Berechnungen im Text: <code>`Gesamt: ${preis * anzahl} Euro`</code></li>
+</ul></li>
 </ul>
 </details>
-<details><summary>Deep Dive 10: Der Qualitätscheck für KI-generierten Webcode</summary>
-<p>Nach dem Ausführen des Prompts („Feuer frei!“) folgt die unverzichtbare Qualitätskontrolle: 1. <strong>Überprüfen der Inhalte:</strong> Wurden alle 8 geforderten Fahrzeugbereiche vollständig abgebildet? 2. <strong>Testen der Verlinkungen:</strong> Funktionieren alle Anchor-Links der Subnavigation und die „Nach oben“-Rücksprünge fehlerfrei? 3. <strong>Prüfung der Bildpfade (404-Check):</strong> Werden alle Bilder (<code>dasBuero.jpg</code>, <code>dieWerkstatt.jpg</code>, Ordner <code>1600</code> etc.) korrekt geladen? 4. <strong>Responsives Verhalten:</strong> Skaliert die Unterseite sauber auf Smartphone-, Tablet- und Desktop-Viewports?</p>
+<details><summary>Deep Dive 8: Entscheidungen treffen – if, switch und Ternärer Operator</summary>
+<ul>
+<li><strong><code>if / else if / else</code>:</strong>
+<ul>
+<li>Für Wertebereiche und Bedingungen:</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (note <span class="op">&lt;=</span> <span class="fl">1.5</span>) { <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;Sehr gut&quot;</span>)<span class="op">;</span> }</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> <span class="cf">if</span> (note <span class="op">&lt;=</span> <span class="fl">4.0</span>) { <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;Bestanden&quot;</span>)<span class="op">;</span> }</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> { <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;Nicht bestanden&quot;</span>)<span class="op">;</span> }</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><strong><code>switch / case</code>:</strong>
+<ul>
+<li>Für den exakten Abgleich eines Werts (z. B. Menüauswahl, Wochentage). Wichtig: Jeder Fall benötigt ein <code>break;</code>, um das Durchfallen zu stoppen.</li>
+</ul></li>
+<li><strong>Ternärer Operator (<code>Bedingung ? WennJa : WennNein</code>):</strong>
+<ul>
+<li>Kompakter Einzeiler für Zuweisungen: <code>const status = alter &gt;= 18 ? &quot;Volljährig&quot; : &quot;Minderjährig&quot;;</code></li>
+</ul></li>
+</ul>
 </details>
-<details><summary>Deep Dive 11: Zukunfts- und Arbeitsmarktausblick nach Bill Gates</summary>
+<details><summary>Deep Dive 9: Schleifen – Listen durchlaufen leicht gemacht</summary>
 <ul>
-<li><strong>Das Zitat:</strong> <em>„Computer machen uns nicht arbeitslos, aber sie verändern unseren Arbeitsalltag stark. Neue Technik nimmt uns viele schwere oder langweilige Aufgaben ab.“</em></li>
-<li><strong>Bedeutung für Webentwickler:</strong>
+<li><p><strong><code>for...of</code> (Empfohlen für Arrays):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> farben <span class="op">=</span> [<span class="st">&quot;Rot&quot;</span><span class="op">,</span> <span class="st">&quot;Grün&quot;</span><span class="op">,</span> <span class="st">&quot;Blau&quot;</span>]<span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (<span class="kw">const</span> farbe <span class="kw">of</span> farben) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`Farbe: </span><span class="sc">${</span>farbe<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Klassische <code>for</code>-Zählschleife:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;=</span> <span class="dv">5</span><span class="op">;</span> i<span class="op">++</span>) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`Zahl: </span><span class="sc">${</span>i<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Schleifensteuerung:</strong></p>
 <ul>
-<li>Keine Angst vor Automatisierung: Die Nachfrage nach durchdachten, barrierefreien und sicheren Webanwendungen steigt kontinuierlich.</li>
-<li>Höherwertige Tätigkeiten: Weniger repetitive Tipparbeit, mehr Fokus auf User Experience (UX), Systemarchitektur, Datenschutz und innovative Interaktionskonzepte.</li>
+<li><code>break;</code> bricht die Schleife sofort komplett ab.</li>
+<li><code>continue;</code> überspringt nur den aktuellen Durchlauf und macht beim nächsten Element weiter.</li>
+</ul></li>
+</ul>
+</details>
+<details><summary>Deep Dive 10: Funktionen &amp; Arrow Functions für Einsteiger</summary>
+<ul>
+<li><p><strong>Klassische Funktionsdeklaration:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">berechneQuadrat</span>(zahl) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> zahl <span class="op">*</span> zahl<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Moderne Arrow Function (<code>=&gt;</code>):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> berechneQuadrat <span class="op">=</span> zahl <span class="kw">=&gt;</span> zahl <span class="op">*</span> zahl<span class="op">;</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Standard-Parameter:</strong></p>
+<ul>
+<li><code>function begruessung(name = &quot;Gast&quot;) { return</code>Hallo ${name}!<code>; }</code></li>
+<li>Verhindert Fehler, wenn beim Aufruf kein Name übergeben wird.</li>
+</ul></li>
+</ul>
+</details>
+<details><summary>Deep Dive 11: Objekte als strukturierte Datenbehälter</summary>
+<ul>
+<li><p>Ein Objekt bündelt zusammengehörige Eigenschaften als Schlüssel-Wert-Paare (<em>Key-Value-Pairs</em>):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> auto <span class="op">=</span> {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">marke</span><span class="op">:</span> <span class="st">&quot;VW&quot;</span><span class="op">,</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">modell</span><span class="op">:</span> <span class="st">&quot;Caravan&quot;</span><span class="op">,</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">baujahr</span><span class="op">:</span> <span class="dv">2024</span><span class="op">,</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">istVerfuegbar</span><span class="op">:</span> <span class="kw">true</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Zugriff:</strong> <code>auto.marke</code> liefert <code>&quot;VW&quot;</code>.</p></li>
+<li><p><strong>Methoden:</strong> Funktionen innerhalb von Objekten können mit <code>this</code> auf die eigenen Eigenschaften zugreifen.</p></li>
+</ul>
+</details>
+<details><summary>Deep Dive 12: Arrays &amp; einfache Datenoperationen</summary>
+<ul>
+<li><strong>Array erstellen:</strong> <code>const tiere = [&quot;Hund&quot;, &quot;Katze&quot;, &quot;Maus&quot;];</code></li>
+<li><strong>0-basierter Index:</strong> Das erste Element liegt immer bei Index <code>0</code> (<code>tiere[0]</code> ist <code>&quot;Hund&quot;</code>).</li>
+<li><strong>Elemente zählen:</strong> <code>tiere.length</code> liefert <code>3</code>.</li>
+<li><strong>Einfache Methoden:</strong>
+<ul>
+<li><code>tiere.includes(&quot;Katze&quot;)</code> <span class="math inline">\(\rightarrow\)</span> prüft, ob das Tier in der Liste ist (<code>true</code>).</li>
+<li><code>tiere.map(t =&gt; t.toUpperCase())</code> <span class="math inline">\(\rightarrow\)</span> erzeugt ein neues Array mit allen Namen in Großbuchstaben.</li>
+<li><code>tiere.filter(t =&gt; t.startsWith(&quot;K&quot;))</code> <span class="math inline">\(\rightarrow\)</span> filtert alle Tiere heraus, die mit “K” beginnen.</li>
 </ul></li>
 </ul>
 </details>
 <hr>
 </section>
-<section id="fallstudien-reflexionsaufgaben" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="fallstudien-reflexionsaufgaben"><span class="header-section-number">1.3</span> 3. Fallstudien &amp; Reflexionsaufgaben</h2>
-<section id="fallbeispiel-a-der-wandel-vom-coder-zum-system-orchestrator" class="level4 unnumbered unlisted case-study">
-<h4 class="unnumbered unlisted anchored" data-anchor-id="fallbeispiel-a-der-wandel-vom-coder-zum-system-orchestrator">Fallbeispiel A: Der Wandel vom Coder zum System-Orchestrator</h4>
-<p><strong>Szenario:</strong> Ein Junior-Entwickler verbringt seinen Arbeitsalltag bisher damit, HTML-Boilerplate manuell abzutippen, CSS-Regeln per Hand zu kopieren und Tippfehler mühsam im Texteditor zu suchen. Nach dem Wechsel auf eine KI-native IDE wie Google Antigravity ändert sich sein Aufgabenprofil grundlegend.</p>
-<p><strong>Arbeitsanweisung &amp; Aufgabenstellung:</strong> 1. Erstellen Sie eine strukturierte Gegenüberstellung des traditionellen Aufgabenprofils („Handwerkliche Kodierung“) mit dem modernen Rollenbild („KI-gestützte Orchestrierung“) bezüglich Zeitbudget, Fehlerfokus und Hauptverantwortung. 2. Erläutern Sie anhand der Metapher des „Dirigenten“, welche konkrete Leitungs- und Steuerungsfunktion der Entwickler im agentischen Workflow übernimmt. 3. Begründen Sie, warum fundierte Web-Grundlagen (HTML5-Semantik, CSS-Kaskade, Pfadhierarchien) für den Entwickler auch bei vollständiger KI-Generierung unverzichtbar bleiben.</p>
+<section id="fallstudien-praxis-szenarien" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="fallstudien-praxis-szenarien"><span class="header-section-number">1.3</span> 3. Fallstudien &amp; Praxis-Szenarien</h2>
+<section id="fallbeispiel-a-der-typen-bug-beim-formular-rechner" class="level4 unnumbered unlisted case-study">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="fallbeispiel-a-der-typen-bug-beim-formular-rechner">Fallbeispiel A: Der Typen-Bug beim Formular-Rechner</h4>
+<p><strong>Szenario:</strong> Ein Webentwickler programmiert einen einfachen Preisrechner. Der Benutzer gibt im Formularfeld einen Betrag von <code>500</code> ein (<code>&lt;input id=&quot;preis&quot; value=&quot;500&quot;&gt;</code>). Das Skript soll eine Servicepauschale von <code>50</code> Euro addieren:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> eingabe <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">&quot;preis&quot;</span>)<span class="op">.</span><span class="at">value</span><span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> pauschale <span class="op">=</span> <span class="dv">50</span><span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> gesamt <span class="op">=</span> eingabe <span class="op">+</span> pauschale<span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;Gesamtpreis:&quot;</span><span class="op">,</span> gesamt)<span class="op">;</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In der Konsole erscheint jedoch die fehlerhafte Ausgabe: <code>Gesamtpreis: 50050</code>.</p>
+<p><strong>Arbeitsanweisung &amp; Aufgabenstellung:</strong> 1. Erklären Sie, warum <code>document.getElementById(&quot;preis&quot;).value</code> immer einen Wert vom Typ <code>string</code> liefert und was der <code>+</code>-Operator bei Zeichenketten bewirkt. 2. Beschreiben Sie, wie Sie in der Konsole mit dem Befehl <code>typeof</code> den Datentyp der Variablen <code>eingabe</code> überprüfen können. 3. Geben Sie die korrigierte Codezeile an, mit der aus dem Text eine Zahl erzeugt und die korrekte Summe <code>550</code> berechnet wird.</p>
 <div class="proof solution">
-<p><span class="proof-title"><em>Lösung</em>. </span><strong>Musterlösung:</strong> 1. <strong>Vergleich der Aufgabenprofile:</strong> - <strong>Handwerkliche Kodierung (Status Quo):</strong> Ca. 80 % der Arbeitszeit fließt in das zeilenweise Schreiben von Syntax und das Beheben von Tipp-/Syntaxfehlern; 20 % in Konzeption. - <strong>KI-gestützte Orchestrierung (Zukunft):</strong> Ca. 20 % der Zeit wird für Prompt-Formulierung und Scaffolding benötigt; 80 % der Zeit fließt in Anforderungsspezifikation (SDD), Multi-File-Architektur, Barrierefreiheits-Audits und Code-Validierung. 2. <strong>Die Dirigenten-Rolle:</strong> - Der Entwickler schreibt nicht mehr jeden Ton (Codezeile) selbst, sondern leitet das KI-Ensemble an, gibt Takt und Architektur vor, instruiert spezialisierte Agenten und korrigiert Dissonanzen (Halluzinationen, falsche Tags). 3. <strong>Notwendigkeit fundierter Web-Grundlagen:</strong> - Ein Dirigent muss die Partitur lesen können. Wer HTML-Semantik, CSS-Spezifität und Pfadhierarchien nicht beherrscht, kann fehlerhaften oder unsauberen KI-Output weder identifizieren noch korrigieren.</p>
+<p><span class="proof-title"><em>Lösung</em>. </span><strong>Musterlösung:</strong> 1. <strong>Ursache des Fehlers:</strong> - In HTML und JavaScript liefert die Eigenschaft <code>.value</code> eines Input-Feldes grundsätzlich immer eine Zeichenkette (<strong><code>string</code></strong>), selbst wenn im HTML <code>type=&quot;number&quot;</code> gesetzt ist. - Der <code>+</code>-Operator führt bei Strings eine <strong>Text-Verknüpfung (Konkatenation)</strong> durch: <code>&quot;500&quot; + 50</code> wird zu <code>&quot;50050&quot;</code> anstatt mathematisch addiert. 2. <strong>Überprüfung mit <code>typeof</code>:</strong> - In der Browser-Konsole (<code>F12</code>) eingeben: <code>console.log(typeof eingabe);</code> - Die Konsole gibt <code>&quot;string&quot;</code> aus, was den Fehler sofort sichtbar macht. 3. <strong>Korrektur:</strong> - Den String vor der Addition mit <code>Number()</code> explizit in eine Zahl umwandeln: <code>javascript      const gesamt = Number(eingabe) + pauschale; // 550</code></p>
 </div>
 </section>
-<section id="fallbeispiel-b-praxisprojekt-homesweethome-unterseitenerstellung-per-prompt" class="level4 unnumbered unlisted case-study">
-<h4 class="unnumbered unlisted anchored" data-anchor-id="fallbeispiel-b-praxisprojekt-homesweethome-unterseitenerstellung-per-prompt">Fallbeispiel B: Praxisprojekt „HomeSweetHome“ – Unterseitenerstellung per Prompt</h4>
-<p><strong>Szenario:</strong> Für das Webprojekt „Maiks Mobiler Caravan-Service“ soll auf Basis der bestehenden <code>index.html</code> und der Bilddateien im Ordner <code>/img/</code> eine neue Unterseite namens <code>homesweethome.html</code> generiert werden. Die Seite soll 8 Fahrzeugbereiche vorstellen (Büro, Führerhaus, Garage, Sanitäranlagen, Werkstatt, LKW außen, Küche, Wohnen/Schlafen) und auf die Einzelbilder sowie den Unterordner <code>/img/1600/</code> zugreifen.</p>
-<p><strong>Arbeitsanweisung &amp; Aufgabenstellung:</strong> 1. Generieren Sie einen vollständigen, präzisen Initial-Prompt für die Antigravity IDE, der alle Anforderungen an HTML5-Semantik, Einbindung der vorhandenen <code>style.css</code>, Barrierefreiheit (<code>alt</code>-Attribute) und die 8 Bild-Assets verbindlich abdeckt. 2. Beschreiben Sie die erforderlichen Handlungsschritte des Entwicklers in der Google Antigravity IDE von der Projektanalyse im Explorer über die Rechtevergabe („Allow read access“, „Allow running command“) bis zur finalen Übernahme („Accept all“). 3. Formulieren Sie das 3-stufige Prüfprotokoll („Fertig ist die Unterseite!“), das der Entwickler nach der Generierung im Browser durchführen muss.</p>
+<section id="fallbeispiel-b-das-defer-problem-bei-der-skripteinbindung" class="level4 unnumbered unlisted case-study">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="fallbeispiel-b-das-defer-problem-bei-der-skripteinbindung">Fallbeispiel B: Das defer-Problem bei der Skripteinbindung</h4>
+<p><strong>Szenario:</strong> Ein Einsteiger bindet sein JavaScript-Skript im <code>&lt;head&gt;</code> der HTML-Datei ein:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">&quot;de&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> charset</span><span class="op">=</span><span class="st">&quot;UTF-8&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Meine Seite<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;main.js&quot;</span><span class="dt">&gt;&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> id</span><span class="op">=</span><span class="st">&quot;meinButton&quot;</span><span class="dt">&gt;</span>Klick mich<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In der Datei <code>main.js</code> steht:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> btn <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">&quot;meinButton&quot;</span>)<span class="op">;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>btn<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&quot;click&quot;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">alert</span>(<span class="st">&quot;Button wurde geklickt!&quot;</span>)<span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Beim Laden der Seite erscheint in der Konsole sofort der Fehler: <code>TypeError: Cannot read properties of null (reading &#39;addEventListener&#39;)</code> und der Button reagiert nicht.</p>
+<p><strong>Arbeitsanweisung &amp; Aufgabenstellung:</strong> 1. Erläutern Sie, warum <code>document.getElementById(&quot;meinButton&quot;)</code> den Wert <code>null</code> zurückliefert, wenn das Skript im Head-Bereich ohne Zusatzattribute geladen wird. 2. Erklären Sie die Funktionsweise des <code>defer</code>-Attributs und warum es dieses Problem löst. 3. Schreiben Sie die korrigierte HTML-Zeile für das Script-Tag.</p>
 <div class="proof solution">
-<p><span class="proof-title"><em>Lösung</em>. </span><strong>Musterlösung:</strong> 1. <strong>Initialer Prompt zur Unterseitengenerierung:</strong> &gt; <em>„Erstelle auf Basis der bestehenden index.html eine neue, responsive Unterseite homesweethome.html. Binde die vorhandene style.css ein. Erstelle im main-Bereich 8 semantische article-Elemente für: Büro, Führerhaus, Garage, Sanitäranlagen, Werkstatt, LKW außen, Küche sowie Wohnen und Schlafen. Binde jeweils die passenden Bilder aus dem Ordner img/ ein (dasBuero.jpg, dasFuehrerHaus.jpg, dieGarage.jpg, dieSanitaerenAnlagen.jpg, dieWerkstatt.jpg, maiksLKWaussen.jpg, willkommenInDerKueche.jpg, wohnenUndSchlafen.jpg sowie Bilder aus dem Ordner 1600). Versehen Sie alle Bilder mit barrierefreien alt-Attributen und strukturieren Sie jeden Artikel mit einer h2-Überschrift und aussagekräftigen Textabschnitten.“</em> 2. <strong>Handlungsschritte in Google Antigravity:</strong> - <strong>Schritt 1 (Explorer):</strong> Projektordner <code>09</code> öffnen, Dateistruktur analysieren und sicherstellen, dass alle Bild-Assets im Ordner <code>img/</code> vorhanden sind. - <strong>Schritt 2 (Agentenfenster):</strong> Den Prompt eingeben, vor dem Absenden mehrmals sorgfältig durchlesen und mit „Feuer frei!“ starten. - <strong>Schritt 3 (Permissions):</strong> Berechtigungsanfragen des Agenten („Allow read access to this path?“, „Allow running command?“) aufmerksam prüfen und bestätigen; nach Prüfung des Quelltext-Diffs im Inhaltsfenster mit „Accept all“ übernehmen. 3. <strong>3-stufiges Prüfprotokoll:</strong> - <strong>1. Überprüfen der Inhalte:</strong> Wurden alle 8 Fahrzeugbereiche vollständig mit Überschriften und Texten generiert? - <strong>2. Testen der Verlinkungen:</strong> Funktionieren alle relativen Links zur Hauptseite und zu Unterabschnitten? - <strong>3. Lesen der Inhalte &amp; Bildkontrolle:</strong> Werden alle Bilder geladen (keine 404-Fehler durch Case-Sensitivity) und sind die generierten Texte fachlich korrekt?</p>
+<p><span class="proof-title"><em>Lösung</em>. </span><strong>Musterlösung:</strong> 1. <strong>Ursache:</strong> - Der Browser liest und verarbeitet HTML-Dokumente von oben nach unten (Parsing). - Trifft er im Head-Bereich auf ein normales <code>&lt;script src=&quot;main.js&quot;&gt;</code>, stoppt er das HTML-Parsing und führt das Skript sofort aus. Zu diesem Zeitpunkt existiert das Button-Element im Body noch gar nicht im DOM-Speicher <span class="math inline">\(\rightarrow\)</span> die Suche liefert <code>null</code>. 2. <strong>Lösung mit defer:</strong> - Das Attribut <code>defer</code> weist den Browser an, das Skript zwar parallel im Hintergrund herunterzuladen, es aber <strong>erst dann auszuführen, wenn das gesamte HTML-Dokument vollständig aufgebaut ist</strong>. Dadurch ist sichergestellt, dass der Button existiert. 3. <strong>Korrigierte HTML-Zeile:</strong> <code>html    &lt;script defer src=&quot;main.js&quot;&gt;&lt;/script&gt;</code></p>
 </div>
 </section>
-<section id="fallbeispiel-c-der-sdd-zyklus-für-ein-interaktives-caravan-buchungsformular" class="level4 unnumbered unlisted case-study">
-<h4 class="unnumbered unlisted anchored" data-anchor-id="fallbeispiel-c-der-sdd-zyklus-für-ein-interaktives-caravan-buchungsformular">Fallbeispiel C: Der SDD-Zyklus für ein interaktives Caravan-Buchungsformular</h4>
-<p><strong>Szenario:</strong> Ein Kunde wünscht ein mehrstufiges Buchungsformular für die mobile Werkstatt. Das Entwicklerteam entscheidet sich für den Spec-Driven Development (SDD) Workflow (<code>Specify</code> <span class="math inline">\(\rightarrow\)</span> <code>Plan</code> <span class="math inline">\(\rightarrow\)</span> <code>Tasks</code> <span class="math inline">\(\rightarrow\)</span> <code>Implement</code>).</p>
-<p><strong>Arbeitsanweisung &amp; Aufgabenstellung:</strong> 1. Konkretisieren Sie für dieses Formularprojekt die 4 Phasen des SDD-Zyklus mit jeweils mindestens zwei konkreten technischen Teilschritten bzw. Artefakten. 2. Formulieren Sie eine verbindliche Architektur-Regel für die Konfigurationsdatei <code>GEMINI.md</code> / <code>AGENTS.md</code>, die sicherstellt, dass die KI bei der Formularerstellung stets barrierefreie <code>&lt;label&gt;</code>-Verknüpfungen und CSS Grid verwendet. 3. Erläutern Sie das Risiko nach dem Prinzip „Garbage In, Garbage Out“, wenn die Phase <code>Specify</code> übersprungen und direkt mit der Implementierung begonnen wird.</p>
+<section id="fallbeispiel-c-variablenwahl-für-einsteiger-const-vs.-let" class="level4 unnumbered unlisted case-study">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="fallbeispiel-c-variablenwahl-für-einsteiger-const-vs.-let">Fallbeispiel C: Variablenwahl für Einsteiger – const vs. let</h4>
+<p><strong>Szenario:</strong> Ein Programm berechnet den Bruttopreis für mehrere Artikel in einem Online-Shop. Ein Entwickler hat folgenden Code mit veraltetem <code>var</code> geschrieben:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> mwstSatz <span class="op">=</span> <span class="fl">0.19</span><span class="op">;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> gesamtSumme <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (<span class="kw">var</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">3</span><span class="op">;</span> i<span class="op">++</span>) {</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> nettoPreis <span class="op">=</span> <span class="dv">100</span><span class="op">;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> bruttoPreis <span class="op">=</span> nettoPreis <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> mwstSatz)<span class="op">;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    gesamtSumme <span class="op">=</span> gesamtSumme <span class="op">+</span> bruttoPreis<span class="op">;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;Gesamt:&quot;</span><span class="op">,</span> gesamtSumme)<span class="op">;</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Arbeitsanweisung &amp; Aufgabenstellung:</strong> 1. Erklären Sie die moderne Grundregel für die Variablenwahl: Warum sollte <code>const</code> die Standardwahl sein und in welchen Fällen nutzt man <code>let</code>? 2. Begründen Sie, warum <code>mwstSatz</code> und <code>nettoPreis</code> als <code>const</code> deklariert werden sollten, während <code>gesamtSumme</code> und der Schleifenzähler <code>let</code> benötigen. 3. Schreiben Sie den Code vollständig auf moderne <code>const</code>- und <code>let</code>-Deklarationen um.</p>
 <div class="proof solution">
-<p><span class="proof-title"><em>Lösung</em>. </span><strong>Musterlösung:</strong> 1. <strong>Die 4 Phasen des SDD-Zyklus in der Praxis:</strong> - <strong>1. Specify (Spezifizieren):</strong> Definition aller benötigten Formularfelder (Name, E-Mail, Fahrzeugmodell, Wunschtermin, Problembeschreibung, DSGVO-Opt-in); Festlegung von Pflichtfeldern und clientseitigen Validierungsmustern (Regex für E-Mail). - <strong>2. Plan (Planen):</strong> Entwurf der HTML5-Architektur (<code>&lt;form&gt;</code>, <code>&lt;fieldset&gt;</code>, <code>&lt;legend&gt;</code>, <code>&lt;label for=&quot;...&quot;&gt;</code>, <code>&lt;input id=&quot;...&quot;&gt;</code>); Festlegung des 2-spaltigen responsiven Layouts mittels CSS Grid. - <strong>3. Tasks (Aufgaben strukturieren):</strong> Aufteilung in atomare Arbeitsschritte (Task 1: Semantisches HTML-Grundgerüst; Task 2: CSS-Styling für Formularelemente &amp; Fokus-Zustände; Task 3: Clientseitiges JavaScript für Validierungsfeedback). - <strong>4. Implement (Umsetzen &amp; Validieren):</strong> Schrittweise Generierung durch den KI-Agenten, gefolgt von Barrierefreiheits- und Screenreader-Tests durch den Entwickler. 2. <strong>Beispiel-Regel für <code>GEMINI.md</code>:</strong> &gt; <em>„Verwende für Formulare ausnahmslos semantische HTML5-Tags. Jedes <input>-Element muss zwingend mit einem zugehörigen <label for="id"> explizit verknüpft sein. Formular-Layouts sind ausschließlich mit CSS Grid zu strukturieren. Keine Inline-Styles erzeugen.“</label></em> 3. <strong>Risiko bei Auslassen der Spezifikation:</strong> - Die KI errät Anforderungen unvollständig, vergisst Pflichtfelder oder erzeugt unpassende Validierungslogik. Das nachträgliche Beheben struktureller Fehlannahmen kostet deutlich mehr Zeit als die initiale Spezifikation.</p>
+<p><span class="proof-title"><em>Lösung</em>. </span><strong>Musterlösung:</strong> 1. <strong>Moderne Grundregel:</strong> - <strong><code>const</code> als Standard:</strong> Schützt Variablen vor unbeabsichtigtem Überschreiben und signalisiert dem Leser, dass die Variable unveränderlich ist. - <strong><code>let</code> als Ausnahme:</strong> Wird nur dann verwendet, wenn der Wert der Variable im späteren Ablauf neu zugewiesen werden muss (z. B. Akkumulatoren, Schleifenzähler). 2. <strong>Begründung für die Variablen:</strong> - <code>mwstSatz</code> (19 %) und <code>nettoPreis</code> (100 €) bleiben während der Berechnung konstant <span class="math inline">\(\rightarrow\)</span> <code>const</code>. - <code>gesamtSumme</code> (wird in jedem Schleifendurchlauf aufaddiert) und <code>i</code> (wird hochgezählt) verändern ihren Wert fortlaufend <span class="math inline">\(\rightarrow\)</span> <code>let</code>. 3. <strong>Refaktorisierter Code:</strong> ```javascript const mwstSatz = 0.19; let gesamtSumme = 0;</p>
+<p>for (let i = 0; i &lt; 3; i++) { const nettoPreis = 100; const bruttoPreis = nettoPreis * (1 + mwstSatz); gesamtSumme += bruttoPreis; }</p>
+<p>console.log(“Gesamt:”, gesamtSumme); ```</p>
 </div>
 </section>
-<section id="fallbeispiel-d-code-smells-aufdecken-und-legacy-css-modernisieren" class="level4 unnumbered unlisted case-study">
-<h4 class="unnumbered unlisted anchored" data-anchor-id="fallbeispiel-d-code-smells-aufdecken-und-legacy-css-modernisieren">Fallbeispiel D: Code Smells aufdecken und Legacy-CSS modernisieren</h4>
-<p><strong>Szenario:</strong> Ein KI-Agent analysiert ein älteres Stylesheet eines Webauftritts und stößt auf folgende Codezeilen:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.sidebar</span> { <span class="kw">float</span><span class="ch">:</span> <span class="dv">left</span><span class="op">;</span> <span class="kw">width</span><span class="ch">:</span> <span class="dv">250</span><span class="dt">px</span><span class="op">;</span> }</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">.content</span> { <span class="kw">float</span><span class="ch">:</span> <span class="dv">right</span><span class="op">;</span> <span class="kw">width</span><span class="ch">:</span> <span class="dv">700</span><span class="dt">px</span><span class="op">;</span> }</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">.clear</span> { <span class="kw">clear</span><span class="ch">:</span> <span class="dv">both</span><span class="op">;</span> }</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Arbeitsanweisung &amp; Aufgabenstellung:</strong> 1. Identifizieren und begründen Sie die zwei gravierenden „Code Smells“ in diesem Auszug bezüglich Responsivität und HTML-Verschmutzung. 2. Verfassen Sie einen präzisen promptbasierten Refactoring-Auftrag an die KI, um dieses Layout in ein modernes, elastisches Flexbox-Layout nach dem Mobile-First-Prinzip umzuwandeln. 3. Geben Sie den sauberen, refactorten CSS-Code an, den die KI als Ergebnis erzeugen soll.</p>
+<section id="fallbeispiel-d-entscheidungslogik-kinoticket-preisrechner" class="level4 unnumbered unlisted case-study">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="fallbeispiel-d-entscheidungslogik-kinoticket-preisrechner">Fallbeispiel D: Entscheidungslogik – Kinoticket-Preisrechner</h4>
+<p><strong>Szenario:</strong> Für ein Kino soll der Ticketpreis anhand von Alter und Wochentag berechnet werden: - <strong>Altersstaffelung:</strong> - Kinder unter 6 Jahren: Freier Eintritt (<code>0.00 €</code>). - Jugendliche unter 18 Jahren: Ermäßigt (<code>8.00 €</code>). - Erwachsene ab 18 Jahren: Standardpreis (<code>12.00 €</code>). - <strong>Kinotag:</strong> Am <code>&quot;Dienstag&quot;</code> erhält jeder Besucher 20 % Rabatt auf den Basispreis (<code>basispreis * 0.8</code>). - <strong>VIP-Status:</strong> Ein Boolean <code>isVip</code> soll einen Statustext festlegen: <code>&quot;VIP-Sitzplatz (+5 €)&quot;</code> oder <code>&quot;Standard-Platz&quot;</code>.</p>
+<p><strong>Arbeitsanweisung &amp; Aufgabenstellung:</strong> 1. Schreiben Sie die Altersprüfung mit einer sauberen <code>if / else if / else</code>-Verzweigung und weisen Sie das Ergebnis der Variable <code>basispreis</code> zu. 2. Berechnen Sie den <code>endpreis</code> abhängig vom Wochentag <code>tag</code> mithilfe einer <code>switch / case</code>-Struktur (inklusive <code>break;</code> und <code>default</code>). 3. Weisen Sie der Konstante <code>platzText</code> mit dem <strong>ternären Operator (<code>? :</code>)</strong> in einer einzigen Zeile den passenden Text anhand von <code>isVip</code> zu.</p>
 <div class="proof solution">
-<p><span class="proof-title"><em>Lösung</em>. </span><strong>Musterlösung:</strong> 1. <strong>Identifizierte Code Smells:</strong> - <strong>Starre Pixelbreiten (<code>250px</code>, <code>700px</code>):</strong> Erzeugen ein starres 950px-Layout, das auf Mobilgeräten zu unschönem horizontalen Scrollen führt. - <strong>Float-Hack (<code>float</code> &amp; <code>.clear</code>):</strong> Veraltetes Layout-Verfahren; zwingt den Entwickler dazu, leere <code>&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;</code>-Elemente zur Behebung des Höhenkollapses in den HTML-DOM einzufügen. 2. <strong>Refactoring-Prompt an die KI:</strong> &gt; <em>„Refactore den CSS-Auszug für .sidebar und .content: Entferne alle Floats und Clearfix-Klassen. Erstelle einen responsiven Flexbox-Container .layout-container nach dem Mobile-First-Prinzip (Standard: Spaltenanordnung untereinander; ab 768px Viewport-Breite: nebeneinander mit flex-Aufteilung 1 zu 3 und 1.5rem Gap).“</em> 3. <strong>Modernes KI-Refactoring (CSS):</strong> ```css .layout-container { display: flex; flex-direction: column; /* Mobile First: Untereinander */ gap: 1.5rem; }</p>
-<p><span class="citation" data-cites="media">@media</span> (min-width: 768px) { .layout-container { flex-direction: row; /* Desktop: Nebeneinander */ } .sidebar { flex: 1; } .content { flex: 3; } } ```</p>
+<p><span class="proof-title"><em>Lösung</em>. </span><strong>Musterlösung:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> alter <span class="op">=</span> <span class="dv">16</span><span class="op">;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> tag <span class="op">=</span> <span class="st">&quot;Dienstag&quot;</span><span class="op">;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> isVip <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">// 1. Altersprüfung mit if / else if / else:</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> basispreis<span class="op">;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (alter <span class="op">&lt;</span> <span class="dv">6</span>) {</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    basispreis <span class="op">=</span> <span class="fl">0.00</span><span class="op">;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (alter <span class="op">&lt;</span> <span class="dv">18</span>) {</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    basispreis <span class="op">=</span> <span class="fl">8.00</span><span class="op">;</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    basispreis <span class="op">=</span> <span class="fl">12.00</span><span class="op">;</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co">// 2. Wochentagsabgleich mit switch / case:</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> endpreis<span class="op">;</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="cf">switch</span> (tag) {</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> <span class="st">&quot;Dienstag&quot;</span><span class="op">:</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>        endpreis <span class="op">=</span> basispreis <span class="op">*</span> <span class="fl">0.8</span><span class="op">;</span> <span class="co">// 20 % Rabatt</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">default</span><span class="op">:</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>        endpreis <span class="op">=</span> basispreis<span class="op">;</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="co">// 3. Zuweisung mit dem ternären Operator:</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> platzText <span class="op">=</span> isVip <span class="op">?</span> <span class="st">&quot;VIP-Sitzplatz (+5 €)&quot;</span> <span class="op">:</span> <span class="st">&quot;Standard-Platz&quot;</span><span class="op">;</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`Preis: </span><span class="sc">${</span>endpreis<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)<span class="sc">}</span><span class="vs"> € | Sitz: </span><span class="sc">${</span>platzText<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="fallbeispiel-e-die-gefahren-blinden-vertrauens-broken-links-und-fehlerhafte-pfade" class="level4 unnumbered unlisted case-study">
-<h4 class="unnumbered unlisted anchored" data-anchor-id="fallbeispiel-e-die-gefahren-blinden-vertrauens-broken-links-und-fehlerhafte-pfade">Fallbeispiel E: Die Gefahren blinden Vertrauens – Broken Links und fehlerhafte Pfade</h4>
-<p><strong>Szenario:</strong> Ein Entwickler beauftragt einen KI-Agenten mit der Erstellung einer neuen Unterseite inklusive Bildergalerie. Die KI meldet Erfolg („Unterseite fertig!“). Beim Öffnen im Browser sind jedoch alle Bilder als zerbrochene Symbole sichtbar, und die Navigationslinks führen auf HTTP-404-Fehlerseiten.</p>
-<p><strong>Arbeitsanweisung &amp; Aufgabenstellung:</strong> 1. Analysieren Sie die drei typischen Ursachen für 404-Fehler und nicht geladene Assets bei KI-generiertem Webcode (relative Pfade, Dateinamen-Halluzinationen, Case Sensitivity auf Linux-Webservern). 2. Beschreiben Sie die systematische Vorgehensweise des „Digital Shepherd“ zur Fehleranalyse mithilfe der Browser-DevTools (Taste <code>F12</code>, Reiter <em>Netzwerk</em>). 3. Formulieren Sie einen präzisen Korrektur-Prompt für den KI-Agenten, um die relativen Bildpfade anhand der tatsächlichen Verzeichnisstruktur im Projekt zu reparieren.</p>
+<section id="fallbeispiel-e-listenverarbeitung-mit-der-modernen-for-of-schleife" class="level4 unnumbered unlisted case-study">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="fallbeispiel-e-listenverarbeitung-mit-der-modernen-for-of-schleife">Fallbeispiel E: Listenverarbeitung mit der modernen for-of-Schleife</h4>
+<p><strong>Szenario:</strong> Ein Web-Portal verwaltet eine Liste von bayerischen Städtenamen:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> staedte <span class="op">=</span> [<span class="st">&quot;Würzburg&quot;</span><span class="op">,</span> <span class="st">&quot;Nürnberg&quot;</span><span class="op">,</span> <span class="st">&quot;München&quot;</span><span class="op">,</span> <span class="st">&quot;Bamberg&quot;</span><span class="op">,</span> <span class="st">&quot;Augsburg&quot;</span>]<span class="op">;</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Die Namen sollen nacheinander im Format <code>&quot;Besuche die Stadt: [Name]&quot;</code> in der Konsole ausgegeben werden. Allerdings soll die Stadt <code>&quot;München&quot;</code> bei der Ausgabe übersprungen werden.</p>
+<p><strong>Arbeitsanweisung &amp; Aufgabenstellung:</strong> 1. Schreiben Sie eine moderne <code>for...of</code>-Schleife, die alle Einträge des Arrays durchläuft. 2. Nutzen Sie Template Literals (Backticks <code>`</code>), um die formatierte Meldung auszugeben. 3. Bauen Sie eine <code>if</code>-Bedingung mit dem Befehl <code>continue</code> ein, die dafür sorgt, dass <code>&quot;München&quot;</code> übersprungen wird. 4. Erklären Sie kurz, warum <code>for...of</code> für Einsteiger einfacher zu lesen ist als eine alte Zählschleife <code>for (let i = 0; i &lt; staedte.length; i++)</code>.</p>
 <div class="proof solution">
-<p><span class="proof-title"><em>Lösung</em>. </span><strong>Musterlösung:</strong> 1. <strong>Typische Ursachen für Pfadfehler:</strong> - <strong>Fehlende Ordnerebenen:</strong> Die KI generiert <code>src=&quot;dasBuero.jpg&quot;</code> statt <code>src=&quot;../img/dasBuero.jpg&quot;</code>, wenn die Unterseite in einem Unterordner liegt. - <strong>Case-Sensitivity-Konflikte:</strong> Auf Windows-Entwicklungsrechnern funktioniert <code>src=&quot;dasbuero.jpg&quot;</code>; auf dem Linux-Produktionsserver schlägt der Abruf fehl, da die Originaldatei <code>dasBuero.jpg</code> heißt. - <strong>Halluzinierte Dateinamen:</strong> Die KI erfindet passende Dateinamen (z. B. <code>kueche-gross.jpg</code>), die im Bildordner physisch nicht existieren. 2. <strong>Systematische Fehleranalyse mit DevTools:</strong> - Browser-DevTools mit Taste <code>F12</code> öffnen und in den Reiter <strong>Netzwerk (Network)</strong> wechseln. - Seite mit <code>Strg + F5</code> neu laden und nach roten HTTP-Statuscodes (<code>404 Not Found</code>) filtern. - Die angefragte URL mit dem tatsächlichen Dateipfad und der Schreibweise im <em>Explorer</em> der IDE abgleichen. 3. <strong>Korrektur-Prompt an den Agenten:</strong> &gt; <em>„Prüfe die homesweethome.html: Alle Bilder im Ordner ‘img/’ werden aktuell mit HTTP 404 blockiert. Korrigiere alle <img>-Tags so, dass sie relative Pfade (‘img/Dateiname.jpg’) verwenden und die exakte Groß-/Kleinschreibung der Dateien im Explorer beachten (z. B. dasBuero.jpg, dasFuehrerHaus.jpg, willkommenInDerKueche.jpg).“</em></p>
+<p><span class="proof-title"><em>Lösung</em>. </span><strong>Musterlösung:</strong> 1. <strong>Schleifencode mit <code>for...of</code>, Template Literals und <code>continue</code>:</strong> ```javascript const staedte = [“Würzburg”, “Nürnberg”, “München”, “Bamberg”, “Augsburg”];</p>
+<p>for (const stadt of staedte) { if (stadt === “München”) { continue; // Überspringt München und geht direkt zum nächsten Eintrag } console.log(<code>Besuche die Stadt: ${stadt}</code>); } ``<code>2. **Vorteil von</code>for…of<code>gegenüber klassischem</code>for (i…)<code>:**    - Bei</code>for…of<code>muss man keinen Schleifenzähler</code>i<code>deklarieren, keine Abbruchbedingung (</code>i &lt; staedte.length<code>) prüfen und nicht manuell über</code>staedte[i]` auf das Element zugreifen. Das verhindert typische Index-Fehler (z. B. <em>Off-by-One</em>-Fehler) und macht den Code sofort verständlich.</p>
 </div>
 </section>
-<section id="fallbeispiel-f-sub-navigation-mit-scroll-ankern-und-barrierefreien-sprungmarken" class="level4 unnumbered unlisted case-study">
-<h4 class="unnumbered unlisted anchored">Fallbeispiel F: Sub-Navigation mit Scroll-Ankern und barrierefreien Sprungmarken</h4>
-<p><strong>Szenario:</strong> Die neu erstellte Unterseite <code>homesweethome.html</code> ist durch ausführliche Texte und 8 Inhaltsbereiche sehr lang geworden. Zur Verbesserung der Usability soll eine interne Subnavigation mit Sprungmarken und Rücksprung-Links integriert werden.</p>
-<p><strong>Arbeitsanweisung &amp; Aufgabenstellung:</strong> 1. Verfassen Sie den vollständigen Anweisungs-Prompt für das Agentenfenster, um die Subnavigation (<code>.subnavi</code>), die Ankerverlinkungen (<code>#id</code>) zu den <code>&lt;h2&gt;</code>-Überschriften und die „Nach oben“-Links zu generieren. 2. Geben Sie den resultierenden HTML-Auszug für die <code>&lt;nav class=&quot;subnavi&quot;&gt;</code> und einen beispielhaften <code>&lt;article&gt;</code>-Abschnitt an. 3. Definieren Sie die geforderten CSS-Regeln für <code>.subnavi</code> in der <code>style.css</code> (schwarz auf weißem Grund, kein List-Style, schwarz-gepunktete Abgrenzungslinien).</p>
+<section id="fallbeispiel-f-objekte-erstellen-json-datenaustausch" class="level4 unnumbered unlisted case-study">
+<h4 class="unnumbered unlisted anchored" data-anchor-id="fallbeispiel-f-objekte-erstellen-json-datenaustausch">Fallbeispiel F: Objekte erstellen &amp; JSON-Datenaustausch</h4>
+<p><strong>Szenario:</strong> In einer Webanwendung sollen Benutzerdaten für einen Studenten erfasst und an einen Server übertragen werden: - Name: <code>&quot;Lisa Müller&quot;</code> - Matrikelnummer: <code>632217</code> - Eingeschrieben: <code>true</code> - Module: <code>[&quot;Webprogrammierung&quot;, &quot;Geovisualisierung&quot;]</code></p>
+<p><strong>Arbeitsanweisung &amp; Aufgabenstellung:</strong> 1. Erstellen Sie ein JavaScript-Objekt namens <code>student</code> mit den oben genannten Eigenschaften. 2. Zeigen Sie, wie Sie per Punkt-Notation auf den Namen und per Index auf das erste Modul im Array zugreifen. 3. Wandeln Sie das Objekt mit <code>JSON.stringify()</code> in einen JSON-String um und geben Sie ihn aus. 4. Simulieren Sie den Empfang: Wandeln Sie den JSON-String mit <code>JSON.parse()</code> wieder in ein echtes JavaScript-Objekt um.</p>
 <div class="proof solution">
-<p><span class="proof-title"><em>Lösung</em>. </span></p>
-<strong>Musterlösung:</strong> 1. <strong>Prompt für die Subnavigation (aus den Lehrunterlagen):</strong> &gt; <em>„Erstelle im main-Bereich eine Liste mit einer Subnavigation. Die Liste soll gut lesbarer Text in schwarz auf weißem Grund sein und den style der Klasse ‘subnavi’ in der ‘style.css’ haben. Die Texte sollen keinen List-Style haben, sondern stattdessen mit schwarz-gepunkteten Linien horizontal abgegrenzt werden. Jeder Punkt der Subnavi soll dann einen entsprechenden Anchor der h2-Überschriften in den Articlen anspringen. Erstelle unter jedem Article einen Link ‘nach oben’ zur Subnavigation. Der Inhalt der Navigation sollen die h2-Überschriften der einzelnen Article sein.“</em> 2. <strong>Resultierender HTML-Auszug:</strong> ```html
-<nav class="subnavi" id="subnavi">
-<ul>
-<li>
-<a href="#buero">Das Büro</a>
-</li>
-<li>
-<a href="#werkstatt">Die Werkstatt</a>
-</li>
-<li>
-<a href="#kueche">Willkommen in der Küche</a>
-</li>
-</ul>
-</nav>
-<article id="buero">
-<h2 class="anchored" data-anchor-id="fallbeispiel-f-sub-navigation-mit-scroll-ankern-und-barrierefreien-sprungmarken">
-Das Büro
-</h2>
-<p>
-Beschreibung des mobilen Bürobereichs…
-</p>
-<a href="#subnavi">nach oben</a>
-</article>
-<pre><code>3. **Ergänzung in der `style.css`:**
-```css
-.subnavi ul {
-  list-style: none;
-  background-color: #ffffff;
-  color: #000000;
-  padding: 0;
-  margin: 1rem 0;
-}
-
-.subnavi li {
-  border-bottom: 1px dotted #000000;
-  padding: 8px 0;
-}
-
-.subnavi a {
-  color: #000000;
-  text-decoration: none;
-}</code></pre>
+<p><span class="proof-title"><em>Lösung</em>. </span><strong>Musterlösung:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">// 1. Objekt erstellen (Objekt-Literal):</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> student <span class="op">=</span> {</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">name</span><span class="op">:</span> <span class="st">&quot;Lisa Müller&quot;</span><span class="op">,</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">matrikelnummer</span><span class="op">:</span> <span class="dv">632217</span><span class="op">,</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">istEingeschrieben</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">module</span><span class="op">:</span> [<span class="st">&quot;Webprogrammierung&quot;</span><span class="op">,</span> <span class="st">&quot;Geovisualisierung&quot;</span>]</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">// 2. Eigenschaften abrufen:</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;Name:&quot;</span><span class="op">,</span> student<span class="op">.</span><span class="at">name</span>)<span class="op">;</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;Erstes Modul:&quot;</span><span class="op">,</span> student<span class="op">.</span><span class="at">module</span>[<span class="dv">0</span>])<span class="op">;</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">// 3. In JSON-Text umwandeln (z. B. für API-Übertragung):</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> jsonString <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(student)<span class="op">;</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;JSON-String:&quot;</span><span class="op">,</span> jsonString)<span class="op">;</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co">// Ausgabe: &#39;{&quot;name&quot;:&quot;Lisa Müller&quot;,&quot;matrikelnummer&quot;:632217,&quot;istEingeschrieben&quot;:true,&quot;module&quot;:[&quot;Webprogrammierung&quot;,&quot;Geovisualisierung&quot;]}&#39;</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co">// 4. JSON-Text zurück in ein JS-Objekt parsen:</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> empfangenesObjekt <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(jsonString)<span class="op">;</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;Wiederhergestellter Name:&quot;</span><span class="op">,</span> empfangenesObjekt<span class="op">.</span><span class="at">name</span>)<span class="op">;</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <hr>
@@ -2874,332 +2986,365 @@ Beschreibung des mobilen Bürobereichs…
 <h2 data-number="1.4" class="anchored" data-anchor-id="active-recall-lückentexte-drag-drop"><span class="header-section-number">1.4</span> 4. Active Recall (Lückentexte / Drag &amp; Drop)</h2>
 <p>Klicken Sie auf ein Wort im Pool und setzen Sie es in die passende Lücke ein:</p>
 <div class="drag-exercise">
-<p>Die moderne Webentwicklung wandelt sich vom manuellen Schreiben von Quellcode zu einer <em>orchestrierten</em> Systemintegration. Entwickler agieren zunehmend als <em>Dirigenten</em>, die Anforderungen strukturieren und KI-Agenten steuern. Anstelle des reinen Auswendiglernens von Syntax rückt die Fähigkeit zur präzisen <em>Problemformulierung</em> in den Mittelpunkt.</p>
+<p>Im Zusammenspiel moderner Webtechnologien definiert HTML die Struktur, CSS das Aussehen und <em>JavaScript</em> das dynamische Verhalten der Seite. Zur Laufzeit übersetzt die integrierte <em>Engine</em> des Browsers den Code in Maschinencode. Aus Sicherheitsgründen läuft der Code isoliert in einer <em>Sandbox</em>.</p>
 </div>
 <div class="drag-exercise">
-<p>Der iterative Entwicklungszyklus im Spec-Driven Development folgt den vier Phasen: <em>Specify</em>, Plan, Tasks und <em>Implement</em>. Da die KI auf Basis exakter Leitplanken arbeitet, beginnt der Prozess stets bei der <em>Spezifikation</em> und nicht direkt beim Code. Das automatisierte <em>Scaffolding</em> spart Entwicklern repetitive Routinearbeit bei Grundgerüsten ein.</p>
+<p>Zur Fehlersuche öffnen Entwickler mit der Taste <em>F12</em> die DevTools. Textausgaben zur Kontrolle werden mit <em>console.log</em> erzeugt. Möchte man das Programm an einer bestimmten Stelle anhalten, setzt man im Sources-Tab einen <em>Breakpoint</em> oder schreibt das Statement <em>debugger;</em> in den Code.</p>
 </div>
 <div class="drag-exercise">
-<p>Als <em>Digital Shepherd</em> trägt der Mensch die Gesamtverantwortung für das Endprodukt. Er überwacht die generierte <em>Semantik</em> der HTML5-Elemente, prüft die Einhaltung von <em>Barrierefreiheit</em> und kontrolliert, ob keine Sicherheitslücken oder fehlerhaften <em>Halluzinationen</em> im Code vorliegen.</p>
+<p>Externe Skripte sollten im Head-Bereich mit dem Attribut <em>defer</em> geladen werden, damit sie das Parsen des HTML-Dokuments nicht <em>blockieren</em>. Dadurch wird das Skript erst ausgeführt, wenn alle <em>Elemente</em> des DOMs vollständig aufgebaut sind.</p>
 </div>
 <div class="drag-exercise">
-<p>Im Gegensatz zu einfachen Texteditoren besitzen moderne KI-native Entwicklungsumgebungen wie Google <em>Antigravity</em> oder Cursor ein umfassendes <em>Kontextbewusstsein</em> über das gesamte Repository. Über Konfigurationsdateien wie <em>GEMINI.md</em> werden projektspezifische Architekturregeln hinterlegt, während integrierte Agenten <em>Refactorings</em> in Echtzeit durchführen.</p>
+<p>Für Variablen, deren Wert sich im Programm nicht ändert, verwendet man immer <em>const</em>. Ändert sich der Wert, nutzt man <em>let</em>. Beide Schlüsselwörter besitzen einen <em>Block</em>-Scope und sind nur innerhalb geschweifter Klammern gültig. Das veraltete <em>var</em> sollte vermieden werden.</p>
 </div>
 <div class="drag-exercise">
-<p>Die Arbeitsumgebung von Google Antigravity gliedert sich in drei Kernbereiche: den <em>Explorer</em> zur Projektverwaltung, das <em>Inhaltsfenster</em> für Quellcode und Diffs sowie das <em>Agentenfenster</em> zur Prompt-Eingabe. Vor Dateimodifikationen holt der Agent explizite <em>Berechtigungen</em> beim Entwickler ein.</p>
+<p>Wird eine Texteingabe mit einer Zahl addiert, führt JavaScript eine <em>Konkatenation</em> durch. Um mathematisch zu rechnen, muss der String mit <em>Number</em> umgewandelt werden. Für sichere Vergleiche von Wert und Typ nutzt man den strikten Operator <em>===</em>.</p>
 </div>
 <div class="drag-exercise">
-<p>Beim Generieren einer Unterseite formuliert der Entwickler im <em>Prompt</em> präzise Anforderungen an Layout und Styling. Für eine interne Subnavigation erzeugt die KI Sprungmarken mittels <em>Anchor</em>-IDs an den Überschriften. Jeder Inhaltsabschnitt erhält zusätzlich einen Rücksprung-Link <em>nach oben</em> zur Menüleiste.</p>
+<p>Mit <em>Template</em> Literals in Backticks können Variablen über den Ausdruck <code>${...}</code> direkt in Texte eingebettet werden. Dies nennt man String-<em>Interpolation</em>. Zudem erlauben Backticks das direkte Schreiben von <em>mehrzeiligen</em> Texten ohne <code>\n</code>.</p>
 </div>
 <div class="drag-exercise">
-<p>Nach der automatischen Codegenerierung ist eine gewissenhafte <em>Validierung</em> unerlässlich. Der Entwickler testet interne <em>Verlinkungen</em> auf 404-Fehler, prüft das Verhalten auf mobilen Viewports und stellt sicher, dass alle Assets im <em>img</em>-Verzeichnis korrekt referenziert wurden.</p>
+<p>Um alle Elemente eines Arrays einfach zu durchlaufen, verwendet man die moderne Schleife <em>for…of</em>. Möchte man einen einzelnen Durchlauf überspringen, nutzt man den Befehl <em>continue</em>. Soll die Schleife sofort ganz beendet werden, dient dazu der Befehl <em>break</em>.</p>
 </div>
 <div class="drag-exercise">
-<p>Zur künftigen Arbeitsmarktsituation betonte Bill <em>Gates</em>, dass Computer uns nicht <em>arbeitslos</em> machen, sondern unseren Arbeitsalltag stark verändern, indem neue Technik uns schwere und <em>langweilige</em> Aufgaben abnimmt.</p>
+<p>Zur Datenstrukturierung bündeln <em>Objekte</em> zusammengehörige Schlüssel-Wert-Paare in geschweiften Klammern. Für den Datenaustausch wandelt <em>JSON.stringify</em> ein Objekt in Text um, während <em>JSON.parse</em> einen JSON-String wieder in ein Objekt zurückverwandelt.</p>
 </div>
 <hr>
 </section>
 <section id="quick-check-klausurrelevantes-quiz" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="quick-check-klausurrelevantes-quiz"><span class="header-section-number">1.5</span> 5. Quick-Check (Klausurrelevantes Quiz)</h2>
-<section id="bereich-1-ki-workflows-paradigmenwechsel-in-der-webentwicklung" class="level3" data-number="1.5.1">
-<h3 data-number="1.5.1" class="anchored" data-anchor-id="bereich-1-ki-workflows-paradigmenwechsel-in-der-webentwicklung"><span class="header-section-number">1.5.1</span> Bereich 1: KI-Workflows &amp; Paradigmenwechsel in der Webentwicklung</h3>
+<section id="bereich-1-grundlagen-sicherheitsmodell" class="level3" data-number="1.5.1">
+<h3 data-number="1.5.1" class="anchored" data-anchor-id="bereich-1-grundlagen-sicherheitsmodell"><span class="header-section-number">1.5.1</span> Bereich 1: Grundlagen &amp; Sicherheitsmodell</h3>
 <div class="quick-check">
-<p>Wie verändert sich die primäre Rolle des Webentwicklers durch den Einsatz moderner KI-Agenten?</p>
+<p>Welche zentrale Aufgabe hat JavaScript im klassischen Web-Dreigespann (HTML, CSS, JavaScript)?</p>
 <ul>
-<li><strong>Der Entwickler agiert als System-Orchestrator und Dirigent, der Anforderungen spezifiziert und generierten Code validiert, statt reine Syntax manuell abzutippen.</strong></li>
-<li>Der Entwickler muss nur noch binären Maschinencode schreiben.</li>
-<li>Die Rolle des Entwicklers wird vollständig obsolet, da KI fehlerfrei ohne Menschen arbeitet.</li>
+<li>JavaScript legt die Schriftfarben und Abstände der Webseite fest.</li>
+<li><strong>JavaScript haucht der Webseite Leben ein, indem es auf Benutzeraktionen reagiert, Daten verarbeitet und Inhalte dynamisch verändert.</strong></li>
+<li>JavaScript speichert die HTML-Dateien dauerhaft auf dem Webserver ab.</li>
 </ul>
 <blockquote class="blockquote">
-<p>KI automatisiert das zeilenweise Schreiben von Syntax. Die Wertschöpfung verlagert sich auf Architektur, Prompt-Präzision und Qualitätssicherung.</p>
+<p>HTML liefert die Struktur, CSS das Layout/Design und JavaScript steuert Interaktivität und Verhalten.</p>
 </blockquote>
 </div>
 <div class="quick-check">
-<p>Welche Aussage zur künftigen Arbeitsmarktsituation durch KI entspricht dem Zitat von Bill Gates?</p>
+<p>Was versteht man unter dem Sandbox-Prinzip von JavaScript im Browser?</p>
 <ul>
-<li>Computer werden in den nächsten zwei Jahren jeden Programmierer überflüssig machen.</li>
-<li>Durch KI wird Softwareentwicklung wieder ausschließlich auf Papier stattfinden.</li>
-<li><strong>„Computer machen uns nicht arbeitslos, aber sie verändern unseren Arbeitsalltag stark, indem sie schwere und langweilige Aufgaben abnehmen.“</strong></li>
+<li>Dass JavaScript nur auf Computern mit Sandfilter-Lüftern ausgeführt werden darf.</li>
+<li>Dass der Code vor dem Start in eine ZIP-Datei komprimiert wird.</li>
+<li><strong>Dass JavaScript in einer isolierten Sicherheitsumgebung läuft und standardmäßig nicht auf lokale Dateien oder Hardware des Nutzers zugreifen darf.</strong></li>
 </ul>
 <blockquote class="blockquote">
-<p>Neue Technologien verändern das Berufsbild: Routineaufgaben entfallen, höherwertige Steuerungs- und Kontrollaufgaben gewinnen an Bedeutung.</p>
+<p>Die Sandbox schützt das Betriebssystem und die Privatsphäre des Nutzers vor schädlichem Fremdcode.</p>
 </blockquote>
 </div>
 <div class="quick-check">
-<p>Welche Kernkompetenz gewinnt in der KI-gestützten Webentwicklung die höchste Priorität?</p>
+<p>Welche Aussage zur Beziehung zwischen ECMAScript und JavaScript ist korrekt?</p>
 <ul>
-<li>Das Auswendiglernen sämtlicher 141 CSS-Farbnamen.</li>
-<li><strong>Die Fähigkeit zur präzisen Problemformulierung (Spezifikation), Systemintegration und kritischen Code-Validierung.</strong></li>
-<li>Das manuelle Tippen von HTML-Tags mit mehr als 400 Anschlägen pro Minute.</li>
+<li><strong>ECMAScript ist der offizielle Standard und Bauplan, während JavaScript die konkrete Umsetzung und Programmiersprache ist.</strong></li>
+<li>ECMAScript ist ein veraltetes Grafikprogramm für Webdesigner.</li>
+<li>JavaScript ist die Spezifikation, nach der ECMAScript programmiert wird.</li>
 </ul>
 <blockquote class="blockquote">
-<p>Wer der KI präzise Leitplanken vorgibt und die Ergebnisse semantisch und sicherheitskritisch beurteilen kann, erzielt die besten Ergebnisse.</p>
+<p>Die Organisation ECMA standardisiert die Sprachspezifikation (ECMAScript), die von den Browsern implementiert wird.</p>
 </blockquote>
 </div>
 <div class="quick-check">
-<p>Was charakterisiert die traditionelle „Handwerkliche Kodierung“ im Vergleich zur modernen Orchestrierung?</p>
+<p>Welche Browser-Engine führt JavaScript im Browser Google Chrome und in Microsoft Edge aus?</p>
 <ul>
-<li><strong>Fokus auf das zeilenweise Schreiben von Syntax und das manuelle Beheben von Tipp- und Syntaxfehlern.</strong></li>
-<li>Vollständige Unabhängigkeit von Programmiersprachen.</li>
-<li>Automatische Generierung kompletter Web-Plattformen per Sprachbefehl.</li>
+<li>SpiderMonkey</li>
+<li><strong>V8</strong></li>
+<li>JavaScriptCore</li>
 </ul>
 <blockquote class="blockquote">
-<p>Handwerkliche Kodierung bindet viel Zeit in Implementierungsdetails, die heute durch KI-Scaffolding beschleunigt werden.</p>
-</blockquote>
-</div>
-<hr>
-</section>
-<section id="bereich-2-spec-driven-development-sdd-scaffolding" class="level3" data-number="1.5.2">
-<h3 data-number="1.5.2" class="anchored" data-anchor-id="bereich-2-spec-driven-development-sdd-scaffolding"><span class="header-section-number">1.5.2</span> Bereich 2: Spec-Driven Development (SDD) &amp; Scaffolding</h3>
-<div class="quick-check">
-<p>In welcher exakten Reihenfolge läuft der Entwicklungszyklus im Spec-Driven Development (SDD) ab?</p>
-<ul>
-<li>Implement <span class="math inline">\(\rightarrow\)</span> Tasks <span class="math inline">\(\rightarrow\)</span> Plan <span class="math inline">\(\rightarrow\)</span> Specify</li>
-<li>Code <span class="math inline">\(\rightarrow\)</span> Debug <span class="math inline">\(\rightarrow\)</span> Deploy <span class="math inline">\(\rightarrow\)</span> Test</li>
-<li><strong>Specify <span class="math inline">\(\rightarrow\)</span> Plan <span class="math inline">\(\rightarrow\)</span> Tasks <span class="math inline">\(\rightarrow\)</span> Implement</strong></li>
-</ul>
-<blockquote class="blockquote">
-<p>SDD stellt die Spezifikation und Planung vor die Codegenerierung, um Fehlentwicklungen von vornherein zu unterbinden.</p>
-</blockquote>
-</div>
-<div class="quick-check">
-<p>Was versteht man unter dem Begriff „Scaffolding“ in der modernen Webentwicklung?</p>
-<ul>
-<li><strong>Das automatische Generieren von stabilen Grundgerüsten und Standard-Dateistrukturen (HTML-Struktur, CSS-Dateien, Ordner).</strong></li>
-<li>Das manuelle Zeichnen von Wireframes auf Papier.</li>
-<li>Das endgültige Löschen veralteter Datenbank-Tabellen.</li>
-</ul>
-<blockquote class="blockquote">
-<p>Scaffolding spart enorm viel Zeit, indem Boilerplate-Code für neue Seiten blitzschnell auf Knopfdruck erzeugt wird.</p>
-</blockquote>
-</div>
-<div class="quick-check">
-<p>Welche Konsequenz droht, wenn bei der KI-Entwicklung die Spezifikationsphase („Specify“) übersprungen wird?</p>
-<ul>
-<li>Die KI verweigert grundsätzlich die Antwort.</li>
-<li><strong>Es entsteht fehlerhafter, unvollständiger oder semantisch unpassender Code nach dem Prinzip „Garbage In, Garbage Out“.</strong></li>
-<li>Das Betriebssystem stürzt sofort ab.</li>
-</ul>
-<blockquote class="blockquote">
-<p>Ohne klare funktionale und architektonische Spezifikation muss die KI raten, was zu schwer auffindbaren Fehlern führt.</p>
-</blockquote>
-</div>
-<div class="quick-check">
-<p>Worin besteht die „Verschiebung der Wertschöpfung“ im Spec-Driven Development?</p>
-<ul>
-<li>Entwickler werden nach der Anzahl getippter Zeichen bezahlt.</li>
-<li>Webentwicklung erfordert keine Tests mehr.</li>
-<li><strong>Produktivitätssprünge entstehen durch automatisiertes Scaffolding, wodurch mehr Zeit für Konzeption, Barrierefreiheit und Qualitätskontrolle bleibt.</strong></li>
-</ul>
-<blockquote class="blockquote">
-<p>Die manuelle Erstellung von Boilerplate entfällt; Entwickler konzentrieren sich auf wertschöpfende Kernanforderungen.</p>
+<p>Die V8-Engine von Google treibt Google Chrome, Microsoft Edge, Brave und auch Node.js an.</p>
 </blockquote>
 </div>
 <hr>
 </section>
-<section id="bereich-3-ki-native-entwicklungsumgebungen-google-antigravity" class="level3" data-number="1.5.3">
-<h3 data-number="1.5.3" class="anchored" data-anchor-id="bereich-3-ki-native-entwicklungsumgebungen-google-antigravity"><span class="header-section-number">1.5.3</span> Bereich 3: KI-native Entwicklungsumgebungen &amp; Google Antigravity</h3>
+<section id="bereich-2-entwicklertools-fehlerdiagnose" class="level3" data-number="1.5.2">
+<h3 data-number="1.5.2" class="anchored" data-anchor-id="bereich-2-entwicklertools-fehlerdiagnose"><span class="header-section-number">1.5.2</span> Bereich 2: Entwicklertools &amp; Fehlerdiagnose</h3>
 <div class="quick-check">
-<p>Was unterscheidet eine KI-native IDE (wie Google Antigravity oder Cursor) von klassischen Texteditoren wie Notepad++?</p>
+<p>Mit welcher Tastenkombination öffnen Sie in den meisten Browsern direkt die Entwicklertools (DevTools)?</p>
 <ul>
-<li><strong>Sie besitzt ein ganzheitliches Kontextbewusstsein über das gesamte Projekt-Repository und kann Multi-File-Aktionen sowie Refactorings durchführen.</strong></li>
-<li>Eine KI-native IDE benötigt keinen Stromanschluss.</li>
-<li>Sie unterstützt ausschließlich die Programmiersprache PHP.</li>
+<li><strong>Taste <span class="math inline">\(F12\)</span> (oder Rechtsklick <span class="math inline">\(\rightarrow\)</span> Untersuchen)</strong></li>
+<li>Tastenkombination <span class="math inline">\(Alt + F4\)</span></li>
+<li>Taste <span class="math inline">\(F1\)</span></li>
 </ul>
 <blockquote class="blockquote">
-<p>KI-native IDEs analysieren das gesamte Projektumfeld, bestehende CSS-Klassen und Dateipfade für konsistente Generierungen.</p>
+<p>F12 öffnet die DevTools mit Console, Elements, Sources und Network-Tab.</p>
 </blockquote>
 </div>
 <div class="quick-check">
-<p>Welche drei Kernbereiche bilden die Arbeitsoberfläche der Google Antigravity IDE?</p>
+<p>Was bedeutet die Fehlermeldung <code>ReferenceError: eingabe is not defined</code> in der Konsole?</p>
 <ul>
-<li>Excel-Tabelle, Word-Dokument und Paint-Fenster.</li>
-<li><strong>Explorer (Projektdateien), Inhaltsfenster/Editor (Quellcode &amp; Diffs) und Agentenfenster (Chat &amp; Werkzeugsteuerung).</strong></li>
-<li>Terminal, BIOS und Task-Manager.</li>
+<li>Eine Bilddatei konnte vom Server nicht geladen werden.</li>
+<li>Eine Zahl wurde fälschlicherweise durch Null geteilt.</li>
+<li><strong>Es wird versucht, auf eine Variable namens <code>eingabe</code> zuzugreifen, die im aktuellen Programmcode nicht deklariert wurde (oder falsch geschrieben ist).</strong></li>
 </ul>
 <blockquote class="blockquote">
-<p>Diese drei Komponenten ermöglichen die nahtlose Interaktion zwischen Entwickler, Projektdateien und autonomem Agenten.</p>
+<p>Ein ReferenceError signalisiert immer einen unbekannten bzw. nicht auffindbaren Variablennamen.</p>
 </blockquote>
 </div>
 <div class="quick-check">
-<p>Welche Zugangsvoraussetzung ist für die Nutzung der Google Antigravity IDE erforderlich?</p>
+<p>Was bewirkt der Befehl <code>debugger;</code>, wenn er an einer Stelle im JavaScript-Code platziert wird?</p>
 <ul>
-<li>Ein bezahltes Enterprise-Abonnement bei Microsoft.</li>
-<li>Ein Universitätsabschluss in Informatik.</li>
-<li><strong>Ein registriertes Google-Konto mit bestätigter Volljährigkeit (Altersbestätigung).</strong></li>
+<li><strong>Er hält die Programmausführung an dieser Zeile sofort an, sofern die Entwicklertools geöffnet sind, um Variablenwerte zu prüfen.</strong></li>
+<li>Er behebt alle Syntaxfehler in der Datei automatisch.</li>
+<li>Er löscht die Konsole und startet das Skript neu.</li>
 </ul>
 <blockquote class="blockquote">
-<p>Wie in den Vorlesungsfolien vermerkt, erfordert Antigravity ein registriertes Google-Konto mit Altersbestätigung.</p>
+<p><code>debugger;</code> wirkt wie ein fest im Quellcode einprogrammierter Breakpoint.</p>
 </blockquote>
 </div>
 <div class="quick-check">
-<p>Warum fragen agentische KI-Tools vor bestimmten Aktionen nach Genehmigungen wie „Allow access“ oder „Allow running command“?</p>
+<p>Warum ist das Setzen von Breakpoints im Sources-Tab oft besser als reines <code>console.log()</code>-Ausgeben?</p>
 <ul>
-<li><strong>Aus Sicherheitsgründen, damit der Entwickler die volle Kontrolle über Dateizugriffe, Überschreibungen und Befehlsausführungen behält.</strong></li>
-<li>Um die Internetverbindung des Webservers zu drosseln.</li>
-<li>Weil die KI pro Klick bezahlt werden muss.</li>
+<li><strong>Weil Breakpoints das Programm live anhalten, sodass man alle aktuellen Variablen im Scope interaktiv inspizieren kann, ohne den Code mit Log-Befehlen zu überladen.</strong></li>
+<li>Weil <code>console.log()</code> im Browser streng verboten ist.</li>
+<li>Weil Breakpoints die Ausführungsgeschwindigkeit der Webseite verdoppeln.</li>
 </ul>
 <blockquote class="blockquote">
-<p>Das Sicherheitsmodell garantiert, dass keine sensiblen Dateien unbemerkt gelesen oder fehlerhafte Skripte ungeprüft ausgeführt werden.</p>
-</blockquote>
-</div>
-<hr>
-</section>
-<section id="bereich-4-kontext-management-agentic-rules-konfigurationen" class="level3" data-number="1.5.4">
-<h3 data-number="1.5.4" class="anchored" data-anchor-id="bereich-4-kontext-management-agentic-rules-konfigurationen"><span class="header-section-number">1.5.4</span> Bereich 4: Kontext-Management, Agentic Rules &amp; Konfigurationen</h3>
-<div class="quick-check">
-<p>Wozu dienen Dateien wie <code>.cursorrules</code>, <code>GEMINI.md</code> oder <code>AGENTS.md</code> in einem Webprojekt?</p>
-<ul>
-<li>Sie dienen als Auslagerungsdatei für den Arbeitsspeicher des Computers.</li>
-<li>Sie verschlüsseln alle Bilddateien im Ordner <code>img/</code>.</li>
-<li><strong>Sie vermitteln dem KI-Agenten projektweite Konventionen, Architekturregeln und Codierstandards als dauerhaften Systemkontext.</strong></li>
-</ul>
-<blockquote class="blockquote">
-<p>Agentic Rules stellen sicher, dass die KI automatisch vereinbarte Konventionen (z. B. HTML5-Semantik, CSS-Klassen) einhält.</p>
-</blockquote>
-</div>
-<div class="quick-check">
-<p>Welche Anweisung ist ein typisches Beispiel für eine sinnvolle Regel in einer <code>GEMINI.md</code> für Webentwicklung?</p>
-<ul>
-<li><em>„Schreibe jeden CSS-Befehl auf Chinesisch.“</em></li>
-<li><strong><em>„Verwende ausschließlich semantische HTML5-Tags und binde Stile über die zentrale style.css ein; verwende keine Inline-Styles.“</em></strong></li>
-<li><em>„Lösche alle Bilder vor dem Speichern.“</em></li>
-</ul>
-<blockquote class="blockquote">
-<p>Klare Constraints verhindern unsaubere Entwurfsmuster wie Divitis oder Spezifitätskonflikte durch Inline-Styles.</p>
-</blockquote>
-</div>
-<div class="quick-check">
-<p>Warum ist ein projektweites Kontextbewusstsein der KI wichtig, wenn eine neue Unterseite erstellt wird?</p>
-<ul>
-<li><strong>Damit die KI bestehende CSS-Klassen, Pfadstrukturen und Navigationsmuster der Hauptseite automatisch konsistent übernimmt.</strong></li>
-<li>Damit die KI den aktuellen Wetterbericht anzeigen kann.</li>
-<li>Weil Unterseiten sonst im Binärformat gespeichert werden.</li>
-</ul>
-<blockquote class="blockquote">
-<p>Ohne Projektkontext würde die KI ein neues, inkompatibles Stylesheet erfinden oder falsche Bildpfade annehmen.</p>
+<p>Breakpoints ermöglichen gezieltes Step-by-Step-Debugging zur Laufzeit.</p>
 </blockquote>
 </div>
 <hr>
 </section>
-<section id="bereich-5-die-rolle-des-digital-shepherd-code-smells-refactoring" class="level3" data-number="1.5.5">
-<h3 data-number="1.5.5" class="anchored" data-anchor-id="bereich-5-die-rolle-des-digital-shepherd-code-smells-refactoring"><span class="header-section-number">1.5.5</span> Bereich 5: Die Rolle des „Digital Shepherd“, Code Smells &amp; Refactoring</h3>
+<section id="bereich-3-skripteinbindung-ladeverhalten" class="level3" data-number="1.5.3">
+<h3 data-number="1.5.3" class="anchored" data-anchor-id="bereich-3-skripteinbindung-ladeverhalten"><span class="header-section-number">1.5.3</span> Bereich 3: Skripteinbindung &amp; Ladeverhalten</h3>
 <div class="quick-check">
-<p>Was beschreibt die Metapher des „Digital Shepherd“ (digitaler Hirte) in der Softwareentwicklung?</p>
+<p>Warum sollte ein externes JavaScript im Head-Bereich mit dem Attribut defer eingebunden werden?</p>
 <ul>
-<li>Ein Entwickler, der Schafe über eine GPS-App auf der Weide ortet.</li>
-<li>Ein automatisches Skript zum Herunterladen von Bilddateien.</li>
-<li><strong>Der Entwickler, der den KI-generierten Code beaufsichtigt, schützt und die finale Verantwortung für Semantik, Barrierefreiheit und Sicherheit trägt.</strong></li>
+<li><strong>Weil <code>defer</code> das Skript im Hintergrund lädt und erst ausführt, wenn das HTML-Dokument vollständig aufgebaut ist (verhindert Parser-Blocking).</strong></li>
+<li>Weil <code>defer</code> dafür sorgt, dass das Skript nur auf Mobilgeräten ausgeführt wird.</li>
+<li>Weil ohne <code>defer</code> keine mathematischen Berechnungen möglich sind.</li>
 </ul>
 <blockquote class="blockquote">
-<p>Der Mensch bleibt die letzte Kontrollinstanz für ethische, fachliche, semantische und sicherheitstechnische Standards.</p>
+<p><code>defer</code> stellt sicher, dass alle DOM-Elemente existieren, wenn das Skript startet.</p>
 </blockquote>
 </div>
 <div class="quick-check">
-<p>Was versteht man unter „Code Smells“, die moderne KI-Systeme beim Refactoring aufspüren?</p>
+<p>Warum gilt das direkte Platzieren von JavaScript im HTML-Tag (z. B. onclick) als schlechte Praxis (No-Go)?</p>
 <ul>
-<li><strong>Strukturelle Mängel und veraltete Entwurfsmuster im Quellcode (z. B. unsaubere Float-Hacks oder Divitis), die Wartung und Lesbarkeit verschlechtern.</strong></li>
-<li>Schlechten Geruch von überhitzten Computer-Lüftern.</li>
-<li>Dateien, die größer als 10 Gigabyte sind.</li>
+<li>Weil moderne Browser Klicks auf Buttons nicht mehr unterstützen.</li>
+<li>Weil Inline-Code dazu führt, dass die Schriftgröße des Buttons kleiner wird.</li>
+<li><strong>Weil es HTML-Struktur und Programmlogik vermischt, die Wiederverwendbarkeit zerstört und die Wartung erschwert.</strong></li>
 </ul>
 <blockquote class="blockquote">
-<p>KI hilft dabei, veraltete Muster schnell auf moderne Standards (wie Flexbox, CSS Grid, semantische Tags) umzustellen.</p>
+<p>Best Practice ist die saubere Trennung von HTML (Struktur) und JS (Verhalten via <code>addEventListener</code>).</p>
 </blockquote>
 </div>
 <div class="quick-check">
-<p>Welches Refactoring schlägt eine moderne KI-IDE für veralteten Code wie <code>.box { float: left; width: 50%; }</code> vor?</p>
+<p>Welche Dateiendung besitzen externe JavaScript-Dateien üblicherweise?</p>
 <ul>
-<li>Die Datei sofort zu löschen.</li>
-<li><strong>Die Umstellung auf modernes CSS Flexbox (<code>display: flex;</code>) oder CSS Grid mit fluider Breitenaufteilung.</strong></li>
-<li>Das Hinzufügen von 10 weiteren Float-Elementen.</li>
+<li><strong><code>.js</code></strong></li>
+<li><code>.java</code></li>
+<li><code>.script</code></li>
 </ul>
 <blockquote class="blockquote">
-<p>Moderne Layout-Module wie Flexbox und Grid ersetzen fehleranfällige Float- und Clearfix-Konstrukte vollständig.</p>
+<p>JavaScript-Dateien enden standardmäßig auf <code>.js</code>.</p>
 </blockquote>
 </div>
 <div class="quick-check">
-<p>Was versteht man unter dem Prinzip des „Algorithmischen Skeptizismus“?</p>
+<p>Welche Konsequenz hat es, wenn ein Skript ohne <code>defer</code> ganz oben im Head-Bereich versucht, mit <code>document.getElementById(&quot;titel&quot;)</code> auf eine Überschrift zuzugreifen?</p>
 <ul>
-<li>Dass Entwickler grundsätzlich keine Computer mehr verwenden dürfen.</li>
-<li>Dass Algorithmen keine Primzahlen berechnen können.</li>
-<li><strong>Dass jeder KI-generierte Code kritisch hinterfragt, auf Fehler analysiert und vor der Freigabe systematisch validiert werden muss.</strong></li>
+<li>Die Überschrift wird automatisch gelöscht.</li>
+<li><strong>Der Befehl liefert <code>null</code> zurück, da der Browser den Body mit der Überschrift zu diesem Zeitpunkt noch gar nicht geladen hat.</strong></li>
+<li>Der Browser startet automatisch neu.</li>
 </ul>
 <blockquote class="blockquote">
-<p>Blindes Vertrauen in KI führt zu Sicherheitslücken und unsauberen Webseiten; kritische Prüfung ist unerlässlich.</p>
-</blockquote>
-</div>
-<hr>
-</section>
-<section id="bereich-6-prompt-engineering-für-webkomponenten-ki-generierung" class="level3" data-number="1.5.6">
-<h3 data-number="1.5.6" class="anchored" data-anchor-id="bereich-6-prompt-engineering-für-webkomponenten-ki-generierung"><span class="header-section-number">1.5.6</span> Bereich 6: Prompt Engineering für Webkomponenten &amp; KI-Generierung</h3>
-<div class="quick-check">
-<p>Wie formuliert man einen effektiven Folge-Prompt für eine KI, um eine neue Webseitenkomponente (z. B. eine interne Subnavigation mit Sprungmarken) passgenau zu generieren?</p>
-<ul>
-<li>Man schreibt nur ein einzelnes Schlagwort wie „Menü“ in das Chatfenster.</li>
-<li><strong>Man beschreibt der KI präzise den Zielort im DOM (<code>&lt;main&gt;</code>), die semantische HTML-Struktur (<code>&lt;nav&gt;</code>, <code>&lt;ul&gt;</code>), gewünschte CSS-Klassen (<code>.subnavi</code>), das Verlinkungsverhalten (<code>#anchor</code>) und visuelle Gestaltungsregeln.</strong></li>
-<li>Man fordert die KI auf, die gesamte Webseite komplett neu in PHP zu programmieren.</li>
-</ul>
-<blockquote class="blockquote">
-<p>Je detaillierter und strukturierter der Folge-Prompt formuliert wird, desto passgenauer fügt die KI neue Komponenten in das bestehende HTML- und CSS-Gefüge ein.</p>
-</blockquote>
-</div>
-<div class="quick-check">
-<p>Warum ist vor dem Ausführen eines Prompts („Feuer frei!“) das mehrfache Durchlesen des Prompts dringend empfohlen?</p>
-<ul>
-<li><strong>Weil Präzision und Vollständigkeit des Prompts die Codequalität der KI bestimmen; ungenaue Prompts erfordern zeitaufwendige Nacharbeiten.</strong></li>
-<li>Weil der Prompt sonst vom Betriebssystem gelöscht wird.</li>
-<li>Weil moderne KI-Modelle nur Prompts akzeptieren, die dreimal gelesen wurden.</li>
-</ul>
-<blockquote class="blockquote">
-<p>Ein sorgfältig geprüfter Prompt verhindert Missverständnisse, fehlende Abschnitte oder falsche Bildverknüpfungen.</p>
-</blockquote>
-</div>
-<div class="quick-check">
-<p>Wie stellt man bei der KI-gestützten Unterseitenerstellung („HomeSweetHome“) sicher, dass die KI auf bestehende Stile und Bilder zugreift?</p>
-<ul>
-<li>Die KI findet externe Dateien immer automatisch auf der Festplatte des Nutzers ohne jede Pfadangabe.</li>
-<li>Bilder müssen immer zuerst in Textdateien umgewandelt werden.</li>
-<li><strong>Indem man der KI im Prompt explizit die Dateinamen der Assets, die Ordnerstruktur (z. B. <code>/img/</code> und <code>/img/1600/</code>) sowie die wiederzuverwendende <code>style.css</code> vorgibt.</strong></li>
-</ul>
-<blockquote class="blockquote">
-<p>Klare Verweise auf vorhandene Stylesheets und Bildpfade verhindern, dass die KI redundante CSS-Dateien anlegt oder fehlerhafte Bildverknüpfungen erzeugt.</p>
+<p>Das Element existiert zum Ausführungszeitpunkt noch nicht im DOM.</p>
 </blockquote>
 </div>
 <hr>
 </section>
-<section id="bereich-7-qualitätssicherung-validierung-von-ki-code-arbeitsmarktausblick" class="level3" data-number="1.5.7">
-<h3 data-number="1.5.7" class="anchored" data-anchor-id="bereich-7-qualitätssicherung-validierung-von-ki-code-arbeitsmarktausblick"><span class="header-section-number">1.5.7</span> Bereich 7: Qualitätssicherung, Validierung von KI-Code &amp; Arbeitsmarktausblick</h3>
+<section id="bereich-4-variablen-datentypen-vergleiche" class="level3" data-number="1.5.4">
+<h3 data-number="1.5.4" class="anchored" data-anchor-id="bereich-4-variablen-datentypen-vergleiche"><span class="header-section-number">1.5.4</span> Bereich 4: Variablen, Datentypen &amp; Vergleiche</h3>
 <div class="quick-check">
-<p>Welche drei Prüfschritte gehören zur unmittelbaren Abnahme nach der Generierung der Unterseite („Fertig ist die Unterseite!“)?</p>
+<p>Welche Aussage zur Deklaration von Variablen mit <code>const</code> ist richtig?</p>
 <ul>
-<li>Festplatte formatieren, Rechner neustarten, Monitor kalibrieren.</li>
-<li>Sämtliche HTML-Tags in Großbuchstaben umwandeln.</li>
-<li><strong>Überprüfen der Inhalte auf Vollständigkeit, Testen aller Verlinkungen (Anchor- &amp; Navigationslinks) und Lesen der generierten Texte.</strong></li>
+<li><strong>Eine mit <code>const</code> deklarierte Variable kann nach ihrer Initialisierung nicht neu zugewiesen werden.</strong></li>
+<li><code>const</code> darf nur für Zahlen, nicht aber für Texte verwendet werden.</li>
+<li>Variablen mit <code>const</code> sind auf der gesamten Festplatte gültig.</li>
 </ul>
 <blockquote class="blockquote">
-<p>Wie in Folie 152/154 definiert: Nach der KI-Generierung müssen Inhalte, Links und Texte unmittelbar durch den Entwickler verifiziert werden.</p>
+<p><code>const</code> schützt die Variable vor unbeabsichtigter Neuzuweisung.</p>
 </blockquote>
 </div>
 <div class="quick-check">
-<p>Welche typische Fehlerquelle tritt bei KI-generierten Webseiten häufig bei Bildressourcen auf?</p>
+<p>Welches Ergebnis liefert der Ausdruck <code>&quot;10&quot; + 5</code> in JavaScript?</p>
 <ul>
-<li>Der Computer stürzt bei relativen Pfaden automatisch ab.</li>
-<li><strong>HTTP 404 (Not Found) durch fehlerhafte relative Pfade (z. B. <code>img/</code> statt <code>../img/</code>), Groß-/Kleinschreibungsfehler oder halluzinierte Dateinamen.</strong></li>
-<li>Das Bild wird automatisch in ein Video konvertiert.</li>
+<li><code>15</code></li>
+<li><code>NaN</code></li>
+<li><strong><code>&quot;105&quot;</code></strong></li>
 </ul>
 <blockquote class="blockquote">
-<p>KI-Modelle können Verzeichnishierarchien fehlerhaft auflösen; eine systematische Pfad- und 404-Prüfung ist unerlässlich.</p>
+<p>Da der erste Operand ein String ist, verbindet der <code>+</code>-Operator beide Werte als Text.</p>
 </blockquote>
 </div>
 <div class="quick-check">
-<p>Welche Anforderung gilt laut Folie „KI ist geil?“ für das Erstellen einer eigenen Webseite mit KI?</p>
+<p>Welcher Vergleich liefert in JavaScript das Ergebnis <code>false</code>?</p>
 <ul>
-<li><strong>Sie soll ausreichend Content (Beispielseiten, Bilder, eigene/KI-Texte), Responsive Design, Mobiltauglichkeit und Barrierefreiheit vereinen.</strong></li>
-<li>Die Seite muss ausschließlich aus unformatiertem Text bestehen.</li>
-<li>Sie darf keine CSS-Stylesheets verwenden.</li>
+<li><code>5 == &quot;5&quot;</code></li>
+<li><strong><code>5 === &quot;5&quot;</code></strong></li>
+<li><code>true == 1</code></li>
 </ul>
 <blockquote class="blockquote">
-<p>Eine vollständige Webpräsenz erfordert stimmigen Content, responsives Layout für alle Geräte und barrierefreie Zugänglichkeit.</p>
+<p>Der strikte Operator <code>===</code> prüft Wert und Typ: Number <code>5</code> ist nicht gleich String <code>&quot;5&quot;</code>.</p>
+</blockquote>
+</div>
+<div class="quick-check">
+<p>Welchen Datentyp besitzt eine Variable, die mit <code>let punkte;</code> deklariert, der aber noch kein Wert zugewiesen wurde?</p>
+<ul>
+<li><strong><code>undefined</code></strong></li>
+<li><code>null</code></li>
+<li><code>0</code></li>
+</ul>
+<blockquote class="blockquote">
+<p>Eine deklarierte, aber nicht initialisierte Variable hat automatisch den Wert und Typ <code>undefined</code>.</p>
+</blockquote>
+</div>
+<hr>
+</section>
+<section id="bereich-5-strings-template-literals-kontrollstrukturen" class="level3" data-number="1.5.5">
+<h3 data-number="1.5.5" class="anchored" data-anchor-id="bereich-5-strings-template-literals-kontrollstrukturen"><span class="header-section-number">1.5.5</span> Bereich 5: Strings, Template Literals &amp; Kontrollstrukturen</h3>
+<div class="quick-check">
+<p>Wie bindet man eine Variable <code>name</code> in einem Template Literal (mit Backticks) korrekt ein?</p>
+<ul>
+<li><code>`Hallo &amp;name;`</code></li>
+<li><strong><code>`Hallo ${name}`</code></strong></li>
+<li><code>`Hallo [name]`</code></li>
+</ul>
+<blockquote class="blockquote">
+<p>Die Syntax für String-Interpolation in Backticks lautet <code>${variable}</code>.</p>
+</blockquote>
+</div>
+<div class="quick-check">
+<p>Wozu dient das Schlüsselwort <code>break;</code> innerhalb eines <code>switch / case</code>-Blocks?</p>
+<ul>
+<li>Es beendet das gesamte Browser-Fenster.</li>
+<li>Es wandelt den Text in Kleinbuchstaben um.</li>
+<li><strong>Es stoppt die Ausführung des <code>switch</code>-Blocks und verhindert das ungewollte Durchfallen in nachfolgende <code>case</code>-Zweige.</strong></li>
+</ul>
+<blockquote class="blockquote">
+<p>Ohne <code>break;</code> führt JavaScript alle folgenden Cases ebenfalls aus (Fallthrough).</p>
+</blockquote>
+</div>
+<div class="quick-check">
+<p>Was bewirkt der ternäre Operator im Ausdruck <code>const erg = score &gt;= 50 ? &quot;Ja&quot; : &quot;Nein&quot;;</code>?</p>
+<ul>
+<li><strong>Wenn <code>score</code> mindestens 50 ist, erhält <code>erg</code> den Wert <code>&quot;Ja&quot;</code>, andernfalls <code>&quot;Nein&quot;</code>.</strong></li>
+<li>Er zählt den Wert von <code>score</code> um 50 nach oben.</li>
+<li>Er prüft, ob <code>score</code> eine Primzahl ist.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Der ternäre Operator ist eine kompakte Kurzform für einfache <code>if / else</code>-Zuweisungen.</p>
+</blockquote>
+</div>
+<div class="quick-check">
+<p>Welche Eigenschaft liefert die Anzahl der Zeichen in einem String <code>text = &quot;Webentwicklung&quot;</code>?</p>
+<ul>
+<li><code>text.count</code></li>
+<li><strong><code>text.length</code></strong></li>
+<li><code>text.size()</code></li>
+</ul>
+<blockquote class="blockquote">
+<p><code>.length</code> gibt die Zeichenlänge des Strings zurück.</p>
+</blockquote>
+</div>
+<hr>
+</section>
+<section id="bereich-6-schleifen-funktionen" class="level3" data-number="1.5.6">
+<h3 data-number="1.5.6" class="anchored" data-anchor-id="bereich-6-schleifen-funktionen"><span class="header-section-number">1.5.6</span> Bereich 6: Schleifen &amp; Funktionen</h3>
+<div class="quick-check">
+<p>Welche Schleife ist der modernste und sicherste Weg, um nacheinander alle Einträge eines Arrays <code>const liste = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;]</code> auszulesen?</p>
+<ul>
+<li><code>loop (liste)</code></li>
+<li><code>while (liste)</code></li>
+<li><strong><code>for (const element of liste)</code></strong></li>
+</ul>
+<blockquote class="blockquote">
+<p><code>for...of</code> iteriert direkt über alle Werte eines Arrays.</p>
+</blockquote>
+</div>
+<div class="quick-check">
+<p>Was bewirkt das Schlüsselwort <code>return</code> in einer Funktion?</p>
+<ul>
+<li><strong>Es beendet die Funktionsausführung und gibt das berechnete Ergebnis an den Aufrufer zurück.</strong></li>
+<li>Es startet die Funktion von vorne.</li>
+<li>Es druckt die Seite auf dem Standarddrucker aus.</li>
+</ul>
+<blockquote class="blockquote">
+<p><code>return</code> liefert den Rückgabewert der Funktion und beendet deren Ausführung sofort.</p>
+</blockquote>
+</div>
+<div class="quick-check">
+<p>Wie lautet die kompakte Arrow-Function-Schreibweise für eine Funktion, die eine Zahl verdoppelt?</p>
+<ul>
+<li><code>function doppel(x) { return x * 2; }</code></li>
+<li><strong><code>const doppel = x =&gt; x * 2;</code></strong></li>
+<li><code>const doppel = x -&gt; x * 2;</code></li>
+</ul>
+<blockquote class="blockquote">
+<p>Bei Einzeilern mit Arrow Functions (<code>=&gt;</code>) entfallen <code>function</code>, Klammern und <code>return</code>.</p>
+</blockquote>
+</div>
+<div class="quick-check">
+<p>Was passiert bei der Ausführung des Befehls <code>continue;</code> innerhalb einer Schleife?</p>
+<ul>
+<li>Die Schleife wird sofort komplett abgebrochen.</li>
+<li>Das Programm stürzt mit einem Fehler ab.</li>
+<li><strong>Der aktuelle Schleifendurchlauf wird sofort beendet und die Schleife springt zum nächsten Element.</strong></li>
+</ul>
+<blockquote class="blockquote">
+<p><code>continue</code> überspringt nur den Rest des aktuellen Durchgangs.</p>
+</blockquote>
+</div>
+<hr>
+</section>
+<section id="bereich-7-komplexe-datenstrukturen-objekte-arrays" class="level3" data-number="1.5.7">
+<h3 data-number="1.5.7" class="anchored" data-anchor-id="bereich-7-komplexe-datenstrukturen-objekte-arrays"><span class="header-section-number">1.5.7</span> Bereich 7: Komplexe Datenstrukturen: Objekte &amp; Arrays</h3>
+<div class="quick-check">
+<p>Wie greift man auf das erste Element des Arrays <code>const farben = [&quot;Rot&quot;, &quot;Gelb&quot;, &quot;Blau&quot;]</code> zu?</p>
+<ul>
+<li><strong><code>farben[0]</code></strong></li>
+<li><code>farben[1]</code></li>
+<li><code>farben.first()</code></li>
+</ul>
+<blockquote class="blockquote">
+<p>Arrays sind in JavaScript 0-basiert indiziert; das erste Element liegt bei Index <code>0</code>.</p>
+</blockquote>
+</div>
+<div class="quick-check">
+<p>Gegeben ist das Objekt <code>const auto = { marke: &quot;BMW&quot;, ps: 190 };</code>. Wie greift man per Punktnotation auf die PS zu?</p>
+<ul>
+<li><code>auto-&gt;ps</code></li>
+<li><strong><code>auto.ps</code></strong></li>
+<li><code>auto(&quot;ps&quot;)</code></li>
+</ul>
+<blockquote class="blockquote">
+<p>Eigenschaften von Objekten werden standardmäßig mit der Punktnotation <code>objekt.eigenschaft</code> gelesen.</p>
+</blockquote>
+</div>
+<div class="quick-check">
+<p>Was bewirkt die Methode <code>JSON.stringify(meinObjekt)</code>?</p>
+<ul>
+<li>Sie löscht alle doppelten Einträge aus dem Objekt.</li>
+<li>Sie übersetzt das Objekt in die Programmiersprache Python.</li>
+<li><strong>Sie wandelt das JavaScript-Objekt in einen standardisierten JSON-Text-String um.</strong></li>
+</ul>
+<blockquote class="blockquote">
+<p><code>JSON.stringify()</code> serialisiert Objekte in JSON-Text zur Speicherung oder Übertragung.</p>
+</blockquote>
+</div>
+<div class="quick-check">
+<p>Was bewirkt die Methode <code>JSON.parse(jsonText)</code>?</p>
+<ul>
+<li><strong>Sie liest einen JSON-formatierten Text ein und wandelt ihn wieder in ein nutzbares JavaScript-Objekt um.</strong></li>
+<li>Sie prüft, ob eine Datei auf der Festplatte existiert.</li>
+<li>Sie formatiert den Quelltext mit Einrückungen.</li>
+</ul>
+<blockquote class="blockquote">
+<p><code>JSON.parse()</code> deserialisiert JSON-Text zurück in ein JavaScript-Objekt.</p>
 </blockquote>
 </div>
 </section>

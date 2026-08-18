@@ -21,7 +21,7 @@ footer: '[zurück zur Übersicht](../index.html)'
 - [DOM-Manipulation & Modernes Event-Handling](#dom-manipulation-modernes-event-handling)
 - [Modernes Event Handling](#modernes-event-handling)
 - [Asynchrone Programmierung & Fetch API](#asynchrone-programmierung-fetch-api)
-- [Clientseitige Speicherung, Web APIs & KI-Integration](#clientseitige-speicherung-web-apis-ki-integration)
+- [Clientseitige Speicherung, Web APIs & KI-Workflows](#clientseitige-speicherung-web-apis-ki-workflows)
 - [Formularverarbeitung & Validierung](#formularverarbeitung-validierung)
 - [Zurück zum Maik: Ein Hamburger Menü (10)](#zuruck-zum-maik-ein-hamburger-menu-10)
 - [Wie gehts weiter? (11)](#wie-gehts-weiter-11)
@@ -34,7 +34,7 @@ footer: '[zurück zur Übersicht](../index.html)'
 - DOM-Baumstruktur & Selektion (`querySelector`)
 - Dynamische DOM-Manipulation (`createElement`, `classList`)
 - Modernes Event-Handling (`addEventListener`, `event.target`)
-- Event Flow & Delegation
+- Interaktive Praxis-Beispiele (z. B. Hamburger-Menü)
 
 ---
 
@@ -199,6 +199,10 @@ btn.dataset.role = "superadmin";
 | **Element erzeugen** | `document.createElement('div')` | Sicheres Erzeugen von Knoten im Speicher |
 | **Element anhängen** | `parent.append(child)` | Fügt Knoten am Ende der Kinder ein |
 | **HTML einfügen** | `el.insertAdjacentHTML('beforeend', html)` | Schnelles Einfügen von Template-Strings |
+---
+
+| Aufgabe | Modernes Verfahren | Nutzen |
+| :--- | :--- | :--- |
 | **Klassen umschalten** | `el.classList.toggle('active')` | Sauberes Trennen von JS & CSS-Design |
 | **Metadaten lesen** | `el.dataset.userId` | Zugriff auf `data-user-id` im HTML |
 
@@ -224,17 +228,13 @@ Nutze `classList` für visuelle Änderungen anstelle von direkten Inline-Styles 
 <!-- _class: structural -->
 
 ## Modernes Event Handling
-### Interaktivität, Event-Listener & Event-Delegation
+### Interaktivität & Event-Listener
 
-**Übericht:**
-- Event-Listener
-- Event-Objekt
-- Event-Flow
-- Event Delegation 
-
--> **Paradigmenwechsel:** Saubere Trennung von HTML (Struktur) und JS (Verhalten)
--> **Flexibilität:** Beliebig viele Listener pro Event auf einem Element registrieren
--> **Effizienz:** Event Delegation für dynamische DOM-Strukturen und Speicherschonung
+**Übersicht:**
+- **Paradigmenwechsel:** Saubere Trennung von HTML (Struktur) und JS (Verhalten)
+- **`addEventListener()`:** Events wie Klicks oder Eingaben sauber abfangen
+- **Das Event-Objekt (`event`):** `event.target` und `event.preventDefault()`
+- **Praxis:** Interaktive Steuerung von Webseiten-Elementen
 
 ---
 
@@ -247,10 +247,9 @@ Nutze `classList` für visuelle Änderungen anstelle von direkten Inline-Styles 
 ```
 
 **Warum Inline-Handler problematisch sind:**
-- **Verletzung der Trennung von Belangen (Separation of Concerns):** HTML steuert Layout, JS das Verhalten.
-- **Verschmutzung des globalen Scope:** Funktionen müssen global verfügbar sein.
-- **Sicherheitsrisiko (CSP):** Verstößt gegen strikte Content Security Policies.
-- **Einschränkung:** Nur ein einzelner Event-Handler pro Event möglich.
+- **Verletzung der Trennung von Belangen (Separation of Concerns):** HTML steuert Struktur/Inhalt, JS das Verhalten.
+- **Verschmutzung des globalen Scope:** Funktionen müssen global deklariert sein.
+- **Wartbarkeit & Flexibilität:** Schwer zu debuggen und nur ein Handler pro Element möglich.
 
 ---
 
@@ -260,96 +259,47 @@ Nutze `classList` für visuelle Änderungen anstelle von direkten Inline-Styles 
 ```
 ```javascript
 const saveBtn = document.querySelector('#saveBtn');
+
+// Saubere Registrierung des Event-Listeners in JavaScript:
 saveBtn.addEventListener('click', speichernData);
 ```
-Fügt dem Button ein Event-Listener hinzu.
--> Das Event "click" wird aufgerufen, wenn der Button geklickt wird.
--> Die Funktion "speichernData" wird aufgerufen, wenn der Button geklickt wird.
+- Trennt HTML-Markup und JavaScript-Logik vollständig.
+- Erlaubt beliebig viele Listener auf demselben Element.
 
 ---
 
-### Event-Listener registrieren & verwalten (`addEventListener`)
-
-
+### Event-Listener in der Praxis (`addEventListener`)
 
 ```javascript
 const btn = document.querySelector('.action-btn');
 
-// 1. Anonyme Arrow-Function als Listener:
+// Variante 1: Direkt mit anonymer Pfeilfunktion (Arrow Function)
 btn.addEventListener('click', (event) => {
     console.log('Button wurde geklickt!');
 });
 
-// 2. Benannte Funktion (erforderlich für removeEventListener):
-function handleMouseOver(event) {
-    console.log('Maus über Element!');
+// Variante 2: Mit benannter Funktion (erhöht Lesbarkeit & Wiederverwendbarkeit)
+function handleAction(event) {
+    console.log('Aktion ausgeführt!');
 }
-btn.addEventListener('mouseover', handleMouseOver);
-btn.removeEventListener('mouseover', handleMouseOver);
-
-// 3. Option: Event nur 1x ausführen:
-btn.addEventListener('click', () => console.log('Einmalig!'), { once: true });
+btn.addEventListener('click', handleAction);
 ```
 
 ---
 
 ### Das Event-Objekt (`event`)
 
-Beim Auslösen eines Events übergibt der Browser ein **Event-Objekt** mit Metadaten an den Handler:
+Beim Auslösen eines Events übergibt der Browser automatisch ein **Event-Objekt** mit nützlichen Metadaten:
 
-- **`event.target`**: Das konkrete Element, das das Event **ausgelöst** hat (z. B. das geklickte Bild/Icon).
-- **`event.currentTarget`**: Das Element, an dem der **Listener registriert** wurde.
-- **`event.preventDefault()`**: Unterdrückt das standardmäßige Browserverhalten.
-- **`event.stopPropagation()`**: Stoppt die Weiterleitung des Events im DOM-Baum.
-
-**Beispiel: Standardverhalten bei Formularen verhindern:**
-```javascript
-const form = document.querySelector('#loginForm');
-
-form.addEventListener('submit', (event) => {
-    event.preventDefault(); // Verhindert Neuladen der Seite!
-    console.log('Formular wird per JavaScript (z. B. fetch) verarbeitet.');
-});
-```
-
----
-
-### Event-Flow: Bubbling & Capturing
-
-Ereignisse durchlaufen den DOM-Baum in **drei Phasen**:
-
-1. **Capturing Phase (Erfassungsphase):** Das Event wandert von `window` / `document` nach unten zum Ziel-Element.
-2. **Target Phase (Zielphase):** Das Event erreicht das eigentliche Ziel-Element (`event.target`).
-3. **Bubbling Phase (Bubbling-Phase):** Das Event steigt vom Ziel-Element wieder nach oben durch alle Elternknoten.
-
-```
-[ window ]   | 1. Capturing   ^ 3. Bubbling
-  └─ [ <body> ]  | Phase          | Phase
-       └─ [ <div#card> ]        |
-            └─ [ <button> ] <-- 2. Target Phase
-```
-
-*Standard:* `addEventListener()` lauscht standardmäßig in der **Bubbling-Phase** (`{ capture: false }`).
-
----
-
-### Event Delegation (Effiziente Event-Steuerung)
-
-**Problem:** Viele einzelne Listener auf Liste-Items oder Tabellenzeilen fressen Speicher und funktionieren nicht bei dynamisch erzeugten Elementen.
-
-**Lösung:** **Ein** einziger Event-Listener am übergeordneten Vater-Container.
-Nutze `event.target` und `.closest()`:
+- **`event.target`**: Das konkrete HTML-Element, das das Ereignis ausgelöst hat.
+- **`event.preventDefault()`**: Unterdrückt das standardmäßige Verhalten des Browsers (z. B. Seiten-Reload beim Formular-Absenden oder Springen bei Links).
 
 ```javascript
-// Listener wird an der übergeordneten Liste <ul> registriert
-const todoList = document.querySelector('#todoList');
+const link = document.querySelector('#specialLink');
 
-todoList.addEventListener('click', (event) => {
-    // Wandert vom geklickten Punkt nach oben zum nächsten .delete-btn
-    const btn = event.target.closest('.delete-btn');
-    if (!btn) return; // Klick war nicht auf/in einem Löschen-Button    
-    const listItem = btn.closest('li');
-    listItem.remove(); // Löscht den zugehörigen Listeneintrag
+link.addEventListener('click', (event) => {
+    event.preventDefault(); // Verhindert das Standard-Springen der Seite
+    console.log('Geklicktes Element:', event.target);
 });
 ```
 
@@ -357,13 +307,11 @@ todoList.addEventListener('click', (event) => {
 
 ### Übersicht: Modernes Event Handling
 
-| Konzept | Syntax / Methode | Zweck / Vorteile |
+| Konzept | Syntax / Methode | Zweck / Praxis-Nutzen |
 | :--- | :--- | :--- |
-| **Listener registrieren** | `el.addEventListener('click', fn)` | Mehrere Handler möglich, saubere Trennung von HTML & JS |
-| **Listener entfernen** | `el.removeEventListener('click', fn)` | Speicher freigeben / Events deaktivieren (benötigt Funktionsreferenz) |
-| **Formular-Stop** | `event.preventDefault()` | Verhindert Seitenneuladen bei Formular-Submits & Links |
-| **Event-Auslöser** | `event.target` | Das exakte Unterelement ermitteln, auf das geklickt wurde |
-| **Event Delegation** | `parent.addEventListener(...)` + `closest()` | Speicher sparen, funktioniert automatisch bei dynamisch eingefügten Elementen |
+| **Listener registrieren** | `el.addEventListener('click', fn)` | Reagiert auf Benutzerinteraktionen ohne Inline-HTML |
+| **Standardverhalten stoppen** | `event.preventDefault()` | Verhindert ungewolltes Neuladen bei Formularen & Links |
+| **Auslöser ermitteln** | `event.target` | Referenz auf das konkret angeklickte Element |
 
 ---
 
@@ -371,10 +319,9 @@ todoList.addEventListener('click', (event) => {
 
 - **Ausführbare Demodatei:** `Samples/JS/event-handling-demo.html`
 - **Gezeigte Kernkonzepte im Code:**
-  1. **`addEventListener('click', handler)`:** Ereignisse sauber ohne Inline-Code abfangen.
-  2. **`event.preventDefault()`:** Verhindern von Formular-Reloads.
-  3. **`event.target` & `closest()`:** Auslesen von Attributen und gezieltes Verarbeiten geklickter Elemente.
-  4. **Event Delegation:** Zentrale Steuerung dynamischer UI-Elemente.
+  1. **`addEventListener('click', handler)`:** Ereignisse sauber im JS-Code abfangen.
+  2. **`event.preventDefault()`:** Verhindern von Standard-Browseraktionen.
+  3. **`event.target`:** Auslesen von Attributen und Werten des geklickten Elements.
 
 **Ausprobieren:**
 Öffne `Samples/JS/event-handling-demo.html` im Browser und teste die interaktiven Buttons und Event-Handler!
@@ -398,7 +345,6 @@ todoList.addEventListener('click', (event) => {
 - **Synchroner Ablauf (Problem):**
   - Befehle werden streng nacheinander ausgeführt.
   - Beim Laden großer Dateien (z. B. 5 MB GeoJSON) **blockiert** der gesamte Browser: Die Webseite friert ein, Buttons reagieren nicht mehr!
-
 - **Asynchroner Ablauf (Lösung):**
   - Der Browser fordert die Datei im Hintergrund an.
   - Die Webseite bleibt sofort bedienbar und flüssig.
@@ -439,13 +385,11 @@ Das Schlüsselwort-Paar **`async / await`** macht asynchronen Code extrem übers
 async function ladeGeodaten() {
     // 1. Auf Antwort des Servers warten:
     const response = await fetch('orte.geojson');
-    
     // 2. Auf das Konvertieren der GeoJSON-Daten warten:
     const geodaten = await response.json();
     
     console.log('Geladene Orte:', geodaten);
 }
-
 ladeGeodaten();
 ```
 
@@ -504,13 +448,13 @@ Verwende ausschließlich `async / await` in Kombination mit `fetch()` für alle 
 ---
 <!-- _class: structural -->
 
-## Clientseitige Speicherung, Web APIs & KI-Integration
-### Web Storage, Browser APIs & KI-gestützte Workflows (SDD)
+## Clientseitige Speicherung, Web APIs & KI-Workflows
+### Web Storage, Browser APIs & KI-gestützte Entwicklung (SDD)
 
 - **Die JavaScript Sandbox:** Sicherheitsarchitektur & isolierte Speicherung
 - **Clientseitige Speicherung:** `localStorage` vs. `sessionStorage` & JSON-Serialisierung
 - **Moderne Web APIs:** Die Geolocation API zur Standortabfrage in GIS-Apps
-- **KI-Integration & SDD:** KI-Tools (Antigravity, Cursor) & Spec-Driven Development
+- **KI-Workflows & SDD:** Spec-Driven Development mit KI-Coding-Assistenten
 
 ---
 
@@ -519,7 +463,7 @@ Verwende ausschließlich `async / await` in Kombination mit `fetch()` für alle 
 JavaScript läuft aus Sicherheitsgründen in einer strikten **Sandbox** im Browser:
 
 - **Sandbox-Prinzip (Same-Origin Policy):**
-  - Kein direkter Zugriff auf das lokale Dateisystem der Benutzer.
+  - Kein direkter, unkontrollierter Zugriff auf das lokale Dateisystem der Benutzer.
   - Daten sind isoliert pro Domäne/Protokoll gespeichert.
 - **Web Storage API (Zwei Speicherarten):**
   - **`localStorage`**: Speichert Daten **dauerhaft** im Browser-Profil (übersteht Neustarts).
@@ -566,32 +510,6 @@ console.log(configObj.zoom); // 12
 
 ---
 
-### Dateiverarbeitung im Browser: Export & Import
-
-Neben Web Storage ermöglichen spezialisierte **Web APIs** den echten Dateiaustausch mit dem Nutzergerät:
-
-- **Datei-Export (Download per Blob API):**
-  - Daten im JS-Arbeitsspeicher in ein `Blob`-Objekt verpacken.
-  - Temporäre Objekt-URL erzeugen (`URL.createObjectURL(blob)`) und Download per `<a download>` starten.
-- **Datei-Import (Upload per FileReader API):**
-  - Datei über `<input type="file">` vom Nutzer auswählen lassen.
-  - Mit `FileReader.readAsText(file)` den Dateiinhalt (z. B. GeoJSON) asynchron einlesen & parsen.
-
----
-
-### Praxis-Check: Dateiverarbeitung (Blob & FileReader API) im Einsatz
-
-- **Ausführbare Demodatei:** `Samples/JS/file-io-demo.html`
-- **Gezeigte Kernkonzepte im Code:**
-  1. **Formular -> GeoJSON Transformation:** Dynamisches Auslesen von Formulardaten zur Erzeugung strukturierter GeoJSON-Features.
-  2. **Blob API & Download Trigger:** `new Blob()` und `URL.createObjectURL()` erzeugen die herunterladbare GeoJSON-Datei.
-  3. **`FileReader.readAsText()`:** Sicheres Wieder-Einlesen der selbst erzeugten `.geojson`-Datei zur Überprüfung im DOM.
-
-**Ausprobieren:**
-Öffne `Samples/JS/file-io-demo.html` im Browser, fülle das Formular aus und lade deine eigene GeoJSON-Datei herunter!
-
----
-
 ### Moderne Web APIs: Die Geolocation API
 
 Browser bieten viele eingebaute Schnittstellen (**Web APIs**), die speziell in der Geovisualisierung wichtig sind:
@@ -625,36 +543,16 @@ navigator.geolocation.getCurrentPosition(
 
 ---
 
-### KI-gestützte Entwicklung & KI-Integration (SDD)
+### KI-gestützte Entwicklung mit Spec-Driven Development (SDD)
 
-Moderne KI-Tools revolutionieren die Webentwicklung durch **Spec-Driven Development (SDD)**:
+Moderne KI-Tools (z. B. Antigravity, Cursor) revolutionieren die Webprogrammierung durch **Spec-Driven Development (SDD)**:
 
-- **Spec-Driven Development (SDD):**
-  - Präzise Spezifikationen (Prompts / Specs) steuern die KI-Generierung von JS-Code, GeoJSON oder Tests.
-  - KI-Tools (z. B. Antigravity, Cursor) unterstützen beim Schreiben, Refaktoren und Fehlerbeheben.
-- **KI-Integration in Web-Apps:**
-  - KI-Modelle / APIs können per `fetch()` angebunden werden, um aus Freitext-Eingaben Geodaten zu erzeugen.
-
-```javascript
-// Beispiel: KI-Spezifikation an API senden
-const response = await fetch('/api/ai-generate', {
-    method: 'POST',
-    body: JSON.stringify({ prompt: 'Erstelle GeoJSON für Würzburg' })
-});
-```
-
----
-
-### Praxis-Check: KI-Integration & Spec-Driven Workflows
-
-- **Ausführbare Demodatei:** `Samples/JS/ai-integration-demo.html`
-- **Gezeigte Kernkonzepte im Code:**
-  1. **HTTP POST Request per `fetch()`:** Aufbau von Anfragen an KI-APIs mit JSON-Payload (`Content-Type` & `Authorization: Bearer`).
-  2. **System-Prompts / Structured Output:** Zwingen der KI zur Ausgabe von meerschichtigen GeoJSON-Strukturen.
-  3. **SDD-Workflow:** Nutzung von Spezifikationen zur automatischen Datentransformation.
-
-**Ausprobieren:**
-Öffne `Samples/JS/ai-integration-demo.html` im Browser und inspiziere die HTTP-POST Protokoll-Struktur von KI-APIs!
+- **Das Prinzip: Spezifikation vor Code:**
+  - Statt vager Prompts ("Mach mir eine Karte") wird zuerst eine präzise Spezifikation (`spec.md`) formuliert.
+  - Die Spezifikation definiert Datenstrukturen (GeoJSON), Schnittstellen, Validierungsregeln und UX-Verhalten.
+- **Vorteile für Einsteiger:**
+  - KI generiert sauberen, standardkonformen Code nach klaren Vorgaben.
+  - Fehler lassen sich durch schrittweises Refactoring und Prompt-Iterationen gezielt beheben.
 
 ---
 
@@ -662,18 +560,16 @@ const response = await fetch('/api/ai-generate', {
 
 | Thema | Schlüsseltechnologie | Einsatz in der Geovisualisierung |
 | :--- | :--- | :--- |
-| **Web Storage** | `localStorage` / `sessionStorage` | Speichern von Benutzereinstellungen, Kartenausschnitten & Tokens |
-| **Datei-Export** | `Blob` + `URL.createObjectURL()` | Download von GeoJSON-Dateien & Karten-Exporte |
-| **Datei-Import** | `<input type="file">` + `FileReader` | Einlesen von lokalen Geodaten-Dateien (.geojson) |
-| **Web APIs** | `navigator.geolocation` | Abfragen des eigenen Standorts für z. B. Routen- & Standortkarten |
-| **KI & SDD** | Spec-Driven Dev / LLM APIs | Automatische Code-Generierung, Prompt-basierte GeoJSON-Erstellung |
+| **Web Storage** | `localStorage` / `sessionStorage` | Speichern von Benutzereinstellungen, Filtern & Kartenausschnitten |
+| **Web APIs** | `navigator.geolocation` | Abfragen des eigenen Standorts für Routen- & Umgebungskarten |
+| **KI & SDD** | Spec-Driven Development (SDD) | Spezifikationsgestützte Generierung und Refactoring von JS & GeoJSON |
 
 ---
 
 **Best Practice:**
-Nutze `localStorage` für persistenten Status, `Blob` / `FileReader` für den Dateiaustausch, sichere Web APIs mit Permission-Handling und erstelle Code KI-gestützt auf Basis klarer Spezifikationen (SDD).
+Nutze `localStorage` für persistenten Status im Browser, binde native Web APIs wie `geolocation` mit sauberem Error-Handling ein und entwickle Anwendungen nach dem SDD-Prinzip auf Basis präziser Spezifikationen.
 
----
+
 
 ---
 <!-- _class: structural -->

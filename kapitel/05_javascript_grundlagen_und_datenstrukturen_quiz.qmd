@@ -1,0 +1,880 @@
+---
+title: "Kapitel 5: JavaScript Grundlagen & Datenstrukturen"
+subtitle: "Interaktives Selbstlern-Quiz | THWS Webprogrammierung"
+date: last-modified
+lang: de
+
+author:
+  - name: Stefan Sauer
+    email: stefan.sauer@thws.de
+    role: Fachlehrer
+    affiliation: THWS Geovisualisierung & Vermessung
+
+semester: "WS 26/27"
+course: "Webprogrammierung"
+version: "2.0"
+
+include-after-body:
+  - _extensions/moodle/interactions.js
+
+format:
+  moodle-html: default
+---
+
+# 🎯 Umfassendes Selbstlern-Quiz & Wissens-Check
+
+Willkommen zum interaktiven Selbstlern-Quiz für **Kapitel 5: JavaScript Grundlagen und Datenstrukturen**. Dieses Quiz konzentriert sich auf die **zentralen Grundprinzipien und Kernkonzepte der JavaScript-Programmierung für Einsteiger**:
+
+1. **Rolle & Funktionsweise von JavaScript** (HTML = Struktur, CSS = Design, JS = Interaktion & Leben; Sandbox-Sicherheitsmodell)
+2. **Entwicklertools & Einfaches Debugging** (DevTools F12, Console, `console.log()`, Breakpoints & `debugger;`, häufige Fehlermeldungen)
+3. **Saubere Skripteinbindung & Ladeverhalten** (Externes Skript, das `defer`-Attribut im Head-Bereich, Trennung von Struktur und Verhalten)
+4. **Variablen & Scopes für Einsteiger** (`const` als Standard, `let` für veränderliche Werte, warum `var` vermieden wird, Block-Scope `{ ... }`)
+5. **Grundlegende Datentypen & Vergleiche** (String, Number, Boolean, `undefined`, `null`, Strikte Gleichheit `===` vs. Lose Gleichheit `==`)
+6. **String-Verarbeitung & Template Literals** (Zeichenketten verbinden mit Backticks `` `Hallo ${name}` ``, nützliche Methoden wie `.length`, `.includes()`)
+7. **Entscheidungsstrukturen** (`if / else if / else` für Bereiche, `switch / case` für feste Werte, Ternärer Operator `? :` für kompakte Zuweisungen)
+8. **Schleifen & Iteration** (`for...of` für Arrays, klassische `for`-Zählschleife, `while`, Steuerung mit `break` & `continue`)
+9. **Funktionen & Arrow Functions** (Klassische Funktionen mit `return`, kompakte Arrow Functions `=>`, Parameter & Standardwerte)
+10. **Objekte & Arrays (Grundlagen)** (Objekt-Literale `{ key: value }`, Punkt- vs. Klammer-Notation, Arrays `[0, 1, 2]`, `JSON.stringify()` & `JSON.parse()`)
+
+---
+
+## 1. Kernbegriffe (Flip-Cards)
+
+Klicken oder tippen Sie auf die Karten, um die Vorder- und Rückseite zu wenden:
+
+::: {.flip-card}
+#### Welche Rolle übernimmt JavaScript im Zusammenspiel mit HTML und CSS?
+**HTML** bildet das statische Grundgerüst (Inhalt), **CSS** gestaltet das Aussehen (Design), und **JavaScript** haucht der Webseite Leben ein (Interaktivität, Animationen, Berechnungen und dynamische Reaktionen auf Benutzereingaben).
+:::
+
+::: {.flip-card}
+#### Was unterscheidet ECMAScript von einer JavaScript-Engine?
+**ECMAScript** ist der offizielle Standard und Bauplan (das „Rezept“), der die Regeln und Syntax festlegt. Die **JS-Engine** (z. B. V8 in Chrome/Edge, SpiderMonkey in Firefox) ist der „Koch“ im Browser, der den JavaScript-Code zur Laufzeit interpretiert und ausführt.
+:::
+
+::: {.flip-card}
+#### Warum läuft JavaScript im Browser in einer Sandbox?
+Aus **Sicherheitsgründen**. Das Sandbox-Prinzip verhindert, dass bösartiger Code fremder Webseiten direkt auf die Festplatte des Nutzers zugreift, Programme startet oder private Daten ohne Erlaubnis ausspioniert.
+:::
+
+::: {.flip-card}
+#### Warum sollte man externe Skripte im Head-Bereich mit dem defer-Attribut einbinden?
+Das Attribut `defer` lädt die JavaScript-Datei im Hintergrund herunter, führt sie aber **erst aus, nachdem das gesamte HTML-Dokument aufgebaut ist**. Dadurch blockiert das Skript nicht das Laden der Seite und alle HTML-Elemente sind für JavaScript sofort auffindbar.
+:::
+
+::: {.flip-card}
+#### Wann verwendet man const und wann let?
+- **`const` (Standard):** Für alle Variablen, deren Wert oder Referenz sich nach der Zuweisung nicht mehr ändert.
+- **`let`:** Nur dann, wenn der Wert der Variable später bewusst neu zugewiesen werden muss (z. B. Zähler in einer Schleife).
+- **`var`:** Veraltet – sollte in modernem JavaScript nicht mehr verwendet werden.
+:::
+
+::: {.flip-card}
+#### Was bedeutet Block-Scope bei const und let?
+Variablen, die mit `const` oder `let` innerhalb von geschweiften Klammern `{ ... }` (z. B. in einem `if`-Block oder einer Schleife) deklariert werden, existieren **nur innerhalb dieses Blocks** und sind von außen unsichtbar.
+:::
+
+::: {.flip-card}
+#### Warum liefert der Ausdruck Text plus Zahl eine Zeichenkette?
+Weil der `+`-Operator bei Zeichenketten (Strings) keine mathematische Addition durchführt, sondern die Werte als Text aneinanderhängt (**String-Konkatenation**, z. B. `"5" + 10` ergibt `"510"`). Um zu rechnen, muss der String vorher mit `Number("5")` umgewandelt werden.
+:::
+
+::: {.flip-card}
+#### Was ist der Unterschied zwischen striktem und losem Vergleich?
+- **`===` (Strikte Gleichheit – Empfohlen!):** Prüft **Wert UND Datentyp**. `"5" === 5` ergibt `false`.
+- **`==` (Lose Gleichheit):** Versucht vor dem Vergleich die Typen automatisch umzuwandeln. `"5" == 5` ergibt `true` (kann zu unerwarteten Fehlern führen).
+:::
+
+::: {.flip-card}
+#### Welche Vorteile bieten Template Literals mit Backticks?
+Sie ermöglichen **String-Interpolation** mit `${variable}`, wodurch Variablen direkt und übersichtlich in den Text eingebettet werden können, sowie **mehrzeilige Texte** ohne umständliche `+`-Verknüpfungen oder `\n`.
+:::
+
+::: {.flip-card}
+#### Welche Schleife eignet sich am besten für Arrays?
+Die moderne **`for...of`-Schleife** (`for (const element of array)`). Sie liest direkt die einzelnen Werte der Reihe nach aus, ohne dass man manuell mit einem Indexzähler (`i++`) hantieren muss.
+:::
+
+::: {.flip-card}
+#### Was ist eine Arrow Function?
+Eine moderne, kompakte Schreibweise für Funktionen in JavaScript (`=>`). Bei Einzeilern kann das `function`-Schlüsselwort und sogar das `return` weggelassen werden: `const verdoppeln = x => x * 2;`.
+:::
+
+::: {.flip-card}
+#### Wie greift man auf Eigenschaften eines JavaScript-Objekts zu?
+- **Punkt-Notation (Standard):** `user.name`
+- **Klammer-Notation (bei dynamischen Schlüsseln oder Sonderzeichen):** `user["name"]`
+:::
+
+::: {.flip-card}
+#### Wozu dienen JSON stringify und JSON parse?
+- **`JSON.stringify(obj)`:** Wandelt ein JavaScript-Objekt in einen lesbaren **Text-String (JSON)** um (z. B. zum Speichern oder Versenden).
+- **`JSON.parse(text)`:** Wandelt einen empfangenen **JSON-Text** wieder in ein echtes, nutzbares JavaScript-Objekt um.
+:::
+
+::: {.flip-card}
+#### Was bewirkt das debugger-Statement im Code?
+Wenn die Entwicklertools (DevTools mit $F12$) geöffnet sind, hält der Browser die Programmausführung an der Stelle des `debugger;`-Befehls sofort an, sodass man Variablenwerte in Ruhe untersuchen kann.
+:::
+
+---
+
+## 2. Deep Dives & Exkurse
+
+::: {.details}
+#### Deep Dive 1: Das Dreigespann des Webs – HTML, CSS und JavaScript
+- **HTML (Struktur):** Definiert, *was* auf der Seite ist (Überschriften, Absätze, Buttons, Bilder).
+- **CSS (Präsentation):** Bestimmt, *wie* die Elemente aussehen (Farben, Abstände, Schriftarten, responsives Raster).
+- **JavaScript (Verhalten & Dynamik):** Steuert, *wie* die Seite reagiert:
+  - Auf Klicks, Tastatur- oder Mauseingaben reagieren (Event-Handling).
+  - Inhalte verändern oder nachladen, ohne die Seite neu aufzurufen.
+  - Berechnungen und Formularvalidierungen direkt im Browser durchführen.
+:::
+
+::: {.details}
+#### Deep Dive 2: Die Browser-Entwicklertools (DevTools) für Einsteiger
+- **Öffnen:** Taste `F12` oder `Rechtsklick -> Untersuchen`.
+- **Console-Tab:**
+  - `console.log("Wert:", x)` gibt Werte im Log-Fenster aus.
+  - `console.error("Fehler!")` hebt Probleme rot hervor.
+  - Interaktives Ausprobieren: Man kann beliebigen JS-Code direkt eintippen und mit Enter ausführen.
+- **Sources-Tab & Breakpoints:**
+  - Klick auf eine Zeilennummer setzt einen **Breakpoint** (Haltepunkt).
+  - Bei Auslösung stoppt das Skript: Man kann mit der Maus über Variablen fahren, um deren aktuellen Inhalt live zu sehen.
+  - **$F10$ (Step Over):** Führt die nächste Zeile aus.
+  - **$F8$ (Resume):** Lässt das Skript normal weiterlaufen.
+:::
+
+::: {.details}
+#### Deep Dive 3: Die 3 häufigsten Fehlermeldungen verstehen
+1. **`ReferenceError: x is not defined`**
+   - **Bedeutung:** Eine Variable mit dem Namen `x` existiert nicht oder der Name wurde falsch geschrieben (Tippfehler!).
+2. **`TypeError: Cannot read properties of null / undefined`**
+   - **Bedeutung:** Es wird versucht, auf eine Eigenschaft zuzugreifen, obwohl das Element gar nicht existiert (z. B. `document.getElementById("falscheId").value`).
+3. **`SyntaxError: Unexpected token`**
+   - **Bedeutung:** Ein formaler Schreibfehler im Code, z. B. eine vergessene schließende Klammer `)` oder ein fehlendes Anführungszeichen.
+:::
+
+::: {.details}
+#### Deep Dive 4: Skripteinbindung – Warum das defer-Attribut Best Practice ist
+- **Problem ohne defer:**
+  - Steht ein Skript-Tag ohne Zusatzattribute im Head-Bereich, lädt der Browser das Skript sofort herunter und führt es aus. Zu diesem Zeitpunkt ist der Body-Bereich aber noch gar nicht gelesen $\rightarrow$ `document.getElementById()` findet kein Element und liefert `null`.
+- **Die moderne Lösung mit defer:**
+  - Wird das Skript mit `defer` im Head-Bereich platziert (`<script defer src="app.js"></script>`), wird das Skript während des HTML-Aufbaus im Hintergrund heruntergeladen und **erst nach Fertigstellung des HTML-Baums** ausgeführt.
+:::
+
+::: {.details}
+#### Deep Dive 5: Variablen deklarieren – const vs. let vs. altes var
+- **`const`:**
+  - Sollte für **90 % aller Variablen** verwendet werden.
+  - Verhindert, dass Variablen versehentlich überschrieben werden (`const steuersatz = 0.19;`).
+- **`let`:**
+  - Wird verwendet, wenn sich der Wert im Programmablauf ändert (`let zaehler = 0; zaehler++;`).
+- **Warum kein var mehr?**
+  - `var` gilt heute als veraltet: Es ignoriert geschweifte Klammern (`if`, `for`) und „leckt“ in äußere Bereiche durch, was zu schwer auffindbaren Fehlern führt.
+:::
+
+::: {.details}
+#### Deep Dive 6: Primitive Datentypen im Überblick
+JavaScript unterscheidet grundlegende Datentypen:
+- **`string`:** Text in Anführungszeichen (`"Hallo"`, `'Welt'`).
+- **`number`:** Ganze Zahlen und Kommazahlen mit Punkt (`42`, `19.99`).
+- **`boolean`:** Wahrheitswerte (`true` oder `false`).
+- **`undefined`:** Variable wurde angelegt, hat aber noch keinen Wert erhalten (`let x;`).
+- **`null`:** Bewusste Kennzeichnung für „kein Wert vorhanden“.
+- **Typprüfung:** Mit `typeof variable` lässt sich der Typ ermitteln (z. B. `typeof 42` $\rightarrow$ `"number"`).
+:::
+
+::: {.details}
+#### Deep Dive 7: Strings verarbeiten & Template Literals
+- **Nützliche String-Eigenschaften & Methoden:**
+  - `text.length` $\rightarrow$ Gibt die Anzahl der Zeichen zurück (`"Auto".length` ist `4`).
+  - `text.toUpperCase()` / `text.toLowerCase()` $\rightarrow$ Text in Groß-/Kleinbuchstaben wandeln.
+  - `text.includes("suchbegriff")` $\rightarrow$ Prüft, ob ein Wort im Text vorkommt (`true`/`false`).
+  - `text.trim()` $\rightarrow$ Entfernt überflüssige Leerzeichen am Anfang und Ende.
+- **Template Literals (Backticks `` ` ``):**
+  - Variablen einbetten: `` `Hallo ${vorname} ${nachname}!` ``
+  - Berechnungen im Text: `` `Gesamt: ${preis * anzahl} Euro` ``
+:::
+
+::: {.details}
+#### Deep Dive 8: Entscheidungen treffen – if, switch und Ternärer Operator
+- **`if / else if / else`:**
+  - Für Wertebereiche und Bedingungen:
+  ```javascript
+  if (note <= 1.5) { console.log("Sehr gut"); }
+  else if (note <= 4.0) { console.log("Bestanden"); }
+  else { console.log("Nicht bestanden"); }
+  ```
+- **`switch / case`:**
+  - Für den exakten Abgleich eines Werts (z. B. Menüauswahl, Wochentage). Wichtig: Jeder Fall benötigt ein `break;`, um das Durchfallen zu stoppen.
+- **Ternärer Operator (`Bedingung ? WennJa : WennNein`):**
+  - Kompakter Einzeiler für Zuweisungen: `const status = alter >= 18 ? "Volljährig" : "Minderjährig";`
+:::
+
+::: {.details}
+#### Deep Dive 9: Schleifen – Listen durchlaufen leicht gemacht
+- **`for...of` (Empfohlen für Arrays):**
+  ```javascript
+  const farben = ["Rot", "Grün", "Blau"];
+  for (const farbe of farben) {
+      console.log(`Farbe: ${farbe}`);
+  }
+  ```
+- **Klassische `for`-Zählschleife:**
+  ```javascript
+  for (let i = 1; i <= 5; i++) {
+      console.log(`Zahl: ${i}`);
+  }
+  ```
+- **Schleifensteuerung:**
+  - `break;` bricht die Schleife sofort komplett ab.
+  - `continue;` überspringt nur den aktuellen Durchlauf und macht beim nächsten Element weiter.
+:::
+
+::: {.details}
+#### Deep Dive 10: Funktionen & Arrow Functions für Einsteiger
+- **Klassische Funktionsdeklaration:**
+  ```javascript
+  function berechneQuadrat(zahl) {
+      return zahl * zahl;
+  }
+  ```
+- **Moderne Arrow Function (`=>`):**
+  ```javascript
+  const berechneQuadrat = zahl => zahl * zahl;
+  ```
+- **Standard-Parameter:**
+  - `function begruessung(name = "Gast") { return `Hallo ${name}!`; }`
+  - Verhindert Fehler, wenn beim Aufruf kein Name übergeben wird.
+:::
+
+::: {.details}
+#### Deep Dive 11: Objekte als strukturierte Datenbehälter
+- Ein Objekt bündelt zusammengehörige Eigenschaften als Schlüssel-Wert-Paare (*Key-Value-Pairs*):
+  ```javascript
+  const auto = {
+      marke: "VW",
+      modell: "Caravan",
+      baujahr: 2024,
+      istVerfuegbar: true
+  };
+  ```
+- **Zugriff:** `auto.marke` liefert `"VW"`.
+- **Methoden:** Funktionen innerhalb von Objekten können mit `this` auf die eigenen Eigenschaften zugreifen.
+:::
+
+::: {.details}
+#### Deep Dive 12: Arrays & einfache Datenoperationen
+- **Array erstellen:** `const tiere = ["Hund", "Katze", "Maus"];`
+- **0-basierter Index:** Das erste Element liegt immer bei Index `0` (`tiere[0]` ist `"Hund"`).
+- **Elemente zählen:** `tiere.length` liefert `3`.
+- **Einfache Methoden:**
+  - `tiere.includes("Katze")` $\rightarrow$ prüft, ob das Tier in der Liste ist (`true`).
+  - `tiere.map(t => t.toUpperCase())` $\rightarrow$ erzeugt ein neues Array mit allen Namen in Großbuchstaben.
+  - `tiere.filter(t => t.startsWith("K"))` $\rightarrow$ filtert alle Tiere heraus, die mit "K" beginnen.
+:::
+
+---
+
+## 3. Fallstudien & Praxis-Szenarien
+
+::: {.case-study}
+#### Fallbeispiel A: Der Typen-Bug beim Formular-Rechner
+**Szenario:**
+Ein Webentwickler programmiert einen einfachen Preisrechner. Der Benutzer gibt im Formularfeld einen Betrag von `500` ein (`<input id="preis" value="500">`). Das Skript soll eine Servicepauschale von `50` Euro addieren:
+```javascript
+const eingabe = document.getElementById("preis").value;
+const pauschale = 50;
+const gesamt = eingabe + pauschale;
+console.log("Gesamtpreis:", gesamt);
+```
+In der Konsole erscheint jedoch die fehlerhafte Ausgabe: `Gesamtpreis: 50050`.
+
+**Arbeitsanweisung & Aufgabenstellung:**
+1. Erklären Sie, warum `document.getElementById("preis").value` immer einen Wert vom Typ `string` liefert und was der `+`-Operator bei Zeichenketten bewirkt.
+2. Beschreiben Sie, wie Sie in der Konsole mit dem Befehl `typeof` den Datentyp der Variablen `eingabe` überprüfen können.
+3. Geben Sie die korrigierte Codezeile an, mit der aus dem Text eine Zahl erzeugt und die korrekte Summe `550` berechnet wird.
+
+::: {.solution}
+**Musterlösung:**
+1. **Ursache des Fehlers:**
+   - In HTML und JavaScript liefert die Eigenschaft `.value` eines Input-Feldes grundsätzlich immer eine Zeichenkette (**`string`**), selbst wenn im HTML `type="number"` gesetzt ist.
+   - Der `+`-Operator führt bei Strings eine **Text-Verknüpfung (Konkatenation)** durch: `"500" + 50` wird zu `"50050"` anstatt mathematisch addiert.
+2. **Überprüfung mit `typeof`:**
+   - In der Browser-Konsole (`F12`) eingeben: `console.log(typeof eingabe);`
+   - Die Konsole gibt `"string"` aus, was den Fehler sofort sichtbar macht.
+3. **Korrektur:**
+   - Den String vor der Addition mit `Number()` explizit in eine Zahl umwandeln:
+     ```javascript
+     const gesamt = Number(eingabe) + pauschale; // 550
+     ```
+:::
+:::
+
+::: {.case-study}
+#### Fallbeispiel B: Das defer-Problem bei der Skripteinbindung
+**Szenario:**
+Ein Einsteiger bindet sein JavaScript-Skript im `<head>` der HTML-Datei ein:
+```html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Meine Seite</title>
+  <script src="main.js"></script>
+</head>
+<body>
+  <button id="meinButton">Klick mich</button>
+</body>
+</html>
+```
+In der Datei `main.js` steht:
+```javascript
+const btn = document.getElementById("meinButton");
+btn.addEventListener("click", () => {
+    alert("Button wurde geklickt!");
+});
+```
+Beim Laden der Seite erscheint in der Konsole sofort der Fehler:
+`TypeError: Cannot read properties of null (reading 'addEventListener')` und der Button reagiert nicht.
+
+**Arbeitsanweisung & Aufgabenstellung:**
+1. Erläutern Sie, warum `document.getElementById("meinButton")` den Wert `null` zurückliefert, wenn das Skript im Head-Bereich ohne Zusatzattribute geladen wird.
+2. Erklären Sie die Funktionsweise des `defer`-Attributs und warum es dieses Problem löst.
+3. Schreiben Sie die korrigierte HTML-Zeile für das Script-Tag.
+
+::: {.solution}
+**Musterlösung:**
+1. **Ursache:**
+   - Der Browser liest und verarbeitet HTML-Dokumente von oben nach unten (Parsing).
+   - Trifft er im Head-Bereich auf ein normales `<script src="main.js">`, stoppt er das HTML-Parsing und führt das Skript sofort aus. Zu diesem Zeitpunkt existiert das Button-Element im Body noch gar nicht im DOM-Speicher $\rightarrow$ die Suche liefert `null`.
+2. **Lösung mit defer:**
+   - Das Attribut `defer` weist den Browser an, das Skript zwar parallel im Hintergrund herunterzuladen, es aber **erst dann auszuführen, wenn das gesamte HTML-Dokument vollständig aufgebaut ist**. Dadurch ist sichergestellt, dass der Button existiert.
+3. **Korrigierte HTML-Zeile:**
+   ```html
+   <script defer src="main.js"></script>
+   ```
+:::
+:::
+
+::: {.case-study}
+#### Fallbeispiel C: Variablenwahl für Einsteiger – const vs. let
+**Szenario:**
+Ein Programm berechnet den Bruttopreis für mehrere Artikel in einem Online-Shop. Ein Entwickler hat folgenden Code mit veraltetem `var` geschrieben:
+```javascript
+var mwstSatz = 0.19;
+var gesamtSumme = 0;
+
+for (var i = 0; i < 3; i++) {
+    var nettoPreis = 100;
+    var bruttoPreis = nettoPreis * (1 + mwstSatz);
+    gesamtSumme = gesamtSumme + bruttoPreis;
+}
+
+console.log("Gesamt:", gesamtSumme);
+```
+
+**Arbeitsanweisung & Aufgabenstellung:**
+1. Erklären Sie die moderne Grundregel für die Variablenwahl: Warum sollte `const` die Standardwahl sein und in welchen Fällen nutzt man `let`?
+2. Begründen Sie, warum `mwstSatz` und `nettoPreis` als `const` deklariert werden sollten, während `gesamtSumme` und der Schleifenzähler `let` benötigen.
+3. Schreiben Sie den Code vollständig auf moderne `const`- und `let`-Deklarationen um.
+
+::: {.solution}
+**Musterlösung:**
+1. **Moderne Grundregel:**
+   - **`const` als Standard:** Schützt Variablen vor unbeabsichtigtem Überschreiben und signalisiert dem Leser, dass die Variable unveränderlich ist.
+   - **`let` als Ausnahme:** Wird nur dann verwendet, wenn der Wert der Variable im späteren Ablauf neu zugewiesen werden muss (z. B. Akkumulatoren, Schleifenzähler).
+2. **Begründung für die Variablen:**
+   - `mwstSatz` (19 %) und `nettoPreis` (100 €) bleiben während der Berechnung konstant $\rightarrow$ `const`.
+   - `gesamtSumme` (wird in jedem Schleifendurchlauf aufaddiert) und `i` (wird hochgezählt) verändern ihren Wert fortlaufend $\rightarrow$ `let`.
+3. **Refaktorisierter Code:**
+   ```javascript
+   const mwstSatz = 0.19;
+   let gesamtSumme = 0;
+
+   for (let i = 0; i < 3; i++) {
+       const nettoPreis = 100;
+       const bruttoPreis = nettoPreis * (1 + mwstSatz);
+       gesamtSumme += bruttoPreis;
+   }
+
+   console.log("Gesamt:", gesamtSumme);
+   ```
+:::
+:::
+
+::: {.case-study}
+#### Fallbeispiel D: Entscheidungslogik – Kinoticket-Preisrechner
+**Szenario:**
+Für ein Kino soll der Ticketpreis anhand von Alter und Wochentag berechnet werden:
+- **Altersstaffelung:**
+  - Kinder unter 6 Jahren: Freier Eintritt (`0.00 €`).
+  - Jugendliche unter 18 Jahren: Ermäßigt (`8.00 €`).
+  - Erwachsene ab 18 Jahren: Standardpreis (`12.00 €`).
+- **Kinotag:** Am `"Dienstag"` erhält jeder Besucher 20 % Rabatt auf den Basispreis (`basispreis * 0.8`).
+- **VIP-Status:** Ein Boolean `isVip` soll einen Statustext festlegen: `"VIP-Sitzplatz (+5 €)"` oder `"Standard-Platz"`.
+
+**Arbeitsanweisung & Aufgabenstellung:**
+1. Schreiben Sie die Altersprüfung mit einer sauberen `if / else if / else`-Verzweigung und weisen Sie das Ergebnis der Variable `basispreis` zu.
+2. Berechnen Sie den `endpreis` abhängig vom Wochentag `tag` mithilfe einer `switch / case`-Struktur (inklusive `break;` und `default`).
+3. Weisen Sie der Konstante `platzText` mit dem **ternären Operator (`? :`)** in einer einzigen Zeile den passenden Text anhand von `isVip` zu.
+
+::: {.solution}
+**Musterlösung:**
+```javascript
+const alter = 16;
+const tag = "Dienstag";
+const isVip = true;
+
+// 1. Altersprüfung mit if / else if / else:
+let basispreis;
+if (alter < 6) {
+    basispreis = 0.00;
+} else if (alter < 18) {
+    basispreis = 8.00;
+} else {
+    basispreis = 12.00;
+}
+
+// 2. Wochentagsabgleich mit switch / case:
+let endpreis;
+switch (tag) {
+    case "Dienstag":
+        endpreis = basispreis * 0.8; // 20 % Rabatt
+        break;
+    default:
+        endpreis = basispreis;
+        break;
+}
+
+// 3. Zuweisung mit dem ternären Operator:
+const platzText = isVip ? "VIP-Sitzplatz (+5 €)" : "Standard-Platz";
+
+console.log(`Preis: ${endpreis.toFixed(2)} € | Sitz: ${platzText}`);
+```
+:::
+:::
+
+::: {.case-study}
+#### Fallbeispiel E: Listenverarbeitung mit der modernen for-of-Schleife
+**Szenario:**
+Ein Web-Portal verwaltet eine Liste von bayerischen Städtenamen:
+```javascript
+const staedte = ["Würzburg", "Nürnberg", "München", "Bamberg", "Augsburg"];
+```
+Die Namen sollen nacheinander im Format `"Besuche die Stadt: [Name]"` in der Konsole ausgegeben werden. Allerdings soll die Stadt `"München"` bei der Ausgabe übersprungen werden.
+
+**Arbeitsanweisung & Aufgabenstellung:**
+1. Schreiben Sie eine moderne `for...of`-Schleife, die alle Einträge des Arrays durchläuft.
+2. Nutzen Sie Template Literals (Backticks `` ` ``), um die formatierte Meldung auszugeben.
+3. Bauen Sie eine `if`-Bedingung mit dem Befehl `continue` ein, die dafür sorgt, dass `"München"` übersprungen wird.
+4. Erklären Sie kurz, warum `for...of` für Einsteiger einfacher zu lesen ist als eine alte Zählschleife `for (let i = 0; i < staedte.length; i++)`.
+
+::: {.solution}
+**Musterlösung:**
+1. **Schleifencode mit `for...of`, Template Literals und `continue`:**
+   ```javascript
+   const staedte = ["Würzburg", "Nürnberg", "München", "Bamberg", "Augsburg"];
+
+   for (const stadt of staedte) {
+       if (stadt === "München") {
+           continue; // Überspringt München und geht direkt zum nächsten Eintrag
+       }
+       console.log(`Besuche die Stadt: ${stadt}`);
+   }
+   ```
+2. **Vorteil von `for...of` gegenüber klassischem `for (i...)`:**
+   - Bei `for...of` muss man keinen Schleifenzähler `i` deklarieren, keine Abbruchbedingung (`i < staedte.length`) prüfen und nicht manuell über `staedte[i]` auf das Element zugreifen. Das verhindert typische Index-Fehler (z. B. *Off-by-One*-Fehler) und macht den Code sofort verständlich.
+:::
+:::
+
+::: {.case-study}
+#### Fallbeispiel F: Objekte erstellen & JSON-Datenaustausch
+**Szenario:**
+In einer Webanwendung sollen Benutzerdaten für einen Studenten erfasst und an einen Server übertragen werden:
+- Name: `"Lisa Müller"`
+- Matrikelnummer: `632217`
+- Eingeschrieben: `true`
+- Module: `["Webprogrammierung", "Geovisualisierung"]`
+
+**Arbeitsanweisung & Aufgabenstellung:**
+1. Erstellen Sie ein JavaScript-Objekt namens `student` mit den oben genannten Eigenschaften.
+2. Zeigen Sie, wie Sie per Punkt-Notation auf den Namen und per Index auf das erste Modul im Array zugreifen.
+3. Wandeln Sie das Objekt mit `JSON.stringify()` in einen JSON-String um und geben Sie ihn aus.
+4. Simulieren Sie den Empfang: Wandeln Sie den JSON-String mit `JSON.parse()` wieder in ein echtes JavaScript-Objekt um.
+
+::: {.solution}
+**Musterlösung:**
+```javascript
+// 1. Objekt erstellen (Objekt-Literal):
+const student = {
+    name: "Lisa Müller",
+    matrikelnummer: 632217,
+    istEingeschrieben: true,
+    module: ["Webprogrammierung", "Geovisualisierung"]
+};
+
+// 2. Eigenschaften abrufen:
+console.log("Name:", student.name);
+console.log("Erstes Modul:", student.module[0]);
+
+// 3. In JSON-Text umwandeln (z. B. für API-Übertragung):
+const jsonString = JSON.stringify(student);
+console.log("JSON-String:", jsonString);
+// Ausgabe: '{"name":"Lisa Müller","matrikelnummer":632217,"istEingeschrieben":true,"module":["Webprogrammierung","Geovisualisierung"]}'
+
+// 4. JSON-Text zurück in ein JS-Objekt parsen:
+const empfangenesObjekt = JSON.parse(jsonString);
+console.log("Wiederhergestellter Name:", empfangenesObjekt.name);
+```
+:::
+:::
+
+---
+
+## 4. Active Recall (Lückentexte / Drag & Drop)
+
+Klicken Sie auf ein Wort im Pool und setzen Sie es in die passende Lücke ein:
+
+::: {.drag-exercise}
+Im Zusammenspiel moderner Webtechnologien definiert HTML die Struktur, CSS das Aussehen und *JavaScript* das dynamische Verhalten der Seite. Zur Laufzeit übersetzt die integrierte *Engine* des Browsers den Code in Maschinencode. Aus Sicherheitsgründen läuft der Code isoliert in einer *Sandbox*.
+:::
+
+::: {.drag-exercise}
+Zur Fehlersuche öffnen Entwickler mit der Taste *F12* die DevTools. Textausgaben zur Kontrolle werden mit *console.log* erzeugt. Möchte man das Programm an einer bestimmten Stelle anhalten, setzt man im Sources-Tab einen *Breakpoint* oder schreibt das Statement *debugger;* in den Code.
+:::
+
+::: {.drag-exercise}
+Externe Skripte sollten im Head-Bereich mit dem Attribut *defer* geladen werden, damit sie das Parsen des HTML-Dokuments nicht *blockieren*. Dadurch wird das Skript erst ausgeführt, wenn alle *Elemente* des DOMs vollständig aufgebaut sind.
+:::
+
+::: {.drag-exercise}
+Für Variablen, deren Wert sich im Programm nicht ändert, verwendet man immer *const*. Ändert sich der Wert, nutzt man *let*. Beide Schlüsselwörter besitzen einen *Block*-Scope und sind nur innerhalb geschweifter Klammern gültig. Das veraltete *var* sollte vermieden werden.
+:::
+
+::: {.drag-exercise}
+Wird eine Texteingabe mit einer Zahl addiert, führt JavaScript eine *Konkatenation* durch. Um mathematisch zu rechnen, muss der String mit *Number* umgewandelt werden. Für sichere Vergleiche von Wert und Typ nutzt man den strikten Operator *===*.
+:::
+
+::: {.drag-exercise}
+Mit *Template* Literals in Backticks können Variablen über den Ausdruck `${...}` direkt in Texte eingebettet werden. Dies nennt man String-*Interpolation*. Zudem erlauben Backticks das direkte Schreiben von *mehrzeiligen* Texten ohne `\n`.
+:::
+
+::: {.drag-exercise}
+Um alle Elemente eines Arrays einfach zu durchlaufen, verwendet man die moderne Schleife *for...of*. Möchte man einen einzelnen Durchlauf überspringen, nutzt man den Befehl *continue*. Soll die Schleife sofort ganz beendet werden, dient dazu der Befehl *break*.
+:::
+
+::: {.drag-exercise}
+Zur Datenstrukturierung bündeln *Objekte* zusammengehörige Schlüssel-Wert-Paare in geschweiften Klammern. Für den Datenaustausch wandelt *JSON.stringify* ein Objekt in Text um, während *JSON.parse* einen JSON-String wieder in ein Objekt zurückverwandelt.
+:::
+
+---
+
+## 5. Quick-Check (Klausurrelevantes Quiz)
+
+### Bereich 1: Grundlagen & Sicherheitsmodell
+
+::: {.quick-check}
+Welche zentrale Aufgabe hat JavaScript im klassischen Web-Dreigespann (HTML, CSS, JavaScript)?
+
+- JavaScript legt die Schriftfarben und Abstände der Webseite fest.
+- **JavaScript haucht der Webseite Leben ein, indem es auf Benutzeraktionen reagiert, Daten verarbeitet und Inhalte dynamisch verändert.**
+- JavaScript speichert die HTML-Dateien dauerhaft auf dem Webserver ab.
+
+> HTML liefert die Struktur, CSS das Layout/Design und JavaScript steuert Interaktivität und Verhalten.
+:::
+
+::: {.quick-check}
+Was versteht man unter dem Sandbox-Prinzip von JavaScript im Browser?
+
+- Dass JavaScript nur auf Computern mit Sandfilter-Lüftern ausgeführt werden darf.
+- Dass der Code vor dem Start in eine ZIP-Datei komprimiert wird.
+- **Dass JavaScript in einer isolierten Sicherheitsumgebung läuft und standardmäßig nicht auf lokale Dateien oder Hardware des Nutzers zugreifen darf.**
+
+> Die Sandbox schützt das Betriebssystem und die Privatsphäre des Nutzers vor schädlichem Fremdcode.
+:::
+
+::: {.quick-check}
+Welche Aussage zur Beziehung zwischen ECMAScript und JavaScript ist korrekt?
+
+- **ECMAScript ist der offizielle Standard und Bauplan, während JavaScript die konkrete Umsetzung und Programmiersprache ist.**
+- ECMAScript ist ein veraltetes Grafikprogramm für Webdesigner.
+- JavaScript ist die Spezifikation, nach der ECMAScript programmiert wird.
+
+> Die Organisation ECMA standardisiert die Sprachspezifikation (ECMAScript), die von den Browsern implementiert wird.
+:::
+
+::: {.quick-check}
+Welche Browser-Engine führt JavaScript im Browser Google Chrome und in Microsoft Edge aus?
+
+- SpiderMonkey
+- **V8**
+- JavaScriptCore
+
+> Die V8-Engine von Google treibt Google Chrome, Microsoft Edge, Brave und auch Node.js an.
+:::
+
+---
+
+### Bereich 2: Entwicklertools & Fehlerdiagnose
+
+::: {.quick-check}
+Mit welcher Tastenkombination öffnen Sie in den meisten Browsern direkt die Entwicklertools (DevTools)?
+
+- **Taste $F12$ (oder Rechtsklick $\rightarrow$ Untersuchen)**
+- Tastenkombination $Alt + F4$
+- Taste $F1$
+
+> F12 öffnet die DevTools mit Console, Elements, Sources und Network-Tab.
+:::
+
+::: {.quick-check}
+Was bedeutet die Fehlermeldung `ReferenceError: eingabe is not defined` in der Konsole?
+
+- Eine Bilddatei konnte vom Server nicht geladen werden.
+- Eine Zahl wurde fälschlicherweise durch Null geteilt.
+- **Es wird versucht, auf eine Variable namens `eingabe` zuzugreifen, die im aktuellen Programmcode nicht deklariert wurde (oder falsch geschrieben ist).**
+
+> Ein ReferenceError signalisiert immer einen unbekannten bzw. nicht auffindbaren Variablennamen.
+:::
+
+::: {.quick-check}
+Was bewirkt der Befehl `debugger;`, wenn er an einer Stelle im JavaScript-Code platziert wird?
+
+- **Er hält die Programmausführung an dieser Zeile sofort an, sofern die Entwicklertools geöffnet sind, um Variablenwerte zu prüfen.**
+- Er behebt alle Syntaxfehler in der Datei automatisch.
+- Er löscht die Konsole und startet das Skript neu.
+
+> `debugger;` wirkt wie ein fest im Quellcode einprogrammierter Breakpoint.
+:::
+
+::: {.quick-check}
+Warum ist das Setzen von Breakpoints im Sources-Tab oft besser als reines `console.log()`-Ausgeben?
+
+- **Weil Breakpoints das Programm live anhalten, sodass man alle aktuellen Variablen im Scope interaktiv inspizieren kann, ohne den Code mit Log-Befehlen zu überladen.**
+- Weil `console.log()` im Browser streng verboten ist.
+- Weil Breakpoints die Ausführungsgeschwindigkeit der Webseite verdoppeln.
+
+> Breakpoints ermöglichen gezieltes Step-by-Step-Debugging zur Laufzeit.
+:::
+
+---
+
+### Bereich 3: Skripteinbindung & Ladeverhalten
+
+::: {.quick-check}
+Warum sollte ein externes JavaScript im Head-Bereich mit dem Attribut defer eingebunden werden?
+
+- **Weil `defer` das Skript im Hintergrund lädt und erst ausführt, wenn das HTML-Dokument vollständig aufgebaut ist (verhindert Parser-Blocking).**
+- Weil `defer` dafür sorgt, dass das Skript nur auf Mobilgeräten ausgeführt wird.
+- Weil ohne `defer` keine mathematischen Berechnungen möglich sind.
+
+> `defer` stellt sicher, dass alle DOM-Elemente existieren, wenn das Skript startet.
+:::
+
+::: {.quick-check}
+Warum gilt das direkte Platzieren von JavaScript im HTML-Tag (z. B. onclick) als schlechte Praxis (No-Go)?
+
+- Weil moderne Browser Klicks auf Buttons nicht mehr unterstützen.
+- Weil Inline-Code dazu führt, dass die Schriftgröße des Buttons kleiner wird.
+- **Weil es HTML-Struktur und Programmlogik vermischt, die Wiederverwendbarkeit zerstört und die Wartung erschwert.**
+
+> Best Practice ist die saubere Trennung von HTML (Struktur) und JS (Verhalten via `addEventListener`).
+:::
+
+::: {.quick-check}
+Welche Dateiendung besitzen externe JavaScript-Dateien üblicherweise?
+
+- **`.js`**
+- `.java`
+- `.script`
+
+> JavaScript-Dateien enden standardmäßig auf `.js`.
+:::
+
+::: {.quick-check}
+Welche Konsequenz hat es, wenn ein Skript ohne `defer` ganz oben im Head-Bereich versucht, mit `document.getElementById("titel")` auf eine Überschrift zuzugreifen?
+
+- Die Überschrift wird automatisch gelöscht.
+- **Der Befehl liefert `null` zurück, da der Browser den Body mit der Überschrift zu diesem Zeitpunkt noch gar nicht geladen hat.**
+- Der Browser startet automatisch neu.
+
+> Das Element existiert zum Ausführungszeitpunkt noch nicht im DOM.
+:::
+
+---
+
+### Bereich 4: Variablen, Datentypen & Vergleiche
+
+::: {.quick-check}
+Welche Aussage zur Deklaration von Variablen mit `const` ist richtig?
+
+- **Eine mit `const` deklarierte Variable kann nach ihrer Initialisierung nicht neu zugewiesen werden.**
+- `const` darf nur für Zahlen, nicht aber für Texte verwendet werden.
+- Variablen mit `const` sind auf der gesamten Festplatte gültig.
+
+> `const` schützt die Variable vor unbeabsichtigter Neuzuweisung.
+:::
+
+::: {.quick-check}
+Welches Ergebnis liefert der Ausdruck `"10" + 5` in JavaScript?
+
+- `15`
+- `NaN`
+- **`"105"`**
+
+> Da der erste Operand ein String ist, verbindet der `+`-Operator beide Werte als Text.
+:::
+
+::: {.quick-check}
+Welcher Vergleich liefert in JavaScript das Ergebnis `false`?
+
+- `5 == "5"`
+- **`5 === "5"`**
+- `true == 1`
+
+> Der strikte Operator `===` prüft Wert und Typ: Number `5` ist nicht gleich String `"5"`.
+:::
+
+::: {.quick-check}
+Welchen Datentyp besitzt eine Variable, die mit `let punkte;` deklariert, der aber noch kein Wert zugewiesen wurde?
+
+- **`undefined`**
+- `null`
+- `0`
+
+> Eine deklarierte, aber nicht initialisierte Variable hat automatisch den Wert und Typ `undefined`.
+:::
+
+---
+
+### Bereich 5: Strings, Template Literals & Kontrollstrukturen
+
+::: {.quick-check}
+Wie bindet man eine Variable `name` in einem Template Literal (mit Backticks) korrekt ein?
+
+- `` `Hallo &name;` ``
+- **`` `Hallo ${name}` ``**
+- `` `Hallo [name]` ``
+
+> Die Syntax für String-Interpolation in Backticks lautet `${variable}`.
+:::
+
+::: {.quick-check}
+Wozu dient das Schlüsselwort `break;` innerhalb eines `switch / case`-Blocks?
+
+- Es beendet das gesamte Browser-Fenster.
+- Es wandelt den Text in Kleinbuchstaben um.
+- **Es stoppt die Ausführung des `switch`-Blocks und verhindert das ungewollte Durchfallen in nachfolgende `case`-Zweige.**
+
+> Ohne `break;` führt JavaScript alle folgenden Cases ebenfalls aus (Fallthrough).
+:::
+
+::: {.quick-check}
+Was bewirkt der ternäre Operator im Ausdruck `const erg = score >= 50 ? "Ja" : "Nein";`?
+
+- **Wenn `score` mindestens 50 ist, erhält `erg` den Wert `"Ja"`, andernfalls `"Nein"`.**
+- Er zählt den Wert von `score` um 50 nach oben.
+- Er prüft, ob `score` eine Primzahl ist.
+
+> Der ternäre Operator ist eine kompakte Kurzform für einfache `if / else`-Zuweisungen.
+:::
+
+::: {.quick-check}
+Welche Eigenschaft liefert die Anzahl der Zeichen in einem String `text = "Webentwicklung"`?
+
+- `text.count`
+- **`text.length`**
+- `text.size()`
+
+> `.length` gibt die Zeichenlänge des Strings zurück.
+:::
+
+---
+
+### Bereich 6: Schleifen & Funktionen
+
+::: {.quick-check}
+Welche Schleife ist der modernste und sicherste Weg, um nacheinander alle Einträge eines Arrays `const liste = ["A", "B", "C"]` auszulesen?
+
+- `loop (liste)`
+- `while (liste)`
+- **`for (const element of liste)`**
+
+> `for...of` iteriert direkt über alle Werte eines Arrays.
+:::
+
+::: {.quick-check}
+Was bewirkt das Schlüsselwort `return` in einer Funktion?
+
+- **Es beendet die Funktionsausführung und gibt das berechnete Ergebnis an den Aufrufer zurück.**
+- Es startet die Funktion von vorne.
+- Es druckt die Seite auf dem Standarddrucker aus.
+
+> `return` liefert den Rückgabewert der Funktion und beendet deren Ausführung sofort.
+:::
+
+::: {.quick-check}
+Wie lautet die kompakte Arrow-Function-Schreibweise für eine Funktion, die eine Zahl verdoppelt?
+
+- `function doppel(x) { return x * 2; }`
+- **`const doppel = x => x * 2;`**
+- `const doppel = x -> x * 2;`
+
+> Bei Einzeilern mit Arrow Functions (`=>`) entfallen `function`, Klammern und `return`.
+:::
+
+::: {.quick-check}
+Was passiert bei der Ausführung des Befehls `continue;` innerhalb einer Schleife?
+
+- Die Schleife wird sofort komplett abgebrochen.
+- Das Programm stürzt mit einem Fehler ab.
+- **Der aktuelle Schleifendurchlauf wird sofort beendet und die Schleife springt zum nächsten Element.**
+
+> `continue` überspringt nur den Rest des aktuellen Durchgangs.
+:::
+
+---
+
+### Bereich 7: Komplexe Datenstrukturen: Objekte & Arrays
+
+::: {.quick-check}
+Wie greift man auf das erste Element des Arrays `const farben = ["Rot", "Gelb", "Blau"]` zu?
+
+- **`farben[0]`**
+- `farben[1]`
+- `farben.first()`
+
+> Arrays sind in JavaScript 0-basiert indiziert; das erste Element liegt bei Index `0`.
+:::
+
+::: {.quick-check}
+Gegeben ist das Objekt `const auto = { marke: "BMW", ps: 190 };`. Wie greift man per Punktnotation auf die PS zu?
+
+- `auto->ps`
+- **`auto.ps`**
+- `auto("ps")`
+
+> Eigenschaften von Objekten werden standardmäßig mit der Punktnotation `objekt.eigenschaft` gelesen.
+:::
+
+::: {.quick-check}
+Was bewirkt die Methode `JSON.stringify(meinObjekt)`?
+
+- Sie löscht alle doppelten Einträge aus dem Objekt.
+- Sie übersetzt das Objekt in die Programmiersprache Python.
+- **Sie wandelt das JavaScript-Objekt in einen standardisierten JSON-Text-String um.**
+
+> `JSON.stringify()` serialisiert Objekte in JSON-Text zur Speicherung oder Übertragung.
+:::
+
+::: {.quick-check}
+Was bewirkt die Methode `JSON.parse(jsonText)`?
+
+- **Sie liest einen JSON-formatierten Text ein und wandelt ihn wieder in ein nutzbares JavaScript-Objekt um.**
+- Sie prüft, ob eine Datei auf der Festplatte existiert.
+- Sie formatiert den Quelltext mit Einrückungen.
+
+> `JSON.parse()` deserialisiert JSON-Text zurück in ein JavaScript-Objekt.
+:::

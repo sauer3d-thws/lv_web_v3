@@ -1,0 +1,802 @@
+---
+title: "Kapitel 6: DOM-Manipulation, Events, Fetch API & Projekt"
+subtitle: "Interaktives Selbstlern-Quiz | THWS Webprogrammierung"
+date: last-modified
+lang: de
+
+author:
+  - name: Stefan Sauer
+    email: stefan.sauer@thws.de
+    role: Fachlehrer
+    affiliation: THWS Geovisualisierung & Vermessung
+
+semester: "WS 26/27"
+course: "Webprogrammierung"
+version: "2.0"
+
+include-after-body:
+  - _extensions/moodle/interactions.js
+
+format:
+  moodle-html: default
+---
+
+# 🎯 Umfassendes Selbstlern-Quiz & Wissens-Check
+
+Willkommen zum interaktiven Selbstlern-Quiz für **Kapitel 6: DOM-Manipulation, Events, Fetch API, Validierung und Projekt-Praxis**. Dieses Quiz vertieft die **Kernkompetenzen für interaktive Webanwendungen und Geovisualisierung**:
+
+1. **Das Document Object Model (DOM) & Selektion** (DOM als Baumstruktur im RAM, `querySelector()`, `querySelectorAll()`, Traversierung mit `parentElement`, `children`, `closest()`)
+2. **Dynamische DOM-Manipulation & Styling** (`document.createElement()`, `append()`, `insertAdjacentHTML()`, `classList.toggle()`, `dataset` für Data-Attribute)
+3. **Modernes Event-Handling** (Ablösung von Inline-Handlern, `addEventListener()`, `event.target`, `event.preventDefault()`)
+4. **Asynchrone Programmierung & Fetch API** (Nicht-blockierendes Laden, `fetch()`, `async / await`, GeoJSON-Verarbeitung, `try ... catch` mit `response.ok`)
+5. **Clientseitige Speicherung & Web APIs** (Sandbox-Sicherheitsmodell, `localStorage` vs. `sessionStorage`, `JSON.stringify()` / `JSON.parse()`, `navigator.geolocation`)
+6. **KI-Workflows & Spec-Driven Development (SDD)** (Spezifikation vor Code mit `spec.md`, Prompting & Refactoring mit Assistenten)
+7. **Formularverarbeitung & Validierung** (`submit`, `input`, `change`, `FormData`-API & `Object.fromEntries()`, Constraint Validation mit `checkValidity()`)
+8. **Praxisprojekt: Hamburger-Menü & Kontaktseite** (`DOMContentLoaded`, Menü-Toggle mit CSS-Klassen, responsive Breakpoints ab 768px)
+
+---
+
+## 1. Kernbegriffe (Flip-Cards)
+
+Klicken oder tippen Sie auf die Karten, um die Vorder- und Rückseite zu wenden:
+
+::: {.flip-card}
+#### Was ist das Document Object Model (DOM)?
+Das DOM ist die **objektorientierte Baumstruktur** eines HTML-Dokuments im Arbeitsspeicher des Browsers. Es ermöglicht JavaScript den dynamischen Lese- und Schreibzugriff auf Struktur, Inhalte und CSS-Styles einer Webseite.
+:::
+
+::: {.flip-card}
+#### Was unterscheidet querySelector() von querySelectorAll()?
+- **`querySelector(sel)`:** Liefert das **erste** Element im DOM zurück, das zum CSS-Selektor passt (oder `null`, wenn kein Treffer vorliegt).
+- **`querySelectorAll(sel)`:** Liefert eine **NodeList** (Sammlung) **aller** passenden Elemente zurück, die z. B. per `.forEach()` durchlaufen werden kann.
+:::
+
+::: {.flip-card}
+#### Warum sollte man zur visuellen Steuerung classList statt element.style nutzen?
+`classList` (`add`, `remove`, `toggle`) wahrt die **saubere Trennung von Layout und Verhalten**: Das Styling verbleibt zentral in der CSS-Datei, während JavaScript lediglich festlegt, welche Zustandsklasse (z. B. `.active`, `.hidden`) aktiv ist.
+:::
+
+::: {.flip-card}
+#### Was sind data-*-Attribute und wie greift JavaScript darauf zu?
+Data-Attribute (`data-user-id="42"`, `data-role="admin"`) betten benutzerdefinierte Zusatzdaten direkt in HTML-Tags ein. In JavaScript liest und schreibt man diese über die Eigenschaft **`element.dataset`** (z. B. `btn.dataset.userId` in automatischer CamelCase-Schreibweise).
+:::
+
+::: {.flip-card}
+#### Warum sind Inline-Event-Handler wie onclick im HTML veraltet?
+Weil sie HTML-Struktur und JS-Logik vermischen (**Verletzung der Separation of Concerns**), globale Funktionen erzwingen, Sicherheitsrichtlinien (CSP) verletzen und pro Element nur einen einzigen Handler erlauben. Modern ist ausschließlich `addEventListener()`.
+:::
+
+::: {.flip-card}
+#### Wozu dient event.preventDefault()?
+Es unterdrückt das **standardmäßige Browserverhalten** eines Ereignisses – insbesondere das sofortige Neuladen der Seite beim Absenden eines Formulars (`submit`) oder das Springen an den Seitenanfang bei Klick auf einen Anker-Link (`<a href="#">`).
+:::
+
+::: {.flip-card}
+#### Was ist der Unterschied zwischen synchronem und asynchronem Laden von Daten?
+- **Synchron:** Der Browser führt Befehle nacheinander aus und **blockiert** (friert ein), bis z. B. eine große Datei fertig geladen ist.
+- **Asynchron (`fetch`):** Die Datenanforderung läuft im Hintergrund ab; die Webseite bleibt flüssig bedienbar, und das Ergebnis wird verarbeitet, sobald es eintrifft.
+:::
+
+::: {.flip-card}
+#### Warum wird das Schlüsselwort-Paar async / await verwendet?
+`async / await` macht asynchronen Code (z. B. Netzwerkabfragen) so übersichtlich und linear lesbar wie synchronen Code. Es ersetzt verschachtelte Callbacks und unübersichtliche `.then()`-Ketten.
+:::
+
+::: {.flip-card}
+#### Wie prüft man bei fetch(), ob ein Server-Aufruf erfolgreich war?
+Über die Eigenschaft **`response.ok`** (ist `true` bei HTTP-Statuscodes 200–299). Ein `fetch()` schlägt im `catch`-Block nur bei Netzwerkabbrüchen fehl; ein HTTP-404-Fehler wird erst durch die Prüfung `if (!response.ok)` erkannt.
+:::
+
+::: {.flip-card}
+#### Was unterscheidet localStorage von sessionStorage?
+- **`localStorage`:** Speichert Schlüssel-Wert-Paare **dauerhaft** im Browser-Profil des Nutzers (übersteht Browser-Neustarts).
+- **`sessionStorage`:** Speichert Daten nur **temporär** für die Dauer der aktuellen Browsersitzung (wird beim Schließen des Tabs gelöscht).
+:::
+
+::: {.flip-card}
+#### Warum müssen Objekte für den Web Storage serialisiert werden?
+Weil `localStorage` und `sessionStorage` ausschließlich **Zeichenketten (Strings)** speichern können. Mit `JSON.stringify(obj)` wird ein Objekt in Text gewandelt und mit `JSON.parse(text)` wieder zurück in ein echtes JavaScript-Objekt verwandelt.
+:::
+
+::: {.flip-card}
+#### Welche Rolle spielt das Permission-Modell bei der Geolocation API?
+Da Standortdaten hochsensible personenbezogene Daten sind, erzwingt der Browser aus Datenschutzgründen vor dem Zugriff auf `navigator.geolocation` immer einen **systemseitigen Bestätigungsdialog** für den Nutzer.
+:::
+
+::: {.flip-card}
+#### Welchen Vorteil bietet die FormData-API gegenüber manuellem Auslesen?
+`new FormData(form)` liest **automatisch alle Eingabefelder** eines Formulars anhand ihrer `name="..."`-Attribute auf einmal aus. Mit `Object.fromEntries(formData)` lässt sich daraus in einer einzigen Zeile ein fertiges JavaScript-Objekt erzeugen.
+:::
+
+::: {.flip-card}
+#### Was ist das Kernprinzip von Spec-Driven Development (SDD)?
+**Spezifikation vor Code:** Vor der eigentlichen Implementierung wird in einer präzisen Spezifikation (`spec.md`) festgelegt, wie Datenstrukturen, Validierungsregeln und Benutzerinteraktionen aussehen müssen. KI-Tools generieren und refaktorisieren Code anschließend zielgerichtet anhand dieser Vorgabe.
+:::
+
+---
+
+## 2. Deep Dives & Exkurse
+
+::: {.details}
+#### Deep Dive 1: Das DOM als lebendiger Objektbaum im Browser
+- **HTML:** Ist lediglich die Textdatei (der statische Bauplan auf dem Server).
+- **DOM (Document Object Model):** Ist die tatsächliche Struktur im Arbeitsspeicher des Browsers, nachdem der HTML-Code geparst wurde.
+- **Knotenhierarchie:**
+  - `document`: Die Wurzel des gesamten Baumes.
+  - `Element`: HTML-Tags (`<body>`, `<main>`, `<button>`).
+  - `Text`: Der eigentliche Inhalt zwischen Tags (`TextNode`).
+- **Dynamik:** Jede Änderung am DOM durch JavaScript (`textContent`, `append`, `classList`) wird von der Rendering-Engine des Browsers sofort visuell neu berechnet (*Reflow & Repaint*).
+:::
+
+::: {.details}
+#### Deep Dive 2: Gezielte DOM-Selektion & Traversierung
+- **Moderne Selektoren:**
+  - `document.querySelector(".karte.aktiv")` $\rightarrow$ Erstes passendes Element.
+  - `document.querySelectorAll("nav a")` $\rightarrow$ Alle passenden Links als iterierbare `NodeList`.
+- **Traversierung im Baum:**
+  - `element.parentElement` $\rightarrow$ Geht eine Ebene nach oben zum Vaterknoten.
+  - `element.children` $\rightarrow$ Liefert alle direkten HTML-Kinder als Sammlung.
+  - `element.closest("section")` $\rightarrow$ Wandert im DOM-Baum nach oben und sucht das nächstgelegene passende Elternelement.
+- **Entfall:** Veraltete Methoden wie `document.getElementsByName()` oder `document.write()` gehören der Vergangenheit an.
+:::
+
+::: {.details}
+#### Deep Dive 3: CSS-Klassen steuern mit classList
+- Statt Inline-Styles wie `element.style.display = "none"` zu setzen, steuert man Darstellung über CSS-Klassen:
+  ```javascript
+  const nav = document.querySelector("#mainNav");
+  nav.classList.add("open");      // Klasse ergänzen
+  nav.classList.remove("hidden"); // Klasse entfernen
+  nav.classList.toggle("active"); // Umschalten (an/aus)
+  if (nav.classList.contains("active")) {
+      console.log("Menü ist geöffnet!");
+  }
+  ```
+- **Vorteil:** Animationen, Transitions und Farbschemata bleiben vollständig im CSS definiert.
+:::
+
+::: {.details}
+#### Deep Dive 4: Modernes Event-Handling mit addEventListener
+- **Aufbau eines Event-Listeners:**
+  ```javascript
+  const btn = document.querySelector("#btnSpeichern");
+  btn.addEventListener("click", (event) => {
+      console.log("Auslösendes Element:", event.target);
+  });
+  ```
+- **Warum anonyme Pfeilfunktionen vs. benannte Funktionen?**
+  - **Pfeilfunktion (`(e) => { ... }`):** Kompakt für einmalige Event-Reaktionen direkt vor Ort.
+  - **Benannte Funktion (`function handleKlick(e) { ... }`):** Bessere Wiederverwendbarkeit und sauberere Testbarkeit bei umfangreicherer Logik.
+:::
+
+::: {.details}
+#### Deep Dive 5: Asynchroner Datenabruf mit fetch() und async/await
+- **Das 2-Schritt-Muster bei fetch():**
+  ```javascript
+  async function ladeOrte() {
+      try {
+          // Schritt 1: HTTP-Anfrage senden und auf Response warten
+          const response = await fetch("orte.geojson");
+          
+          // Schritt 2: HTTP-Erfolg prüfen
+          if (!response.ok) {
+              throw new Error(`Serverfehler: Status ${response.status}`);
+          }
+          
+          // Schritt 3: JSON-Body asynchron in ein JS-Objekt parsen
+          const geodaten = await response.json();
+          console.log("Geladene GeoJSON-Features:", geodaten.features);
+      } catch (error) {
+          console.error("Fehler beim Datenabruf:", error.message);
+      }
+  }
+  ```
+- **Wichtig:** Ein Aufruf von `fetch()` friert den Browser nicht ein, sondern läuft vollständig asynchron im Hintergrund ab.
+:::
+
+::: {.details}
+#### Deep Dive 6: Web Storage – localStorage vs. sessionStorage
+- **`localStorage`:**
+  - Persistenter Speicher (bleibt auch nach Schließen des Browsers oder Rechner-Neustart erhalten).
+  - Typische Einsatzzwecke: Dunkelmodus-Einstellung (`theme: "dark"`), gemerkter Benutzerfilter, gespeicherte Karten-Favoriten.
+- **`sessionStorage`:**
+  - Temporärer Speicher für die Dauer eines geöffneten Browser-Tabs.
+  - Wird gelöscht, sobald der Nutzer den Tab schließt.
+- **Speicherlimit:** Ca. 5–10 MB pro Origin (Domäne), synchroner Lese-/Schreibzugriff.
+:::
+
+::: {.details}
+#### Deep Dive 7: Die Geolocation API in Web-GIS-Anwendungen
+- Die Schnittstelle `navigator.geolocation` ermöglicht die genaue Ortsbestimmung des Client-Geräts (via GPS, Mobilfunk oder WLAN-Triangulation):
+  ```javascript
+  if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+          (pos) => {
+              const { latitude, longitude } = pos.coords;
+              console.log(`Standort: Lat ${latitude}, Lon ${longitude}`);
+              // Z. B. Leaflet-Kartenmarker auf diesen Punkt setzen
+          },
+          (err) => {
+              console.warn("Standortabfrage verweigert oder fehlgeschlagen:", err.message);
+          }
+      );
+  }
+  ```
+:::
+
+::: {.details}
+#### Deep Dive 8: Formularverarbeitung & Constraint Validation API
+- **Events bei Formularen:**
+  - `submit`: Feuert beim Absenden $\rightarrow$ immer `event.preventDefault()` aufrufen, um das Neuladen der Seite zu verhindern!
+  - `input`: Feuert sofort bei jedem Tastenanschlag $\rightarrow$ perfekt für Live-Zeichenzähler oder Sofortsuche.
+  - `change`: Feuert nach Verlassen des Feldes (`blur`) oder bei Änderung in Dropdowns (`<select>`).
+- **Native Validierung:**
+  - `form.checkValidity()` liefert `true`, wenn alle HTML5-Regeln (`required`, `type="email"`, `minlength="3"`) erfüllt sind.
+  - `form.reportValidity()` öffnet die nativen Hinweisblasen des Browsers für fehlerhafte Felder.
+:::
+
+::: {.details}
+#### Deep Dive 9: Praxisarchitektur – Das responsive Hamburger-Menü
+- **Konzept für mobile Geräte:**
+  1. **HTML:** Ein Menü-Button (`<a id="hamburger-icon" aria-label="Menü">&#9776;</a>`) und der Navigationscontainer (`<aside><nav>...</nav></aside>`).
+  2. **CSS (Media Query):**
+     - Bei Bildschirmen $\ge 768\text{ px}$ ist das Menü dauerhaft sichtbar (`display: block`) und der Hamburger-Button unsichtbar (`display: none`).
+     - Bei Bildschirmen $< 768\text{ px}$ ist das Menü standardmäßig versteckt (`display: none`) und wird erst mit der Klasse `.active` eingeblendet (`display: block`).
+  3. **JavaScript:** Ein Klick-Listener auf dem Hamburger schaltet per `nav.classList.toggle("active")` die CSS-Klasse um.
+:::
+
+::: {.details}
+#### Deep Dive 10: Spec-Driven Development (SDD) in der Praxis
+- **Warum SDD?** Wenn man KI-Coding-Assistenten (wie Antigravity oder Cursor) ungenaue Arbeitsaufträge gibt, entstehen oft inkonsistente Lösungen oder Code mit Altlasten.
+- **Der SDD-Workflow:**
+  1. Erstellen einer `spec.md` mit Spezifikation von HTML-IDs, CSS-Klassen, Datenstrukturen und Events.
+  2. Gezielte Prompting-Zyklen: Die KI generiert Code exakt passend zur Spezifikation.
+  3. Verifikation im Browser & gezieltes Refactoring.
+:::
+
+---
+
+## 3. Fallstudien & Praxis-Szenarien
+
+::: {.case-study}
+#### Fallbeispiel A: Der verschwundene Formular-Submit (Reload-Bug)
+**Szenario:**
+Ein Student entwickelt ein interaktives Filter-Formular zur Geodaten-Suche. In seiner JavaScript-Datei bindet er folgenden Event-Listener ein:
+```javascript
+const form = document.querySelector("#filterForm");
+
+form.addEventListener("submit", (event) => {
+    const kategorie = document.querySelector("#kategorieInput").value;
+    console.log("Filtere nach Kategorie:", kategorie);
+    ladeGefiltertePunkte(kategorie);
+});
+```
+Beim Klick auf den Absende-Button flackert die Webseite kurz auf, die Konsolenausgabe verschwindet sofort wieder und die Funktion `ladeGefiltertePunkte()` wird scheinbar gar nicht ausgeführt.
+
+**Arbeitsanweisung & Aufgabenstellung:**
+1. Erklären Sie die Ursache des Fehlers und warum der Browser die Seite beim `submit`-Ereignis standardmäßig neu lädt.
+2. Nennen Sie den JavaScript-Befehl, der das Standardverhalten des Browsers unterdrückt.
+3. Geben Sie den vollständig korrigierten Event-Listener an.
+
+::: {.solution}
+**Musterlösung:**
+1. **Ursache des Fehlers:**
+   - Standardmäßig führt ein HTML-Formular bei einem `submit`-Event eine HTTP-Anfrage an die im `action`-Attribut definierte URL aus und lädt dabei die gesamte Webseite neu.
+   - Durch diesen Seiten-Reload wird der aktuelle JavaScript-Zustand zurückgesetzt und alle Konsolenausgaben gehen verloren, bevor die asynchrone Filterfunktion ihr Ergebnis anzeigen kann.
+2. **Lösungsbefehl:**
+   - **`event.preventDefault()`**: Dieser Methodenaufruf auf dem Event-Objekt weist den Browser an, das Standard-Absenden und das damit verbundene Neuladen der Seite zu unterbinden.
+3. **Korrigierter Code:**
+   ```javascript
+   const form = document.querySelector("#filterForm");
+
+   form.addEventListener("submit", (event) => {
+       event.preventDefault(); // Verhindert das Neuladen der Seite!
+       const kategorie = document.querySelector("#kategorieInput").value;
+       console.log("Filtere nach Kategorie:", kategorie);
+       ladeGefiltertePunkte(kategorie);
+   });
+   ```
+:::
+:::
+
+::: {.case-study}
+#### Fallbeispiel B: querySelector vs. querySelectorAll Verwechslung
+**Szenario:**
+Auf einer Geoportal-Seite befinden sich fünf POI-Karten mit der Klasse `.poi-card`. Ein Entwickler möchte alle Karten mit einem roten Rahmen versehen und schreibt folgenden Code:
+```javascript
+const karten = document.querySelector(".poi-card");
+karten.forEach((karte) => {
+    karte.classList.add("highlight");
+});
+```
+In der Konsole erscheint die Fehlermeldung: `TypeError: karten.forEach is not a function`.
+
+**Arbeitsanweisung & Aufgabenstellung:**
+1. Erläutern Sie den Unterschied im Rückgabewert zwischen `document.querySelector()` und `document.querySelectorAll()`.
+2. Begründen Sie, warum der obige Methodenaufruf `.forEach()` fehlschlägt.
+3. Formulieren Sie den fehlerfreien Code zur Markierung aller Karten.
+
+::: {.solution}
+**Musterlösung:**
+1. **Rückgabewerte im Vergleich:**
+   - `document.querySelector(".poi-card")` liefert ausschließlich das **erste gefundene Element** als einzelnes `Element`-Objekt (oder `null`).
+   - `document.querySelectorAll(".poi-card")` liefert eine **NodeList** (Sammlung/Array-ähnliches Konstrukt) mit **allen** Treffern.
+2. **Ursache des TypeErrors:**
+   - Ein einzelnes DOM-Element (wie `<div>`) besitzt keine Methode `.forEach()`. Da `querySelector` nur ein einzelnes Element zurückgibt, wirft der Versuch, `.forEach` darauf aufzurufen, einen Typfehler.
+3. **Korrigierter Code:**
+   ```javascript
+   // querySelectorAll liefert die iterierbare NodeList aller Karten:
+   const karten = document.querySelectorAll(".poi-card");
+
+   karten.forEach((karte) => {
+       karte.classList.add("highlight");
+   });
+   ```
+:::
+:::
+
+::: {.case-study}
+#### Fallbeispiel C: Der unsichtbare HTTP-404-Fehler bei fetch()
+**Szenario:**
+Für eine Webkarte sollen POI-Daten aus der Datei `sehenswuerdigkeiten.geojson` geladen werden. Die Datei wurde versehentlich auf dem Server umbenannt, sodass die URL einen HTTP-Status `404 Not Found` liefert. Der Entwickler hat folgenden Code geschrieben:
+```javascript
+async function ladePunkte() {
+    try {
+        const res = await fetch("sehenswuerdigkeiten.geojson");
+        const daten = await res.json();
+        console.log("Erfolgreich geladen:", daten);
+    } catch (err) {
+        console.log("Netzwerkfehler aufgetreten:", err.message);
+    }
+}
+ladePunkte();
+```
+Beim Ausführen landet der Code überraschenderweise im `catch`-Block mit dem Fehler `SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON`.
+
+**Arbeitsanweisung & Aufgabenstellung:**
+1. Erklären Sie, warum `fetch()` bei einem HTTP-Statuscode 404 **nicht** automatisch den `catch`-Block auslöst.
+2. Warum wirft der Aufruf `res.json()` im Fehlerfall einen `SyntaxError`?
+3. Ergänzen Sie die Prüfung `if (!res.ok)`, um HTTP-Fehler vor dem JSON-Parsen sauber abzufangen.
+
+::: {.solution}
+**Musterlösung:**
+1. **Verhalten von fetch():**
+   - Das Promise von `fetch()` wird nur dann zurückgewiesen (*rejected*), wenn ein echter **Netzwerkfehler** vorliegt (z. B. keine Internetverbindung oder DNS-Fehler).
+   - Ein HTTP-Fehlerstatus wie `404 (Not Found)` oder `500 (Internal Server Error)` gilt für `fetch()` als technisch erfolgreiche Server-Antwort.
+2. **Ursache des SyntaxErrors:**
+   - Bei einem 404-Fehler liefert der Webserver meist eine HTML-Fehlerseite (`<!DOCTYPE html>...`).
+   - `res.json()` versucht, diesen HTML-Text als JSON zu interpretieren, was sofort an dem Zeichen `<` scheitert.
+3. **Korrigierter Code mit res.ok:**
+   ```javascript
+   async function ladePunkte() {
+       try {
+           const res = await fetch("sehenswuerdigkeiten.geojson");
+           
+           // Statuscode prüfen (200-299 ist ok):
+           if (!res.ok) {
+               throw new Error(`Server antwortete mit Statuscode: ${res.status}`);
+           }
+           
+           const daten = await res.json();
+           console.log("Erfolgreich geladen:", daten);
+       } catch (err) {
+           console.error("Fehler beim Laden:", err.message);
+       }
+   }
+   ```
+:::
+:::
+
+::: {.case-study}
+#### Fallbeispiel D: Speichern von Benutzer-Favoriten im localStorage
+**Szenario:**
+Ein Nutzer kann in einer Karten-App Orte als Favoriten speichern. Ein Entwickler möchte ein Array mit den IDs der gemerkten Orte im `localStorage` ablegen:
+```javascript
+const favoriten = [101, 204, 309];
+localStorage.setItem("userFavs", favoriten);
+
+// Späteres Auslesen:
+const geladeneDaten = localStorage.getItem("userFavs");
+console.log("Geladener Datentyp:", typeof geladeneDaten);
+console.log("Erstes Element:", geladeneDaten[0]);
+```
+Die Konsole gibt aus: `Geladener Datentyp: string` und `Erstes Element: "1"`. Der Entwickler wundert sich, dass sein Array zerstört wurde.
+
+**Arbeitsanweisung & Aufgabenstellung:**
+1. Erläutern Sie, warum `localStorage` komplexe Datenstrukturen wie Arrays oder Objekte ohne explizite Serialisierung in den String `"101,204,309"` umwandelt.
+2. Zeigen Sie, wie Sie das Array mit `JSON.stringify()` korrekt als JSON-String speichern.
+3. Zeigen Sie, wie Sie den String beim Auslesen mit `JSON.parse()` wieder in ein echtes JavaScript-Array zurückverwandeln.
+
+::: {.solution}
+**Musterlösung:**
+1. **Ursache:**
+   - Die Web Storage API kann prinzipiell nur Werte vom Typ `string` speichern.
+   - Übergibt man ein Array oder Objekt direkt an `localStorage.setItem()`, ruft JavaScript implizit `.toString()` auf. Aus `[101, 204, 309]` wird der Text `"101,204,309"`. Beim Zugriff auf Index `[0]` wird somit das erste Zeichen des Strings (`"1"`) gelesen.
+2. **Speichern mit JSON.stringify():**
+   ```javascript
+   const favoriten = [101, 204, 309];
+   localStorage.setItem("userFavs", JSON.stringify(favoriten));
+   // Im Speicher liegt nun: '[101,204,309]'
+   ```
+3. **Auslesen mit JSON.parse():**
+   ```javascript
+   const raw = localStorage.getItem("userFavs");
+   if (raw) {
+       const gespeicherteFavs = JSON.parse(raw);
+       console.log("Array-Länge:", gespeicherteFavs.length); // 3
+       console.log("Erstes Element:", gespeicherteFavs[0]);  // 101 (Zahl!)
+   }
+   ```
+:::
+:::
+
+::: {.case-study}
+#### Fallbeispiel E: Interaktives Hamburger-Menü für Maiks Seite
+**Szenario:**
+Für Maiks LKW-Webseite soll ein Hamburger-Menü programmiert werden. Gegeben ist folgender HTML-Ausschnitt:
+```html
+<a href="#" id="hamburger-icon" aria-label="Menü">&#9776;</a>
+<aside>
+  <nav class="main-nav">
+    <a href="index.html">Start</a>
+    <a href="kontakt.html">Kontakt</a>
+  </nav>
+</aside>
+```
+Im CSS ist die Klasse `.main-nav.active { display: block; }` definiert.
+
+**Arbeitsanweisung & Aufgabenstellung:**
+1. Schreiben Sie das JavaScript, das beim Klick auf `#hamburger-icon` die Klasse `active` auf dem `<nav>`-Element umschaltet (`toggle`).
+2. Stellen Sie sicher, dass das Standardverhalten des `<a>`-Tags (Sprung an den Seitenanfang wegen `href="#"`) verhindert wird.
+3. Schützen Sie den Code davor, dass er fehlschlägt, falls ein Element auf einer Unterseite nicht existiert.
+
+::: {.solution}
+**Musterlösung:**
+```javascript
+// Auf vollständiges Laden des DOMs warten:
+document.addEventListener("DOMContentLoaded", () => {
+    const hamburgerBtn = document.querySelector("#hamburger-icon");
+    const navMenu = document.querySelector("aside nav.main-nav");
+
+    // Null-Check zur Absicherung:
+    if (hamburgerBtn && navMenu) {
+        hamburgerBtn.addEventListener("click", (event) => {
+            // Standard-Link-Sprung verhindern:
+            event.preventDefault();
+            
+            // Klasse 'active' umschalten:
+            navMenu.classList.toggle("active");
+        });
+    }
+});
+```
+:::
+:::
+
+---
+
+## 4. Active Recall (Lückentexte / Drag & Drop)
+
+Klicken Sie auf ein Wort im Pool und setzen Sie es in die passende Lücke ein:
+
+::: {.drag-exercise}
+Das Document Object Model bildet die HTML-Struktur als *Baumstruktur* im Arbeitsspeicher des Browsers ab. Um das erste passende Element anhand eines CSS-Selektors zu finden, nutzt man *querySelector*. Möchte man alle Elemente als Sammlung erhalten, verwendet man *querySelectorAll*.
+:::
+
+::: {.drag-exercise}
+Für die optische Steuerung von Elementen verwendet man die Eigenschaft *classList*. Mit der Methode *toggle* lässt sich eine CSS-Klasse bei jedem Klick bequem an- und ausschalten. Benutzerdefinierte Daten in HTML-Attributen liest man über das Objekt *dataset* aus.
+:::
+
+::: {.drag-exercise}
+Ereignisse werden in modernem JavaScript sauber über die Methode *addEventListener* registriert. Das vom Browser übergebene Event-Objekt enthält in der Eigenschaft *target* das auslösende HTML-Element. Mit *preventDefault* unterdrückt man ungewollte Standardaktionen wie den Seiten-Reload bei Formularen.
+:::
+
+::: {.drag-exercise}
+Beim asynchronen Laden mit *fetch* friert die Benutzeroberfläche nicht ein. Um auf die Serverantwort zu warten, wird vor den Aufruf das Schlüsselwort *await* gesetzt, was nur innerhalb einer mit *async* deklarierten Funktion erlaubt ist. Das Parsen von GeoJSON-Daten erfolgt mit der Methode *json*.
+:::
+
+::: {.drag-exercise}
+Zur dauerhaften Speicherung von Einstellungen im Browser dient *localStorage*. Da der Speicher nur Strings aufnehmen kann, muss ein JavaScript-Objekt vor dem Speichern mit *JSON.stringify* umgewandelt werden. Beim Auslesen stellt *JSON.parse* das ursprüngliche Objekt wieder her.
+:::
+
+::: {.drag-exercise}
+Die genaue Position des Benutzers kann über die Schnittstelle *geolocation* im Objekt navigator ermittelt werden. Aus Datenschutzgründen verlangt der Browser vor der Standortabfrage immer die explizite *Zustimmung* des Nutzers.
+:::
+
+::: {.drag-exercise}
+Formulardaten lassen sich mit der Schnittstelle *FormData* in einem Schritt auslesen, sofern die HTML-Eingabefelder ein *name* Attribut besitzen. Zur clientseitigen Überprüfung der Eingaberegeln prüft man das Formular mit der Methode *checkValidity*.
+:::
+
+::: {.drag-exercise}
+Im Entwicklungskonzept *Spec-Driven* Development wird vor der Codierung eine präzise Spezifikation verfasst. KI-Werkzeuge können anhand dieser Vorgaben gezielt *Code* generieren und Fehler durch iteratives *Refactoring* beheben.
+:::
+
+---
+
+## 5. Quick-Check (Klausurrelevantes Quiz)
+
+### Bereich 1: DOM-Baum & Selektion
+
+::: {.quick-check}
+Welche Aussage zur DOM-Methode `document.querySelector()` ist korrekt?
+
+- **Sie liefert das erste im Dokument gefundene Element zurück, das dem übergebenen CSS-Selektor entspricht (oder `null`).**
+- Sie liefert grundsätzlich immer ein Array aller vorhandenen HTML-Tags zurück.
+- Sie löscht das selektierte Element sofort aus dem Speicher.
+
+> `querySelector()` sucht nach CSS-Selektoren und gibt genau den ersten Treffer zurück.
+:::
+
+::: {.quick-check}
+Welchen Rückgabetyp liefert der Methodenaufruf `document.querySelectorAll("button")`?
+
+- Einen einzelnen Boolean-Wert (`true` oder `false`).
+- Einen JSON-formatierten Text-String.
+- **Eine `NodeList` (Sammlung aller passenden Button-Elemente im DOM).**
+
+> `querySelectorAll` gibt eine iterierbare `NodeList` aller übereinstimmenden Knoten zurück.
+:::
+
+::: {.quick-check}
+Welche Eigenschaft wandert im DOM-Baum nach oben und liefert das direkte übergeordnete Element?
+
+- `element.children`
+- **`element.parentElement`**
+- `element.nextSibling`
+
+> `parentElement` referenziert den direkten Elternknoten im DOM-Baum.
+:::
+
+::: {.quick-check}
+Was bewirkt der Methodenaufruf `element.closest(".card")`?
+
+- Er sucht innerhalb der Kind-Elemente nach der ersten Klasse `.card`.
+- **Er wandert im DOM-Baum vom Element aus nach oben und liefert das nächstgelegene passende Eltern-Element mit der Klasse `.card`.**
+- Er berechnet den Pixel-Abstand zur nächsten Karte auf dem Bildschirm.
+
+> `closest()` traversiert den Baum nach oben in Richtung Wurzelknoten (`document`).
+:::
+
+---
+
+### Bereich 2: DOM-Manipulation & CSS-Steuerung
+
+::: {.quick-check}
+Wie erzeugt man in modernem JavaScript ein neues `<div>`-Element sicher im Arbeitsspeicher?
+
+- `document.newTag("div");`
+- `document.write("<div></div>");`
+- **`document.createElement("div");`**
+
+> `document.createElement()` erzeugt einen neuen Elementknoten im RAM, der anschließend mit `.append()` eingehängt werden kann.
+:::
+
+::: {.quick-check}
+Warum ist die Verwendung von `classList.toggle("active")` besser als `element.style.display = "block"`?
+
+- **Weil `classList` das Design sauber im CSS belässt und JS nur die semantische Zustandsklasse steuert.**
+- Weil `element.style` auf mobilen Endgeräten nicht unterstützt wird.
+- Weil `classList` automatisch alle HTML-Tags schließt.
+
+> Die Steuerung von CSS-Klassen wahrt die strikte Trennung von Struktur, Design und Verhalten (*Separation of Concerns*).
+:::
+
+::: {.quick-check}
+Gegeben ist der HTML-Button `<button id="btn" data-poi-id="789" data-category="museum">Info</button>`. Wie greift man in JavaScript auf die POI-ID zu?
+
+- `btn.getAttributeName("poi-id")`
+- **`btn.dataset.poiId`**
+- `btn.data("poiId")`
+
+> Das `dataset`-Objekt wandelt Attribute wie `data-poi-id` automatisch in CamelCase (`poiId`) um.
+:::
+
+::: {.quick-check}
+Was bewirkt der Befehl `parent.append(neuesElement)`?
+
+- Er ersetzt alle bisherigen Kindelemente durch das neue Element.
+- Er fügt das Element ganz oben als erstes Kind ein.
+- **Er fügt das neue Element am Ende der Kindelemente des Containers in das DOM ein.**
+
+> `.append()` hängt den neuen Knoten als letztes Kind an das Elternelement an (im Gegensatz zu `.prepend()`).
+:::
+
+---
+
+### Bereich 3: Modernes Event-Handling
+
+::: {.quick-check}
+Welcher Code registriert einen Klick-Event-Listener nach aktuellen Best Practices?
+
+- `<button onclick="handleKlick()">Klick</button>`
+- **`btn.addEventListener("click", handleKlick);`**
+- `btn.attachEvent("onclick", handleKlick);`
+
+> `addEventListener()` trennt HTML von JavaScript und erlaubt mehrere Listener pro Element.
+:::
+
+::: {.quick-check}
+Was repräsentiert die Eigenschaft `event.target` innerhalb einer Event-Handler-Funktion?
+
+- Die IP-Adresse des auslösenden Computers.
+- Die URL der aktuell geöffneten Webseite.
+- **Das konkrete HTML-Element, auf dem das Ereignis (z. B. der Klick) ausgelöst wurde.**
+
+> `event.target` verweist direkt auf das auslösende DOM-Element im Dokument.
+:::
+
+::: {.quick-check}
+Warum ist der Aufruf von `event.preventDefault()` in einem Formular-`submit`-Listener essenziell?
+
+- **Er verhindert, dass der Browser das Standard-Absenden ausführt und die Webseite dabei komplett neu lädt.**
+- Er speichert das Formular automatisch auf einem USB-Stick.
+- Er wandelt alle eingegebenen Buchstaben in Großbuchstaben um.
+
+> Ohne `preventDefault()` lädt der Browser die Seite neu und der JavaScript-Zustand geht verloren.
+:::
+
+---
+
+### Bereich 4: Asynchrone Programmierung & Fetch API
+
+::: {.quick-check}
+Warum werden Geodaten und externe APIs in JavaScript asynchron geladen?
+
+- Weil synchrone Abfragen in Deutschland gesetzlich verboten sind.
+- **Weil eine synchrone Abfrage den gesamten Browser einfrieren würde, bis alle Daten über das Netzwerk empfangen wurden.**
+- Weil JSON-Dateien nur im Dunkelmodus geöffnet werden können.
+
+> Asynchronität stellt sicher, dass die Benutzeroberfläche flüssig bedienbar bleibt, während Daten im Hintergrund laden.
+:::
+
+::: {.quick-check}
+Welche Voraussetzung muss erfüllt sein, damit das Schlüsselwort `await` verwendet werden darf?
+
+- Der Code muss in einer HTML-Tabelle stehen.
+- **`await` darf nur innerhalb einer Funktion verwendet werden, die mit dem Schlüsselwort `async` deklariert wurde.**
+- Das Betriebssystem muss ein 64-Bit-System sein.
+
+> `await` pausiert die Ausführung innerhalb einer `async function`, bis das Promise aufgelöst ist.
+:::
+
+::: {.quick-check}
+Welche Eigenschaft des `Response`-Objekts bei `fetch()` zeigt an, ob der HTTP-Statuscode im Erfolgsbereich (200–299) liegt?
+
+- `response.status === "erfolgreich"`
+- `response.isLoaded`
+- **`response.ok`**
+
+> `response.ok` ist ein Boolean, der bei Statuscodes 200 bis 299 den Wert `true` liefert.
+:::
+
+::: {.quick-check}
+Was bewirkt der Methodenaufruf `await response.json()`?
+
+- Er wandelt eine Bilddatei in ein PNG-Format um.
+- **Er liest den Text-Body der HTTP-Antwort asynchron ein und parst ihn in ein natives JavaScript-Objekt.**
+- Er druckt den Quelltext in der Konsole aus.
+
+> `response.json()` konvertiert den empfangenen JSON-String asynchron in ein JS-Objekt oder Array.
+:::
+
+---
+
+### Bereich 5: Clientseitiger Speicher & Web APIs
+
+::: {.quick-check}
+Welche Eigenschaft trifft auf den `localStorage` des Browsers zu?
+
+- **Die gespeicherten Daten bleiben dauerhaft im Browser-Profil erhalten, selbst wenn der Tab oder der Browser geschlossen wird.**
+- Die Daten werden nach genau 10 Minuten automatisch gelöscht.
+- Die Daten können von jeder beliebigen anderen Domain im Internet uneingeschränkt gelesen werden.
+
+> `localStorage` bietet domainspezifischen, persistenten Speicher auf Client-Seite.
+:::
+
+::: {.quick-check}
+Welcher Datentyp kann von der Web Storage API (`localStorage` / `sessionStorage`) ausschließlich gespeichert werden?
+
+- Arrays
+- **Strings (Zeichenketten)**
+- Binäre JPEG-Bilder
+
+> Web Storage akzeptiert nur Zeichenketten. Komplexe Objekte müssen vorher mit `JSON.stringify()` serialisiert werden.
+:::
+
+::: {.quick-check}
+Welche Schnittstelle ermöglicht die Abfrage der GPS-/Standortkoordinaten des Client-Geräts in JavaScript?
+
+- `window.location.gps`
+- `document.getGeoPosition()`
+- **`navigator.geolocation`**
+
+> `navigator.geolocation` ist die standardisierte Web API für Standortabfragen im Browser.
+:::
+
+::: {.quick-check}
+Warum erscheint vor der ersten Ausführung von `navigator.geolocation.getCurrentPosition()` ein Browser-Popup?
+
+- Weil der Browser eine kostenpflichtige Lizenz aktivieren muss.
+- **Weil Standortdaten datenschutzsensibel sind und der Browser vor dem Zugriff die ausdrückliche Erlaubnis des Nutzers einholen muss.**
+- Weil die Internetverbindung neu gestartet werden muss.
+
+> Das Sicherheitsmodell moderner Web-APIs verlangt explizite Nutzerzustimmung (*Permission Model*).
+:::
+
+---
+
+### Bereich 6: Formularverarbeitung & Validierung
+
+::: {.quick-check}
+Welches Formular-Event feuert **sofort bei jedem einzelnen Tastendruck** in einem Textfeld?
+
+- `change`
+- **`input`**
+- `submit`
+
+> Das `input`-Event reagiert in Echtzeit auf jede Werteänderung, ideal für Live-Suchfilter oder Zeichenzähler.
+:::
+
+::: {.quick-check}
+Welche Voraussetzung müssen HTML-Eingabefelder erfüllen, damit die `FormData`-API ihre Werte automatisch auslesen kann?
+
+- **Jedes Eingabefeld muss ein gültiges `name="..."`-Attribut besitzen.**
+- Jedes Feld muss mit einem CSS-Glow animiert sein.
+- Die Felder müssen zwingend in einer nummerierten Liste `<ol>` liegen.
+
+> `FormData` verwendet die `name`-Attribute der Eingabefelder als Schlüssel im resultierenden Datensatz.
+:::
+
+::: {.quick-check}
+Welche JavaScript-Methode prüft, ob alle nativen HTML5-Validierungsregeln (z. B. `required`, `type="email"`) eines Formulars erfüllt sind?
+
+- `form.isValid()`
+- `form.testRules()`
+- **`form.checkValidity()`**
+
+> `checkValidity()` liefert `true`, wenn alle Formular-Constraints erfüllt sind, andernfalls `false`.
+:::
+
+::: {.quick-check}
+Wie wandelt man ein aus `new FormData(meinFormular)` erstelltes FormData-Objekt am schnellsten in ein einfaches JavaScript-Objekt um?
+
+- `formData.toJsonObject()`
+- **`Object.fromEntries(formData)`**
+- `JSON.toObject(formData)`
+
+> `Object.fromEntries()` konvertiert Key-Value-Iteratoren wie `FormData` direkt in ein einfaches JS-Objekt.
+:::
+
+---
+
+### Bereich 7: KI-Workflows (SDD) & Praxisprojekt
+
+::: {.quick-check}
+Was ist das Hauptziel von Spec-Driven Development (SDD) beim Einsatz von KI-Coding-Assistenten wie Antigravity?
+
+- Das manuelle Schreiben von HTML-Code vollständig zu verbieten.
+- **Durch eine präzise Spezifikation (`spec.md`) vorab Datenstrukturen, IDs und Verhalten exakt zu definieren, damit die KI fehlerfreien, standardkonformen Code generiert.**
+- Den Computer nachts ohne Internet laufen zu lassen.
+
+> SDD sorgt für klare Leitplanken und verhindert Fehlinterpretationen und Code-Altlasten bei der KI-Generierung.
+:::
+
+::: {.quick-check}
+Welches CSS-Media-Query-Muster wird für Maiks responsives Hamburger-Menü ab einem Breakpoint von 768px eingesetzt?
+
+- `@media (color: blue) { ... }`
+- **`@media screen and (min-width: 768px) { #hamburger-icon { display: none; } aside nav { display: block; } }`**
+- `@media screen and (max-resolution: 300dpi) { ... }`
+
+> Ab 768px Bildschirmbreite wird das Hamburger-Icon ausgeblendet und die reguläre Navigation dauerhaft angezeigt.
+:::
+
+::: {.quick-check}
+Warum wird der JavaScript-Code für das Hamburger-Menü in einen `document.addEventListener("DOMContentLoaded", ...)`-Block gekapselt?
+
+- Damit das Skript nur einmal im Monat ausgeführt wird.
+- Damit die Webseite automatisch einen Screenshot speichert.
+- **Um sicherzustellen, dass alle HTML-Elemente (wie `#hamburger-icon`) im DOM existieren, bevor Event-Listener darauf registriert werden.**
+
+> `DOMContentLoaded` garantiert, dass das HTML-Dokument vollständig geparst wurde, bevor DOM-Zugriffe stattfinden.
+:::
