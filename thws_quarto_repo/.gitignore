@@ -1,0 +1,28 @@
+/.luarc.json
+.quarto/
+_freeze/
+_quarto_internal_scss_error.scss
+
+# Render-Artefakte (Extension-.typ unter _extensions/ NICHT betroffen — nur Root)
+*.pdf
+/*.typ
+*_files/
+
+# --- MacOS Systemmüll (The Apple Trap) ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# VS Code Settings (optional, wenn du sie nicht teilen willst)
+.vscode/
+
+# Excalidraw
+excalidraw.log
+
+# --- Interne Arbeits-/Entwurfsdateien (nicht Teil der offiziellen Doku) ---
+/tutorial-07-real-options.qmd
+/tutorial-skill-prompt.md
+docs/reader/LOGO-STOLPERFALLE.md
+*Mockup.html
