@@ -60,7 +60,8 @@ footer: '[zurück zur Übersicht](../index.html)'
 ohne dass Seite neu geladen werden muss
 - kann Daten auf dem Client speichern
 - kann lokalisierte Informationen anzeigen
-- kann Daten des Clientrechners auswerten und  Seiten und Inhalte an die Gegebenheiten des Besuchers anpassen
+- kann Daten des Clientrechners auswerten und  Seiten und Inhalte an die Gegebenheiten
+des Besuchers anpassen
 
 ---
 #### Was Javascript nicht kann
@@ -341,7 +342,8 @@ document.getElementById('addBtn').addEventListener('click', () => {
   - Für Variablen, deren Wert sich **später ändert** (z. B. Zähler in Schleifen).
   - Gültig nur im jeweiligen Code-Block (*Block Scope* `{ ... }`).
 - **❌ Entfall: Kein `var` mehr nutzen!**
-  - `var` hat keinen Block-Scope und leidet unter *Hoisting* (Hochziehen von Variablen). Führt in der Praxis zu schwer auffindbaren Bugs.
+  - `var` hat keinen Block-Scope und leidet unter *Hoisting* (Hochziehen von Variablen).
+  Führt in der Praxis zu schwer auffindbaren Bugs.
 
 ---
 ### Was ist Hoisting ("Hochziehen")?
@@ -463,11 +465,11 @@ Deine Punkte: ${punkte}`;
 ---
 ### Vorher vs. Nachher: `+`-Konkatenation vs. Backticks
 
-- ❌ **Veraltet (unübersichtliche `+`-Verknüpfung):**
+- **Veraltet (unübersichtliche `+`-Verknüpfung):**
   ```javascript
   const info = "User: " + vorname + " " + namename + " (" + alter + " Jahre)";
   ```
-- ✅ **Modern & Sauber (Template Literals):**
+- **Modern & Sauber (Template Literals):**
   ```javascript
   const info = `User: ${vorname} ${namename} (${alter} Jahre)`;
   ```
@@ -503,7 +505,8 @@ if (alter >= 18) {
 ```
 
 - **Ablauf:** Bedingungen werden sequenziell von oben nach unten geprüft.
-- **Logik:** Sobald eine Bedingung `true` ergibt, wird dieser Block ausgeführt und der Rest übersprungen.
+- **Logik:** Sobald eine Bedingung `true` ergibt, wird dieser Block ausgeführt
+und der Rest übersprungen.
 
 ---
 ### Mehrfachauswahl: `switch` / `case`
@@ -643,16 +646,14 @@ Steuere den Ablauf innerhalb einer laufenden Schleife gezielt:
   ```javascript
   for (let i = 1; i <= 10; i++) {
       if (i === 4) break; // Stoppt die Schleife bei 4!
-      console.log(i); // Gibt 1, 2, 3 aus
-  }
+      console.log(i); // Gibt 1, 2, 3 aus  }
   ```
 - **`continue` (Überspringen des aktuellen Durchlaufs):**
   - Bricht nur den aktuellen Durchgang ab und springt zum nächsten.
   ```javascript
   for (let i = 1; i <= 4; i++) {
       if (i === 3) continue; // Überspringt nur die 3!
-      console.log(i); // Gibt 1, 2, 4 aus
-  }
+      console.log(i); // Gibt 1, 2, 4 aus  }
   ```
 
 ---
@@ -927,7 +928,9 @@ const koordinaten = [49.79, 9.93];
 const [lat, lng] = koordinaten; // lat = 49.79, lng = 9.93
 ```
 
-> **Vorteil:** Erspart unübersichtliches `const name = user.name; const stadt = user.stadt;`.
+> **Vorteil:** Erspart unübersichtliches
+"const name = user.name;
+const stadt = user.stadt;".
 
 ---
 ### Der Spread-Operator (`...`)

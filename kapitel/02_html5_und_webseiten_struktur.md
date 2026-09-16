@@ -623,7 +623,7 @@ Aber auch spezifische Domains sind möglich:
 - **Zustandsbehaftet:** Der Server speichert während einer Sitzung den Zustand (z. B. das aktuelle Arbeitsverzeichnis).
 - **Funktionen:** Upload (Client → Server), Download (Server → Client), Datei- & Verzeichnisverwaltung (Erstellen, Löschen, Umbenennen).
 
-![ftp-basics](../img/ftp-basics.png)
+![bg right:45%](../img/ftp-basics.png)
 
 ---
 
@@ -648,12 +648,12 @@ Aber auch spezifische Domains sind möglich:
 <!-- _class: img-right -->
 
 ### FTP-Sicherheit & FTP-Clients
-- **Das Sicherheitsrisiko:** Klassisches FTP überträgt Zugangsdaten (Benutzer/Passwort) und Dateien **unverschlüsselt** im Klartext.
+- **Das Sicherheitsrisiko:** Klassisches FTP überträgt Zugangsdaten & Dateien **unverschlüsselt** im Klartext.
 - **Sichere Alternativen (Standard heute):**
   - **SFTP (SSH File Transfer Protocol):** verschlüsselte Übertragung über SSH (Port 22).
   - **FTPS (FTP over SSL/TLS):** Verschlüsseltes FTP (Port 21 mit Explicit TLS oder Port 990).
 
-![ftp-security](../img/ftp-security.png)
+![bgy](../img/ftp-security.png)
 
 ---
 <!-- _class: img-right -->
@@ -917,9 +917,9 @@ https://mongoose.ws/binary/
 <!-- _class: img-right -->
 
 ### 1. Elemente (Elements)
-- **Das DOM inspizieren:** Zeigt den aktuellen Zustand des **DOM (Document Object Model)** an – also die Live-Baumstruktur aller HTML-Elemente.
-- **Live-Editing:** Ermöglicht das temporäre Bearbeiten von HTML-Tags, Attributen und Texten direkt im Browser.
-- **CSS-Entwicklung:** Stylesheets einsehen, Regeln an- und ausschalten oder neue CSS-Eigenschaften live testen.
+- **Das DOM inspizieren:** Zeigt den aktuellen Zustand des **DOM (Document Object Model)** = Live-Baumstruktur aller HTML-Elemente.
+- **Live-Editing:** Ermöglicht das temporäre Bearbeiten von HTML-Tags, Attributen & Texten direkt im Browser.
+- **CSS-Entwicklung:** Stylesheets einsehen, Regeln an- & ausschalten oder neue CSS-Eigenschaften live testen.
 
 ![devtools-elements](../img/devtools-elements.jpg)
 
@@ -1156,13 +1156,17 @@ In diesem Beispiel definieren das Attribut `src` (source) und `alt` (alternative
 
 ---
 ### Ein valides HTML-Dokument: Die Bestandteile
-- **`<!DOCTYPE html>` (Dokumenttyp-Deklaration):** Steht in der allerersten Zeile und teilt dem Browser mit, dass es sich um HTML5 handelt.
-- **`<html>` (Wurzelelement):** Umschließt das gesamte Dokument und definiert die Hauptsprache (z. B. `<html lang="de">`).
-- **`<head>` (Kopfbereich):** Umschließt unsichtbare Meta-Informationen (z. B. Zeichensatz `<meta charset="utf-8">`).
+- **`<!DOCTYPE html>` (Dokumenttyp-Deklaration):**
+Steht in der allerersten Zeile & teilt dem Browser mit, dass es sich um HTML5 handelt.
+- **`<html>` (Wurzelelement):**
+Umschließt das gesamte Dokument & definiert die Hauptsprache (z. B. `<html lang="de">`).
+- **`<head>` (Kopfbereich):**
+Umschließt unsichtbare Meta-Informationen (z. B. Zeichensatz `<meta charset="utf-8">`).
 - **`<title>` (Seitentitel - PFLICHT!):**
-  - Ist im `<head>` platziert und für die Validität der Seite **zwingend vorgeschrieben** (Pflichtelement).
-  - Definiert den Text, der im Browser-Tab und in Suchergebnissen (z. B. Google Search) erscheint.
-- **`<body>` (Inhaltsbereich):** Umschließt alle sichtbaren Elemente einer Webseite (Texte, Bilder, Links, etc.).
+  - Ist im `<head>` platziert & für die Validität der Seite **zwingend vorgeschrieben** (Pflichtelement).
+  - Definiert den Text, der im Browser-Tab & in Suchergebnissen (z. B. Google Search) erscheint.
+- **`<body>` (Inhaltsbereich):**
+Umschließt alle sichtbaren Elemente einer Webseite (Texte, Bilder, Links, etc.).
 
 ---
 
@@ -1211,7 +1215,7 @@ Ein voll funktionsfähiges und standardkonformes HTML-Dokument sieht minimal so 
 `<!DOCTYPE html>`
 
 - **Dokumenttyp-Deklaration:** in erster Zeile & teilt Browser mit, dass es sich um HTML5 handelt.
-- früher Angabe der html-Version erforderlich (z.B. `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">`)
+- früher Angabe der html-Version erforderlich
 - Seit HTML5  `<!DOCTYPE html>`.
 - rigorose Vereinfachung im Sinne von
 Less-is-more
@@ -1249,8 +1253,8 @@ Less-is-more
 
 - `<meta charset="utf-8">`
 - Zeichenkodierung festlegen
-- für Suchmaschinen & Screenreader wichtig
-- korrekte Darstellung von Sonderzeichen, Umlauten und Emojis über verschiedene Betriebssysteme & Browser hinweg.
+- für Suchmaschinen & Screenreader
+- korrekte Darstellung von Sonderzeichen, Umlauten & Emojis überall gleich
 - erstes Element im `<head>`, vor allen anderen Elementen im `<head>` (nicht zwingend, gilt aber als Best Practice).
 - muss innerhalb  erster 512 Bytes des Dokuments stehen
 
@@ -1439,8 +1443,8 @@ Zur Versionierung der Daten > fortlaufende Nummerierung der Verzeichnisse:
 http://localhost/maiks-mobiler-service/01/
 
 - Chrome zeigt unsere erste Webseite an.
-- Beachten Sie, dass Chrome im Tab den **Title Tag** wiedergibt.
-- Beachten Sie ebenfalls die Darstellung des **strukturierten Textes**.
+- Chrome zeigt im Tab den **Title Tag**
+- Darstellung des **strukturierten Textes**.
 
 ![alt text](../img/erste-eigene-Seite.jpg)
 
@@ -1923,6 +1927,9 @@ das Zauberwort
 - **Vererbte vs. nicht-vererbte Eigenschaften**:
   - *Vererbt*: Text- und Schrifteigenschaften (z. B. `font-family`, `color`, `line-height`).
   - *Nicht vererbt*: Layout- und Box-Eigenschaften (z. B. `margin`, `padding`, `border`, `background-color`).
+
+---
+**Veranschaulichung der Vererbung**
 
 ![bg right:50%](../img/css_inheritance_diagram.png)
 

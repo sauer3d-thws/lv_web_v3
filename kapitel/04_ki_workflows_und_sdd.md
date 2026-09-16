@@ -107,7 +107,7 @@ Meine Wahl ist Antigravity, da ich ein registriertes Google-Konto mit Altersbest
 
 ---
 ### Arbeiten in Antigravity
-Öffnet Euch in Antigravity doch mal den Projektordner (09)
+Öffnet Euch in Antigravity den Projektordner (09)
 Analysiert die Projektstruktur
 und die Tools der Software:
 - Explorer
