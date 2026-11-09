@@ -167,6 +167,8 @@ Entwicklertools der Browser (Console, Sources, Debugging)
 
 ---
 #### Schritt-für-Schritt: Vorgehensweise beim Debuggen
+
+- **Ausführbare Demodatei:** [`Samples/JS/debugger.html`](../Samples/JS/debugger.html)
 - **1. DevTools öffnen:** Seite laden und `F12` (oder `Rechtsklick -> Untersuchen`) drücken.
 - **2. Aktion ausführen:** Klick auf den Button "Summe berechnen".
   - 🛑 Browser stoppt automatisch bei `debugger;` in der Funktion `berechneSumme()`.
@@ -175,6 +177,9 @@ Entwicklertools der Browser (Console, Sources, Debugging)
   - Erkenne den Typ: `a = "5"` (String) vs. `b = 10` (Number).
 - **4. Fehlerursache:** `a + b` führt wegen String-Konkatenation zu `"510"` statt `15`.
 - **5. Live-Fix in der Console testen:** In der Konsole `Number(a) + b` ausführen -> `15`.
+
+**Ausprobieren:**
+Öffne [`Samples/JS/debugger.html`](../Samples/JS/debugger.html) im Browser und teste das Breakpoint-Debugging!
 
 ---
 <!-- _class: fullscreen-->
@@ -427,7 +432,7 @@ console.log("22" === alter); // false (Strikte Gleichheit -> Sicherer Standard!)
 Strings erstellen und verarbeiten (Eigenschaften & Methoden)
 
  **Übersicht:**
- -Nützliche String-Methoden
+ - Nützliche String-Methoden
  - Template Literals (Backticks)
  - mehrzeilige Strings.
 

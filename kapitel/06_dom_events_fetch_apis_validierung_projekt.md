@@ -115,7 +115,7 @@ const kinder = form.children;          // Direkte Kinder von form
 ---
 ### Praxis-Check: DOM-Selektion & Traversierung im Einsatz
 
-- **Ausführbare Demodatei:** `Samples/JS/dom-selection-demo.html`
+- **Ausführbare Demodatei:** [`Samples/JS/dom-selection-demo.html`](../Samples/JS/dom-selection-demo.html)
 - **Gezeigte Kernkonzepte im Code:**
   1. **`querySelector()`:** Greift gezielt das erste Element per ID (`#mainContainer`) oder CSS-Klasse (`.card-item.active`).
   2. **`querySelectorAll()`:** Selektiert alle Treffer als `NodeList` und durchläuft diese per `.forEach()`.
@@ -123,7 +123,7 @@ const kinder = form.children;          // Direkte Kinder von form
   4. **`closest(selector)`:** Wandert im Baum nach oben, um das nächstgelegene passende Eltern-Element zu finden.
 
 **Ausprobieren:**
-Öffne `Samples/JS/dom-selection-demo.html` im Browser und teste die interaktiven Buttons!
+Öffne [`Samples/JS/dom-selection-demo.html`](../Samples/JS/dom-selection-demo.html) im Browser und teste die interaktiven Buttons!
 
 ---
 ### Dynamische DOM-Manipulation
@@ -213,7 +213,7 @@ Nutze `classList` für visuelle Änderungen anstelle von direkten Inline-Styles 
 
 ### Praxis-Check: Dynamische DOM-Manipulation im Einsatz
 
-- **Ausführbare Demodatei:** `Samples/JS/dom-manipulation-demo.html`
+- **Ausführbare Demodatei:** [`Samples/JS/dom-manipulation-demo.html`](../Samples/JS/dom-manipulation-demo.html)
 - **Gezeigte Kernkonzepte im Code:**
   1. **`document.createElement()` & `.append()`:** Erzeugen von Knoten im Speicher und Einfügen am Ende des Ziel-Containers.
   2. **`insertAdjacentHTML('beforeend', html)`:** Direktes Parsen und Einfügen von HTML-Template-Strings.
@@ -221,7 +221,7 @@ Nutze `classList` für visuelle Änderungen anstelle von direkten Inline-Styles 
   4. **`dataset`:** Auslesen (`dataset.cardId`) und dynamisches Setzen (`dataset.status`) von Data-Attributen.
 
 **Ausprobieren:**
-Öffne `Samples/JS/dom-manipulation-demo.html` im Browser und teste die interaktiven Buttons!
+Öffne [`Samples/JS/dom-manipulation-demo.html`](../Samples/JS/dom-manipulation-demo.html) im Browser und teste die interaktiven Buttons!
 
 
 ---
@@ -317,14 +317,14 @@ link.addEventListener('click', (event) => {
 
 ### Praxis-Check: Modernes Event Handling im Einsatz
 
-- **Ausführbare Demodatei:** `Samples/JS/event-handling-demo.html`
+- **Ausführbare Demodatei:** [`Samples/JS/event-handling-demo.html`](../Samples/JS/event-handling-demo.html)
 - **Gezeigte Kernkonzepte im Code:**
   1. **`addEventListener('click', handler)`:** Ereignisse sauber im JS-Code abfangen.
   2. **`event.preventDefault()`:** Verhindern von Standard-Browseraktionen.
   3. **`event.target`:** Auslesen von Attributen und Werten des geklickten Elements.
 
 **Ausprobieren:**
-Öffne `Samples/JS/event-handling-demo.html` im Browser und teste die interaktiven Buttons und Event-Handler!
+Öffne [`Samples/JS/event-handling-demo.html`](../Samples/JS/event-handling-demo.html) im Browser und teste die interaktiven Buttons und Event-Handler!
 
 ---
 <!-- _class: structural -->
@@ -435,7 +435,7 @@ Verwende ausschließlich `async / await` in Kombination mit `fetch()` für alle 
 
 ### Praxis-Check: Asynchrone Geodaten-Verarbeitung im Einsatz
 
-- **Ausführbare Demodatei:** `Samples/JS/async-fetch-demo.html`
+- **Ausführbare Demodatei:** [`Samples/JS/async-fetch-demo.html`](../Samples/JS/async-fetch-demo.html)
 - **Gezeigte Kernkonzepte im Code:**
   1. **`async / await`:** Sauberer, schrittweiser Ablauf ohne verschachtelte Callbacks.
   2. **`fetch('orte.geojson')`:** Asynchrones Laden von Geodaten-Dateien.
@@ -443,7 +443,7 @@ Verwende ausschließlich `async / await` in Kombination mit `fetch()` für alle 
   4. **DOM-Integration:** Automatische Generierung von UI-Karten aus den geladenen Geodaten.
 
 **Ausprobieren:**
-Öffne `Samples/JS/async-fetch-demo.html` im Browser und teste den asynchronen Geodaten-Abruf!
+Öffne [`Samples/JS/async-fetch-demo.html`](../Samples/JS/async-fetch-demo.html) im Browser und teste den asynchronen Geodaten-Abruf!
 
 ---
 <!-- _class: structural -->
@@ -499,14 +499,38 @@ console.log(configObj.zoom); // 12
 
 ### Praxis-Check: Clientseitige Speicherung im Einsatz
 
-- **Ausführbare Demodatei:** `Samples/JS/storage-demo.html`
+- **Ausführbare Demodatei:** [`Samples/JS/storage-demo.html`](../Samples/JS/storage-demo.html)
 - **Gezeigte Kernkonzepte im Code:**
   1. **Sandbox-Isolierung:** Daten bleiben sicher im Web-Browser des Nutzers.
   2. **`localStorage` vs. `sessionStorage`:** Vergleich von permanenter und sitzungsbasierter Speicherung.
   3. **`JSON.stringify()` & `JSON.parse()`:** Saubere Serialisierung komplexer Einstellungs-Objekte.
 
 **Ausprobieren:**
-Öffne `Samples/JS/storage-demo.html` im Browser und teste das Speichern von Karten-Einstellungen!
+Öffne [`Samples/JS/storage-demo.html`](../Samples/JS/storage-demo.html) im Browser und teste das Speichern von Karten-Einstellungen!
+
+---
+
+### Dateiverarbeitung im Browser: Export (Blob) & Import (FileReader)
+
+- **Datei-Export (Download per Blob API):**
+  - Daten im JS-Arbeitsspeicher in ein `Blob`-Objekt verpacken.
+  - Temporäre Objekt-URL erzeugen (`URL.createObjectURL(blob)`) und Download per `<a download>` starten.
+- **Datei-Import (Upload per FileReader API):**
+  - Datei über `<input type="file">` vom Nutzer auswählen lassen.
+  - Mit `FileReader.readAsText(file)` den Dateiinhalt (z. B. GeoJSON) asynchron einlesen & parsen.
+
+---
+
+### Praxis-Check: Dateiverarbeitung (Blob & FileReader API) im Einsatz
+
+- **Ausführbare Demodatei:** [`Samples/JS/file-io-demo.html`](../Samples/JS/file-io-demo.html)
+- **Gezeigte Kernkonzepte im Code:**
+  1. **Formular -> GeoJSON Transformation:** Dynamisches Auslesen von Formulardaten zur Erzeugung strukturierter GeoJSON-Features.
+  2. **Blob API & Download Trigger:** `new Blob()` und `URL.createObjectURL()` erzeugen die herunterladbare GeoJSON-Datei.
+  3. **`FileReader.readAsText()`:** Sicheres Wieder-Einlesen der selbst erzeugten `.geojson`-Datei zur Überprüfung im DOM.
+
+**Ausprobieren:**
+Öffne [`Samples/JS/file-io-demo.html`](../Samples/JS/file-io-demo.html) im Browser, fülle das Formular aus und lade deine eigene GeoJSON-Datei herunter!
 
 ---
 
@@ -532,27 +556,47 @@ navigator.geolocation.getCurrentPosition(
 
 ### Praxis-Check: Moderne Web APIs (Geolocation) im Einsatz
 
-- **Ausführbare Demodatei:** `Samples/JS/web-apis-demo.html`
+- **Ausführbare Demodatei:** [`Samples/JS/web-apis-demo.html`](../Samples/JS/web-apis-demo.html)
 - **Gezeigte Kernkonzepte im Code:**
   1. **`'geolocation' in navigator`:** Browser-Kompatibilität sicher prüfen.
   2. **`getCurrentPosition()`:** Asynchroner Aufruf mit Success- und Error-Callbacks.
   3. **Berechtigungsverwaltung:** Sauberes Abfangen von Ablehnungen (`PERMISSION_DENIED`).
 
 **Ausprobieren:**
-Öffne `Samples/JS/web-apis-demo.html` im Browser und teste die Standort-Ermittlung!
+Öffne [`Samples/JS/web-apis-demo.html`](../Samples/JS/web-apis-demo.html) im Browser und teste die Standort-Ermittlung!
 
 ---
 
-### KI-gestützte Entwicklung mit Spec-Driven Development (SDD)
+### KI-gestützte Entwicklung & KI-Integration (SDD)
 
-Moderne KI-Tools (z. B. Antigravity, Cursor) revolutionieren die Webprogrammierung durch **Spec-Driven Development (SDD)**:
+Moderne KI-Tools revolutionieren die Webentwicklung durch **Spec-Driven Development (SDD)**:
 
-- **Das Prinzip: Spezifikation vor Code:**
-  - Statt vager Prompts ("Mach mir eine Karte") wird zuerst eine präzise Spezifikation (`spec.md`) formuliert.
-  - Die Spezifikation definiert Datenstrukturen (GeoJSON), Schnittstellen, Validierungsregeln und UX-Verhalten.
-- **Vorteile für Einsteiger:**
-  - KI generiert sauberen, standardkonformen Code nach klaren Vorgaben.
-  - Fehler lassen sich durch schrittweises Refactoring und Prompt-Iterationen gezielt beheben.
+- **Spec-Driven Development (SDD):**
+  - Präzise Spezifikationen (Prompts / Specs) steuern die KI-Generierung von JS-Code, GeoJSON oder Tests.
+  - KI-Tools (z. B. Antigravity, Cursor) unterstützen beim Schreiben, Refaktoren und Fehlerbeheben.
+- **KI-Integration in Web-Apps:**
+  - KI-Modelle / APIs können per `fetch()` angebunden werden, um aus Freitext-Eingaben Geodaten zu erzeugen.
+
+```javascript
+// Beispiel: KI-Spezifikation an API senden
+const response = await fetch('/api/ai-generate', {
+    method: 'POST',
+    body: JSON.stringify({ prompt: 'Erstelle GeoJSON für Würzburg' })
+});
+```
+
+---
+
+### Praxis-Check: KI-Integration & Spec-Driven Workflows
+
+- **Ausführbare Demodatei:** [`Samples/JS/ai-integration-demo.html`](../Samples/JS/ai-integration-demo.html)
+- **Gezeigte Kernkonzepte im Code:**
+  1. **HTTP POST Request per `fetch()`:** Aufbau von Anfragen an KI-APIs mit JSON-Payload (`Content-Type` & `Authorization: Bearer`).
+  2. **System-Prompts / Structured Output:** Zwingen der KI zur Ausgabe von mehrschichtigen GeoJSON-Strukturen.
+  3. **SDD-Workflow:** Nutzung von Spezifikationen zur automatischen Datentransformation.
+
+**Ausprobieren:**
+Öffne [`Samples/JS/ai-integration-demo.html`](../Samples/JS/ai-integration-demo.html) im Browser und inspiziere die HTTP-POST Protokoll-Struktur von KI-APIs!
 
 ---
 
@@ -561,8 +605,10 @@ Moderne KI-Tools (z. B. Antigravity, Cursor) revolutionieren die Webprogrammieru
 | Thema | Schlüsseltechnologie | Einsatz in der Geovisualisierung |
 | :--- | :--- | :--- |
 | **Web Storage** | `localStorage` / `sessionStorage` | Speichern von Benutzereinstellungen, Filtern & Kartenausschnitten |
+| **Datei-Export** | `Blob` + `URL.createObjectURL()` | Download von GeoJSON-Dateien & Karten-Exporte |
+| **Datei-Import** | `<input type="file">` + `FileReader` | Einlesen von lokalen Geodaten-Dateien (.geojson) |
 | **Web APIs** | `navigator.geolocation` | Abfragen des eigenen Standorts für Routen- & Umgebungskarten |
-| **KI & SDD** | Spec-Driven Development (SDD) | Spezifikationsgestützte Generierung und Refactoring von JS & GeoJSON |
+| **KI & SDD** | Spec-Driven Dev / LLM APIs | Automatische Code-Generierung, Prompt-basierte GeoJSON-Erstellung |
 
 ---
 
@@ -660,14 +706,14 @@ if (!form.checkValidity()) {
 
 ### Praxis-Check: Formularverarbeitung & Validierung im Einsatz
 
-- **Ausführbare Demodatei:** `Samples/JS/form-validation-demo.html`
+- **Ausführbare Demodatei:** [`Samples/JS/form-validation-demo.html`](../Samples/JS/form-validation-demo.html)
 - **Gezeigte Kernkonzepte im Code:**
   1. **`input` & `change` Events:** Live-Zeichenzähler und Sofort-Reaktion bei Dropdown-Auswahl.
   2. **FormData API:** Datenextraktion mit `new FormData(form)` & `Object.fromEntries()`.
   3. **Constraint Validation:** Native Validierung mit `checkValidity()` & `validity.typeMismatch`.
 
 **Ausprobieren:**
-Öffne `Samples/JS/form-validation-demo.html` im Browser und teste die Formular-Validierung & Extraktion!
+Öffne [`Samples/JS/form-validation-demo.html`](../Samples/JS/form-validation-demo.html) im Browser und teste die Formular-Validierung & Extraktion!
 
 ---
 <!-- _class: structural -->
