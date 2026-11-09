@@ -701,22 +701,22 @@ IMMER auf die eigene Position! Wobei ICH die Datei bin, in der ich mich gerade b
 ---
 
 - **Gleiches Verzeichnis:**
-  * Die Zieldatei liegt im selben Ordner wie das HTML-Dokument.
-  * Code: `<img src="header.jpg" alt="Maiks Service">`
+  - Die Zieldatei liegt im selben Ordner wie das HTML-Dokument.
+  - Code: `<img src="header.jpg" alt="Maiks Service">`
 - **Unterverzeichnis (Abwärts navigieren):**
-  * Die Zieldatei liegt in einem Unterordner (z. B. `img/`).
-  * Code: `<img src="img/header.jpg" alt="Maiks Service">`
+  - Die Zieldatei liegt in einem Unterordner (z. B. `img/`).
+  - Code: `<img src="img/header.jpg" alt="Maiks Service">`
 
 ---
 
 - **Übergeordnetes Verzeichnis (Aufwärts navigieren):**
-  * Mit `../` springen Sie in der Ordnerstruktur eine Ebene höher.
-  * Mehrere Ebenen überspringen Sie mit `../../`.
-  * Code: `<img src="../img/header.jpg" alt="...">`
+  - Mit `../` springen Sie in der Ordnerstruktur eine Ebene höher.
+  - Mehrere Ebenen überspringen Sie mit `../../`.
+  - Code: `<img src="../img/header.jpg" alt="...">`
 - **Absolute Pfadangabe relativ zur Basis-URI:**
-  * Beginnt mit `/` (Slash) und geht vom Hauptverzeichnis (Root) des Webservers aus.
-  * Code: `<img src="/img/header.jpg" alt="...">`
-  * *Hinweis:** Sollte bei lokaler Entwicklung vermieden werden, da oft Pfadfehler entstehen.
+  - Beginnt mit `/` (Slash) und geht vom Hauptverzeichnis (Root) des Webservers aus.
+  - Code: `<img src="/img/header.jpg" alt="...">`
+  - *Hinweis:** Sollte bei lokaler Entwicklung vermieden werden, da oft Pfadfehler entstehen.
 
 
 
@@ -734,12 +734,12 @@ Absolute Pfade existieren systemweit nur ein einziges Mal und sind eindeutig.
 ---
 
 - **Externe Quellen im WWW:**
-  * Verwendung für Links auf fremde Websites oder externe Ressourcen.
-  * Erfordert immer die Angabe des Protokolls (`http` oder `https`) und die vollständige Domain:
-  * Code: `<a href="https://www.maiks-service.de">Maiks Website</a>`
+  - Verwendung für Links auf fremde Websites oder externe Ressourcen.
+  - Erfordert immer die Angabe des Protokolls (`http` oder `https`) und die vollständige Domain:
+  - Code: `<a href="https://www.maiks-service.de">Maiks Website</a>`
 - **Lokale absolute Pfade (Windows):**
-  * Dateipfade mit Laufwerksbuchstabe, z. B. `C:\Projekte\img\header.jpg`.
-  * **Achtung:** Ungeeignet für Webseiten! Diese Pfade existieren auf den Computern der Webseitenbesucher nicht.
+  - Dateipfade mit Laufwerksbuchstabe, z. B. `C:\Projekte\img\header.jpg`.
+  - **Achtung:** Ungeeignet für Webseiten! Diese Pfade existieren auf den Computern der Webseitenbesucher nicht.
 
 ---
 <!-- _class: small-text -->
@@ -749,15 +749,15 @@ Absolute Pfade existieren systemweit nur ein einziges Mal und sind eindeutig.
 Netzwerkprotokolle regeln die Kommunikation zwischen Browser und Webserver:
 
 - **HTTP (Hypertext Transfer Protocol):**
-  * Datenübertragung erfolgt im Klartext.
-  * **Gefahr:** Passwörter, Logins und Formulardaten können leicht abgehört oder manipuliert werden.
+  - Datenübertragung erfolgt im Klartext.
+  - **Gefahr:** Passwörter, Logins und Formulardaten können leicht abgehört oder manipuliert werden.
 - **HTTPS (Hypertext Transfer Protocol Secure):**
-  * Verschlüsselte Verbindung mittels **TLS/SSL**.
-  * Bietet Server-Authentifizierung und Schutz vor Datenmanipulation.
+  - Verschlüsselte Verbindung mittels **TLS/SSL**.
+  - Bietet Server-Authentifizierung und Schutz vor Datenmanipulation.
 - **Vorteile von HTTPS:**
-  * **Sicherheit & Vertrauen:** Pflicht bei Zahlungs- und Formulardaten.
-  * **SEO-Vorteil:** Google wertet HTTPS als positives Ranking-Signal.
-  * **Browser-Hinweise:** Browser markieren HTTP-Seiten als "nicht sicher".
+  - **Sicherheit & Vertrauen:** Pflicht bei Zahlungs- und Formulardaten.
+  - **SEO-Vorteil:** Google wertet HTTPS als positives Ranking-Signal.
+  - **Browser-Hinweise:** Browser markieren HTTP-Seiten als "nicht sicher".
 
 ---
 <!-- _class: img-right -->
@@ -774,11 +774,11 @@ HTML unterscheidet im Textfluss grundlegend zwei Arten von Elementen
 ---
 
 - **Block-Elemente:**
-  * Erzeugen automatisch eine neue Zeile und nehmen die volle verfügbare Breite ein.
-  * *Beispiele:* `<p>`, `<h1>`–`<h6>`, `<ul>`, `<div>`, `<table>`.
+  - Erzeugen automatisch eine neue Zeile und nehmen die volle verfügbare Breite ein.
+  - *Beispiele:* `<p>`, `<h1>`–`<h6>`, `<ul>`, `<div>`, `<table>`.
 - **Inline-Elemente:**
-  * Bleiben im normalen Textfluss (keine neue Zeile) und sind nur so breit wie ihr Inhalt.
-  * *Beispiele:* `<a>`, `<strong>`, `<em>`, `<span>`, `<img>`.
+  - Bleiben im normalen Textfluss (keine neue Zeile) und sind nur so breit wie ihr Inhalt.
+  - *Beispiele:* `<a>`, `<strong>`, `<em>`, `<span>`, `<img>`.
 > Elemente immer nach ihrer semantischen Bedeutung nutzen, nicht nach ihrem Standard-Aussehen.
 
 
@@ -798,8 +798,8 @@ HTML5 führt spezifische Strukturelemente ein, um Bereichen eine klare logische 
 - **`<nav>`:** Navigationsbereich (Haupt- und Subnavigation).
 - **`<main>`:** Umschließt den einzigartigen Hauptinhalt einer Webseite.
 - **`<section>` & `<article>`:**
-  * `section` definiert thematische Abschnitte (z. B. Kapitel).
-  * `article` steht für in sich geschlossene, eigenständige Inhalte.
+  - `section` definiert thematische Abschnitte (z. B. Kapitel).
+  - `article` steht für in sich geschlossene, eigenständige Inhalte.
 - **`<aside>`:** Randspalten für Zusatzinfos, Werbung oder Verweise.
 
 
@@ -818,10 +818,10 @@ Für rein gestalterische Gruppierungen (z. B. Styling oder Layout-Wrapper) exist
 
 
 - **`<div>` (Division):**
-  * Block-Element. Gruppiert Block-Elemente, Bilder oder Tabellen.
-  * Dient meist als Layout-Grid-Container.
+  - Block-Element. Gruppiert Block-Elemente, Bilder oder Tabellen.
+  - Dient meist als Layout-Grid-Container.
 - **`<span>`:**
-  * Inline-Element. Gruppiert Wörter, Phrasen oder Inline-elemente direkt im Fließtext.
+  - Inline-Element. Gruppiert Wörter, Phrasen oder Inline-elemente direkt im Fließtext.
 - **Best Practice:** Wrapper-Divs vermeiden („Div-Suppe“). CSS-Regeln bevorzugt direkt den semantischen Tags zuweisen.
 
 
@@ -840,11 +840,11 @@ Kommentare dokumentieren den Quellcode für Entwickler und helfen bei der Fehler
 ---
 
 - **HTML-Kommentare:**
-  * Syntax: `<!-- Kommentartext -->`
-  * *Einsatz:* Strukturierung von Abschnitten, temporäres Deaktivieren von Code zur Fehlersuche.
+  - Syntax: `<!-- Kommentartext -->`
+  - *Einsatz:* Strukturierung von Abschnitten, temporäres Deaktivieren von Code zur Fehlersuche.
 - **CSS-Kommentare:**
-  * Syntax: `/* Kommentartext */`
-  * *Einsatz:* Gliederung des Stylesheets (z. B. Header, Navigation, Footer-Styles).
+  - Syntax: `/* Kommentartext */`
+  - *Einsatz:* Gliederung des Stylesheets (z. B. Header, Navigation, Footer-Styles).
 - **Tipp:** Kommentare nutzen, um unübersichtlichen Code-Bereichen klare Start- und Endpunkte zu geben.
 
 ---
@@ -886,11 +886,11 @@ Hyperlinks sind das Herzstück des WWW. Sie verknüpfen isolierte Seiten zu eine
 ---
 
 - **Keine Angst vor ausgehenden Links:**
-  * Surfer kann man nicht festhalten – sie kommen zurück,
+  - Surfer kann man nicht festhalten – sie kommen zurück,
   wenn der Inhalt durch Qualität überzeugt!
 - **Das Google-Prinzip:**
-  * Suchmaschinen und Besucher finden Seiten über Links.
-  * Eine Seite mit wenigen Verknüpfungen rankt niedriger als eine, die „mitten im Netz“ steht.
+  - Suchmaschinen und Besucher finden Seiten über Links.
+  - Eine Seite mit wenigen Verknüpfungen rankt niedriger als eine, die „mitten im Netz“ steht.
 
 ---
 
@@ -921,17 +921,17 @@ Ein Link verbindet Dokumente im Web. In HTML wird dafür das Anchor-Tag (`<a>`) 
 
 - **Syntax:** `<a href="Linkziel">Linktext</a>`
 - **Sprechende Linktexte:**
-  * Beschreibt Linkziel klar, damit Besucher und Suchmaschinen sofort wissen, was sich dahinter verbirgt.
-  * *Schlecht:* „Hier klicken“, „Weiter“, „Zurück“.
-  * *Gut:* „Unser Service-Angebot“, „Aktueller Wetterbericht“.
+  - Beschreibt Linkziel klar, damit Besucher und Suchmaschinen sofort wissen, was sich dahinter verbirgt.
+  - *Schlecht:* „Hier klicken“, „Weiter“, „Zurück“.
+  - *Gut:* „Unser Service-Angebot“, „Aktueller Wetterbericht“.
 
 
 ---
 <!-- _class: img-right small-text -->
 
 - **Die target="_blank" Kontroverse:**
-  * Zwingt den Browser, den Link in einem neuen Tab/Fenster zu öffnen.
-  * **Kritik:** Schränkt die Benutzerkontrolle ein (Browser-Voreinstellung wird übergangen).
+  - Zwingt den Browser, den Link in einem neuen Tab/Fenster zu öffnen.
+  - **Kritik:** Schränkt die Benutzerkontrolle ein (Browser-Voreinstellung wird übergangen).
 - Lasst lieber die Entscheidung, ob der Link in einem neuen Tab oder Fenster geöffnet werden soll, beim Nutzer, indem ihr dieses Attribut weglasst.
 
 ![Link Syntax](../img/hyperlink_syntax.png)
@@ -1330,7 +1330,7 @@ Grid ist ein **zweidimensionales** Layout-Modell (Zeilen *und* Spalten gleichzei
 - Layout passt sich **nicht** an den Bildschirm an
 - Führt bei kleinen Bildschirmen zu horizontalen Scrollbalken
 
-[Code-Beispiel ansehen](Samples/Layout/fixed.html)
+[Code-Beispiel ansehen](../Samples/Layout/fixed.html)
 
 ![bg right:50%](../img/screenshot_fixed.png)
 
@@ -1342,7 +1342,7 @@ Grid ist ein **zweidimensionales** Layout-Modell (Zeilen *und* Spalten gleichzei
 - Layout fließt und füllt den Viewport flexibel aus
 - Zentrale Grundlage für modernes Responsive Design
 
-[Code-Beispiel ansehen](Samples/Layout/fluid.html)
+[Code-Beispiel ansehen](../Samples/Layout/fluid.html)
 
 ![bg right:50%](../img/screenshot_fluid.png)
 
@@ -1354,7 +1354,7 @@ Grid ist ein **zweidimensionales** Layout-Modell (Zeilen *und* Spalten gleichzei
 - Layout wächst proportional, wenn der Nutzer die Schrift vergrößert (Strg. + Mausrad)
 - Sehr gut für Barrierefreiheit, jedoch komplexer im Design
 
-[Code-Beispiel ansehen](Samples/Layout/elastic.html)
+[Code-Beispiel ansehen](../Samples/Layout/elastic.html)
 
 ![bg right:50%](../img/screenshot_elastic.png)
 
@@ -1366,7 +1366,7 @@ Grid ist ein **zweidimensionales** Layout-Modell (Zeilen *und* Spalten gleichzei
 - Boxen verteilen den verfügbaren Platz dynamisch (z.B. `flex: 1`)
 - Ideal zur Ausrichtung von Elementen und UI-Komponenten
 
-[Code-Beispiel ansehen](Samples/Layout/flexbox.html)
+[Code-Beispiel ansehen](../Samples/Layout/flexbox.html)
 
 ![bg right:50%](../img/screenshot_flexbox.png)
 
@@ -1378,7 +1378,7 @@ Grid ist ein **zweidimensionales** Layout-Modell (Zeilen *und* Spalten gleichzei
 - Elemente lassen sich exakt auf vordefinierten Spuren platzieren
 - Das mächtigste CSS-Werkzeug für das strukturelle Seitenlayout
 
-[Code-Beispiel ansehen](Samples/Layout/grid.html)
+[Code-Beispiel ansehen](../Samples/Layout/grid.html)
 
 ![bg right:50%](../img/screenshot_grid.png)---
 
