@@ -1914,7 +1914,7 @@ Diese ändert ihr Layout sowie die Hintergrundfarbe dynamisch je nach verfügbar
 .box {  flex: 1 1 100%; /* 1 Spalte */}
 ```
 
-![Mobile Viewport](Samples/Media%20Querie/media_query_mobile.png)
+![Mobile Viewport](../Samples/Media%20Querie/media_query_mobile.png)
 
 ---
 <!-- _class: twocolumns -->
@@ -1930,7 +1930,7 @@ Diese ändert ihr Layout sowie die Hintergrundfarbe dynamisch je nach verfügbar
   .box { flex: 1 1 calc(50% - 20px); }}
 ```
 
-![Tablet Viewport](Samples/Media%20Querie/media_query_tablet.png)
+![Tablet Viewport](../Samples/Media%20Querie/media_query_tablet.png)
 
 ---
 <!-- _class: twocolumns -->
@@ -1946,7 +1946,7 @@ Diese ändert ihr Layout sowie die Hintergrundfarbe dynamisch je nach verfügbar
   .box { flex: 1 1 calc(33.333% - 20px); }}
 ```
 
-![Desktop Viewport](Samples/Media%20Querie/media_query_desktop.png)
+![Desktop Viewport](../Samples/Media%20Querie/media_query_desktop.png)
 
 ---
 <!-- _class: structural -->
